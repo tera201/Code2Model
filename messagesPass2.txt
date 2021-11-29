@@ -1,0 +1,2 @@
+info: C:\Users\Dell\IdeaProjects\CppToUML\CppToUMLSamples\src\samples\sample01.cpp: Parsing file:
+info: C:\Users\Dell\IdeaProjects\CppToUML\CppToUMLSamples\src\samples\sample02.h: Parsing file:
