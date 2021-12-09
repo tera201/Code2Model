@@ -63,4 +63,29 @@ class CPP14TreeListener(
 
         umlBuilder.endPackage()
     }
+
+    override fun enterClassSpecifier(ctx: CPP14Parser.ClassSpecifierContext?) {
+        val className = ctx!!.classHead().classHeadName().className().text
+        umlBuilder.startClass(className)
+        println("class $className {")
+    }
+
+    override fun exitClassSpecifier(ctx: CPP14Parser.ClassSpecifierContext?) {
+        println("}")
+    }
+
+    override fun enterMemberdeclaration(ctx: CPP14Parser.MemberdeclarationContext?) {
+        val type = ctx!!.getChild(0).text
+        print("$type ")
+        val childs = ctx.memberDeclaratorList().memberDeclarator()
+        if (childs.size > 1){
+            for (ind in childs){
+                umlBuilder.addAttribute(ind.text, type)
+                print("${ind.text} ")
+            }}
+    }
+
+    override fun exitMemberdeclaration(ctx: CPP14Parser.MemberdeclarationContext?) {
+        println(";")
+    }
 }
