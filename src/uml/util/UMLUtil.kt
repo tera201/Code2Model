@@ -1,9 +1,6 @@
 package uml.util
 
-import org.eclipse.uml2.uml.Model
-import org.eclipse.uml2.uml.NamedElement
-import org.eclipse.uml2.uml.Package
-import org.eclipse.uml2.uml.Type
+import org.eclipse.uml2.uml.*
 
 /**
  * Набор вспомогательных методов для работы с элементами UML-модели.
@@ -17,9 +14,11 @@ object UMLUtil {
      * @return пакет с этим квалифицированным именем
      */
     fun getPackage(p: Package, javaQName: String): Package? {
-        val names = javaQName.split("\\.").toTypedArray()
+        val names = javaQName.split(".").toTypedArray()
         var root: Package = p
         for (name in names) {
+            println(name)
+            if (root.name == name) continue
             var np = root.getNestedPackage(name)
             if (np == null) np = p.createNestedPackage(name)
             root = np
@@ -35,7 +34,7 @@ object UMLUtil {
      * @return тип с этим квалифицированным именем
      */
     fun getType(model: Model, javaQName: String): Type? {
-        val names = javaQName.split("\\.").toTypedArray()
+        val names = javaQName.split(".").toTypedArray()
         var root: Package = model
         var type: Type? = null
         for (name in names) {
@@ -48,6 +47,7 @@ object UMLUtil {
             type = root.getOwnedType(name)
             if (type != null) // name - это имя типа.
                 break
+            type = root.createOwnedType(name, UMLPackage.Literals.ASSOCIATION) // eClass?
 
             // TODO Продолжить поиск, если квалифицированное имя 
             // - это имя типа вложенного в тип. 
