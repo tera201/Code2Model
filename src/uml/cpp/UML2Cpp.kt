@@ -7,22 +7,21 @@ fun Package.generateCpp(targetPath: String) {
 
     makePackageDir(targetPath)
     val ps = createFile(targetPath, name) ?: return
-    ps.println("namespace $name {")
+    generateNamespace(ps)
+    ps.close()
+}
+fun Namespace.generateNamespace(file: PrintStream){
+    file.println("namespace $name {")
     ownedMembers.
     filter {!it.hasKeyword("unknown") }.
     forEach {
         when(it) {
-            is Class -> it.generateClass(ps)
-            //is Namespace -> it.generateNamespace(targetPath)
-            is Package -> it.generateCpp(targetPath)
+            is Class -> it.generateClass(file)
+            is Namespace -> it.generateNamespace(file)
+//            is Package -> it.generateCpp(targetPath)
         }
     }
-    ps.println("}")
-    ps.close()
-}
-fun Namespace.generateNamespace(packageDir: String){
-    println("namespace $name {")
-    println("} // $name ")
+    file.println("} // $name ")
 }
 fun Class.generateClass(file: PrintStream) {
     file.println("class $name {")
