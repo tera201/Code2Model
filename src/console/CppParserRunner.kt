@@ -12,6 +12,7 @@ import org.eclipse.uml2.uml.UMLFactory
 import uml.IUMLBuilder
 import uml.builders.CPP14UMLBuilderPass1
 import uml.builders.CPP14UMLBuilderPass2
+import uml.cpp.clearPackageDir
 import uml.cpp.generateCpp
 import util.FilesUtil
 import util.messages.FileMessage
@@ -73,6 +74,7 @@ object CppParserRunner {
         //
         // Генерация кода на языке C++.
         //
+        clearPackageDir(targetPath)
         model.nestedPackages.forEach { it.generateCpp(targetPath) }
     }
 
