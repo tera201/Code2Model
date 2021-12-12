@@ -1,5 +1,7 @@
 namespace game {
 
+namespace sub_game {}
+
 class Board {
 };
 
