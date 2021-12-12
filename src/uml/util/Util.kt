@@ -11,7 +11,19 @@ fun makePackageDir(packageDir: String) {
     if (!d.exists()) d.mkdirs()
 }
 
+fun clearPackageDir(packageDir: String) {
+    val d = File(packageDir)
+    if (d.exists())   d.deleteRecursively()
+}
+
 fun createFile(packageDir: String, name: String, ext: String = "cpp") = try {
+    PrintStream("$packageDir/$name.$ext")
+} catch (e: FileNotFoundException) {
+    println(e.toString())
+    null
+}
+
+fun createJava(packageDir: String, name: String, ext: String = "java") = try {
     PrintStream("$packageDir/$name.$ext")
 } catch (e: FileNotFoundException) {
     println(e.toString())
