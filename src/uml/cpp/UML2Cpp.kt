@@ -30,4 +30,4 @@ fun Class.generateClass(file: PrintStream) {
 }
 
 private val Property.propertyAsJava
-    get() = "$name;"
+    get() = "${type.name} $name;"
