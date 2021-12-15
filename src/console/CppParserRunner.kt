@@ -44,17 +44,33 @@ object CppParserRunner {
             e.printStackTrace()
         }
 
-        //
-        // Модель для примеров на языке C++.
-        //
-        val model: Model = UMLFactory.eINSTANCE.createModel()
-        model.name = "CppSampleModel"
+        // Собираем файлы на языке C++.
+        val cppFiles = collectFiles(sourcePath)
+
+        // Строим UML-модель для этих файлов.
+        val model = buildModel("CppSampleModel", cppFiles)
 
         //
-        // Собираем файлы на языке C++.
+        // Генерация кода на языке C++.
         //
+        clearPackageDir(targetPath)
+        model.nestedPackages.forEach { it.generateCpp(targetPath) }
+    }
+
+    fun collectFiles(vararg paths: String): ArrayList<String> {
         val cppFiles = ArrayList<String>()
-        FilesUtil.walkRes(sourcePath, ::test, cppFiles::add)
+
+        paths.forEach { FilesUtil.walkRes(it, ::test, cppFiles::add) }
+
+        return cppFiles
+    }
+
+    /**
+     * Создать именованную модель для заданных файлов.
+     */
+    fun buildModel(modelName: String, cppFiles: ArrayList<String>): Model {
+        val model = UMLFactory.eINSTANCE.createModel()
+        model.name = modelName
 
         //
         // 1-й проход. Добавление в UML-модель пакетов и типов данных.
@@ -71,11 +87,7 @@ object CppParserRunner {
         val umlBuilderPass2 = CPP14UMLBuilderPass2(model, mh2)
         cppFiles.forEach { parseFile(it, mh2, umlBuilderPass2) }
 
-        //
-        // Генерация кода на языке C++.
-        //
-        clearPackageDir(targetPath)
-        model.nestedPackages.forEach { it.generateCpp(targetPath) }
+        return model
     }
 
     private fun parseFile(fileName: String, messageHandler: IMessageHandler, umlBuilder: IUMLBuilder) {
@@ -133,5 +145,5 @@ object CppParserRunner {
 
     private fun test(fileName: String) =
         fileName.endsWith(".h") or fileName.endsWith(".c") or
-        fileName.endsWith(".hpp") or fileName.endsWith(".cpp")
+                fileName.endsWith(".hpp") or fileName.endsWith(".cpp")
 }
