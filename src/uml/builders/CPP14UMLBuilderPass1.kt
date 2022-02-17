@@ -1,7 +1,9 @@
 package uml.builders
 
-import org.eclipse.emf.common.util.EList
-import org.eclipse.uml2.uml.*
+import org.eclipse.uml2.uml.Model
+import org.eclipse.uml2.uml.Operation
+import org.eclipse.uml2.uml.Package
+import org.eclipse.uml2.uml.Property
 import uml.IUMLBuilder
 import uml.util.UMLUtil
 import util.messages.IMessageHandler
@@ -11,18 +13,20 @@ class CPP14UMLBuilderPass1(override val model: Model, val mh: IMessageHandler) :
     private var currentPackage: Package = model
     private var packageStack: Stack<String> = Stack()
 
-    override fun setName(modelName: String) { model.name = modelName}
+    override fun setName(modelName: String) {
+        model.name = modelName
+    }
 
     override fun startPackage(packageName: String) {
         if (packageStack.empty()) packageStack.push(packageName)
         else packageStack.push("${packageStack.peek()}.$packageName")
-        currentPackage = UMLUtil.getPackage(currentPackage, packageStack.peek()) ?: return
+        currentPackage = UMLUtil.getPackage(currentPackage, packageStack.peek())
     }
 
     override fun endPackage() {
         packageStack.pop()
         currentPackage = if (!packageStack.empty())
-            UMLUtil.getPackage(model, packageStack.peek()) ?: return
+            UMLUtil.getPackage(model, packageStack.peek())
         else model
     }
 
@@ -30,8 +34,6 @@ class CPP14UMLBuilderPass1(override val model: Model, val mh: IMessageHandler) :
     }
 
     override fun endClass() {}
-
-
 
     override fun addAttribute(attributeName: String, typeName: String): Property? {
         UMLUtil.getType(model, typeName)

@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "https://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="660" height="870" version="1.1">
+  <defs>
+    <marker id="arrowAdorn" viewBox="0 0 16 16" refX="16" refY="8" markerWidth="16" markerHeight="16" orient="auto" stroke-width="1">
+      <path stroke="navy" fill="none" d="M 0 0 L 16 8 L 0 16"/>
+    </marker>
+    <marker id="triangleAdorn" viewBox="0 0 16 16" refX="16" refY="8" markerWidth="16" markerHeight="16" orient="auto" stroke-width="1">
+      <path stroke="blue" fill="white" d="M 0 0 L 16 8 L 0 16 Z"/>
+    </marker>
+    <symbol id="enumIcon" viewBox="0 0 32 32">
+      <path d="M 1 1 h 30 v 30 h -30 v -30 z" stroke-width="1"/>
+      <path d="M 1 10 h 30" stroke-width="1"/>
+    </symbol>
+    <symbol id="classIcon" viewBox="0 0 32 32">
+      <path d="M 1 1 h 30 v 30 h -30 v -30 z M 1 10 h 30 M 1 21 h 30" stroke-width="1"/>
+    </symbol>
+    <symbol id="interfaceIcon" viewBox="0 0 32 32">
+      <circle cx="16" cy="16" r="14" stroke-width="1"/>
+    </symbol>
+    <symbol id="packageIcon" viewBox="0 0 32 32">
+      <path d="M 1 1 h 30 v 30 h -30 v -30 z" stroke-width="1"/>
+      <path d="M 1 10 h 21 l 9 -9" stroke-width="1"/>
+    </symbol>
+    <symbol id="componentIcon" viewBox="0 0 32 32">
+      <path d="M 8 1 h 24 v 30 h -24 z " stroke-width="1"/>
+      <path d="M 1 5 h 16 v 8 h -16 z " stroke-width="1"/>
+      <path d="M 1 18 h 16 v 8 h -16 z " stroke-width="1"/>
+    </symbol>
+    <style type="text/css"><![CDATA[
+.classifier { 
+  fill: cyan; 
+  stroke: blue; 
+  stroke-width: 1; 
+} 
+
+.package { 
+  fill: lime; 
+  stroke: green; 
+  stroke-width: 1; 
+} 
+]]></style>
+  </defs>
+  <g>
+    <rect x="0px" y="0px" width="660px" height="870px" stroke="Maroon" fill="LightYellow" rx="0px" ry="0px">
+      <title></title>
+    </rect>
+    <rect x="15px" y="15px" width="100px" height="100px" stroke="navy" fill="SkyBlue" rx="0px" ry="0px">
+      <title></title>
+    </rect>
+    <rect x="165px" y="15px" width="100px" height="100px" stroke="Indigo" fill="none" rx="0px" ry="0px">
+      <title></title>
+    </rect>
+    <rect x="315px" y="15px" width="100px" height="100px" stroke="DarkGreen" fill="Chartreuse" rx="20px" ry="20px">
+      <title></title>
+    </rect>
+    <rect x="465px" y="15px" width="100px" height="100px" stroke="Crimson" fill="none" rx="20px" ry="20px">
+      <title></title>
+    </rect>
+    <line x1="315" y1="165" x2="315" y2="265" stroke="Red" fill="none">
+      <title></title>
+    </line>
+    <text x="315" y="183" width="200px" height="16px" fill="purple" stroke="none" font-size="16px" font-family="Courier">
+      <title></title>Text start (default)
+    </text>
+    <text x="315" y="203" width="340px" height="16px" fill="purple" stroke="none" font-size="16px" font-family="Courier" text-anchor="middle">
+      <title></title>setAlignment(AlignmentKind.center)
+    </text>
+    <text x="315" y="223" width="310px" height="16px" fill="purple" stroke="none" font-size="16px" font-family="Courier" text-anchor="end">
+      <title></title>setAlignment(AlignmentKind.end)
+    </text>
+    <circle r="50" cx="65" cy="365" stroke="Teal" fill="LightSeaGreen">
+      <title></title>
+    </circle>
+    <circle r="50" cx="215" cy="365" stroke="DarkGreen" fill="none">
+      <title></title>
+    </circle>
+    <polyline points="15,565 65,515 115,565 65,615 15,565" stroke="blue" fill="none" stroke-width="3">
+      <title></title>
+    </polyline>
+    <polyline points="165,565 215,515 265,565 215,615 165,565" stroke="blue" fill="cyan" stroke-width="3">
+      <title></title>
+    </polyline>
+    <line x1="15" y1="865" x2="215" y2="865" stroke="navy" fill="none">
+      <title></title>
+    </line>
+    <line x1="15" y1="865" x2="15" y2="665" stroke="navy" fill="none">
+      <title></title>
+    </line>
+    <line x1="165" y1="865" x2="15" y2="715" stroke="red" fill="none">
+      <title></title>
+    </line>
+  </g>
+</svg>

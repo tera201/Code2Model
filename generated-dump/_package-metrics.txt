@@ -1,0 +1,243 @@
+Package org.eclipse.emf.ecore.xmi.util has metrics:
+   ASC=0.0, ASP=0.0, EIC=0.0, EIP=0.0, NCP=0.0, RFP=0.0, RTP=0.0 
+
+Package org.eclipse.emf.common.command has metrics:
+   ASC=0.0, ASP=0.0, EIC=0.0, EIP=0.0, NCP=0.0, RFP=0.0, RTP=0.0 
+
+Package org.osgi.framework has metrics:
+   ASC=0.0, ASP=0.0, EIC=0.0, EIP=0.0, NCP=0.0, RFP=0.0, RTP=0.0 
+
+Package javax.crypto has metrics:
+   ASC=0.0, ASP=0.0, EIC=0.0, EIP=0.0, NCP=0.0, RFP=0.0, RTP=0.0 
+
+Package javax.xml.parsers has metrics:
+   ASC=0.0, ASP=0.0, EIC=0.0, EIP=0.0, NCP=0.0, RFP=0.0, RTP=0.0 
+
+Package java has metrics:
+   ASC=0.0, ASP=0.0, EIC=0.0, EIP=0.0, NCP=0.0, RFP=0.0, RTP=0.0 
+
+Package org.eclipse.core.resources has metrics:
+   ASC=0.0, ASP=0.0, EIC=0.0, EIP=0.0, NCP=0.0, RFP=0.0, RTP=0.0 
+
+Package org.eclipse.core.runtime.content has metrics:
+   ASC=0.0, ASP=0.0, EIC=0.0, EIP=0.0, NCP=0.0, RFP=0.0, RTP=0.0 
+
+Package org.eclipse.emf.common.notify has metrics:
+   ASC=0.0, ASP=0.0, EIC=0.0, EIP=0.0, NCP=0.0, RFP=0.0, RTP=0.0 
+
+Package org.eclipse.emf.ecore.xmi.impl has metrics:
+   ASC=0.0, ASP=0.0, EIC=0.0, EIP=0.0, NCP=0.0, RFP=0.0, RTP=0.0 
+
+Package java.util.jar has metrics:
+   ASC=0.0, ASP=0.0, EIC=0.0, EIP=0.0, NCP=0.0, RFP=0.0, RTP=0.0 
+
+Package java.util.zip has metrics:
+   ASC=0.0, ASP=0.0, EIC=0.0, EIP=0.0, NCP=0.0, RFP=0.0, RTP=0.0 
+
+Package org.eclipse.emf.ecore.xml.type.impl has metrics:
+   ASC=0.0, ASP=0.0, EIC=0.0, EIP=0.0, NCP=0.0, RFP=0.0, RTP=0.0 
+
+Package java.math has metrics:
+   ASC=0.0, ASP=0.0, EIC=0.0, EIP=0.0, NCP=0.0, RFP=0.0, RTP=0.0 
+
+Package org.eclipse.emf.ecore.xml.namespace.impl has metrics:
+   ASC=0.0, ASP=0.0, EIC=0.0, EIP=0.0, NCP=0.0, RFP=0.0, RTP=0.0 
+
+Package org.eclipse.uml2.common.util has metrics:
+   ASC=0.0, ASP=0.0, EIC=0.0, EIP=0.0, NCP=0.0, RFP=0.0, RTP=0.0 
+
+Package java.util has metrics:
+   ASC=0.0, ASP=0.0, EIC=0.0, EIP=0.0, NCP=0.0, RFP=0.0, RTP=0.0 
+
+Package java.lang.reflect has metrics:
+   ASC=0.0, ASP=0.0, EIC=0.0, EIP=0.0, NCP=0.0, RFP=0.0, RTP=0.0 
+
+Package org.eclipse.emf.ecore.xml.namespace.util has metrics:
+   ASC=0.0, ASP=0.0, EIC=0.0, EIP=0.0, NCP=0.0, RFP=0.0, RTP=0.0 
+
+Package javax.xml.namespace has metrics:
+   ASC=0.0, ASP=0.0, EIC=0.0, EIP=0.0, NCP=0.0, RFP=0.0, RTP=0.0 
+
+Package org.eclipse.uml2.types.internal.impl has metrics:
+   ASC=0.0, ASP=0.0, EIC=0.0, EIP=0.0, NCP=0.0, RFP=0.0, RTP=0.0 
+
+Package java.util.concurrent has metrics:
+   ASC=0.0, ASP=0.0, EIC=0.0, EIP=0.0, NCP=0.0, RFP=0.0, RTP=0.0 
+
+Package org.eclipse.core.runtime has metrics:
+   ASC=0.0, ASP=0.0, EIC=0.0, EIP=0.0, NCP=0.0, RFP=0.0, RTP=0.0 
+
+Package javax.crypto.spec has metrics:
+   ASC=0.0, ASP=0.0, EIC=0.0, EIP=0.0, NCP=0.0, RFP=0.0, RTP=0.0 
+
+Package org.eclipse.emf.mapping has metrics:
+   ASC=0.0, ASP=0.0, EIC=0.0, EIP=0.0, NCP=0.0, RFP=0.0, RTP=0.0 
+
+Package org.eclipse.uml2.types has metrics:
+   ASC=0.0, ASP=0.0, EIC=0.0, EIP=0.0, NCP=0.0, RFP=0.0, RTP=0.0 
+
+Package java.security has metrics:
+   ASC=0.0, ASP=0.0, EIC=0.0, EIP=0.0, NCP=0.0, RFP=0.0, RTP=0.0 
+
+Package java.text has metrics:
+   ASC=0.0, ASP=0.0, EIC=0.0, EIP=0.0, NCP=0.0, RFP=0.0, RTP=0.0 
+
+Package javax.xml has metrics:
+   ASC=0.0, ASP=0.0, EIC=0.0, EIP=0.0, NCP=0.0, RFP=0.0, RTP=0.0 
+
+Package java.io has metrics:
+   ASC=0.0, ASP=0.0, EIC=0.0, EIP=0.0, NCP=0.0, RFP=0.0, RTP=0.0 
+
+Package org.eclipse.emf.ecore.util has metrics:
+   ASC=0.0, ASP=0.0, EIC=0.0, EIP=0.0, NCP=0.0, RFP=0.0, RTP=0.0 
+
+Package org.eclipse.uml2.common has metrics:
+   ASC=0.0, ASP=0.0, EIC=0.0, EIP=0.0, NCP=0.0, RFP=0.0, RTP=0.0 
+
+Package org.eclipse.core has metrics:
+   ASC=0.0, ASP=0.0, EIC=0.0, EIP=0.0, NCP=0.0, RFP=0.0, RTP=0.0 
+
+Package org.eclipse.emf has metrics:
+   ASC=0.0, ASP=0.0, EIC=0.0, EIP=0.0, NCP=0.0, RFP=0.0, RTP=0.0 
+
+Package org.eclipse.emf.ecore.xml.namespace has metrics:
+   ASC=0.0, ASP=0.0, EIC=0.0, EIP=0.0, NCP=0.0, RFP=0.0, RTP=0.0 
+
+Package org.eclipse.uml2 has metrics:
+   ASC=0.0, ASP=0.0, EIC=0.0, EIP=0.0, NCP=0.0, RFP=0.0, RTP=0.0 
+
+Package javax.xml.datatype has metrics:
+   ASC=0.0, ASP=0.0, EIC=0.0, EIP=0.0, NCP=0.0, RFP=0.0, RTP=0.0 
+
+Package java.lang.ref has metrics:
+   ASC=0.0, ASP=0.0, EIC=0.0, EIP=0.0, NCP=0.0, RFP=0.0, RTP=0.0 
+
+Package java.util.concurrent.atomic has metrics:
+   ASC=0.0, ASP=0.0, EIC=0.0, EIP=0.0, NCP=0.0, RFP=0.0, RTP=0.0 
+
+Package org.eclipse.core.runtime.preferences has metrics:
+   ASC=0.0, ASP=0.0, EIC=0.0, EIP=0.0, NCP=0.0, RFP=0.0, RTP=0.0 
+
+Package org.eclipse.uml2.uml.internal has metrics:
+   ASC=0.0, ASP=0.0, EIC=0.0, EIP=0.0, NCP=0.0, RFP=0.0, RTP=0.0 
+
+Package org.eclipse.core.runtime.spi has metrics:
+   ASC=0.0, ASP=0.0, EIC=0.0, EIP=0.0, NCP=0.0, RFP=0.0, RTP=0.0 
+
+Package org.eclipse.emf.mapping.ecore2xml.util has metrics:
+   ASC=0.0, ASP=0.0, EIC=0.0, EIP=0.0, NCP=0.0, RFP=0.0, RTP=0.0 
+
+Package org.eclipse.uml2.uml.internal.resource has metrics:
+   ASC=0.0, ASP=0.0, EIC=0.0, EIP=0.0, NCP=0.0, RFP=0.0, RTP=0.0 
+
+Package java.lang has metrics:
+   ASC=0.0, ASP=0.0, EIC=0.0, EIP=0.0, NCP=0.0, RFP=0.0, RTP=0.0 
+
+Package org.eclipse.emf.ecore.xml.type.internal has metrics:
+   ASC=0.0, ASP=0.0, EIC=0.0, EIP=0.0, NCP=0.0, RFP=0.0, RTP=0.0 
+
+Package org.w3c.dom has metrics:
+   ASC=0.0, ASP=0.0, EIC=0.0, EIP=0.0, NCP=0.0, RFP=0.0, RTP=0.0 
+
+Package org has metrics:
+   ASC=0.0, ASP=0.0, EIC=0.0, EIP=0.0, NCP=0.0, RFP=0.0, RTP=0.0 
+
+Package org.eclipse.emf.ecore.resource has metrics:
+   ASC=0.0, ASP=0.0, EIC=0.0, EIP=0.0, NCP=0.0, RFP=0.0, RTP=0.0 
+
+Package org.xml.sax.helpers has metrics:
+   ASC=0.0, ASP=0.0, EIC=0.0, EIP=0.0, NCP=0.0, RFP=0.0, RTP=0.0 
+
+Package org.eclipse.emf.mapping.ecore2xml has metrics:
+   ASC=0.0, ASP=0.0, EIC=0.0, EIP=0.0, NCP=0.0, RFP=0.0, RTP=0.0 
+
+Package org.eclipse.emf.mapping.ecore2xml.impl has metrics:
+   ASC=0.0, ASP=0.0, EIC=0.0, EIP=0.0, NCP=0.0, RFP=0.0, RTP=0.0 
+
+Package javax has metrics:
+   ASC=0.0, ASP=0.0, EIC=0.0, EIP=0.0, NCP=0.0, RFP=0.0, RTP=0.0 
+
+Package org.eclipse.emf.ecore.xmi has metrics:
+   ASC=0.0, ASP=0.0, EIC=0.0, EIP=0.0, NCP=0.0, RFP=0.0, RTP=0.0 
+
+Package org.osgi has metrics:
+   ASC=0.0, ASP=0.0, EIC=0.0, EIP=0.0, NCP=0.0, RFP=0.0, RTP=0.0 
+
+Package org.eclipse.emf.common.util has metrics:
+   ASC=0.0, ASP=0.0, EIC=0.0, EIP=0.0, NCP=0.0, RFP=0.0, RTP=0.0 
+
+Package console has metrics:
+   ASC=0.0, ASP=0.0, EIC=0.0, EIP=0.0, NCP=0.0, RFP=0.0, RTP=0.0 
+
+Package java.util.regex has metrics:
+   ASC=0.0, ASP=0.0, EIC=0.0, EIP=0.0, NCP=0.0, RFP=0.0, RTP=0.0 
+
+Package org.eclipse.uml2.uml.internal.impl has metrics:
+   ASC=0.0, ASP=0.0, EIC=0.0, EIP=0.0, NCP=0.0, RFP=0.0, RTP=0.0 
+
+Package org.eclipse.emf.ecore.impl has metrics:
+   ASC=0.0, ASP=0.0, EIC=0.0, EIP=0.0, NCP=0.0, RFP=0.0, RTP=0.0 
+
+Package org.eclipse.uml2.uml.util has metrics:
+   ASC=0.0, ASP=0.0, EIC=0.0, EIP=0.0, NCP=0.0, RFP=0.0, RTP=0.0 
+
+Package org.eclipse.emf.ecore has metrics:
+   ASC=0.0, ASP=0.0, EIC=0.0, EIP=0.0, NCP=0.0, RFP=0.0, RTP=0.0 
+
+Package org.eclipse.emf.ecore.plugin has metrics:
+   ASC=0.0, ASP=0.0, EIC=0.0, EIP=0.0, NCP=0.0, RFP=0.0, RTP=0.0 
+
+Package org.eclipse.emf.ecore.xml.type has metrics:
+   ASC=0.0, ASP=0.0, EIC=0.0, EIP=0.0, NCP=0.0, RFP=0.0, RTP=0.0 
+
+Package org.eclipse.emf.ecore.xml has metrics:
+   ASC=0.0, ASP=0.0, EIC=0.0, EIP=0.0, NCP=0.0, RFP=0.0, RTP=0.0 
+
+Package org.eclipse.emf.ecore.xml.type.util has metrics:
+   ASC=0.0, ASP=0.0, EIC=0.0, EIP=0.0, NCP=0.0, RFP=0.0, RTP=0.0 
+
+Package java.net has metrics:
+   ASC=0.0, ASP=0.0, EIC=0.0, EIP=0.0, NCP=0.0, RFP=0.0, RTP=0.0 
+
+Package java.util.concurrent.locks has metrics:
+   ASC=0.0, ASP=0.0, EIC=0.0, EIP=0.0, NCP=0.0, RFP=0.0, RTP=0.0 
+
+Package org.eclipse.uml2.uml.internal.operations has metrics:
+   ASC=0.0, ASP=0.0, EIC=0.0, EIP=0.0, NCP=0.0, RFP=0.0, RTP=0.0 
+
+Package org.xml has metrics:
+   ASC=0.0, ASP=0.0, EIC=0.0, EIP=0.0, NCP=0.0, RFP=0.0, RTP=0.0 
+
+Package org.eclipse.emf.common.notify.impl has metrics:
+   ASC=0.0, ASP=0.0, EIC=0.0, EIP=0.0, NCP=0.0, RFP=0.0, RTP=0.0 
+
+Package org.xml.sax has metrics:
+   ASC=0.0, ASP=0.0, EIC=0.0, EIP=0.0, NCP=0.0, RFP=0.0, RTP=0.0 
+
+Package org.eclipse.emf.ecore.resource.impl has metrics:
+   ASC=0.0, ASP=0.0, EIC=0.0, EIP=0.0, NCP=0.0, RFP=0.0, RTP=0.0 
+
+Package org.eclipse.uml2.types.internal has metrics:
+   ASC=0.0, ASP=0.0, EIC=0.0, EIP=0.0, NCP=0.0, RFP=0.0, RTP=0.0 
+
+Package org.eclipse.emf.common has metrics:
+   ASC=0.0, ASP=0.0, EIC=0.0, EIP=0.0, NCP=0.0, RFP=0.0, RTP=0.0 
+
+Package org.w3c has metrics:
+   ASC=0.0, ASP=0.0, EIC=0.0, EIP=0.0, NCP=0.0, RFP=0.0, RTP=0.0 
+
+Package org.xml.sax.ext has metrics:
+   ASC=0.0, ASP=0.0, EIC=0.0, EIP=0.0, NCP=0.0, RFP=0.0, RTP=0.0 
+
+Package org.eclipse.uml2.uml has metrics:
+   ASC=0.0, ASP=0.0, EIC=0.0, EIP=0.0, NCP=0.0, RFP=0.0, RTP=0.0 
+
+Package org.eclipse.uml2.uml.resource has metrics:
+   ASC=0.0, ASP=0.0, EIC=0.0, EIP=0.0, NCP=0.0, RFP=0.0, RTP=0.0 
+
+Package org.eclipse.emf.common.archive has metrics:
+   ASC=0.0, ASP=0.0, EIC=0.0, EIP=0.0, NCP=0.0, RFP=0.0, RTP=0.0 
+
+Package org.eclipse has metrics:
+   ASC=0.0, ASP=0.0, EIC=0.0, EIP=0.0, NCP=0.0, RFP=0.0, RTP=0.0 
+

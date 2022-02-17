@@ -13,9 +13,10 @@ object UMLUtil {
      * @param javaQName квалифицированное имя с разделителями - точками.
      * @return пакет с этим квалифицированным именем
      */
-    fun getPackage(p: Package, javaQName: String): Package? {
+    fun getPackage(p: Package, javaQName: String): Package {
         val names = javaQName.split(".").toTypedArray()
         var root: Package = p
+
         for (name in names) {
             println(name)
             if (root.name == name) continue
@@ -37,6 +38,7 @@ object UMLUtil {
         val names = javaQName.split(".").toTypedArray()
         var root: Package = model
         var type: Type? = null
+
         for (name in names) {
             val np = root.getNestedPackage(name)
             if (np != null) {
@@ -67,6 +69,7 @@ object UMLUtil {
         val names = javaQName.split("\\.").toTypedArray()
         var root: Package = model
         var type: Type? = null
+
         for (name in names) {
             val np = root.getNestedPackage(name)
             if (np != null) {
@@ -96,6 +99,7 @@ object UMLUtil {
     fun findPackage(model: Model, javaQName: String): Package? {
         var root: Package = model
         val names = javaQName.split("\\.").toTypedArray()
+
         for (name in names) {
             val np = root.getNestedPackage(name) ?: return null
             root = np
@@ -106,7 +110,7 @@ object UMLUtil {
     /**
      * Выдать квалифицированное имя без имени модели.
      *
-     * @param named - именованный элемент модели.
+     * @param named именованный элемент модели.
      * @return короткое квалификированное имя разделяемое точками.
      */
     fun javaName(named: NamedElement): String {
@@ -120,7 +124,7 @@ object UMLUtil {
     /**
      * Выдать последнее имя в квалифицированном имени.
      *
-     * @param qName - квалифицированное имя.
+     * @param qName квалифицированное имя.
      * @return последннее имя в цепочке имен.
      */
     fun lastName(qName: String): String {

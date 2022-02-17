@@ -1,0 +1,3 @@
+jars: 
+   CloudUML-1.0.0.jar
+

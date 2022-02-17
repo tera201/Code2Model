@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "https://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="495" height="100" version="1.1">
+  <defs>
+    <marker id="arrowAdorn" viewBox="0 0 16 16" refX="16" refY="8" markerWidth="16" markerHeight="16" orient="auto" stroke-width="1">
+      <path stroke="navy" fill="none" d="M 0 0 L 16 8 L 0 16"/>
+    </marker>
+    <marker id="triangleAdorn" viewBox="0 0 16 16" refX="16" refY="8" markerWidth="16" markerHeight="16" orient="auto" stroke-width="1">
+      <path stroke="blue" fill="white" d="M 0 0 L 16 8 L 0 16 Z"/>
+    </marker>
+    <symbol id="enumIcon" viewBox="0 0 32 32">
+      <path d="M 1 1 h 30 v 30 h -30 v -30 z" stroke-width="1"/>
+      <path d="M 1 10 h 30" stroke-width="1"/>
+    </symbol>
+    <symbol id="classIcon" viewBox="0 0 32 32">
+      <path d="M 1 1 h 30 v 30 h -30 v -30 z M 1 10 h 30 M 1 21 h 30" stroke-width="1"/>
+    </symbol>
+    <symbol id="interfaceIcon" viewBox="0 0 32 32">
+      <circle cx="16" cy="16" r="14" stroke-width="1"/>
+    </symbol>
+    <symbol id="packageIcon" viewBox="0 0 32 32">
+      <path d="M 1 1 h 30 v 30 h -30 v -30 z" stroke-width="1"/>
+      <path d="M 1 10 h 21 l 9 -9" stroke-width="1"/>
+    </symbol>
+    <symbol id="componentIcon" viewBox="0 0 32 32">
+      <path d="M 8 1 h 24 v 30 h -24 z " stroke-width="1"/>
+      <path d="M 1 5 h 16 v 8 h -16 z " stroke-width="1"/>
+      <path d="M 1 18 h 16 v 8 h -16 z " stroke-width="1"/>
+    </symbol>
+    <style type="text/css"><![CDATA[
+.classifier { 
+  fill: cyan; 
+  stroke: blue; 
+  stroke-width: 1; 
+} 
+
+.package { 
+  fill: lime; 
+  stroke: green; 
+  stroke-width: 1; 
+} 
+]]></style>
+  </defs>
+  <g>
+    <rect x="0px" y="0px" width="495px" height="100px" stroke="Maroon" fill="LightYellow" rx="0px" ry="0px">
+      <title></title>
+    </rect>
+    <g>
+      <use xlink:href="#classIcon" x="5" y="5" width="18px" height="18px" stroke="Blue" fill="Cyan">
+        <title></title>
+      </use>
+      <text x="24" y="23" width="50px" height="18px" fill="Blue" stroke="none" font-size="16px" font-family="Courier" font-weight="bold">
+        <title></title>Class
+      </text>
+    </g>
+    <g>
+      <use xlink:href="#interfaceIcon" x="74" y="23" width="18px" height="18px" stroke="Purple" fill="Violet">
+        <title></title>
+      </use>
+      <text x="93" y="41" width="90px" height="18px" fill="Purple" stroke="none" font-size="16px" font-family="Courier" font-weight="bold" font-style="italic">
+        <title></title>Interface
+      </text>
+    </g>
+    <g>
+      <use xlink:href="#enumIcon" x="183" y="41" width="18px" height="18px" stroke="maroon" fill="yellow">
+        <title></title>
+      </use>
+      <text x="202" y="59" width="110px" height="18px" fill="maroon" stroke="none" font-size="16px" font-family="Courier" font-weight="bold">
+        <title></title>Enumeration
+      </text>
+    </g>
+    <g>
+      <use xlink:href="#componentIcon" x="312" y="59" width="18px" height="18px" stroke="Blue" fill="CornflowerBlue">
+        <title></title>
+      </use>
+      <text x="331" y="77" width="70px" height="18px" fill="Blue" stroke="none" font-size="16px" font-family="Courier" font-weight="bold">
+        <title></title>swt.jar
+      </text>
+    </g>
+    <g>
+      <use xlink:href="#packageIcon" x="401" y="77" width="18px" height="18px" stroke="DarkGreen" fill="SpringGreen">
+        <title></title>
+      </use>
+      <text x="420" y="95" width="70px" height="18px" fill="DarkGreen" stroke="none" font-size="16px" font-family="Courier" font-weight="bold">
+        <title></title>Package
+      </text>
+    </g>
+  </g>
+</svg>

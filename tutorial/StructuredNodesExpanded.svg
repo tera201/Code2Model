@@ -1,0 +1,323 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "https://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="494" height="638" version="1.1">
+  <defs>
+    <marker id="arrowAdorn" viewBox="0 0 16 16" refX="16" refY="8" markerWidth="16" markerHeight="16" orient="auto" stroke-width="1">
+      <path stroke="navy" fill="none" d="M 0 0 L 16 8 L 0 16"/>
+    </marker>
+    <marker id="triangleAdorn" viewBox="0 0 16 16" refX="16" refY="8" markerWidth="16" markerHeight="16" orient="auto" stroke-width="1">
+      <path stroke="blue" fill="white" d="M 0 0 L 16 8 L 0 16 Z"/>
+    </marker>
+    <symbol id="enumIcon" viewBox="0 0 32 32">
+      <path d="M 1 1 h 30 v 30 h -30 v -30 z" stroke-width="1"/>
+      <path d="M 1 10 h 30" stroke-width="1"/>
+    </symbol>
+    <symbol id="classIcon" viewBox="0 0 32 32">
+      <path d="M 1 1 h 30 v 30 h -30 v -30 z M 1 10 h 30 M 1 21 h 30" stroke-width="1"/>
+    </symbol>
+    <symbol id="interfaceIcon" viewBox="0 0 32 32">
+      <circle cx="16" cy="16" r="14" stroke-width="1"/>
+    </symbol>
+    <symbol id="packageIcon" viewBox="0 0 32 32">
+      <path d="M 1 1 h 30 v 30 h -30 v -30 z" stroke-width="1"/>
+      <path d="M 1 10 h 21 l 9 -9" stroke-width="1"/>
+    </symbol>
+    <symbol id="componentIcon" viewBox="0 0 32 32">
+      <path d="M 8 1 h 24 v 30 h -24 z " stroke-width="1"/>
+      <path d="M 1 5 h 16 v 8 h -16 z " stroke-width="1"/>
+      <path d="M 1 18 h 16 v 8 h -16 z " stroke-width="1"/>
+    </symbol>
+    <style type="text/css"><![CDATA[
+.classifier { 
+  fill: cyan; 
+  stroke: blue; 
+  stroke-width: 1; 
+} 
+
+.package { 
+  fill: lime; 
+  stroke: green; 
+  stroke-width: 1; 
+} 
+]]></style>
+  </defs>
+  <g>
+    <rect x="0px" y="0px" width="494px" height="638px" stroke="Maroon" fill="LightYellow" rx="0px" ry="0px">
+      <title></title>
+    </rect>
+    <g>
+      <rect x="5px" y="5px" width="76px" height="123px" stroke="none" fill="none" rx="0px" ry="0px">
+        <title></title>
+      </rect>
+      <g>
+        <rect x="5px" y="5px" width="76px" height="27px" stroke="maroon" fill="yellow" rx="0px" ry="0px">
+          <title></title>
+        </rect>
+        <g>
+          <use xlink:href="#enumIcon" x="9" y="9" width="18px" height="18px" stroke="maroon" fill="yellow">
+            <title></title>
+          </use>
+          <text x="28" y="27" width="50px" height="18px" fill="maroon" stroke="none" font-size="16px" font-family="Courier" font-weight="bold">
+            <title></title>Color
+          </text>
+        </g>
+      </g>
+      <g>
+        <rect x="5px" y="32px" width="76px" height="96px" stroke="maroon" fill="yellow" rx="0px" ry="0px">
+          <title></title>
+        </rect>
+        <text x="9" y="54" width="50px" height="16px" fill="blue" stroke="none" font-size="16px" font-family="Courier">
+          <title></title>white
+        </text>
+        <text x="9" y="72" width="50px" height="16px" fill="blue" stroke="none" font-size="16px" font-family="Courier">
+          <title></title>black
+        </text>
+        <text x="9" y="90" width="50px" height="16px" fill="blue" stroke="none" font-size="16px" font-family="Courier">
+          <title></title>red
+        </text>
+        <text x="9" y="108" width="50px" height="16px" fill="blue" stroke="none" font-size="16px" font-family="Courier">
+          <title></title>green
+        </text>
+        <text x="9" y="126" width="50px" height="16px" fill="blue" stroke="none" font-size="16px" font-family="Courier">
+          <title></title>blue
+        </text>
+      </g>
+      <g>
+        <rect x="5px" y="128px" width="76px" height="0px" stroke="maroon" fill="yellow" rx="0px" ry="0px">
+          <title></title>
+        </rect>
+      </g>
+      <g>
+        <rect x="5px" y="128px" width="76px" height="0px" stroke="maroon" fill="yellow" rx="0px" ry="0px">
+          <title></title>
+        </rect>
+      </g>
+    </g>
+    <g>
+      <rect x="43px" y="138px" width="408px" height="111px" stroke="none" fill="none" rx="0px" ry="0px">
+        <title></title>
+      </rect>
+      <g>
+        <rect x="43px" y="138px" width="408px" height="27px" stroke="blue" fill="cyan" rx="0px" ry="0px">
+          <title></title>
+        </rect>
+        <g>
+          <use xlink:href="#classIcon" x="47" y="142" width="18px" height="18px" stroke="blue" fill="cyan">
+            <title></title>
+          </use>
+          <text x="66" y="160" width="50px" height="18px" fill="blue" stroke="none" font-size="16px" font-family="Courier" font-weight="bold">
+            <title></title>Point
+          </text>
+        </g>
+      </g>
+      <g>
+        <rect x="43px" y="165px" width="408px" height="42px" stroke="blue" fill="cyan" rx="0px" ry="0px">
+          <title></title>
+        </rect>
+        <text x="47" y="187" width="110px" height="16px" fill="blue" stroke="none" font-size="16px" font-family="Courier">
+          <title></title>- x: Double
+        </text>
+        <text x="47" y="205" width="110px" height="16px" fill="blue" stroke="none" font-size="16px" font-family="Courier">
+          <title></title>- y: Double
+        </text>
+      </g>
+      <g>
+        <rect x="43px" y="207px" width="408px" height="42px" stroke="blue" fill="cyan" rx="0px" ry="0px">
+          <title></title>
+        </rect>
+        <text x="47" y="229" width="400px" height="16px" fill="blue" stroke="none" font-size="16px" font-family="Courier" text-decoration="underline">
+          <title></title>+ distance(p1: Point, p2: Point): double
+        </text>
+        <text x="47" y="247" width="400px" height="16px" fill="blue" stroke="none" font-size="16px" font-family="Courier">
+          <title></title>+ distance(p: Point): double
+        </text>
+      </g>
+      <g>
+        <rect x="43px" y="249px" width="408px" height="0px" stroke="blue" fill="cyan" rx="0px" ry="0px">
+          <title></title>
+        </rect>
+      </g>
+    </g>
+    <g>
+      <rect x="247px" y="259px" width="146px" height="78px" stroke="none" fill="none" rx="0px" ry="0px">
+        <title></title>
+      </rect>
+      <g>
+        <rect x="247px" y="259px" width="146px" height="27px" stroke="Purple" fill="Violet" rx="0px" ry="0px">
+          <title></title>
+        </rect>
+        <g>
+          <use xlink:href="#interfaceIcon" x="251" y="263" width="18px" height="18px" stroke="Purple" fill="Violet">
+            <title></title>
+          </use>
+          <text x="270" y="281" width="80px" height="18px" fill="Purple" stroke="none" font-size="16px" font-family="Courier" font-weight="bold" font-style="italic">
+            <title></title>Layouter
+          </text>
+        </g>
+      </g>
+      <g>
+        <rect x="247px" y="286px" width="146px" height="0px" stroke="Purple" fill="Violet" rx="0px" ry="0px">
+          <title></title>
+        </rect>
+      </g>
+      <g>
+        <rect x="247px" y="286px" width="146px" height="24px" stroke="Purple" fill="Violet" rx="0px" ry="0px">
+          <title></title>
+        </rect>
+        <text x="251" y="308" width="100px" height="16px" fill="blue" stroke="none" font-size="16px" font-family="Courier">
+          <title></title>+ layout()
+        </text>
+      </g>
+      <g>
+        <rect x="247px" y="310px" width="146px" height="27px" stroke="Purple" fill="Violet" rx="0px" ry="0px">
+          <title></title>
+        </rect>
+        <g>
+          <use xlink:href="#classIcon" x="251" y="314" width="18px" height="18px" stroke="blue" fill="cyan">
+            <title></title>
+          </use>
+          <text x="270" y="332" width="120px" height="18px" fill="blue" stroke="none" font-size="16px" font-family="Courier" font-weight="bold">
+            <title></title>NoneLayouter
+          </text>
+        </g>
+      </g>
+    </g>
+    <g>
+      <rect x="320px" y="347px" width="106px" height="96px" stroke="none" fill="none" rx="0px" ry="0px">
+        <title></title>
+      </rect>
+      <g>
+        <rect x="320px" y="347px" width="106px" height="27px" stroke="Blue" fill="CornflowerBlue" rx="0px" ry="0px">
+          <title></title>
+        </rect>
+        <g>
+          <use xlink:href="#componentIcon" x="324" y="351" width="18px" height="18px" stroke="Blue" fill="CornflowerBlue">
+            <title></title>
+          </use>
+          <text x="343" y="369" width="70px" height="18px" fill="Blue" stroke="none" font-size="16px" font-family="Courier" font-weight="bold">
+            <title></title>swt.jar
+          </text>
+        </g>
+      </g>
+      <g>
+        <rect x="320px" y="374px" width="106px" height="0px" stroke="Blue" fill="CornflowerBlue" rx="0px" ry="0px">
+          <title></title>
+        </rect>
+      </g>
+      <g>
+        <rect x="320px" y="374px" width="106px" height="0px" stroke="Blue" fill="CornflowerBlue" rx="0px" ry="0px">
+          <title></title>
+        </rect>
+      </g>
+      <g>
+        <rect x="320px" y="374px" width="106px" height="69px" stroke="Blue" fill="CornflowerBlue" rx="0px" ry="0px">
+          <title></title>
+        </rect>
+        <g>
+          <use xlink:href="#packageIcon" x="324" y="378" width="18px" height="18px" stroke="green" fill="lime">
+            <title></title>
+          </use>
+          <text x="343" y="396" width="70px" height="18px" fill="blue" stroke="none" font-size="16px" font-family="Courier" font-weight="bold">
+            <title></title>widgets
+          </text>
+        </g>
+        <g>
+          <use xlink:href="#packageIcon" x="324" y="399" width="18px" height="18px" stroke="green" fill="lime">
+            <title></title>
+          </use>
+          <text x="343" y="417" width="80px" height="18px" fill="blue" stroke="none" font-size="16px" font-family="Courier" font-weight="bold">
+            <title></title>painting
+          </text>
+        </g>
+        <g>
+          <use xlink:href="#packageIcon" x="324" y="420" width="18px" height="18px" stroke="green" fill="lime">
+            <title></title>
+          </use>
+          <text x="343" y="438" width="60px" height="18px" fill="blue" stroke="none" font-size="16px" font-family="Courier" font-weight="bold">
+            <title></title>layout
+          </text>
+        </g>
+      </g>
+    </g>
+    <g>
+      <rect x="373px" y="453px" width="116px" height="180px" stroke="none" fill="none" rx="0px" ry="0px">
+        <title></title>
+      </rect>
+      <g>
+        <rect x="373px" y="453px" width="116px" height="27px" stroke="green" fill="SpringGreen" rx="0px" ry="0px">
+          <title></title>
+        </rect>
+        <g>
+          <use xlink:href="#packageIcon" x="377" y="457" width="18px" height="18px" stroke="green" fill="lime">
+            <title></title>
+          </use>
+          <text x="396" y="475" width="70px" height="18px" fill="green" stroke="none" font-size="16px" font-family="Courier" font-weight="bold">
+            <title></title>diagram
+          </text>
+        </g>
+      </g>
+      <g>
+        <rect x="373px" y="480px" width="116px" height="153px" stroke="green" fill="SpringGreen" rx="0px" ry="0px">
+          <title></title>
+        </rect>
+        <g>
+          <use xlink:href="#interfaceIcon" x="377" y="484" width="18px" height="18px" stroke="Purple" fill="Violet">
+            <title></title>
+          </use>
+          <text x="396" y="502" width="50px" height="18px" fill="Purple" stroke="none" font-size="16px" font-family="Courier" font-weight="bold" font-style="italic">
+            <title></title>Shape
+          </text>
+        </g>
+        <g>
+          <use xlink:href="#classIcon" x="377" y="505" width="18px" height="18px" stroke="Blue" fill="Cyan">
+            <title></title>
+          </use>
+          <text x="396" y="523" width="60px" height="18px" fill="Blue" stroke="none" font-size="16px" font-family="Courier" font-weight="bold">
+            <title></title>Circle
+          </text>
+        </g>
+        <g>
+          <use xlink:href="#classIcon" x="377" y="526" width="18px" height="18px" stroke="Blue" fill="Cyan">
+            <title></title>
+          </use>
+          <text x="396" y="544" width="90px" height="18px" fill="Blue" stroke="none" font-size="16px" font-family="Courier" font-weight="bold">
+            <title></title>Rectangle
+          </text>
+        </g>
+        <g>
+          <use xlink:href="#packageIcon" x="377" y="547" width="18px" height="18px" stroke="DarkGreen" fill="SpringGreen">
+            <title></title>
+          </use>
+          <text x="396" y="565" width="50px" height="18px" fill="DarkGreen" stroke="none" font-size="16px" font-family="Courier" font-weight="bold">
+            <title></title>nodes
+          </text>
+        </g>
+        <g>
+          <use xlink:href="#packageIcon" x="377" y="568" width="18px" height="18px" stroke="DarkGreen" fill="SpringGreen">
+            <title></title>
+          </use>
+          <text x="396" y="586" width="50px" height="18px" fill="DarkGreen" stroke="none" font-size="16px" font-family="Courier" font-weight="bold">
+            <title></title>edges
+          </text>
+        </g>
+        <g>
+          <use xlink:href="#packageIcon" x="377" y="589" width="18px" height="18px" stroke="DarkGreen" fill="SpringGreen">
+            <title></title>
+          </use>
+          <text x="396" y="607" width="70px" height="18px" fill="DarkGreen" stroke="none" font-size="16px" font-family="Courier" font-weight="bold">
+            <title></title>anchors
+          </text>
+        </g>
+        <g>
+          <use xlink:href="#packageIcon" x="377" y="610" width="18px" height="18px" stroke="DarkGreen" fill="SpringGreen">
+            <title></title>
+          </use>
+          <text x="396" y="628" width="70px" height="18px" fill="DarkGreen" stroke="none" font-size="16px" font-family="Courier" font-weight="bold">
+            <title></title>routers
+          </text>
+        </g>
+      </g>
+    </g>
+  </g>
+</svg>

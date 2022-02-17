@@ -1,0 +1,3398 @@
+class org.eclipse.uml2.uml.internal.impl.PackageableElementImpl
+  isParentFor
+   org.eclipse.uml2.uml.internal.impl.ConstraintImpl,
+   org.eclipse.uml2.uml.internal.impl.DependencyImpl,
+   org.eclipse.uml2.uml.internal.impl.EventImpl,
+   org.eclipse.uml2.uml.internal.impl.GeneralizationSetImpl,
+   org.eclipse.uml2.uml.internal.impl.InformationFlowImpl,
+   org.eclipse.uml2.uml.internal.impl.ObservationImpl,
+   org.eclipse.uml2.uml.internal.impl.TypeImpl,
+   org.eclipse.uml2.uml.internal.impl.ValueSpecificationImpl
+ 
+class org.eclipse.uml2.common.util.SubsetSupersetEObjectWithInverseEList$Unsettable
+  isParentFor
+   org.eclipse.uml2.common.util.SubsetSupersetEObjectWithInverseEList$Unsettable$ManyInverse
+ 
+class org.eclipse.uml2.uml.internal.operations.StateOperations
+  isParentFor
+   org.eclipse.uml2.uml.internal.operations.FinalStateOperations
+ 
+interface org.xml.sax.ErrorHandler
+  isParentFor
+   org.eclipse.emf.ecore.xmi.XMLDefaultHandler
+ 
+class org.eclipse.emf.ecore.plugin.RegistryReader$PluginClassDescriptor
+  isParentFor
+   org.eclipse.emf.ecore.plugin.ConversionDelegateFactoryRegistryReader$ConversionDelegateFactoryDescriptor,
+   org.eclipse.emf.ecore.plugin.InvocationDelegateFactoryRegistryReader$InvocationDelegateFactoryDescriptor,
+   org.eclipse.emf.ecore.plugin.QueryDelegateFactoryRegistryReader$QueryDelegateFactoryDescriptor,
+   org.eclipse.emf.ecore.plugin.RegistryReader$EFactoryDescriptor,
+   org.eclipse.emf.ecore.plugin.RegistryReader$EPackageDescriptor,
+   org.eclipse.emf.ecore.plugin.RegistryReader$ResourceFactoryDescriptor,
+   org.eclipse.emf.ecore.plugin.SettingDelegateFactoryRegistryReader$SettingDelegateFactoryDescriptor,
+   org.eclipse.emf.ecore.plugin.ValidationDelegateRegistryReader$ValidationDelegateDescriptor
+ 
+interface org.xml.sax.ext.LexicalHandler
+  isParentFor
+   org.eclipse.emf.ecore.xmi.XMLDefaultHandler
+ 
+class org.eclipse.emf.ecore.util.EDataTypeEList
+  isParentFor
+   org.eclipse.emf.ecore.util.BasicFeatureMap,
+   org.eclipse.emf.ecore.util.EDataTypeEList$Unsettable,
+   org.eclipse.emf.ecore.util.EDataTypeUniqueEList,
+   org.eclipse.uml2.common.util.SubsetSupersetEDataTypeEList
+ 
+class org.eclipse.uml2.uml.internal.impl.StructuralFeatureImpl
+  isParentFor
+   org.eclipse.uml2.uml.internal.impl.PropertyImpl
+ 
+interface java.util.ListIterator
+  isParentFor
+   org.eclipse.emf.ecore.util.EContentsEList$FeatureListIterator
+ 
+class javax.xml.datatype.Duration
+  isParentFor
+   org.eclipse.emf.ecore.xml.type.internal.XMLDuration
+ 
+class org.eclipse.emf.common.util.AbstractEList$EListIterator
+  isParentFor
+   org.eclipse.emf.common.util.AbstractEList$NonResolvingEListIterator,
+   org.eclipse.emf.common.util.ArrayDelegatingEList$EListIterator,
+   org.eclipse.emf.common.util.BasicEList$EListIterator,
+   org.eclipse.emf.common.util.DelegatingEList$EListIterator,
+   org.eclipse.emf.ecore.util.BasicFeatureMap$ValueListIteratorImpl,
+   org.eclipse.emf.ecore.util.DelegatingFeatureMap$ValueListIteratorImpl
+ 
+class org.eclipse.emf.ecore.xml.type.impl.AnyTypeImpl
+  isParentFor
+   org.eclipse.emf.ecore.xml.type.impl.SimpleAnyTypeImpl
+ 
+class org.eclipse.uml2.uml.internal.impl.InteractionUseImpl
+  isParentFor
+   org.eclipse.uml2.uml.internal.impl.PartDecompositionImpl
+ 
+class org.eclipse.uml2.uml.internal.operations.CombinedFragmentOperations
+  isParentFor
+   org.eclipse.uml2.uml.internal.operations.ConsiderIgnoreFragmentOperations
+ 
+class java.util.WeakHashMap
+  isParentFor
+   org.eclipse.emf.ecore.impl.ETypeParameterImpl$2,
+   org.eclipse.emf.ecore.util.FeatureMapUtil$BasicValidator$Cache
+ 
+class java.io.InputStream
+  isParentFor
+   org.eclipse.emf.ecore.resource.URIConverter$ReadableInputStream
+ 
+class org.eclipse.uml2.uml.internal.operations.WriteVariableActionOperations
+  isParentFor
+   org.eclipse.uml2.uml.internal.operations.AddVariableValueActionOperations,
+   org.eclipse.uml2.uml.internal.operations.RemoveVariableValueActionOperations
+ 
+class org.eclipse.uml2.uml.internal.impl.CallActionImpl
+  isParentFor
+   org.eclipse.uml2.uml.internal.impl.CallBehaviorActionImpl,
+   org.eclipse.uml2.uml.internal.impl.CallOperationActionImpl,
+   org.eclipse.uml2.uml.internal.impl.StartObjectBehaviorActionImpl
+ 
+interface org.eclipse.uml2.uml.ExecutableNode
+  isParentFor
+   org.eclipse.uml2.uml.Action
+ 
+class org.eclipse.uml2.common.util.SubsetSupersetEObjectContainmentWithInverseEList$Unsettable
+  isParentFor
+   org.eclipse.uml2.common.util.SubsetSupersetEObjectContainmentWithInverseEList$Unsettable$Resolving
+ 
+interface org.eclipse.uml2.uml.Event
+  isParentFor
+   org.eclipse.uml2.uml.ChangeEvent,
+   org.eclipse.uml2.uml.MessageEvent,
+   org.eclipse.uml2.uml.TimeEvent
+ 
+interface org.eclipse.emf.ecore.EDataType
+  isParentFor
+   org.eclipse.emf.ecore.EDataType$Internal,
+   org.eclipse.emf.ecore.EEnum
+ 
+class org.eclipse.uml2.uml.internal.operations.DeploymentTargetOperations
+  isParentFor
+   org.eclipse.uml2.uml.internal.operations.InstanceSpecificationOperations
+ 
+class org.eclipse.emf.ecore.impl.EStructuralFeatureImpl$InternalSettingDelegateSingleEObjectContainmentWithInverse
+  isParentFor
+   org.eclipse.emf.ecore.impl.EStructuralFeatureImpl$InternalSettingDelegateSingleEObjectContainmentWithInverseResolving,
+   org.eclipse.emf.ecore.impl.EStructuralFeatureImpl$InternalSettingDelegateSingleEObjectContainmentWithInverseUnsettable
+ 
+interface org.eclipse.uml2.uml.Namespace
+  isParentFor
+   org.eclipse.uml2.uml.BehavioralFeature,
+   org.eclipse.uml2.uml.Classifier,
+   org.eclipse.uml2.uml.InteractionOperand,
+   org.eclipse.uml2.uml.Package,
+   org.eclipse.uml2.uml.Region,
+   org.eclipse.uml2.uml.State,
+   org.eclipse.uml2.uml.StructuredActivityNode,
+   org.eclipse.uml2.uml.Transition
+ 
+class org.eclipse.emf.ecore.xmi.impl.XMLHelperImpl
+  isParentFor
+   org.eclipse.emf.ecore.xmi.impl.EMOFHelperImpl,
+   org.eclipse.emf.ecore.xmi.impl.XMIHelperImpl
+ 
+class org.eclipse.uml2.uml.internal.operations.RedefinableElementOperations
+  isParentFor
+   org.eclipse.uml2.uml.internal.operations.ActivityEdgeOperations,
+   org.eclipse.uml2.uml.internal.operations.ActivityNodeOperations,
+   org.eclipse.uml2.uml.internal.operations.ConnectorOperations,
+   org.eclipse.uml2.uml.internal.operations.ExtensionPointOperations,
+   org.eclipse.uml2.uml.internal.operations.PropertyOperations,
+   org.eclipse.uml2.uml.internal.operations.RedefinableTemplateSignatureOperations
+ 
+interface org.eclipse.emf.ecore.ENamedElement
+  isParentFor
+   org.eclipse.emf.ecore.EClassifier,
+   org.eclipse.emf.ecore.EEnumLiteral,
+   org.eclipse.emf.ecore.EPackage,
+   org.eclipse.emf.ecore.ETypeParameter,
+   org.eclipse.emf.ecore.ETypedElement
+ 
+class org.eclipse.uml2.uml.internal.impl.ConstraintImpl
+  isParentFor
+   org.eclipse.uml2.uml.internal.impl.InteractionConstraintImpl,
+   org.eclipse.uml2.uml.internal.impl.IntervalConstraintImpl
+ 
+class org.eclipse.emf.ecore.xmi.impl.XMIHandler
+  isParentFor
+   org.eclipse.emf.ecore.xmi.impl.SAXXMIHandler
+ 
+interface org.eclipse.uml2.uml.TemplateParameter
+  isParentFor
+   org.eclipse.uml2.uml.ClassifierTemplateParameter,
+   org.eclipse.uml2.uml.ConnectableElementTemplateParameter,
+   org.eclipse.uml2.uml.OperationTemplateParameter
+ 
+class org.eclipse.emf.ecore.util.EContentsEList$ResolvingFeatureIteratorImpl
+  isParentFor
+   org.eclipse.emf.ecore.impl.ENamedElementImpl$1$1
+ 
+class org.eclipse.emf.ecore.util.ECrossReferenceEList$FeatureIteratorImpl
+  isParentFor
+   org.eclipse.emf.ecore.impl.ENamedElementImpl$2$2,
+   org.eclipse.emf.ecore.util.ECrossReferenceEList$ResolvingFeatureIteratorImpl,
+   org.eclipse.emf.ecore.xmi.impl.EMOFHelperImpl$2
+ 
+class java.util.AbstractSequentialList
+  isParentFor
+   org.eclipse.emf.ecore.impl.EClassImpl$9$1,
+   org.eclipse.emf.ecore.impl.EOperationImpl$1$1,
+   org.eclipse.emf.ecore.util.AbstractSequentialInternalEList,
+   org.eclipse.emf.ecore.util.AbstractSequentialInternalEList$1
+ 
+class org.eclipse.uml2.uml.internal.impl.TemplateParameterImpl
+  isParentFor
+   org.eclipse.uml2.uml.internal.impl.ClassifierTemplateParameterImpl,
+   org.eclipse.uml2.uml.internal.impl.ConnectableElementTemplateParameterImpl,
+   org.eclipse.uml2.uml.internal.impl.OperationTemplateParameterImpl
+ 
+class org.eclipse.emf.common.util.WeakInterningHashSet
+  isParentFor
+   org.eclipse.emf.common.util.Pool
+ 
+class org.eclipse.uml2.uml.internal.operations.PropertyOperations
+  isParentFor
+   org.eclipse.uml2.uml.internal.operations.ExtensionEndOperations,
+   org.eclipse.uml2.uml.internal.operations.PortOperations
+ 
+class org.eclipse.emf.ecore.xmi.impl.StringSegment
+  isParentFor
+   org.eclipse.emf.ecore.xmi.impl.XMLString
+ 
+class org.eclipse.emf.ecore.util.EContentsEList$FeatureIteratorImpl
+  isParentFor
+   org.eclipse.emf.ecore.impl.ENamedElementImpl$1$2,
+   org.eclipse.emf.ecore.util.EContentsEList$FeatureIteratorImpl$1,
+   org.eclipse.emf.ecore.util.EContentsEList$ResolvingFeatureIteratorImpl,
+   org.eclipse.emf.ecore.util.ECrossReferenceEList$FeatureIteratorImpl
+ 
+class org.eclipse.emf.mapping.ecore2xml.util.Ecore2XMLSwitch
+  isParentFor
+   org.eclipse.emf.mapping.ecore2xml.util.Ecore2XMLAdapterFactory$1
+ 
+class org.eclipse.emf.ecore.resource.impl.ExtensibleURIConverterImpl
+  isParentFor
+   org.eclipse.emf.ecore.resource.impl.URIConverterImpl
+ 
+class org.eclipse.emf.ecore.impl.EModelElementImpl
+  isParentFor
+   org.eclipse.emf.ecore.impl.EAnnotationImpl,
+   org.eclipse.emf.ecore.impl.EFactoryImpl,
+   org.eclipse.emf.ecore.impl.ENamedElementImpl,
+   org.eclipse.uml2.uml.internal.impl.ElementImpl
+ 
+interface org.eclipse.uml2.uml.ExecutionSpecification
+  isParentFor
+   org.eclipse.uml2.uml.ActionExecutionSpecification,
+   org.eclipse.uml2.uml.BehaviorExecutionSpecification
+ 
+interface org.eclipse.uml2.uml.Transition
+  isParentFor
+   org.eclipse.uml2.uml.ProtocolTransition
+ 
+class org.eclipse.emf.ecore.util.EObjectWithInverseResolvingEList$Unsettable
+  isParentFor
+   org.eclipse.emf.ecore.util.EObjectWithInverseResolvingEList$Unsettable$ManyInverse
+ 
+interface org.eclipse.uml2.uml.Constraint
+  isParentFor
+   org.eclipse.uml2.uml.InteractionConstraint,
+   org.eclipse.uml2.uml.IntervalConstraint
+ 
+class org.eclipse.emf.ecore.util.BasicFeatureMap$FeatureEIterator
+  isParentFor
+   org.eclipse.emf.ecore.util.BasicFeatureMap$ResolvingFeatureEIterator
+ 
+class org.eclipse.uml2.uml.internal.impl.ConnectableElementImpl
+  isParentFor
+   org.eclipse.uml2.uml.internal.impl.ParameterImpl,
+   org.eclipse.uml2.uml.internal.impl.VariableImpl
+ 
+interface org.eclipse.uml2.uml.InteractionUse
+  isParentFor
+   org.eclipse.uml2.uml.PartDecomposition
+ 
+class org.eclipse.emf.ecore.impl.DynamicEObjectImpl
+  isParentFor
+   org.eclipse.emf.ecore.impl.DynamicEObjectImpl$BasicEMapEntry,
+   org.eclipse.emf.ecore.impl.DynamicEStoreEObjectImpl
+ 
+class org.eclipse.uml2.uml.internal.impl.CreateLinkActionImpl
+  isParentFor
+   org.eclipse.uml2.uml.internal.impl.CreateLinkObjectActionImpl
+ 
+class org.eclipse.uml2.uml.internal.impl.DirectedRelationshipImpl
+  isParentFor
+   org.eclipse.uml2.uml.internal.impl.ElementImportImpl,
+   org.eclipse.uml2.uml.internal.impl.GeneralizationImpl,
+   org.eclipse.uml2.uml.internal.impl.PackageImportImpl,
+   org.eclipse.uml2.uml.internal.impl.PackageMergeImpl,
+   org.eclipse.uml2.uml.internal.impl.ProfileApplicationImpl,
+   org.eclipse.uml2.uml.internal.impl.ProtocolConformanceImpl,
+   org.eclipse.uml2.uml.internal.impl.TemplateBindingImpl
+ 
+class org.eclipse.uml2.uml.internal.impl.WriteStructuralFeatureActionImpl
+  isParentFor
+   org.eclipse.uml2.uml.internal.impl.AddStructuralFeatureValueActionImpl,
+   org.eclipse.uml2.uml.internal.impl.RemoveStructuralFeatureValueActionImpl
+ 
+class org.eclipse.uml2.uml.internal.impl.ValueSpecificationImpl
+  isParentFor
+   org.eclipse.uml2.uml.internal.impl.DurationImpl,
+   org.eclipse.uml2.uml.internal.impl.ExpressionImpl,
+   org.eclipse.uml2.uml.internal.impl.InstanceValueImpl,
+   org.eclipse.uml2.uml.internal.impl.IntervalImpl,
+   org.eclipse.uml2.uml.internal.impl.LiteralSpecificationImpl,
+   org.eclipse.uml2.uml.internal.impl.OpaqueExpressionImpl,
+   org.eclipse.uml2.uml.internal.impl.TimeExpressionImpl
+ 
+class org.eclipse.emf.ecore.xml.type.internal.RegEx$Op$ChildOp
+  isParentFor
+   org.eclipse.emf.ecore.xml.type.internal.RegEx$Op$ModifierOp
+ 
+class org.eclipse.emf.ecore.resource.impl.PlatformResourceURIHandlerImpl$PlatformResourceOutputStream
+  isParentFor
+   org.eclipse.emf.ecore.resource.impl.PlatformResourceURIHandlerImpl$WorkbenchHelper$1,
+   org.eclipse.emf.ecore.resource.impl.URIConverterImpl$PlatformResourceOutputStream
+ 
+interface org.eclipse.uml2.uml.Interval
+  isParentFor
+   org.eclipse.uml2.uml.DurationInterval,
+   org.eclipse.uml2.uml.TimeInterval
+ 
+class org.eclipse.emf.ecore.impl.ESuperAdapter
+  isParentFor
+   org.eclipse.emf.ecore.impl.EClassImpl$11
+ 
+interface org.eclipse.emf.common.notify.Notifier
+  isParentFor
+   org.eclipse.emf.ecore.EObject,
+   org.eclipse.emf.ecore.resource.Resource,
+   org.eclipse.emf.ecore.resource.ResourceSet
+ 
+class org.eclipse.uml2.uml.internal.impl.MessageEndImpl
+  isParentFor
+   org.eclipse.uml2.uml.internal.impl.GateImpl
+ 
+interface org.eclipse.uml2.uml.StructuralFeature
+  isParentFor
+   org.eclipse.uml2.uml.Property
+ 
+interface org.eclipse.uml2.uml.StructuredClassifier
+  isParentFor
+   org.eclipse.uml2.uml.Collaboration,
+   org.eclipse.uml2.uml.EncapsulatedClassifier
+ 
+class org.eclipse.uml2.uml.internal.operations.WriteStructuralFeatureActionOperations
+  isParentFor
+   org.eclipse.uml2.uml.internal.operations.AddStructuralFeatureValueActionOperations,
+   org.eclipse.uml2.uml.internal.operations.RemoveStructuralFeatureValueActionOperations
+ 
+class org.eclipse.emf.ecore.impl.BasicEObjectImpl
+  isParentFor
+   org.eclipse.emf.ecore.impl.EObjectImpl,
+   org.eclipse.emf.ecore.impl.MinimalEObjectImpl
+ 
+interface org.eclipse.uml2.uml.MessageOccurrenceSpecification
+  isParentFor
+   org.eclipse.uml2.uml.DestructionOccurrenceSpecification
+ 
+class org.eclipse.emf.ecore.util.AbstractSequentialInternalEList
+  isParentFor
+   org.eclipse.emf.ecore.util.EContentsEList,
+   org.eclipse.uml2.common.util.DerivedEObjectEList
+ 
+class org.eclipse.uml2.uml.internal.operations.ValueSpecificationOperations
+  isParentFor
+   org.eclipse.uml2.uml.internal.operations.DurationOperations,
+   org.eclipse.uml2.uml.internal.operations.InstanceValueOperations,
+   org.eclipse.uml2.uml.internal.operations.LiteralBooleanOperations,
+   org.eclipse.uml2.uml.internal.operations.LiteralIntegerOperations,
+   org.eclipse.uml2.uml.internal.operations.LiteralNullOperations,
+   org.eclipse.uml2.uml.internal.operations.LiteralRealOperations,
+   org.eclipse.uml2.uml.internal.operations.LiteralStringOperations,
+   org.eclipse.uml2.uml.internal.operations.LiteralUnlimitedNaturalOperations,
+   org.eclipse.uml2.uml.internal.operations.OpaqueExpressionOperations,
+   org.eclipse.uml2.uml.internal.operations.StringExpressionOperations,
+   org.eclipse.uml2.uml.internal.operations.TimeExpressionOperations
+ 
+class org.eclipse.emf.ecore.util.EObjectValidator$DynamicEDataTypeValidator
+  isParentFor
+   org.eclipse.emf.ecore.util.EObjectValidator$2
+ 
+class org.eclipse.emf.ecore.resource.impl.ResourceImpl
+  isParentFor
+   org.eclipse.emf.ecore.resource.impl.BinaryResourceImpl,
+   org.eclipse.emf.ecore.xmi.impl.XMLResourceImpl,
+   org.eclipse.emf.ecore.xml.type.util.XMLTypeResourceImpl
+ 
+interface org.eclipse.emf.ecore.xmi.XMLResource
+  isParentFor
+   org.eclipse.emf.ecore.xmi.XMIResource
+ 
+interface org.eclipse.emf.ecore.xmi.XMIResource
+  isParentFor
+   org.eclipse.emf.mapping.ecore2xml.util.Ecore2XMLResource,
+   org.eclipse.uml2.uml.resource.UMLResource
+ 
+class org.eclipse.emf.ecore.util.EcoreUtil$CrossReferencer
+  isParentFor
+   org.eclipse.emf.ecore.util.ECrossReferenceAdapter$InverseCrossReferencer,
+   org.eclipse.emf.ecore.util.EcoreUtil$ExternalCrossReferencer,
+   org.eclipse.emf.ecore.util.EcoreUtil$ProxyCrossReferencer,
+   org.eclipse.emf.ecore.util.EcoreUtil$UnresolvedProxyCrossReferencer,
+   org.eclipse.emf.ecore.util.EcoreUtil$UsageCrossReferencer
+ 
+class org.eclipse.emf.ecore.impl.EStructuralFeatureImpl$InternalSettingDelegateSingleEObjectContainmentWithInverseUnsettable
+  isParentFor
+   org.eclipse.emf.ecore.impl.EStructuralFeatureImpl$InternalSettingDelegateSingleEObjectContainmentWithInverseUnsettableResolving
+ 
+class org.eclipse.uml2.common.util.DerivedUnionEObjectEList
+  isParentFor
+   org.eclipse.uml2.common.util.DerivedUnionEObjectEList$1
+ 
+interface org.eclipse.uml2.uml.StructuralFeatureAction
+  isParentFor
+   org.eclipse.uml2.uml.ClearStructuralFeatureAction,
+   org.eclipse.uml2.uml.ReadStructuralFeatureAction,
+   org.eclipse.uml2.uml.WriteStructuralFeatureAction
+ 
+interface org.eclipse.core.runtime.IProgressMonitor
+  isParentFor
+   org.eclipse.core.runtime.IProgressMonitorWithBlocking
+ 
+class org.eclipse.emf.ecore.resource.impl.BinaryResourceImpl$EObjectInputStream
+  isParentFor
+   org.eclipse.emf.ecore.xmi.impl.XMLResourceImpl$1
+ 
+class org.eclipse.emf.ecore.resource.impl.ContentHandlerImpl
+  isParentFor
+   org.eclipse.emf.ecore.resource.impl.PlatformContentHandlerImpl,
+   org.eclipse.emf.ecore.xmi.impl.XMLContentHandlerImpl
+ 
+class org.eclipse.emf.ecore.util.DelegatingEcoreEList$Dynamic
+  isParentFor
+   org.eclipse.emf.ecore.impl.EStoreEObjectImpl$BasicEStoreEList
+ 
+class org.eclipse.emf.ecore.util.EObjectEList$Unsettable
+  isParentFor
+   org.eclipse.emf.ecore.util.EObjectResolvingEList$Unsettable
+ 
+class org.eclipse.emf.ecore.impl.EStoreEObjectImpl$BasicEStoreFeatureMap
+  isParentFor
+   org.eclipse.emf.ecore.impl.EStoreEObjectImpl$EStoreFeatureMap
+ 
+class org.eclipse.uml2.uml.internal.impl.NodeImpl
+  isParentFor
+   org.eclipse.uml2.uml.internal.impl.DeviceImpl,
+   org.eclipse.uml2.uml.internal.impl.ExecutionEnvironmentImpl
+ 
+class org.eclipse.uml2.common.util.SubsetSupersetEObjectContainmentEList$Unsettable
+  isParentFor
+   org.eclipse.uml2.common.util.SubsetSupersetEObjectContainmentEList$Unsettable$Resolving
+ 
+class org.eclipse.emf.common.EMFPlugin$EclipsePlugin
+  isParentFor
+   org.eclipse.emf.common.CommonPlugin$Implementation,
+   org.eclipse.emf.ecore.plugin.EcorePlugin$Implementation,
+   org.eclipse.emf.ecore.xmi.XMIPlugin$Implementation,
+   org.eclipse.uml2.common.CommonPlugin$Implementation,
+   org.eclipse.uml2.types.TypesPlugin$Implementation,
+   org.eclipse.uml2.uml.UMLPlugin$Implementation
+ 
+class org.eclipse.emf.common.util.AbstractEList$NonResolvingEIterator
+  isParentFor
+   org.eclipse.emf.common.util.ArrayDelegatingEList$NonResolvingEIterator,
+   org.eclipse.emf.common.util.BasicEList$NonResolvingEIterator,
+   org.eclipse.emf.common.util.DelegatingEList$NonResolvingEIterator
+ 
+class org.eclipse.uml2.common.util.SubsetSupersetEDataTypeEList
+  isParentFor
+   org.eclipse.uml2.common.util.SubsetSupersetEDataTypeEList$Unsettable,
+   org.eclipse.uml2.common.util.SubsetSupersetEDataTypeUniqueEList
+ 
+class org.eclipse.uml2.uml.internal.resource.UMLSaveImpl$Lookup
+  isParentFor
+   org.eclipse.uml2.uml.internal.resource.XMI2UMLSaveImpl$Lookup
+ 
+class java.util.AbstractSet
+  isParentFor
+   org.eclipse.emf.common.util.BasicEMap$3,
+   org.eclipse.emf.common.util.BasicEMap$5,
+   org.eclipse.emf.common.util.BasicEMap$DelegatingMap$1,
+   org.eclipse.emf.common.util.WeakInterningHashSet,
+   org.eclipse.emf.ecore.impl.ETypeParameterImpl$2$1
+ 
+class org.eclipse.uml2.uml.internal.impl.TypedElementImpl
+  isParentFor
+   org.eclipse.uml2.uml.internal.impl.ConnectableElementImpl
+ 
+class java.io.OutputStream
+  isParentFor
+   org.eclipse.emf.ecore.resource.URIConverter$WriteableOutputStream
+ 
+class java.io.BufferedOutputStream
+  isParentFor
+   org.eclipse.emf.ecore.resource.impl.EFSURIHandlerImpl$1
+ 
+class org.eclipse.emf.mapping.ecore2xml.util.Ecore2XMLExtendedMetaData
+  isParentFor
+   org.eclipse.uml2.uml.resource.CMOF2UMLExtendedMetaData,
+   org.eclipse.uml2.uml.resource.UML212UMLExtendedMetaData,
+   org.eclipse.uml2.uml.resource.UML22UMLExtendedMetaData,
+   org.eclipse.uml2.uml.resource.UML302UMLExtendedMetaData
+ 
+class org.eclipse.emf.ecore.util.DelegatingEcoreEList
+  isParentFor
+   org.eclipse.emf.ecore.impl.EClassImpl$9,
+   org.eclipse.emf.ecore.impl.EOperationImpl$1,
+   org.eclipse.emf.ecore.util.DelegatingEcoreEList$Generic,
+   org.eclipse.emf.ecore.util.DelegatingEcoreEList$Unsettable,
+   org.eclipse.emf.ecore.util.DelegatingFeatureMap,
+   org.eclipse.uml2.uml.internal.operations.ConnectableElementOperations$EndEList,
+   org.eclipse.uml2.uml.internal.operations.VertexOperations$IncomingEList,
+   org.eclipse.uml2.uml.internal.operations.VertexOperations$OutgoingEList
+ 
+interface org.eclipse.emf.ecore.resource.Resource$Factory
+  isParentFor
+   org.eclipse.emf.mapping.ecore2xml.util.Ecore2XMLResource$Factory,
+   org.eclipse.uml2.uml.resource.CMOF202UMLResource$Factory,
+   org.eclipse.uml2.uml.resource.CMOF242UMLResource$Factory,
+   org.eclipse.uml2.uml.resource.CMOF2UMLResource$Factory,
+   org.eclipse.uml2.uml.resource.UML212UMLResource$Factory,
+   org.eclipse.uml2.uml.resource.UML22UMLResource$Factory,
+   org.eclipse.uml2.uml.resource.UML302UMLResource$Factory,
+   org.eclipse.uml2.uml.resource.UML402UMLResource$Factory,
+   org.eclipse.uml2.uml.resource.UMLResource$Factory,
+   org.eclipse.uml2.uml.resource.XMI212UMLResource$Factory,
+   org.eclipse.uml2.uml.resource.XMI222UMLResource$Factory,
+   org.eclipse.uml2.uml.resource.XMI242UMLResource$Factory,
+   org.eclipse.uml2.uml.resource.XMI2UMLResource$Factory
+ 
+class org.eclipse.emf.ecore.impl.EPackageImpl
+  isParentFor
+   org.eclipse.emf.ecore.impl.EcorePackageImpl,
+   org.eclipse.emf.ecore.xml.namespace.impl.XMLNamespacePackageImpl,
+   org.eclipse.emf.ecore.xml.type.impl.XMLTypePackageImpl,
+   org.eclipse.emf.mapping.ecore2xml.impl.Ecore2XMLPackageImpl,
+   org.eclipse.uml2.types.internal.impl.TypesPackageImpl,
+   org.eclipse.uml2.uml.internal.impl.UMLPackageImpl
+ 
+class org.eclipse.emf.ecore.impl.EStructuralFeatureImpl$InternalSettingDelegateSingleEObjectResolvingWithInverse
+  isParentFor
+   org.eclipse.emf.ecore.impl.EStructuralFeatureImpl$InternalSettingDelegateSingleEObjectResolvingWithInverseUnsettable
+ 
+interface org.eclipse.uml2.uml.Package
+  isParentFor
+   org.eclipse.uml2.uml.Model,
+   org.eclipse.uml2.uml.Profile
+ 
+class org.eclipse.core.runtime.spi.RegistryStrategy
+  isParentFor
+   org.eclipse.emf.ecore.plugin.EcorePlugin$ExtensionProcessor$1
+ 
+class org.eclipse.uml2.uml.internal.operations.ElementOperations
+  isParentFor
+   org.eclipse.uml2.uml.internal.operations.ClauseOperations,
+   org.eclipse.uml2.uml.internal.operations.ElementImportOperations,
+   org.eclipse.uml2.uml.internal.operations.ExceptionHandlerOperations,
+   org.eclipse.uml2.uml.internal.operations.LinkEndDataOperations,
+   org.eclipse.uml2.uml.internal.operations.MultiplicityElementOperations,
+   org.eclipse.uml2.uml.internal.operations.NamedElementOperations,
+   org.eclipse.uml2.uml.internal.operations.PackageImportOperations,
+   org.eclipse.uml2.uml.internal.operations.ParameterableElementOperations,
+   org.eclipse.uml2.uml.internal.operations.ProfileApplicationOperations,
+   org.eclipse.uml2.uml.internal.operations.QualifierValueOperations,
+   org.eclipse.uml2.uml.internal.operations.TemplateBindingOperations,
+   org.eclipse.uml2.uml.internal.operations.TemplateParameterOperations,
+   org.eclipse.uml2.uml.internal.operations.TemplateParameterSubstitutionOperations,
+   org.eclipse.uml2.uml.internal.operations.TemplateSignatureOperations,
+   org.eclipse.uml2.uml.internal.operations.TemplateableElementOperations
+ 
+class org.eclipse.uml2.uml.internal.impl.RealizationImpl
+  isParentFor
+   org.eclipse.uml2.uml.internal.impl.ComponentRealizationImpl,
+   org.eclipse.uml2.uml.internal.impl.InterfaceRealizationImpl,
+   org.eclipse.uml2.uml.internal.impl.SubstitutionImpl
+ 
+class org.eclipse.emf.ecore.resource.impl.PlatformResourceURIHandlerImpl$WorkbenchHelper
+  isParentFor
+   org.eclipse.emf.ecore.resource.impl.URIConverterImpl$WorkbenchHelper
+ 
+class org.eclipse.emf.ecore.impl.EStructuralFeatureImpl$InternalSettingDelegateSingle
+  isParentFor
+   org.eclipse.emf.ecore.impl.EStructuralFeatureImpl$InternalSettingDelegateSingleContainer,
+   org.eclipse.emf.ecore.impl.EStructuralFeatureImpl$InternalSettingDelegateSingleData,
+   org.eclipse.emf.ecore.impl.EStructuralFeatureImpl$InternalSettingDelegateSingleEObject
+ 
+class org.eclipse.emf.ecore.util.EcoreEMap$DelegateEObjectContainmentWithInverseEList
+  isParentFor
+   org.eclipse.emf.ecore.util.EcoreEMap$Unsettable$UnsettableDelegateEObjectContainmentWithInverseEList
+ 
+class org.eclipse.uml2.uml.internal.operations.ClassifierOperations
+  isParentFor
+   org.eclipse.uml2.uml.internal.operations.ArtifactOperations,
+   org.eclipse.uml2.uml.internal.operations.AssociationOperations,
+   org.eclipse.uml2.uml.internal.operations.BehavioredClassifierOperations,
+   org.eclipse.uml2.uml.internal.operations.DataTypeOperations,
+   org.eclipse.uml2.uml.internal.operations.InformationItemOperations,
+   org.eclipse.uml2.uml.internal.operations.InterfaceOperations,
+   org.eclipse.uml2.uml.internal.operations.SignalOperations,
+   org.eclipse.uml2.uml.internal.operations.StructuredClassifierOperations
+ 
+class org.eclipse.emf.ecore.resource.impl.BinaryResourceImpl$EObjectOutputStream
+  isParentFor
+   org.eclipse.emf.ecore.xmi.impl.XMLResourceImpl$2
+ 
+class org.eclipse.uml2.uml.internal.impl.ExpressionImpl
+  isParentFor
+   org.eclipse.uml2.uml.internal.impl.StringExpressionImpl
+ 
+class org.eclipse.emf.ecore.resource.impl.BinaryResourceImpl$BinaryIO
+  isParentFor
+   org.eclipse.emf.ecore.resource.impl.BinaryResourceImpl$EObjectInputStream,
+   org.eclipse.emf.ecore.resource.impl.BinaryResourceImpl$EObjectOutputStream
+ 
+interface org.eclipse.uml2.uml.ConnectableElement
+  isParentFor
+   org.eclipse.uml2.uml.Parameter,
+   org.eclipse.uml2.uml.Property,
+   org.eclipse.uml2.uml.Variable
+ 
+class org.eclipse.uml2.uml.internal.operations.PackageableElementOperations
+  isParentFor
+   org.eclipse.uml2.uml.internal.operations.ConstraintOperations,
+   org.eclipse.uml2.uml.internal.operations.DurationObservationOperations,
+   org.eclipse.uml2.uml.internal.operations.GeneralizationSetOperations,
+   org.eclipse.uml2.uml.internal.operations.InformationFlowOperations,
+   org.eclipse.uml2.uml.internal.operations.TimeEventOperations,
+   org.eclipse.uml2.uml.internal.operations.TypeOperations,
+   org.eclipse.uml2.uml.internal.operations.ValueSpecificationOperations
+ 
+interface org.eclipse.uml2.uml.StateMachine
+  isParentFor
+   org.eclipse.uml2.uml.ProtocolStateMachine
+ 
+class java.io.ByteArrayOutputStream
+  isParentFor
+   org.eclipse.emf.ecore.impl.EFactoryImpl$1,
+   org.eclipse.emf.ecore.resource.URIConverter$ReadableInputStream$Buffer,
+   org.eclipse.emf.ecore.resource.impl.PlatformResourceURIHandlerImpl$PlatformResourceOutputStream,
+   org.eclipse.emf.ecore.resource.impl.ResourceImpl$1MyByteArrayOutputStream
+ 
+class org.eclipse.uml2.uml.internal.impl.NamedElementImpl
+  isParentFor
+   org.eclipse.uml2.uml.internal.impl.ActivityGroupImpl,
+   org.eclipse.uml2.uml.internal.impl.CollaborationUseImpl,
+   org.eclipse.uml2.uml.internal.impl.DeployedArtifactImpl,
+   org.eclipse.uml2.uml.internal.impl.DeploymentTargetImpl,
+   org.eclipse.uml2.uml.internal.impl.ExtendImpl,
+   org.eclipse.uml2.uml.internal.impl.GeneralOrderingImpl,
+   org.eclipse.uml2.uml.internal.impl.IncludeImpl,
+   org.eclipse.uml2.uml.internal.impl.InteractionFragmentImpl,
+   org.eclipse.uml2.uml.internal.impl.LifelineImpl,
+   org.eclipse.uml2.uml.internal.impl.MessageEndImpl,
+   org.eclipse.uml2.uml.internal.impl.MessageImpl,
+   org.eclipse.uml2.uml.internal.impl.NamespaceImpl,
+   org.eclipse.uml2.uml.internal.impl.PackageableElementImpl,
+   org.eclipse.uml2.uml.internal.impl.ParameterSetImpl,
+   org.eclipse.uml2.uml.internal.impl.RedefinableElementImpl,
+   org.eclipse.uml2.uml.internal.impl.TriggerImpl,
+   org.eclipse.uml2.uml.internal.impl.TypedElementImpl,
+   org.eclipse.uml2.uml.internal.impl.VertexImpl
+ 
+class org.eclipse.emf.common.util.Pool$AccessUnit$Queue
+  isParentFor
+   org.eclipse.emf.common.util.CommonUtil$StringPool$CharSequenceAccessUnit$Queue,
+   org.eclipse.emf.common.util.CommonUtil$StringPool$CharactersAccessUnit$Queue,
+   org.eclipse.emf.common.util.CommonUtil$StringPool$JavaInterningAccessUnit$Queue,
+   org.eclipse.emf.common.util.CommonUtil$StringPool$StringAccessUnit$Queue,
+   org.eclipse.emf.common.util.CommonUtil$StringPool$StringsAccessUnit$Queue,
+   org.eclipse.emf.common.util.CommonUtil$StringPool$SubstringAccessUnit$Queue,
+   org.eclipse.emf.common.util.Pool$ObjectAccessUnit$Queue,
+   org.eclipse.emf.common.util.SegmentSequence$SegmentSequencePool$SegmentsAccessUnit$Queue,
+   org.eclipse.emf.common.util.SegmentSequence$SegmentSequencePool$SegmentsAndSegmentAccessUnit$Queue,
+   org.eclipse.emf.common.util.SegmentSequence$SegmentSequencePool$SegmentsAndSegmentsAccessUnit$Queue,
+   org.eclipse.emf.common.util.SegmentSequence$SegmentSequencePool$StringAccessUnit$Queue,
+   org.eclipse.emf.common.util.SegmentSequence$StringArrayPool$SegmentsAccessUnit$Queue,
+   org.eclipse.emf.common.util.SegmentSequence$StringArrayPool$SegmentsAndSegmentAccessUnit$Queue,
+   org.eclipse.emf.common.util.SegmentSequence$StringArrayPool$SegmentsAndSegmentCountAccessUnit$Queue,
+   org.eclipse.emf.common.util.SegmentSequence$StringArrayPool$SegmentsAndSegmentsAccessUnit$Queue,
+   org.eclipse.emf.common.util.SegmentSequence$StringArrayPool$SegmentsAndSubsegmentAccessUnit$Queue,
+   org.eclipse.emf.common.util.SegmentSequence$StringArrayPool$StringAccessUnit$Queue,
+   org.eclipse.emf.common.util.SegmentSequence$StringArrayPool$SubsegmentsAndSubsegmentsAccessUnit$Queue,
+   org.eclipse.emf.common.util.SegmentSequence$StringArrayPool$SubstringAccessUnit$Queue,
+   org.eclipse.emf.common.util.URI$URIPool$FileAccessUnit$Queue,
+   org.eclipse.emf.common.util.URI$URIPool$PlatformAccessUnit$Queue,
+   org.eclipse.emf.common.util.URI$URIPool$StringAccessUnit$Queue,
+   org.eclipse.emf.common.util.URI$URIPool$URIComponentsAccessUnit$Queue
+ 
+interface org.eclipse.emf.ecore.InternalEObject
+  isParentFor
+   org.eclipse.emf.ecore.EDataType$Internal,
+   org.eclipse.emf.ecore.EOperation$Internal,
+   org.eclipse.emf.ecore.EStructuralFeature$Internal
+ 
+interface org.eclipse.uml2.uml.EncapsulatedClassifier
+  isParentFor
+   org.eclipse.uml2.uml.Class
+ 
+class org.eclipse.uml2.uml.internal.operations.ActivityNodeOperations
+  isParentFor
+   org.eclipse.uml2.uml.internal.operations.ActionOperations,
+   org.eclipse.uml2.uml.internal.operations.DecisionNodeOperations,
+   org.eclipse.uml2.uml.internal.operations.FinalNodeOperations,
+   org.eclipse.uml2.uml.internal.operations.ForkNodeOperations,
+   org.eclipse.uml2.uml.internal.operations.InitialNodeOperations,
+   org.eclipse.uml2.uml.internal.operations.JoinNodeOperations,
+   org.eclipse.uml2.uml.internal.operations.MergeNodeOperations,
+   org.eclipse.uml2.uml.internal.operations.ObjectNodeOperations
+ 
+class org.eclipse.uml2.uml.internal.operations.WriteLinkActionOperations
+  isParentFor
+   org.eclipse.uml2.uml.internal.operations.CreateLinkActionOperations
+ 
+class org.eclipse.uml2.uml.internal.operations.InteractionUseOperations
+  isParentFor
+   org.eclipse.uml2.uml.internal.operations.PartDecompositionOperations
+ 
+interface org.eclipse.uml2.uml.Behavior
+  isParentFor
+   org.eclipse.uml2.uml.Activity,
+   org.eclipse.uml2.uml.Interaction,
+   org.eclipse.uml2.uml.OpaqueBehavior,
+   org.eclipse.uml2.uml.StateMachine
+ 
+class org.eclipse.emf.ecore.impl.EFactoryImpl
+  isParentFor
+   org.eclipse.emf.ecore.impl.EcoreFactoryImpl,
+   org.eclipse.emf.ecore.xml.namespace.impl.XMLNamespaceFactoryImpl,
+   org.eclipse.emf.ecore.xml.type.impl.XMLTypeFactoryImpl,
+   org.eclipse.emf.mapping.ecore2xml.impl.Ecore2XMLFactoryImpl,
+   org.eclipse.uml2.types.internal.impl.TypesFactoryImpl,
+   org.eclipse.uml2.uml.internal.impl.UMLFactoryImpl
+ 
+class org.eclipse.emf.ecore.impl.ENamedElementImpl
+  isParentFor
+   org.eclipse.emf.ecore.impl.EClassifierImpl,
+   org.eclipse.emf.ecore.impl.EEnumLiteralImpl,
+   org.eclipse.emf.ecore.impl.EPackageImpl,
+   org.eclipse.emf.ecore.impl.ETypeParameterImpl,
+   org.eclipse.emf.ecore.impl.ETypedElementImpl
+ 
+interface org.eclipse.emf.ecore.EStructuralFeature
+  isParentFor
+   org.eclipse.emf.ecore.EAttribute,
+   org.eclipse.emf.ecore.EReference,
+   org.eclipse.emf.ecore.EStructuralFeature$Internal
+ 
+class org.eclipse.uml2.uml.internal.impl.StructuralFeatureActionImpl
+  isParentFor
+   org.eclipse.uml2.uml.internal.impl.ClearStructuralFeatureActionImpl,
+   org.eclipse.uml2.uml.internal.impl.ReadStructuralFeatureActionImpl,
+   org.eclipse.uml2.uml.internal.impl.WriteStructuralFeatureActionImpl
+ 
+class org.eclipse.emf.common.util.AbstractEList$EIterator
+  isParentFor
+   org.eclipse.emf.common.util.AbstractEList$EListIterator,
+   org.eclipse.emf.common.util.AbstractEList$NonResolvingEIterator,
+   org.eclipse.emf.common.util.ArrayDelegatingEList$EIterator,
+   org.eclipse.emf.common.util.BasicEList$EIterator,
+   org.eclipse.emf.common.util.DelegatingEList$EIterator
+ 
+class org.eclipse.emf.common.util.BasicEList$UnmodifiableEList
+  isParentFor
+   org.eclipse.emf.ecore.util.EcoreEList$UnmodifiableEList
+ 
+class org.eclipse.uml2.uml.internal.impl.DeploymentTargetImpl
+  isParentFor
+   org.eclipse.uml2.uml.internal.impl.InstanceSpecificationImpl
+ 
+class org.eclipse.emf.ecore.xmi.impl.URIHandlerImpl
+  isParentFor
+   org.eclipse.emf.ecore.xmi.impl.ResourceEntityHandlerImpl,
+   org.eclipse.emf.ecore.xmi.impl.URIHandlerImpl$AbsoluteCrossBundleAware,
+   org.eclipse.emf.ecore.xmi.impl.URIHandlerImpl$PlatformSchemeAware
+ 
+class org.eclipse.emf.common.command.CompoundCommand
+  isParentFor
+   org.eclipse.emf.common.command.AbstractCommand$1ChainedCompoundCommand,
+   org.eclipse.emf.common.command.StrictCompoundCommand
+ 
+class javax.xml.datatype.XMLGregorianCalendar
+  isParentFor
+   org.eclipse.emf.ecore.xml.type.internal.XMLCalendar
+ 
+class org.eclipse.emf.ecore.util.EContentAdapter
+  isParentFor
+   org.eclipse.emf.ecore.resource.impl.ResourceSetImpl$MappedResourceLocator$ResourceAdapter
+ 
+interface org.eclipse.uml2.uml.OccurrenceSpecification
+  isParentFor
+   org.eclipse.uml2.uml.ExecutionOccurrenceSpecification,
+   org.eclipse.uml2.uml.MessageOccurrenceSpecification
+ 
+interface org.eclipse.uml2.uml.BehavioredClassifier
+  isParentFor
+   org.eclipse.uml2.uml.Actor,
+   org.eclipse.uml2.uml.Class,
+   org.eclipse.uml2.uml.Collaboration,
+   org.eclipse.uml2.uml.UseCase
+ 
+class org.eclipse.emf.ecore.xmi.impl.XMLSaveImpl$Lookup
+  isParentFor
+   org.eclipse.uml2.uml.internal.resource.CMOF2UMLSaveImpl$Lookup,
+   org.eclipse.uml2.uml.internal.resource.UMLSaveImpl$Lookup
+ 
+class org.eclipse.emf.ecore.util.EObjectContainmentEList$Unsettable
+  isParentFor
+   org.eclipse.emf.ecore.impl.EClassImpl$2,
+   org.eclipse.emf.ecore.impl.EOperationImpl$2,
+   org.eclipse.emf.ecore.util.EObjectContainmentEList$Unsettable$Resolving
+ 
+interface org.eclipse.uml2.uml.DeployedArtifact
+  isParentFor
+   org.eclipse.uml2.uml.Artifact,
+   org.eclipse.uml2.uml.InstanceSpecification
+ 
+class org.eclipse.uml2.uml.internal.operations.ArtifactOperations
+  isParentFor
+   org.eclipse.uml2.uml.internal.operations.DeploymentSpecificationOperations
+ 
+class org.eclipse.uml2.uml.internal.impl.PackageImpl
+  isParentFor
+   org.eclipse.uml2.uml.internal.impl.ModelImpl,
+   org.eclipse.uml2.uml.internal.impl.ProfileImpl
+ 
+class org.eclipse.emf.common.util.Pool
+  isParentFor
+   org.eclipse.emf.common.util.CommonUtil$StringPool,
+   org.eclipse.emf.common.util.SegmentSequence$SegmentSequencePool,
+   org.eclipse.emf.common.util.SegmentSequence$StringArrayPool,
+   org.eclipse.emf.common.util.URI$URIPool
+ 
+interface org.eclipse.emf.common.notify.Adapter
+  isParentFor
+   org.eclipse.emf.common.notify.Adapter$Internal
+ 
+class org.eclipse.emf.ecore.util.EcoreEMap
+  isParentFor
+   org.eclipse.emf.ecore.impl.EAnnotationImpl$1,
+   org.eclipse.emf.ecore.impl.EStoreEObjectImpl$1EStoreEcoreEMap,
+   org.eclipse.emf.ecore.impl.MinimalEStoreEObjectImpl$1EStoreEcoreEMap,
+   org.eclipse.emf.ecore.util.EcoreEMap$Unsettable
+ 
+class org.eclipse.uml2.uml.util.UMLSwitch
+  isParentFor
+   org.eclipse.uml2.uml.internal.operations.TypeOperations$1,
+   org.eclipse.uml2.uml.internal.operations.TypeOperations$2,
+   org.eclipse.uml2.uml.internal.operations.ValueSpecificationOperations$1,
+   org.eclipse.uml2.uml.resource.CMOF2UMLResourceHandler$1,
+   org.eclipse.uml2.uml.resource.UML212UMLResourceHandler$1,
+   org.eclipse.uml2.uml.resource.UML22UMLResourceHandler$1,
+   org.eclipse.uml2.uml.resource.UML302UMLResourceHandler$1,
+   org.eclipse.uml2.uml.resource.UML402UMLResourceHandler$1,
+   org.eclipse.uml2.uml.util.UMLAdapterFactory$1,
+   org.eclipse.uml2.uml.util.UMLUtil$1,
+   org.eclipse.uml2.uml.util.UMLUtil$4,
+   org.eclipse.uml2.uml.util.UMLUtil$Ecore2UMLConverter$1,
+   org.eclipse.uml2.uml.util.UMLUtil$Ecore2UMLConverter$2,
+   org.eclipse.uml2.uml.util.UMLUtil$PackageMerger$1,
+   org.eclipse.uml2.uml.util.UMLUtil$Profile2EPackageConverter$1,
+   org.eclipse.uml2.uml.util.UMLUtil$TemplateExpander$1,
+   org.eclipse.uml2.uml.util.UMLUtil$TemplateExpander$2,
+   org.eclipse.uml2.uml.util.UMLUtil$TemplateExpander$2$1,
+   org.eclipse.uml2.uml.util.UMLUtil$UML2EcoreConverter,
+   org.eclipse.uml2.uml.util.UMLUtil$UML2EcoreConverter$1
+ 
+interface org.eclipse.uml2.uml.LinkEndData
+  isParentFor
+   org.eclipse.uml2.uml.LinkEndCreationData,
+   org.eclipse.uml2.uml.LinkEndDestructionData
+ 
+class org.eclipse.emf.ecore.impl.EStructuralFeatureImpl$InternalSettingDelegateSingleData
+  isParentFor
+   org.eclipse.emf.ecore.impl.EStructuralFeatureImpl$InternalSettingDelegateSingleDataDynamic,
+   org.eclipse.emf.ecore.impl.EStructuralFeatureImpl$InternalSettingDelegateSingleDataStatic,
+   org.eclipse.emf.ecore.impl.EStructuralFeatureImpl$InternalSettingDelegateSingleDataUnsettable
+ 
+class org.eclipse.emf.ecore.impl.EStructuralFeatureImpl$InternalSettingDelegateSingleData$NotificationCreator
+  isParentFor
+   org.eclipse.emf.ecore.impl.EStructuralFeatureImpl$InternalSettingDelegateSingleData$NotificationCreator$1,
+   org.eclipse.emf.ecore.impl.EStructuralFeatureImpl$InternalSettingDelegateSingleData$NotificationCreator$2,
+   org.eclipse.emf.ecore.impl.EStructuralFeatureImpl$InternalSettingDelegateSingleData$NotificationCreator$3,
+   org.eclipse.emf.ecore.impl.EStructuralFeatureImpl$InternalSettingDelegateSingleData$NotificationCreator$4,
+   org.eclipse.emf.ecore.impl.EStructuralFeatureImpl$InternalSettingDelegateSingleData$NotificationCreator$5,
+   org.eclipse.emf.ecore.impl.EStructuralFeatureImpl$InternalSettingDelegateSingleData$NotificationCreator$6,
+   org.eclipse.emf.ecore.impl.EStructuralFeatureImpl$InternalSettingDelegateSingleData$NotificationCreator$7,
+   org.eclipse.emf.ecore.impl.EStructuralFeatureImpl$InternalSettingDelegateSingleData$NotificationCreator$8
+ 
+class org.eclipse.emf.common.util.UniqueEList
+  isParentFor
+   org.eclipse.emf.common.util.UniqueEList$FastCompare,
+   org.eclipse.emf.ecore.impl.EClassImpl$10,
+   org.eclipse.emf.ecore.impl.EClassImpl$1EGenericSuperTypeEList,
+   org.eclipse.emf.ecore.impl.EClassImpl$1EStructuralFeatureUniqueEList,
+   org.eclipse.emf.ecore.impl.EClassImpl$1ReferenceList,
+   org.eclipse.emf.ecore.impl.EClassImpl$3,
+   org.eclipse.emf.ecore.impl.EClassImpl$4,
+   org.eclipse.emf.ecore.impl.EClassImpl$7,
+   org.eclipse.emf.ecore.impl.EClassImpl$8,
+   org.eclipse.emf.ecore.impl.ESuperAdapter$1
+ 
+class java.util.AbstractList
+  isParentFor
+   org.eclipse.emf.common.util.AbstractEList,
+   org.eclipse.emf.common.util.ECollections$2$1,
+   org.eclipse.emf.common.util.SegmentSequence$UnmodifiableArrayList,
+   org.eclipse.emf.common.util.SegmentSequence$UnmodifiableArraySubList,
+   org.eclipse.emf.ecore.util.FeatureMapUtil$FeatureEList
+ 
+interface org.eclipse.uml2.uml.InstanceSpecification
+  isParentFor
+   org.eclipse.uml2.uml.EnumerationLiteral
+ 
+interface org.eclipse.uml2.uml.AttributeOwner
+  isParentFor
+   org.eclipse.uml2.uml.Artifact,
+   org.eclipse.uml2.uml.DataType,
+   org.eclipse.uml2.uml.Interface,
+   org.eclipse.uml2.uml.Signal,
+   org.eclipse.uml2.uml.StructuredClassifier
+ 
+interface org.eclipse.uml2.uml.ActivityEdge
+  isParentFor
+   org.eclipse.uml2.uml.ControlFlow,
+   org.eclipse.uml2.uml.ObjectFlow
+ 
+interface org.eclipse.uml2.uml.PackageableElement
+  isParentFor
+   org.eclipse.uml2.uml.Constraint,
+   org.eclipse.uml2.uml.Dependency,
+   org.eclipse.uml2.uml.Event,
+   org.eclipse.uml2.uml.GeneralizationSet,
+   org.eclipse.uml2.uml.InformationFlow,
+   org.eclipse.uml2.uml.InstanceSpecification,
+   org.eclipse.uml2.uml.Observation,
+   org.eclipse.uml2.uml.Package,
+   org.eclipse.uml2.uml.Type,
+   org.eclipse.uml2.uml.ValueSpecification
+ 
+interface org.eclipse.uml2.uml.DataType
+  isParentFor
+   org.eclipse.uml2.uml.Enumeration,
+   org.eclipse.uml2.uml.PrimitiveType
+ 
+class org.eclipse.emf.ecore.util.BasicExtendedMetaData
+  isParentFor
+   org.eclipse.emf.ecore.xmi.impl.EMOFExtendedMetaData,
+   org.eclipse.emf.mapping.ecore2xml.util.Ecore2XMLExtendedMetaData,
+   org.eclipse.uml2.uml.resource.UML402UMLExtendedMetaData,
+   org.eclipse.uml2.uml.resource.XMI2UMLExtendedMetaData
+ 
+interface org.eclipse.emf.ecore.EFactory
+  isParentFor
+   org.eclipse.emf.ecore.EcoreFactory,
+   org.eclipse.emf.ecore.xml.namespace.XMLNamespaceFactory,
+   org.eclipse.emf.ecore.xml.type.XMLTypeFactory,
+   org.eclipse.emf.mapping.ecore2xml.Ecore2XMLFactory,
+   org.eclipse.uml2.types.TypesFactory,
+   org.eclipse.uml2.uml.UMLFactory
+ 
+class org.eclipse.uml2.uml.internal.impl.PropertyImpl
+  isParentFor
+   org.eclipse.uml2.uml.internal.impl.ExtensionEndImpl,
+   org.eclipse.uml2.uml.internal.impl.PortImpl
+ 
+class org.eclipse.uml2.uml.internal.impl.ArtifactImpl
+  isParentFor
+   org.eclipse.uml2.uml.internal.impl.DeploymentSpecificationImpl
+ 
+class org.eclipse.emf.ecore.impl.EStructuralFeatureImpl$InternalSettingDelegateSingleEObjectContainmentUnsettable
+  isParentFor
+   org.eclipse.emf.ecore.impl.EStructuralFeatureImpl$InternalSettingDelegateSingleEObjectContainmentUnsettableResolving
+ 
+class org.eclipse.emf.common.EMFPlugin
+  isParentFor
+   org.eclipse.emf.common.CommonPlugin,
+   org.eclipse.emf.ecore.plugin.EcorePlugin,
+   org.eclipse.emf.ecore.xmi.XMIPlugin,
+   org.eclipse.uml2.common.CommonPlugin,
+   org.eclipse.uml2.types.TypesPlugin,
+   org.eclipse.uml2.uml.UMLPlugin
+ 
+class org.eclipse.emf.ecore.resource.impl.URIMappingRegistryImpl
+  isParentFor
+   org.eclipse.emf.ecore.resource.impl.ExtensibleURIConverterImpl$1
+ 
+class org.eclipse.uml2.uml.internal.impl.MessageEventImpl
+  isParentFor
+   org.eclipse.uml2.uml.internal.impl.AnyReceiveEventImpl,
+   org.eclipse.uml2.uml.internal.impl.CallEventImpl,
+   org.eclipse.uml2.uml.internal.impl.SignalEventImpl
+ 
+interface org.eclipse.emf.ecore.xmi.XMLResource$XMLMap
+  isParentFor
+   org.eclipse.emf.mapping.ecore2xml.XMLMap
+ 
+class org.eclipse.uml2.uml.internal.impl.StructuredClassifierImpl$PartEList
+  isParentFor
+   org.eclipse.uml2.uml.internal.impl.StructuredClassifierImpl$PartEList$1
+ 
+class org.eclipse.uml2.uml.internal.impl.StateImpl
+  isParentFor
+   org.eclipse.uml2.uml.internal.impl.FinalStateImpl
+ 
+class org.eclipse.emf.ecore.impl.EStructuralFeatureImpl$BasicFeatureMapEntry
+  isParentFor
+   org.eclipse.emf.ecore.impl.EStructuralFeatureImpl$ContainmentUpdatingFeatureMapEntry,
+   org.eclipse.emf.ecore.impl.EStructuralFeatureImpl$InverseUpdatingFeatureMapEntry,
+   org.eclipse.emf.ecore.impl.EStructuralFeatureImpl$SimpleContentFeatureMapEntry,
+   org.eclipse.emf.ecore.impl.EStructuralFeatureImpl$SimpleFeatureMapEntry
+ 
+class org.eclipse.uml2.uml.internal.operations.AcceptEventActionOperations
+  isParentFor
+   org.eclipse.uml2.uml.internal.operations.AcceptCallActionOperations
+ 
+class org.eclipse.emf.common.util.DelegatingEList
+  isParentFor
+   org.eclipse.emf.common.notify.impl.DelegatingNotifyingListImpl,
+   org.eclipse.emf.common.util.DelegatingEList$UnmodifiableEList,
+   org.eclipse.emf.common.util.ECollections$1,
+   org.eclipse.emf.common.util.ECollections$3
+ 
+class org.eclipse.emf.ecore.resource.impl.ResourceFactoryRegistryImpl
+  isParentFor
+   org.eclipse.emf.ecore.resource.impl.ResourceSetImpl$2
+ 
+class org.eclipse.uml2.uml.internal.impl.VariableActionImpl
+  isParentFor
+   org.eclipse.uml2.uml.internal.impl.ClearVariableActionImpl,
+   org.eclipse.uml2.uml.internal.impl.ReadVariableActionImpl,
+   org.eclipse.uml2.uml.internal.impl.WriteVariableActionImpl
+ 
+class org.eclipse.uml2.uml.internal.impl.BehaviorImpl
+  isParentFor
+   org.eclipse.uml2.uml.internal.impl.ActivityImpl,
+   org.eclipse.uml2.uml.internal.impl.InteractionImpl,
+   org.eclipse.uml2.uml.internal.impl.OpaqueBehaviorImpl,
+   org.eclipse.uml2.uml.internal.impl.StateMachineImpl
+ 
+class org.eclipse.emf.ecore.util.EObjectContainmentWithInverseEList
+  isParentFor
+   org.eclipse.emf.ecore.util.EObjectContainmentWithInverseEList$Resolving,
+   org.eclipse.emf.ecore.util.EObjectContainmentWithInverseEList$Unsettable
+ 
+class org.eclipse.uml2.uml.internal.resource.XMI2UMLHelperImpl
+  isParentFor
+   org.eclipse.uml2.uml.internal.resource.CMOF2UMLHelperImpl
+ 
+class org.eclipse.uml2.uml.internal.impl.OpaqueBehaviorImpl
+  isParentFor
+   org.eclipse.uml2.uml.internal.impl.FunctionBehaviorImpl
+ 
+class org.eclipse.uml2.uml.internal.impl.AcceptEventActionImpl
+  isParentFor
+   org.eclipse.uml2.uml.internal.impl.AcceptCallActionImpl
+ 
+class org.eclipse.emf.ecore.impl.EObjectImpl
+  isParentFor
+   org.eclipse.emf.ecore.impl.DynamicEObjectImpl,
+   org.eclipse.emf.ecore.impl.EStoreEObjectImpl,
+   org.eclipse.emf.ecore.impl.FlatEObjectImpl,
+   org.eclipse.emf.ecore.util.BasicFeatureMap$FeatureMapEObjectImpl,
+   org.eclipse.emf.ecore.util.DelegatingFeatureMap$FeatureMapEObjectImpl,
+   org.eclipse.emf.ecore.xml.namespace.impl.XMLNamespaceDocumentRootImpl,
+   org.eclipse.emf.ecore.xml.type.impl.AnyTypeImpl,
+   org.eclipse.emf.ecore.xml.type.impl.ProcessingInstructionImpl,
+   org.eclipse.emf.ecore.xml.type.impl.XMLTypeDocumentRootImpl,
+   org.eclipse.emf.mapping.ecore2xml.impl.ENamedElementToXMLInfoMapEntryImpl,
+   org.eclipse.emf.mapping.ecore2xml.impl.XMLInfoImpl,
+   org.eclipse.emf.mapping.ecore2xml.impl.XMLMapImpl
+ 
+class org.eclipse.uml2.common.util.SubsetSupersetEObjectContainmentWithInverseEList
+  isParentFor
+   org.eclipse.uml2.common.util.SubsetSupersetEObjectContainmentWithInverseEList$Resolving,
+   org.eclipse.uml2.common.util.SubsetSupersetEObjectContainmentWithInverseEList$Unsettable
+ 
+class org.eclipse.uml2.uml.internal.impl.ClassImpl$SuperClassEList
+  isParentFor
+   org.eclipse.uml2.uml.internal.impl.ClassImpl$SuperClassEList$1
+ 
+class org.eclipse.emf.common.util.WeakInterningHashSet$Entry
+  isParentFor
+   org.eclipse.emf.common.util.CommonUtil$StringPool$StringPoolEntry,
+   org.eclipse.emf.common.util.Pool$PoolEntry,
+   org.eclipse.emf.common.util.WeakInterningHashSet$SelfCleaningEntry
+ 
+class org.eclipse.emf.ecore.util.ECrossReferenceEList
+  isParentFor
+   org.eclipse.emf.ecore.impl.ENamedElementImpl$2,
+   org.eclipse.emf.ecore.util.ECrossReferenceEList$1,
+   org.eclipse.emf.ecore.util.ECrossReferenceEList$2
+ 
+class org.eclipse.uml2.uml.internal.impl.ClassImpl
+  isParentFor
+   org.eclipse.uml2.uml.internal.impl.AssociationClassImpl,
+   org.eclipse.uml2.uml.internal.impl.BehaviorImpl,
+   org.eclipse.uml2.uml.internal.impl.ComponentImpl,
+   org.eclipse.uml2.uml.internal.impl.NodeImpl,
+   org.eclipse.uml2.uml.internal.impl.StereotypeImpl
+ 
+class org.eclipse.uml2.uml.internal.impl.ElementImpl
+  isParentFor
+   org.eclipse.uml2.uml.internal.impl.ClauseImpl,
+   org.eclipse.uml2.uml.internal.impl.CommentImpl,
+   org.eclipse.uml2.uml.internal.impl.ExceptionHandlerImpl,
+   org.eclipse.uml2.uml.internal.impl.ImageImpl,
+   org.eclipse.uml2.uml.internal.impl.LinkEndDataImpl,
+   org.eclipse.uml2.uml.internal.impl.MultiplicityElementImpl,
+   org.eclipse.uml2.uml.internal.impl.NamedElementImpl,
+   org.eclipse.uml2.uml.internal.impl.ParameterableElementImpl,
+   org.eclipse.uml2.uml.internal.impl.QualifierValueImpl,
+   org.eclipse.uml2.uml.internal.impl.RelationshipImpl,
+   org.eclipse.uml2.uml.internal.impl.SlotImpl,
+   org.eclipse.uml2.uml.internal.impl.TemplateParameterImpl,
+   org.eclipse.uml2.uml.internal.impl.TemplateParameterSubstitutionImpl,
+   org.eclipse.uml2.uml.internal.impl.TemplateSignatureImpl,
+   org.eclipse.uml2.uml.internal.impl.TemplateableElementImpl
+ 
+class org.eclipse.uml2.common.util.UML2Util$EClassMatcher
+  isParentFor
+   org.eclipse.uml2.common.util.UML2Util$EStructuralFeatureMatcher,
+   org.eclipse.uml2.uml.util.UMLUtil$5,
+   org.eclipse.uml2.uml.util.UMLUtil$6,
+   org.eclipse.uml2.uml.util.UMLUtil$Ecore2UMLConverter$ParameterSubstitutionMatcher,
+   org.eclipse.uml2.uml.util.UMLUtil$PackageMerger$1$1,
+   org.eclipse.uml2.uml.util.UMLUtil$PackageMerger$ImplicitAssociationNameMatcher,
+   org.eclipse.uml2.uml.util.UMLUtil$PackageMerger$KeyMatcher,
+   org.eclipse.uml2.uml.util.UMLUtil$PackageMerger$ResultingQNameMatcher,
+   org.eclipse.uml2.uml.util.UMLUtil$PackageMerger$StringValueMatcher
+ 
+class org.eclipse.emf.ecore.impl.EStructuralFeatureImpl$InternalSettingDelegateSingleEObjectResolving
+  isParentFor
+   org.eclipse.emf.ecore.impl.EStructuralFeatureImpl$InternalSettingDelegateSingleEObjectResolvingUnsettable,
+   org.eclipse.emf.ecore.impl.EStructuralFeatureImpl$InternalSettingDelegateSingleEObjectResolvingWithInverse
+ 
+class org.eclipse.emf.ecore.util.BasicExtendedMetaData$EPackageExtendedMetaDataImpl
+  isParentFor
+   org.eclipse.emf.ecore.xmi.impl.EMOFExtendedMetaData$1
+ 
+interface org.eclipse.uml2.uml.WriteStructuralFeatureAction
+  isParentFor
+   org.eclipse.uml2.uml.AddStructuralFeatureValueAction,
+   org.eclipse.uml2.uml.RemoveStructuralFeatureValueAction
+ 
+class org.eclipse.uml2.uml.internal.operations.ConnectableElementOperations
+  isParentFor
+   org.eclipse.uml2.uml.internal.operations.ParameterOperations,
+   org.eclipse.uml2.uml.internal.operations.VariableOperations
+ 
+interface org.eclipse.uml2.uml.Expression
+  isParentFor
+   org.eclipse.uml2.uml.StringExpression
+ 
+class org.eclipse.emf.ecore.util.EcoreEList$Generic
+  isParentFor
+   org.eclipse.emf.ecore.util.EcoreEList$Dynamic
+ 
+interface java.util.Map
+  isParentFor
+   org.eclipse.emf.common.util.EMap$InternalMapView,
+   org.eclipse.emf.ecore.EDataType$Internal$ConversionDelegate$Factory$Registry,
+   org.eclipse.emf.ecore.EOperation$Internal$InvocationDelegate$Factory$Registry,
+   org.eclipse.emf.ecore.EPackage$Registry,
+   org.eclipse.emf.ecore.EStructuralFeature$Internal$SettingDelegate$Factory$Registry,
+   org.eclipse.emf.ecore.EValidator$Registry,
+   org.eclipse.emf.ecore.EValidator$ValidationDelegate$Registry,
+   org.eclipse.emf.ecore.resource.impl.ExtensibleURIConverterImpl$URIMap,
+   org.eclipse.emf.ecore.util.QueryDelegate$Factory$Registry,
+   org.eclipse.emf.mapping.ecore2xml.Ecore2XMLRegistry
+ 
+class org.eclipse.uml2.uml.internal.impl.MessageOccurrenceSpecificationImpl
+  isParentFor
+   org.eclipse.uml2.uml.internal.impl.DestructionOccurrenceSpecificationImpl
+ 
+interface java.util.Map$Entry
+  isParentFor
+   org.eclipse.emf.common.util.BasicEMap$Entry
+ 
+interface org.eclipse.uml2.uml.ParameterableElement
+  isParentFor
+   org.eclipse.uml2.uml.ConnectableElement,
+   org.eclipse.uml2.uml.Operation,
+   org.eclipse.uml2.uml.PackageableElement
+ 
+class org.eclipse.uml2.uml.internal.resource.XMI2UMLHandler
+  isParentFor
+   org.eclipse.uml2.uml.internal.resource.CMOF202UMLHandler,
+   org.eclipse.uml2.uml.internal.resource.CMOF242UMLHandler,
+   org.eclipse.uml2.uml.internal.resource.CMOF2UMLHandler
+ 
+class org.eclipse.uml2.uml.internal.resource.UMLSaveImpl
+  isParentFor
+   org.eclipse.uml2.uml.internal.resource.CMOF2UMLSaveImpl,
+   org.eclipse.uml2.uml.internal.resource.XMI2UMLSaveImpl
+ 
+class org.eclipse.uml2.uml.internal.impl.RelationshipImpl
+  isParentFor
+   org.eclipse.uml2.uml.internal.impl.DirectedRelationshipImpl
+ 
+class org.eclipse.emf.ecore.util.ECrossReferenceAdapter$InverseCrossReferencer
+  isParentFor
+   org.eclipse.uml2.common.util.CacheAdapter$InverseCrossReferencer
+ 
+class org.eclipse.emf.ecore.util.EcoreUtil$Copier
+  isParentFor
+   org.eclipse.emf.ecore.xmi.impl.EMOFHelperImpl$1,
+   org.eclipse.uml2.uml.internal.operations.PackageOperations$StereotypeApplicationCopier,
+   org.eclipse.uml2.uml.util.UMLUtil$PackageMerger
+ 
+class org.eclipse.uml2.uml.internal.impl.ClassifierImpl
+  isParentFor
+   org.eclipse.uml2.uml.internal.impl.ArtifactImpl,
+   org.eclipse.uml2.uml.internal.impl.AssociationImpl,
+   org.eclipse.uml2.uml.internal.impl.BehavioredClassifierImpl,
+   org.eclipse.uml2.uml.internal.impl.DataTypeImpl,
+   org.eclipse.uml2.uml.internal.impl.InformationItemImpl,
+   org.eclipse.uml2.uml.internal.impl.InterfaceImpl,
+   org.eclipse.uml2.uml.internal.impl.SignalImpl,
+   org.eclipse.uml2.uml.internal.impl.StructuredClassifierImpl
+ 
+class org.eclipse.uml2.uml.internal.operations.ActivityGroupOperations
+  isParentFor
+   org.eclipse.uml2.uml.internal.operations.ActivityPartitionOperations,
+   org.eclipse.uml2.uml.internal.operations.InterruptibleActivityRegionOperations
+ 
+class org.eclipse.uml2.uml.internal.operations.ActionOperations
+  isParentFor
+   org.eclipse.uml2.uml.internal.operations.AcceptEventActionOperations,
+   org.eclipse.uml2.uml.internal.operations.BroadcastSignalActionOperations,
+   org.eclipse.uml2.uml.internal.operations.CallActionOperations,
+   org.eclipse.uml2.uml.internal.operations.ClearAssociationActionOperations,
+   org.eclipse.uml2.uml.internal.operations.CreateObjectActionOperations,
+   org.eclipse.uml2.uml.internal.operations.DestroyObjectActionOperations,
+   org.eclipse.uml2.uml.internal.operations.LinkActionOperations,
+   org.eclipse.uml2.uml.internal.operations.OpaqueActionOperations,
+   org.eclipse.uml2.uml.internal.operations.ReadExtentActionOperations,
+   org.eclipse.uml2.uml.internal.operations.ReadIsClassifiedObjectActionOperations,
+   org.eclipse.uml2.uml.internal.operations.ReadLinkObjectEndActionOperations,
+   org.eclipse.uml2.uml.internal.operations.ReadLinkObjectEndQualifierActionOperations,
+   org.eclipse.uml2.uml.internal.operations.ReadSelfActionOperations,
+   org.eclipse.uml2.uml.internal.operations.ReclassifyObjectActionOperations,
+   org.eclipse.uml2.uml.internal.operations.ReduceActionOperations,
+   org.eclipse.uml2.uml.internal.operations.ReplyActionOperations,
+   org.eclipse.uml2.uml.internal.operations.SendObjectActionOperations,
+   org.eclipse.uml2.uml.internal.operations.SendSignalActionOperations,
+   org.eclipse.uml2.uml.internal.operations.StartClassifierBehaviorActionOperations,
+   org.eclipse.uml2.uml.internal.operations.StructuralFeatureActionOperations,
+   org.eclipse.uml2.uml.internal.operations.StructuredActivityNodeOperations,
+   org.eclipse.uml2.uml.internal.operations.TestIdentityActionOperations,
+   org.eclipse.uml2.uml.internal.operations.UnmarshallActionOperations,
+   org.eclipse.uml2.uml.internal.operations.ValueSpecificationActionOperations,
+   org.eclipse.uml2.uml.internal.operations.VariableActionOperations
+ 
+class org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container$Dynamic
+  isParentFor
+   org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container$Dynamic$BasicEMapEntry
+ 
+class org.eclipse.emf.ecore.util.EcoreEList$UnmodifiableEList$FastCompare
+  isParentFor
+   org.eclipse.emf.ecore.impl.EClassImpl$1EAllStructuralFeaturesList,
+   org.eclipse.emf.ecore.impl.EClassImpl$5,
+   org.eclipse.emf.ecore.impl.EClassImpl$6
+ 
+class org.eclipse.emf.common.util.DelegatingResourceLocator
+  isParentFor
+   org.eclipse.emf.common.EMFPlugin
+ 
+class org.eclipse.uml2.uml.internal.impl.DataTypeImpl
+  isParentFor
+   org.eclipse.uml2.uml.internal.impl.EnumerationImpl,
+   org.eclipse.uml2.uml.internal.impl.PrimitiveTypeImpl
+ 
+class org.eclipse.uml2.uml.internal.operations.NamespaceOperations
+  isParentFor
+   org.eclipse.uml2.uml.internal.operations.BehavioralFeatureOperations,
+   org.eclipse.uml2.uml.internal.operations.ClassifierOperations,
+   org.eclipse.uml2.uml.internal.operations.InteractionOperandOperations,
+   org.eclipse.uml2.uml.internal.operations.PackageOperations,
+   org.eclipse.uml2.uml.internal.operations.RegionOperations,
+   org.eclipse.uml2.uml.internal.operations.StateOperations,
+   org.eclipse.uml2.uml.internal.operations.TransitionOperations
+ 
+interface org.eclipse.uml2.uml.DirectedRelationship
+  isParentFor
+   org.eclipse.uml2.uml.Dependency,
+   org.eclipse.uml2.uml.ElementImport,
+   org.eclipse.uml2.uml.Extend,
+   org.eclipse.uml2.uml.Generalization,
+   org.eclipse.uml2.uml.Include,
+   org.eclipse.uml2.uml.InformationFlow,
+   org.eclipse.uml2.uml.PackageImport,
+   org.eclipse.uml2.uml.PackageMerge,
+   org.eclipse.uml2.uml.ProfileApplication,
+   org.eclipse.uml2.uml.ProtocolConformance,
+   org.eclipse.uml2.uml.TemplateBinding
+ 
+interface org.eclipse.uml2.uml.OpaqueBehavior
+  isParentFor
+   org.eclipse.uml2.uml.FunctionBehavior
+ 
+class org.eclipse.emf.ecore.xmi.impl.SAXXMIHandler
+  isParentFor
+   org.eclipse.emf.ecore.xmi.impl.EMOFHandler,
+   org.eclipse.uml2.uml.internal.resource.UMLHandler
+ 
+class org.eclipse.emf.ecore.plugin.RegistryReader$EPackageDescriptor
+  isParentFor
+   org.eclipse.emf.ecore.plugin.RegistryReader$EPackageDescriptor$Dynamic
+ 
+class org.eclipse.emf.common.notify.impl.AdapterImpl
+  isParentFor
+   org.eclipse.emf.ecore.impl.ESuperAdapter,
+   org.eclipse.emf.ecore.resource.impl.ResourceImpl$ModificationTrackingAdapter,
+   org.eclipse.emf.ecore.util.EContentAdapter,
+   org.eclipse.uml2.uml.util.UMLDerivedUnionAdapter,
+   org.eclipse.uml2.uml.util.UMLUtil$HelperLink
+ 
+interface org.eclipse.uml2.uml.WriteVariableAction
+  isParentFor
+   org.eclipse.uml2.uml.AddVariableValueAction,
+   org.eclipse.uml2.uml.RemoveVariableValueAction
+ 
+class org.eclipse.emf.common.util.AbstractEList$BasicIndexOutOfBoundsException
+  isParentFor
+   org.eclipse.emf.common.util.BasicEList$BasicIndexOutOfBoundsException
+ 
+interface org.eclipse.uml2.uml.TypedElement
+  isParentFor
+   org.eclipse.uml2.uml.ConnectableElement,
+   org.eclipse.uml2.uml.ObjectNode,
+   org.eclipse.uml2.uml.StructuralFeature,
+   org.eclipse.uml2.uml.ValueSpecification
+ 
+class org.eclipse.uml2.uml.internal.operations.BehavioredClassifierOperations
+  isParentFor
+   org.eclipse.uml2.uml.internal.operations.ActorOperations,
+   org.eclipse.uml2.uml.internal.operations.UseCaseOperations
+ 
+class org.eclipse.uml2.uml.internal.operations.PackageOperations
+  isParentFor
+   org.eclipse.uml2.uml.internal.operations.ModelOperations,
+   org.eclipse.uml2.uml.internal.operations.ProfileOperations
+ 
+class org.eclipse.emf.ecore.util.EcoreEList$UnmodifiableEList
+  isParentFor
+   org.eclipse.emf.ecore.util.EcoreEList$UnmodifiableEList$FastCompare,
+   org.eclipse.uml2.common.util.UnionEObjectEList
+ 
+class org.eclipse.uml2.uml.internal.operations.VariableActionOperations
+  isParentFor
+   org.eclipse.uml2.uml.internal.operations.ReadVariableActionOperations,
+   org.eclipse.uml2.uml.internal.operations.WriteVariableActionOperations
+ 
+class org.eclipse.uml2.uml.internal.impl.WriteVariableActionImpl
+  isParentFor
+   org.eclipse.uml2.uml.internal.impl.AddVariableValueActionImpl,
+   org.eclipse.uml2.uml.internal.impl.RemoveVariableValueActionImpl
+ 
+class org.eclipse.emf.common.notify.impl.BasicNotifierImpl
+  isParentFor
+   org.eclipse.emf.common.notify.impl.NotifierImpl,
+   org.eclipse.emf.ecore.impl.BasicEObjectImpl
+ 
+class org.eclipse.uml2.uml.internal.operations.ConstraintOperations
+  isParentFor
+   org.eclipse.uml2.uml.internal.operations.DurationConstraintOperations,
+   org.eclipse.uml2.uml.internal.operations.InteractionConstraintOperations,
+   org.eclipse.uml2.uml.internal.operations.TimeConstraintOperations
+ 
+class org.eclipse.emf.common.util.URI
+  isParentFor
+   org.eclipse.emf.common.util.URI$Fragment,
+   org.eclipse.emf.common.util.URI$Hierarchical,
+   org.eclipse.emf.common.util.URI$Opaque
+ 
+class org.eclipse.uml2.uml.util.UMLUtil$PackageMerger
+  isParentFor
+   org.eclipse.uml2.uml.util.UMLUtil$TemplateExpander,
+   org.eclipse.uml2.uml.util.UMLUtil$TemplateExpander$2$2
+ 
+interface org.eclipse.emf.ecore.resource.impl.ExtensibleURIConverterImpl$URIMap
+  isParentFor
+   org.eclipse.emf.ecore.resource.impl.URIConverterImpl$URIMap
+ 
+interface org.eclipse.uml2.uml.Abstraction
+  isParentFor
+   org.eclipse.uml2.uml.Manifestation,
+   org.eclipse.uml2.uml.Realization
+ 
+class org.eclipse.uml2.uml.internal.operations.TemplateParameterOperations
+  isParentFor
+   org.eclipse.uml2.uml.internal.operations.ClassifierTemplateParameterOperations,
+   org.eclipse.uml2.uml.internal.operations.OperationTemplateParameterOperations
+ 
+class org.eclipse.uml2.uml.internal.operations.TransitionOperations
+  isParentFor
+   org.eclipse.uml2.uml.internal.operations.ProtocolTransitionOperations
+ 
+class org.eclipse.emf.ecore.util.EcoreUtil$AbstractFilteredSettingsIterator
+  isParentFor
+   org.eclipse.emf.ecore.util.EcoreUtil$FilteredSettingsIterator
+ 
+class org.eclipse.emf.common.notify.impl.NotificationImpl
+  isParentFor
+   org.eclipse.emf.common.notify.impl.BasicNotifierImpl$EAdapterList$1,
+   org.eclipse.emf.common.notify.impl.DelegatingNotifyingListImpl$1,
+   org.eclipse.emf.common.notify.impl.NotifyingListImpl$1,
+   org.eclipse.emf.ecore.impl.ENotificationImpl,
+   org.eclipse.emf.ecore.impl.MinimalEObjectImpl$1ArrayDelegatingAdapterList$1,
+   org.eclipse.emf.ecore.resource.impl.ResourceImpl$1,
+   org.eclipse.emf.ecore.resource.impl.ResourceImpl$10,
+   org.eclipse.emf.ecore.resource.impl.ResourceImpl$11,
+   org.eclipse.emf.ecore.resource.impl.ResourceImpl$2,
+   org.eclipse.emf.ecore.resource.impl.ResourceImpl$3,
+   org.eclipse.emf.ecore.resource.impl.ResourceImpl$9
+ 
+interface org.eclipse.uml2.uml.Pin
+  isParentFor
+   org.eclipse.uml2.uml.InputPin,
+   org.eclipse.uml2.uml.OutputPin
+ 
+class org.eclipse.uml2.common.util.SubsetSupersetEDataTypeEList$Unsettable
+  isParentFor
+   org.eclipse.uml2.common.util.SubsetSupersetEDataTypeUniqueEList$Unsettable
+ 
+class org.eclipse.uml2.uml.internal.impl.ActivityEdgeImpl
+  isParentFor
+   org.eclipse.uml2.uml.internal.impl.ControlFlowImpl,
+   org.eclipse.uml2.uml.internal.impl.ObjectFlowImpl
+ 
+interface org.eclipse.uml2.uml.BodyOwner
+  isParentFor
+   org.eclipse.uml2.uml.OpaqueAction,
+   org.eclipse.uml2.uml.OpaqueBehavior,
+   org.eclipse.uml2.uml.OpaqueExpression
+ 
+interface org.eclipse.uml2.uml.AcceptEventAction
+  isParentFor
+   org.eclipse.uml2.uml.AcceptCallAction
+ 
+class org.eclipse.emf.common.util.WrappedException
+  isParentFor
+   org.eclipse.emf.ecore.resource.impl.ResourceSetImpl$1DiagnosticWrappedException
+ 
+class org.eclipse.uml2.common.util.DerivedEObjectEList$DerivedListIterator
+  isParentFor
+   org.eclipse.uml2.common.util.DerivedEObjectEList$EmptyDerivedListIterator,
+   org.eclipse.uml2.common.util.DerivedEObjectEList$ResolvingDerivedListIterator,
+   org.eclipse.uml2.common.util.DerivedSubsetEObjectEList$DerivedSubsetListIterator
+ 
+interface org.eclipse.emf.ecore.xmi.XMLResource$XMLInfo
+  isParentFor
+   org.eclipse.emf.mapping.ecore2xml.XMLInfo
+ 
+class java.util.concurrent.atomic.AtomicReference
+  isParentFor
+   org.eclipse.emf.common.util.Pool$AccessUnit$Queue
+ 
+interface org.eclipse.uml2.uml.Action
+  isParentFor
+   org.eclipse.uml2.uml.AcceptEventAction,
+   org.eclipse.uml2.uml.ClearAssociationAction,
+   org.eclipse.uml2.uml.CreateObjectAction,
+   org.eclipse.uml2.uml.DestroyObjectAction,
+   org.eclipse.uml2.uml.InvocationAction,
+   org.eclipse.uml2.uml.LinkAction,
+   org.eclipse.uml2.uml.OpaqueAction,
+   org.eclipse.uml2.uml.RaiseExceptionAction,
+   org.eclipse.uml2.uml.ReadExtentAction,
+   org.eclipse.uml2.uml.ReadIsClassifiedObjectAction,
+   org.eclipse.uml2.uml.ReadLinkObjectEndAction,
+   org.eclipse.uml2.uml.ReadLinkObjectEndQualifierAction,
+   org.eclipse.uml2.uml.ReadSelfAction,
+   org.eclipse.uml2.uml.ReclassifyObjectAction,
+   org.eclipse.uml2.uml.ReduceAction,
+   org.eclipse.uml2.uml.ReplyAction,
+   org.eclipse.uml2.uml.StartClassifierBehaviorAction,
+   org.eclipse.uml2.uml.StructuralFeatureAction,
+   org.eclipse.uml2.uml.StructuredActivityNode,
+   org.eclipse.uml2.uml.TestIdentityAction,
+   org.eclipse.uml2.uml.UnmarshallAction,
+   org.eclipse.uml2.uml.ValueSpecificationAction,
+   org.eclipse.uml2.uml.VariableAction
+ 
+interface java.util.Set
+  isParentFor
+   org.eclipse.emf.common.util.InterningSet
+ 
+interface org.eclipse.uml2.uml.InvocationAction
+  isParentFor
+   org.eclipse.uml2.uml.BroadcastSignalAction,
+   org.eclipse.uml2.uml.CallAction,
+   org.eclipse.uml2.uml.SendObjectAction,
+   org.eclipse.uml2.uml.SendSignalAction
+ 
+class org.eclipse.uml2.uml.internal.operations.ExecutionSpecificationOperations
+  isParentFor
+   org.eclipse.uml2.uml.internal.operations.ActionExecutionSpecificationOperations
+ 
+class org.eclipse.uml2.uml.internal.resource.UMLHandler
+  isParentFor
+   org.eclipse.uml2.uml.internal.resource.UML212UMLHandler,
+   org.eclipse.uml2.uml.internal.resource.UML22UMLHandler,
+   org.eclipse.uml2.uml.internal.resource.UML302UMLHandler,
+   org.eclipse.uml2.uml.internal.resource.XMI212UMLHandler,
+   org.eclipse.uml2.uml.internal.resource.XMI222UMLHandler,
+   org.eclipse.uml2.uml.internal.resource.XMI242UMLHandler,
+   org.eclipse.uml2.uml.internal.resource.XMI2UMLHandler
+ 
+interface org.eclipse.emf.common.util.Enumerator
+  isParentFor
+   org.eclipse.emf.ecore.EEnumLiteral
+ 
+interface org.eclipse.uml2.uml.Classifier
+  isParentFor
+   org.eclipse.uml2.uml.Artifact,
+   org.eclipse.uml2.uml.Association,
+   org.eclipse.uml2.uml.BehavioredClassifier,
+   org.eclipse.uml2.uml.DataType,
+   org.eclipse.uml2.uml.InformationItem,
+   org.eclipse.uml2.uml.Interface,
+   org.eclipse.uml2.uml.Signal,
+   org.eclipse.uml2.uml.StructuredClassifier
+ 
+class org.eclipse.uml2.uml.internal.impl.TransitionImpl
+  isParentFor
+   org.eclipse.uml2.uml.internal.impl.ProtocolTransitionImpl
+ 
+class org.eclipse.uml2.uml.util.UMLUtil$UML2EcoreConverter
+  isParentFor
+   org.eclipse.uml2.uml.util.UMLUtil$Profile2EPackageConverter
+ 
+class org.eclipse.uml2.uml.internal.impl.LiteralSpecificationImpl
+  isParentFor
+   org.eclipse.uml2.uml.internal.impl.LiteralBooleanImpl,
+   org.eclipse.uml2.uml.internal.impl.LiteralIntegerImpl,
+   org.eclipse.uml2.uml.internal.impl.LiteralNullImpl,
+   org.eclipse.uml2.uml.internal.impl.LiteralRealImpl,
+   org.eclipse.uml2.uml.internal.impl.LiteralStringImpl,
+   org.eclipse.uml2.uml.internal.impl.LiteralUnlimitedNaturalImpl
+ 
+class org.eclipse.uml2.uml.internal.impl.PinImpl
+  isParentFor
+   org.eclipse.uml2.uml.internal.impl.InputPinImpl,
+   org.eclipse.uml2.uml.internal.impl.OutputPinImpl
+ 
+class org.eclipse.emf.ecore.impl.MinimalEObjectImpl
+  isParentFor
+   org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container,
+   org.eclipse.emf.ecore.impl.MinimalEStoreEObjectImpl
+ 
+class org.eclipse.emf.ecore.util.EObjectContainmentWithInverseEList$Unsettable
+  isParentFor
+   org.eclipse.emf.ecore.util.EObjectContainmentWithInverseEList$Unsettable$Resolving
+ 
+class org.eclipse.uml2.common.util.DerivedEObjectEList
+  isParentFor
+   org.eclipse.uml2.common.util.DerivedEObjectEList$1,
+   org.eclipse.uml2.common.util.DerivedSubsetEObjectEList,
+   org.eclipse.uml2.common.util.DerivedUnionEObjectEList,
+   org.eclipse.uml2.uml.internal.impl.ProtocolTransitionImpl$ReferredEList,
+   org.eclipse.uml2.uml.internal.impl.StructuredClassifierImpl$PartEList
+ 
+interface org.eclipse.uml2.uml.LinkAction
+  isParentFor
+   org.eclipse.uml2.uml.ReadLinkAction,
+   org.eclipse.uml2.uml.WriteLinkAction
+ 
+class org.eclipse.uml2.uml.internal.impl.ProtocolTransitionImpl$ReferredEList
+  isParentFor
+   org.eclipse.uml2.uml.internal.impl.ProtocolTransitionImpl$ReferredEList$1
+ 
+class org.eclipse.emf.ecore.util.EcoreEList
+  isParentFor
+   org.eclipse.emf.ecore.util.EDataTypeEList,
+   org.eclipse.emf.ecore.util.EObjectEList,
+   org.eclipse.emf.ecore.util.EcoreEList$Generic
+ 
+interface org.eclipse.emf.ecore.EObject
+  isParentFor
+   org.eclipse.emf.ecore.EGenericType,
+   org.eclipse.emf.ecore.EModelElement,
+   org.eclipse.emf.ecore.InternalEObject,
+   org.eclipse.emf.ecore.xml.namespace.XMLNamespaceDocumentRoot,
+   org.eclipse.emf.ecore.xml.type.AnyType,
+   org.eclipse.emf.ecore.xml.type.ProcessingInstruction,
+   org.eclipse.emf.ecore.xml.type.XMLTypeDocumentRoot,
+   org.eclipse.emf.mapping.ecore2xml.XMLInfo,
+   org.eclipse.emf.mapping.ecore2xml.XMLMap
+ 
+class java.util.LinkedHashMap
+  isParentFor
+   org.eclipse.emf.ecore.util.EcoreUtil$Copier
+ 
+class org.eclipse.emf.ecore.util.EObjectWithInverseResolvingEList
+  isParentFor
+   org.eclipse.emf.ecore.util.EObjectWithInverseResolvingEList$ManyInverse
+ 
+class org.eclipse.uml2.uml.internal.impl.IntervalConstraintImpl
+  isParentFor
+   org.eclipse.uml2.uml.internal.impl.DurationConstraintImpl,
+   org.eclipse.uml2.uml.internal.impl.TimeConstraintImpl
+ 
+interface org.eclipse.emf.ecore.util.InternalEList
+  isParentFor
+   org.eclipse.emf.ecore.util.FeatureMap$Internal,
+   org.eclipse.emf.ecore.util.InternalEList$Unsettable
+ 
+class org.eclipse.emf.ecore.impl.ENotificationImpl
+  isParentFor
+   org.eclipse.emf.ecore.util.FeatureMapUtil$FeatureENotificationImpl
+ 
+class org.eclipse.emf.ecore.impl.EStructuralFeatureImpl$InternalSettingDelegateSingleContainer
+  isParentFor
+   org.eclipse.emf.ecore.impl.EStructuralFeatureImpl$InternalSettingDelegateSingleContainerResolving
+ 
+class org.eclipse.emf.ecore.impl.EStoreEObjectImpl$BasicEStoreEList
+  isParentFor
+   org.eclipse.emf.ecore.impl.EStoreEObjectImpl$1EStoreEcoreEMap$1,
+   org.eclipse.emf.ecore.impl.EStoreEObjectImpl$EStoreEList,
+   org.eclipse.emf.ecore.impl.MinimalEStoreEObjectImpl$1EStoreEcoreEMap$1
+ 
+class org.eclipse.emf.common.util.CommonUtil$StringPool$StringPoolEntry
+  isParentFor
+   org.eclipse.emf.common.util.CommonUtil$StringPool$SelfCleaningStringPoolEntry
+ 
+class org.eclipse.emf.ecore.impl.ETypedElementImpl
+  isParentFor
+   org.eclipse.emf.ecore.impl.EOperationImpl,
+   org.eclipse.emf.ecore.impl.EParameterImpl,
+   org.eclipse.emf.ecore.impl.EStructuralFeatureImpl
+ 
+class org.eclipse.uml2.uml.internal.operations.EncapsulatedClassifierOperations
+  isParentFor
+   org.eclipse.uml2.uml.internal.operations.ClassOperations
+ 
+class org.eclipse.uml2.uml.internal.impl.OccurrenceSpecificationImpl
+  isParentFor
+   org.eclipse.uml2.uml.internal.impl.ExecutionOccurrenceSpecificationImpl,
+   org.eclipse.uml2.uml.internal.impl.MessageOccurrenceSpecificationImpl
+ 
+interface org.eclipse.emf.ecore.xml.type.AnyType
+  isParentFor
+   org.eclipse.emf.ecore.xml.type.SimpleAnyType
+ 
+class org.eclipse.emf.ecore.xmi.impl.XMLLoadImpl
+  isParentFor
+   org.eclipse.emf.ecore.xmi.impl.GenericXMLResourceImpl$GenericXMLLoadImpl,
+   org.eclipse.emf.ecore.xmi.impl.XMILoadImpl,
+   org.eclipse.emf.ecore.xmi.impl.XMLContentHandlerImpl$1$1
+ 
+class java.util.AbstractCollection
+  isParentFor
+   org.eclipse.emf.common.util.BasicEMap$4
+ 
+class org.eclipse.emf.ecore.impl.EDataTypeImpl
+  isParentFor
+   org.eclipse.emf.ecore.impl.EEnumImpl
+ 
+class org.eclipse.uml2.uml.internal.operations.CreateLinkActionOperations
+  isParentFor
+   org.eclipse.uml2.uml.internal.operations.CreateLinkObjectActionOperations
+ 
+class java.util.TreeMap
+  isParentFor
+   org.eclipse.emf.ecore.resource.impl.ContentHandlerRegistryImpl
+ 
+class org.eclipse.emf.common.util.BasicMonitor
+  isParentFor
+   org.eclipse.emf.common.util.BasicMonitor$Printing
+ 
+class org.eclipse.emf.ecore.xml.type.util.XMLTypeResourceImpl$StackFrame
+  isParentFor
+   org.eclipse.emf.ecore.xml.type.util.XMLTypeResourceImpl$DataFrame,
+   org.eclipse.emf.ecore.xml.type.util.XMLTypeResourceImpl$FrameFactory$AnyTypeStackFrame,
+   org.eclipse.emf.ecore.xml.type.util.XMLTypeResourceImpl$FrameFactory$ProcessingInstructionStackFrame,
+   org.eclipse.emf.ecore.xml.type.util.XMLTypeResourceImpl$FrameFactory$SimpleAnyTypeStackFrame,
+   org.eclipse.emf.ecore.xml.type.util.XMLTypeResourceImpl$FrameFactory$XMLTypeDocumentRootStackFrame
+ 
+class org.eclipse.uml2.common.util.SubsetSupersetEObjectWithInverseResolvingEList$Unsettable
+  isParentFor
+   org.eclipse.uml2.common.util.SubsetSupersetEObjectWithInverseResolvingEList$Unsettable$ManyInverse
+ 
+class org.eclipse.emf.common.util.CommonUtil$StringPool$SubstringAccessUnit
+  isParentFor
+   org.eclipse.emf.common.util.URI$URIPool$URIPoolAccessUnitBase$1
+ 
+class org.eclipse.emf.ecore.resource.impl.BinaryResourceImpl$DataConverter
+  isParentFor
+   org.eclipse.emf.ecore.resource.impl.BinaryResourceImpl$DataConverter$1,
+   org.eclipse.emf.ecore.resource.impl.BinaryResourceImpl$EObjectInputStream$1,
+   org.eclipse.emf.ecore.resource.impl.BinaryResourceImpl$EObjectOutputStream$1
+ 
+class org.eclipse.uml2.uml.internal.operations.AssociationOperations
+  isParentFor
+   org.eclipse.uml2.uml.internal.operations.CommunicationPathOperations,
+   org.eclipse.uml2.uml.internal.operations.ExtensionOperations
+ 
+class org.eclipse.uml2.uml.internal.impl.InstanceSpecificationImpl
+  isParentFor
+   org.eclipse.uml2.uml.internal.impl.EnumerationLiteralImpl
+ 
+class org.eclipse.emf.ecore.util.EcoreValidator$EGenericTypeBuilder
+  isParentFor
+   org.eclipse.emf.ecore.util.EcoreValidator$2
+ 
+class java.lang.Thread
+  isParentFor
+   org.eclipse.emf.common.util.CommonUtil$1ReferenceClearingQueuePollingThread
+ 
+class org.eclipse.emf.ecore.impl.EStructuralFeatureImpl
+  isParentFor
+   org.eclipse.emf.ecore.impl.EAttributeImpl,
+   org.eclipse.emf.ecore.impl.EReferenceImpl
+ 
+interface org.eclipse.uml2.uml.Class
+  isParentFor
+   org.eclipse.uml2.uml.AssociationClass,
+   org.eclipse.uml2.uml.Behavior,
+   org.eclipse.uml2.uml.Component,
+   org.eclipse.uml2.uml.Node,
+   org.eclipse.uml2.uml.Stereotype
+ 
+interface org.eclipse.uml2.uml.MessageEnd
+  isParentFor
+   org.eclipse.uml2.uml.Gate,
+   org.eclipse.uml2.uml.MessageOccurrenceSpecification
+ 
+class org.eclipse.emf.ecore.util.EcoreValidator$EOperationSignatureValidator
+  isParentFor
+   org.eclipse.emf.ecore.util.EcoreValidator$1
+ 
+class org.eclipse.emf.ecore.impl.EStructuralFeatureImpl$InternalSettingDelegateSingleEObject
+  isParentFor
+   org.eclipse.emf.ecore.impl.EStructuralFeatureImpl$InternalSettingDelegateSingleEObjectContainment,
+   org.eclipse.emf.ecore.impl.EStructuralFeatureImpl$InternalSettingDelegateSingleEObjectResolving,
+   org.eclipse.emf.ecore.impl.EStructuralFeatureImpl$InternalSettingDelegateSingleEObjectUnsettable,
+   org.eclipse.emf.ecore.impl.EStructuralFeatureImpl$InternalSettingDelegateSingleEObjectWithInverse
+ 
+class java.io.FilterOutputStream
+  isParentFor
+   org.eclipse.emf.common.archive.ArchiveURLConnection$2,
+   org.eclipse.emf.ecore.resource.impl.AESCipherImpl$1,
+   org.eclipse.emf.ecore.resource.impl.DESCipherImpl$1,
+   org.eclipse.emf.ecore.resource.impl.URIHandlerImpl$1,
+   org.eclipse.emf.ecore.resource.impl.URIHandlerImpl$2
+ 
+class org.eclipse.uml2.uml.internal.operations.ClassOperations
+  isParentFor
+   org.eclipse.uml2.uml.internal.operations.AssociationClassOperations,
+   org.eclipse.uml2.uml.internal.operations.BehaviorOperations,
+   org.eclipse.uml2.uml.internal.operations.ComponentOperations,
+   org.eclipse.uml2.uml.internal.operations.NodeOperations,
+   org.eclipse.uml2.uml.internal.operations.StereotypeOperations
+ 
+class org.eclipse.uml2.uml.internal.impl.BehavioralFeatureImpl
+  isParentFor
+   org.eclipse.uml2.uml.internal.impl.OperationImpl,
+   org.eclipse.uml2.uml.internal.impl.ReceptionImpl
+ 
+class org.eclipse.emf.ecore.impl.EPackageRegistryImpl$Delegator
+  isParentFor
+   org.eclipse.emf.ecore.impl.EPackageRegistryImpl$SecureDelegator
+ 
+class org.eclipse.uml2.uml.util.UMLUtil$UML2EcoreConverter$NameMatcher
+  isParentFor
+   org.eclipse.uml2.uml.util.UMLUtil$UML2EcoreConverter$ETypeMatcher
+ 
+class org.eclipse.uml2.common.util.SubsetSupersetEObjectResolvingEList
+  isParentFor
+   org.eclipse.uml2.common.util.SubsetSupersetEObjectResolvingEList$Unsettable,
+   org.eclipse.uml2.uml.internal.impl.BehaviorImpl$1,
+   org.eclipse.uml2.uml.internal.impl.BehaviorImpl$2
+ 
+interface org.eclipse.uml2.uml.NamedElement
+  isParentFor
+   org.eclipse.uml2.uml.ActivityGroup,
+   org.eclipse.uml2.uml.CollaborationUse,
+   org.eclipse.uml2.uml.DeployedArtifact,
+   org.eclipse.uml2.uml.DeploymentTarget,
+   org.eclipse.uml2.uml.Extend,
+   org.eclipse.uml2.uml.GeneralOrdering,
+   org.eclipse.uml2.uml.Include,
+   org.eclipse.uml2.uml.InteractionFragment,
+   org.eclipse.uml2.uml.Lifeline,
+   org.eclipse.uml2.uml.Message,
+   org.eclipse.uml2.uml.MessageEnd,
+   org.eclipse.uml2.uml.Namespace,
+   org.eclipse.uml2.uml.PackageableElement,
+   org.eclipse.uml2.uml.ParameterSet,
+   org.eclipse.uml2.uml.RedefinableElement,
+   org.eclipse.uml2.uml.Trigger,
+   org.eclipse.uml2.uml.TypedElement,
+   org.eclipse.uml2.uml.Vertex
+ 
+interface org.eclipse.uml2.uml.InputPin
+  isParentFor
+   org.eclipse.uml2.uml.ActionInputPin,
+   org.eclipse.uml2.uml.ValuePin
+ 
+class org.eclipse.uml2.uml.internal.impl.AbstractionImpl
+  isParentFor
+   org.eclipse.uml2.uml.internal.impl.ManifestationImpl,
+   org.eclipse.uml2.uml.internal.impl.RealizationImpl
+ 
+interface org.eclipse.uml2.uml.MultiplicityElement
+  isParentFor
+   org.eclipse.uml2.uml.ConnectorEnd,
+   org.eclipse.uml2.uml.Parameter,
+   org.eclipse.uml2.uml.Pin,
+   org.eclipse.uml2.uml.StructuralFeature,
+   org.eclipse.uml2.uml.Variable
+ 
+class java.lang.ref.WeakReference
+  isParentFor
+   org.eclipse.emf.common.util.Pool$ExternalRehasher,
+   org.eclipse.emf.common.util.SegmentSequence$SegmentSequencePool$CachedToString,
+   org.eclipse.emf.common.util.URI$LazyFragmentInitializer,
+   org.eclipse.emf.common.util.URI$URIPool$CachedToString,
+   org.eclipse.emf.common.util.WeakInterningHashSet$Entry
+ 
+class org.eclipse.emf.common.command.AbstractCommand
+  isParentFor
+   org.eclipse.emf.common.command.CommandWrapper,
+   org.eclipse.emf.common.command.CompoundCommand,
+   org.eclipse.emf.common.command.IdentityCommand,
+   org.eclipse.emf.common.command.UnexecutableCommand
+ 
+interface org.eclipse.uml2.uml.TemplateSignature
+  isParentFor
+   org.eclipse.uml2.uml.RedefinableTemplateSignature
+ 
+interface org.eclipse.uml2.uml.Observation
+  isParentFor
+   org.eclipse.uml2.uml.DurationObservation,
+   org.eclipse.uml2.uml.TimeObservation
+ 
+class org.eclipse.emf.common.notify.impl.DelegatingNotifyingListImpl
+  isParentFor
+   org.eclipse.emf.ecore.util.DelegatingNotifyingInternalEListImpl
+ 
+class org.eclipse.emf.common.util.Pool$AccessUnit
+  isParentFor
+   org.eclipse.emf.common.util.CommonUtil$StringPool$AccessUnitBase,
+   org.eclipse.emf.common.util.Pool$AccessUnit$Queue$1,
+   org.eclipse.emf.common.util.Pool$ObjectAccessUnit,
+   org.eclipse.emf.common.util.SegmentSequence$SegmentSequencePool$AccessUnitBase,
+   org.eclipse.emf.common.util.SegmentSequence$StringArrayPool$AccessUnitBase,
+   org.eclipse.emf.common.util.URI$URIPool$URIPoolAccessUnitBase
+ 
+class org.eclipse.emf.ecore.xmi.impl.XMIHelperImpl
+  isParentFor
+   org.eclipse.uml2.uml.internal.resource.XMI2UMLHelperImpl
+ 
+class org.eclipse.core.runtime.SubProgressMonitor
+  isParentFor
+   org.eclipse.emf.common.util.BasicMonitor$EclipseSubProgress
+ 
+class org.eclipse.core.runtime.Plugin
+  isParentFor
+   org.eclipse.emf.common.EMFPlugin$EclipsePlugin
+ 
+interface org.eclipse.core.resources.IResource
+  isParentFor
+   org.eclipse.core.resources.IFile
+ 
+class org.eclipse.emf.ecore.impl.EStructuralFeatureImpl$InternalSettingDelegateSingleDataUnsettable
+  isParentFor
+   org.eclipse.emf.ecore.impl.EStructuralFeatureImpl$InternalSettingDelegateSingleDataUnsettableDynamic,
+   org.eclipse.emf.ecore.impl.EStructuralFeatureImpl$InternalSettingDelegateSingleDataUnsettableStatic
+ 
+class org.eclipse.emf.common.util.BasicEMap$EntryImpl
+  isParentFor
+   org.eclipse.emf.ecore.resource.impl.URIMappingRegistryImpl$MappingEntryImpl
+ 
+class org.eclipse.emf.ecore.util.BasicInternalEList
+  isParentFor
+   org.eclipse.emf.ecore.util.BasicInternalEList$Unsettable
+ 
+class org.eclipse.uml2.uml.internal.operations.OccurrenceSpecificationOperations
+  isParentFor
+   org.eclipse.uml2.uml.internal.operations.DestructionOccurrenceSpecificationOperations
+ 
+class org.eclipse.emf.ecore.util.EcoreSwitch
+  isParentFor
+   org.eclipse.emf.ecore.util.EcoreAdapterFactory$1,
+   org.eclipse.uml2.common.util.UML2Util$1,
+   org.eclipse.uml2.uml.resource.UML22UMLResourceHandler$1$1,
+   org.eclipse.uml2.uml.util.UMLUtil$3,
+   org.eclipse.uml2.uml.util.UMLUtil$7,
+   org.eclipse.uml2.uml.util.UMLUtil$Ecore2UMLConverter,
+   org.eclipse.uml2.uml.util.UMLUtil$Ecore2UMLConverter$3,
+   org.eclipse.uml2.uml.util.UMLUtil$Ecore2UMLConverter$4,
+   org.eclipse.uml2.uml.util.UMLUtil$UML2EcoreConverter$2,
+   org.eclipse.uml2.uml.util.UMLUtil$UML2EcoreConverter$3,
+   org.eclipse.uml2.uml.util.UMLUtil$UML2EcoreConverter$4
+ 
+class org.eclipse.uml2.uml.internal.impl.EventImpl
+  isParentFor
+   org.eclipse.uml2.uml.internal.impl.ChangeEventImpl,
+   org.eclipse.uml2.uml.internal.impl.MessageEventImpl,
+   org.eclipse.uml2.uml.internal.impl.TimeEventImpl
+ 
+class org.eclipse.uml2.uml.internal.impl.InputPinImpl
+  isParentFor
+   org.eclipse.uml2.uml.internal.impl.ActionInputPinImpl,
+   org.eclipse.uml2.uml.internal.impl.ValuePinImpl
+ 
+class org.eclipse.uml2.uml.internal.operations.MultiplicityElementOperations
+  isParentFor
+   org.eclipse.uml2.uml.internal.operations.ConnectorEndOperations
+ 
+interface org.eclipse.uml2.uml.Type
+  isParentFor
+   org.eclipse.uml2.uml.Classifier
+ 
+interface org.eclipse.emf.ecore.EClassifier
+  isParentFor
+   org.eclipse.emf.ecore.EClass,
+   org.eclipse.emf.ecore.EDataType
+ 
+interface org.eclipse.uml2.uml.DeploymentTarget
+  isParentFor
+   org.eclipse.uml2.uml.InstanceSpecification,
+   org.eclipse.uml2.uml.Node,
+   org.eclipse.uml2.uml.Property
+ 
+class org.eclipse.uml2.common.util.SubsetSupersetEObjectWithInverseEList
+  isParentFor
+   org.eclipse.uml2.common.util.SubsetSupersetEObjectWithInverseEList$ManyInverse,
+   org.eclipse.uml2.common.util.SubsetSupersetEObjectWithInverseEList$Unsettable,
+   org.eclipse.uml2.common.util.SubsetSupersetEObjectWithInverseResolvingEList
+ 
+class org.eclipse.uml2.uml.internal.operations.ObjectNodeOperations
+  isParentFor
+   org.eclipse.uml2.uml.internal.operations.ActivityParameterNodeOperations,
+   org.eclipse.uml2.uml.internal.operations.ExpansionNodeOperations,
+   org.eclipse.uml2.uml.internal.operations.PinOperations
+ 
+class org.eclipse.uml2.uml.internal.operations.NamedElementOperations
+  isParentFor
+   org.eclipse.uml2.uml.internal.operations.ActivityGroupOperations,
+   org.eclipse.uml2.uml.internal.operations.CollaborationUseOperations,
+   org.eclipse.uml2.uml.internal.operations.CombinedFragmentOperations,
+   org.eclipse.uml2.uml.internal.operations.ConnectableElementOperations,
+   org.eclipse.uml2.uml.internal.operations.ContinuationOperations,
+   org.eclipse.uml2.uml.internal.operations.DeploymentTargetOperations,
+   org.eclipse.uml2.uml.internal.operations.ExecutionSpecificationOperations,
+   org.eclipse.uml2.uml.internal.operations.ExtendOperations,
+   org.eclipse.uml2.uml.internal.operations.GeneralOrderingOperations,
+   org.eclipse.uml2.uml.internal.operations.InteractionUseOperations,
+   org.eclipse.uml2.uml.internal.operations.LifelineOperations,
+   org.eclipse.uml2.uml.internal.operations.MessageEndOperations,
+   org.eclipse.uml2.uml.internal.operations.MessageOperations,
+   org.eclipse.uml2.uml.internal.operations.NamespaceOperations,
+   org.eclipse.uml2.uml.internal.operations.OccurrenceSpecificationOperations,
+   org.eclipse.uml2.uml.internal.operations.PackageableElementOperations,
+   org.eclipse.uml2.uml.internal.operations.ParameterSetOperations,
+   org.eclipse.uml2.uml.internal.operations.RedefinableElementOperations,
+   org.eclipse.uml2.uml.internal.operations.TriggerOperations,
+   org.eclipse.uml2.uml.internal.operations.VertexOperations
+ 
+class org.eclipse.uml2.uml.internal.operations.StateMachineOperations
+  isParentFor
+   org.eclipse.uml2.uml.internal.operations.ProtocolStateMachineOperations
+ 
+class org.eclipse.uml2.uml.internal.impl.MultiplicityElementImpl
+  isParentFor
+   org.eclipse.uml2.uml.internal.impl.ConnectorEndImpl
+ 
+class org.eclipse.uml2.common.util.DerivedEObjectEList$EmptyDerivedListIterator
+  isParentFor
+   org.eclipse.uml2.common.util.DerivedSubsetEObjectEList$EmptyDerivedSubsetListIterator
+ 
+class org.eclipse.emf.common.util.AbstractTreeIterator
+  isParentFor
+   org.eclipse.emf.ecore.impl.BasicEObjectImpl$2,
+   org.eclipse.emf.ecore.resource.impl.ResourceImpl$4,
+   org.eclipse.emf.ecore.util.EcoreUtil$ContentTreeIterator,
+   org.eclipse.uml2.common.util.UML2Util$2
+ 
+class java.lang.Exception
+  isParentFor
+   org.eclipse.core.runtime.CoreException,
+   org.eclipse.emf.common.util.DiagnosticException,
+   org.eclipse.emf.ecore.xmi.XMIException
+ 
+class org.eclipse.emf.ecore.xmi.XMIException
+  isParentFor
+   org.eclipse.emf.ecore.xmi.ClassNotFoundException,
+   org.eclipse.emf.ecore.xmi.DanglingHREFException,
+   org.eclipse.emf.ecore.xmi.FeatureNotFoundException,
+   org.eclipse.emf.ecore.xmi.IllegalValueException,
+   org.eclipse.emf.ecore.xmi.PackageNotFoundException,
+   org.eclipse.emf.ecore.xmi.UnresolvedReferenceException
+ 
+class org.eclipse.emf.ecore.xmi.impl.XMIResourceImpl
+  isParentFor
+   org.eclipse.emf.ecore.xmi.impl.EMOFResourceImpl,
+   org.eclipse.emf.ecore.xmi.impl.EcoreResourceFactoryImpl$1,
+   org.eclipse.emf.mapping.ecore2xml.util.Ecore2XMLResourceImpl,
+   org.eclipse.uml2.uml.internal.resource.UMLResourceImpl
+ 
+class org.eclipse.uml2.uml.internal.impl.FeatureImpl
+  isParentFor
+   org.eclipse.uml2.uml.internal.impl.ConnectorImpl,
+   org.eclipse.uml2.uml.internal.impl.StructuralFeatureImpl
+ 
+class org.eclipse.emf.ecore.util.BasicSettingDelegate
+  isParentFor
+   org.eclipse.emf.ecore.util.BasicSettingDelegate$Stateless
+ 
+class org.eclipse.emf.ecore.util.EDataTypeEList$Unsettable
+  isParentFor
+   org.eclipse.emf.ecore.util.EDataTypeUniqueEList$Unsettable
+ 
+class org.eclipse.emf.common.util.SegmentSequence$StringArrayPool$AccessUnitBase
+  isParentFor
+   org.eclipse.emf.common.util.SegmentSequence$StringArrayPool$SegmentsAccessUnit,
+   org.eclipse.emf.common.util.SegmentSequence$StringArrayPool$SegmentsAndSegmentAccessUnit,
+   org.eclipse.emf.common.util.SegmentSequence$StringArrayPool$SegmentsAndSegmentCountAccessUnit,
+   org.eclipse.emf.common.util.SegmentSequence$StringArrayPool$SegmentsAndSegmentsAccessUnit,
+   org.eclipse.emf.common.util.SegmentSequence$StringArrayPool$SegmentsAndSubsegmentAccessUnit,
+   org.eclipse.emf.common.util.SegmentSequence$StringArrayPool$StringAccessUnit,
+   org.eclipse.emf.common.util.SegmentSequence$StringArrayPool$SubsegmentsAndSubsegmentsAccessUnit,
+   org.eclipse.emf.common.util.SegmentSequence$StringArrayPool$SubstringAccessUnit
+ 
+class org.eclipse.uml2.uml.internal.impl.ObjectNodeImpl
+  isParentFor
+   org.eclipse.uml2.uml.internal.impl.ActivityParameterNodeImpl,
+   org.eclipse.uml2.uml.internal.impl.CentralBufferNodeImpl,
+   org.eclipse.uml2.uml.internal.impl.ExpansionNodeImpl,
+   org.eclipse.uml2.uml.internal.impl.PinImpl
+ 
+class java.lang.Object
+  isParentFor
+   console.CloudUML,
+   org.eclipse.core.resources.ProjectScope,
+   org.eclipse.core.resources.ResourceAttributes,
+   org.eclipse.core.resources.ResourcesPlugin,
+   org.eclipse.core.runtime.ContributorFactorySimple,
+   org.eclipse.core.runtime.FileLocator,
+   org.eclipse.core.runtime.Path,
+   org.eclipse.core.runtime.Platform,
+   org.eclipse.core.runtime.Plugin,
+   org.eclipse.core.runtime.PreferencesService,
+   org.eclipse.core.runtime.QualifiedName,
+   org.eclipse.core.runtime.RegistryFactory,
+   org.eclipse.core.runtime.Status,
+   org.eclipse.core.runtime.SubProgressMonitor,
+   org.eclipse.core.runtime.preferences.InstanceScope,
+   org.eclipse.core.runtime.spi.RegistryStrategy,
+   org.eclipse.emf.common.EMFPlugin$InternalHelper,
+   org.eclipse.emf.common.EMFPlugin$OSGiDelegatingBundleActivator,
+   org.eclipse.emf.common.command.AbstractCommand,
+   org.eclipse.emf.common.command.BasicCommandStack,
+   org.eclipse.emf.common.notify.NotificationWrapper,
+   org.eclipse.emf.common.notify.impl.AdapterFactoryImpl,
+   org.eclipse.emf.common.notify.impl.AdapterImpl,
+   org.eclipse.emf.common.notify.impl.BasicNotifierImpl,
+   org.eclipse.emf.common.notify.impl.NotificationImpl,
+   org.eclipse.emf.common.notify.impl.SingletonAdapterImpl,
+   org.eclipse.emf.common.util.AbstractEList$EIterator,
+   org.eclipse.emf.common.util.AbstractEnumerator,
+   org.eclipse.emf.common.util.AbstractEnumerator$AbstractEnumeratorExternalizeable,
+   org.eclipse.emf.common.util.BasicDiagnostic,
+   org.eclipse.emf.common.util.BasicDiagnostic$DiagnosticWrapper,
+   org.eclipse.emf.common.util.BasicDiagnostic$EclipseHelper,
+   org.eclipse.emf.common.util.BasicDiagnostic$StatusWrapper,
+   org.eclipse.emf.common.util.BasicEMap,
+   org.eclipse.emf.common.util.BasicEMap$BasicEMapIterator,
+   org.eclipse.emf.common.util.BasicEMap$DelegatingMap,
+   org.eclipse.emf.common.util.BasicEMap$DelegatingMap$1$1,
+   org.eclipse.emf.common.util.BasicEMap$DelegatingMap$1$1$1,
+   org.eclipse.emf.common.util.BasicEMap$EntryImpl,
+   org.eclipse.emf.common.util.BasicEMap$View,
+   org.eclipse.emf.common.util.BasicMonitor,
+   org.eclipse.emf.common.util.BasicMonitor$Delegating,
+   org.eclipse.emf.common.util.BasicMonitor$EclipseDelegating,
+   org.eclipse.emf.common.util.CommonUtil,
+   org.eclipse.emf.common.util.DelegatingResourceLocator,
+   org.eclipse.emf.common.util.ECollections,
+   org.eclipse.emf.common.util.ECollections$2,
+   org.eclipse.emf.common.util.ECollections$BasicEmptyUnmodifiableEList,
+   org.eclipse.emf.common.util.ECollections$BasicEmptyUnmodifiableEList$1,
+   org.eclipse.emf.common.util.ECollections$SynchronizedInterningSet,
+   org.eclipse.emf.common.util.ECollections$UnmodifiableEList,
+   org.eclipse.emf.common.util.ECollections$UnmodifiableEList$1,
+   org.eclipse.emf.common.util.ECollections$UnmodifiableEList$2,
+   org.eclipse.emf.common.util.Pool$AccessUnit,
+   org.eclipse.emf.common.util.Reflect,
+   org.eclipse.emf.common.util.SegmentSequence,
+   org.eclipse.emf.common.util.SegmentSequence$Builder,
+   org.eclipse.emf.common.util.URI,
+   org.eclipse.emf.common.util.WeakInterningHashSet$1,
+   org.eclipse.emf.ecore.EStructuralFeature$Internal$DynamicValueHolder$1,
+   org.eclipse.emf.ecore.impl.BasicEObjectImpl$1,
+   org.eclipse.emf.ecore.impl.BasicEObjectImpl$3,
+   org.eclipse.emf.ecore.impl.BasicEObjectImpl$EPropertiesHolderBaseImpl,
+   org.eclipse.emf.ecore.impl.DynamicEObjectImpl$DynamicEPropertiesHolderImpl,
+   org.eclipse.emf.ecore.impl.EPackageImpl$1,
+   org.eclipse.emf.ecore.impl.EPackageRegistryImpl$1,
+   org.eclipse.emf.ecore.impl.EPackageRegistryImpl$Delegator,
+   org.eclipse.emf.ecore.impl.EPackageRegistryImpl$ParentClassLoaderGetter,
+   org.eclipse.emf.ecore.impl.EStoreEObjectImpl$EStoreEPropertiesHolderImpl,
+   org.eclipse.emf.ecore.impl.EStoreEObjectImpl$EStoreImpl,
+   org.eclipse.emf.ecore.impl.EStoreEObjectImpl$EStoreImpl$Entry,
+   org.eclipse.emf.ecore.impl.EStructuralFeatureImpl$BasicFeatureMapEntry,
+   org.eclipse.emf.ecore.impl.EStructuralFeatureImpl$InternalSettingDelegateFeatureMapDelegator,
+   org.eclipse.emf.ecore.impl.EStructuralFeatureImpl$InternalSettingDelegateMany,
+   org.eclipse.emf.ecore.impl.EStructuralFeatureImpl$InternalSettingDelegateSingle,
+   org.eclipse.emf.ecore.impl.EStructuralFeatureImpl$InternalSettingDelegateSingle$1,
+   org.eclipse.emf.ecore.impl.EStructuralFeatureImpl$InternalSettingDelegateSingleData$NotificationCreator,
+   org.eclipse.emf.ecore.impl.EStructuralFeatureImpl$SettingMany,
+   org.eclipse.emf.ecore.impl.ETypeParameterImpl$2$1$1,
+   org.eclipse.emf.ecore.impl.EcorePackageImpl$1,
+   org.eclipse.emf.ecore.plugin.EcorePlugin$ExtensionProcessor,
+   org.eclipse.emf.ecore.plugin.EcorePlugin$ExtensionProcessor$2,
+   org.eclipse.emf.ecore.plugin.EcorePlugin$PDEHelper,
+   org.eclipse.emf.ecore.plugin.RegistryReader,
+   org.eclipse.emf.ecore.plugin.RegistryReader$1,
+   org.eclipse.emf.ecore.plugin.RegistryReader$PluginClassDescriptor,
+   org.eclipse.emf.ecore.resource.impl.AESCipherImpl,
+   org.eclipse.emf.ecore.resource.impl.BinaryResourceImpl$BinaryIO,
+   org.eclipse.emf.ecore.resource.impl.BinaryResourceImpl$DataConverter,
+   org.eclipse.emf.ecore.resource.impl.BinaryResourceImpl$EObjectInputStream$EClassData,
+   org.eclipse.emf.ecore.resource.impl.BinaryResourceImpl$EObjectInputStream$EPackageData,
+   org.eclipse.emf.ecore.resource.impl.BinaryResourceImpl$EObjectInputStream$EStructuralFeatureData,
+   org.eclipse.emf.ecore.resource.impl.BinaryResourceImpl$EObjectOutputStream$EClassData,
+   org.eclipse.emf.ecore.resource.impl.BinaryResourceImpl$EObjectOutputStream$EPackageData,
+   org.eclipse.emf.ecore.resource.impl.BinaryResourceImpl$EObjectOutputStream$EStructuralFeatureData,
+   org.eclipse.emf.ecore.resource.impl.ContentHandlerImpl,
+   org.eclipse.emf.ecore.resource.impl.ContentHandlerImpl$Describer,
+   org.eclipse.emf.ecore.resource.impl.DESCipherImpl,
+   org.eclipse.emf.ecore.resource.impl.ExtensibleURIConverterImpl,
+   org.eclipse.emf.ecore.resource.impl.ExtensibleURIConverterImpl$OptionsMap,
+   org.eclipse.emf.ecore.resource.impl.PlatformResourceURIHandlerImpl$WorkbenchHelper,
+   org.eclipse.emf.ecore.resource.impl.QualifiedName,
+   org.eclipse.emf.ecore.resource.impl.ResourceFactoryImpl,
+   org.eclipse.emf.ecore.resource.impl.ResourceFactoryRegistryImpl,
+   org.eclipse.emf.ecore.resource.impl.ResourceSetImpl$ResourceLocator,
+   org.eclipse.emf.ecore.resource.impl.URIHandlerImpl,
+   org.eclipse.emf.ecore.util.BasicExtendedMetaData,
+   org.eclipse.emf.ecore.util.BasicExtendedMetaData$EClassExtendedMetaDataImpl,
+   org.eclipse.emf.ecore.util.BasicExtendedMetaData$EDataTypeExtendedMetaDataImpl,
+   org.eclipse.emf.ecore.util.BasicExtendedMetaData$EPackageExtendedMetaDataImpl,
+   org.eclipse.emf.ecore.util.BasicExtendedMetaData$EStructuralFeatureExtendedMetaDataImpl,
+   org.eclipse.emf.ecore.util.BasicInvocationDelegate,
+   org.eclipse.emf.ecore.util.BasicSettingDelegate,
+   org.eclipse.emf.ecore.util.BasicSettingDelegate$1,
+   org.eclipse.emf.ecore.util.BasicSettingDelegate$Stateless$1,
+   org.eclipse.emf.ecore.util.Diagnostician,
+   org.eclipse.emf.ecore.util.EContentsEList$FeatureIteratorImpl,
+   org.eclipse.emf.ecore.util.ECrossReferenceAdapter,
+   org.eclipse.emf.ecore.util.ECrossReferenceAdapter$InverseCrossReferencer$1,
+   org.eclipse.emf.ecore.util.ECrossReferenceAdapter$InverseCrossReferencer$2,
+   org.eclipse.emf.ecore.util.EObjectValidator,
+   org.eclipse.emf.ecore.util.EObjectValidator$DynamicEClassValidator,
+   org.eclipse.emf.ecore.util.EObjectValidator$DynamicEDataTypeValidator,
+   org.eclipse.emf.ecore.util.EcoreUtil,
+   org.eclipse.emf.ecore.util.EcoreUtil$AbstractFilteredSettingsIterator,
+   org.eclipse.emf.ecore.util.EcoreUtil$ContentTreeIterator$ResourcesIterator,
+   org.eclipse.emf.ecore.util.EcoreUtil$EGenericTypeConverter,
+   org.eclipse.emf.ecore.util.EcoreUtil$ProperContentIterator,
+   org.eclipse.emf.ecore.util.EcoreUtil$UUID,
+   org.eclipse.emf.ecore.util.EcoreValidator$EGenericTypeBuilder,
+   org.eclipse.emf.ecore.util.EcoreValidator$EOperationSignatureValidator,
+   org.eclipse.emf.ecore.util.FeatureMapUtil,
+   org.eclipse.emf.ecore.util.FeatureMapUtil$1,
+   org.eclipse.emf.ecore.util.FeatureMapUtil$BasicFeatureEIterator,
+   org.eclipse.emf.ecore.util.FeatureMapUtil$BasicValidator,
+   org.eclipse.emf.ecore.util.FeatureMapUtil$EntryImpl,
+   org.eclipse.emf.ecore.util.FeatureMapUtil$FeatureValue,
+   org.eclipse.emf.ecore.util.Switch,
+   org.eclipse.emf.ecore.util.XMLTypeFeatures,
+   org.eclipse.emf.ecore.xmi.impl.BasicResourceHandler,
+   org.eclipse.emf.ecore.xmi.impl.ConfigurationCache,
+   org.eclipse.emf.ecore.xmi.impl.DefaultDOMHandlerImpl,
+   org.eclipse.emf.ecore.xmi.impl.ElementHandlerImpl,
+   org.eclipse.emf.ecore.xmi.impl.NameInfoImpl,
+   org.eclipse.emf.ecore.xmi.impl.StringSegment$Element,
+   org.eclipse.emf.ecore.xmi.impl.StringSegment$SegmentIterator,
+   org.eclipse.emf.ecore.xmi.impl.URIHandlerImpl,
+   org.eclipse.emf.ecore.xmi.impl.XMLHandler$EClassFeatureNamePair,
+   org.eclipse.emf.ecore.xmi.impl.XMLHandler$ManyReference,
+   org.eclipse.emf.ecore.xmi.impl.XMLHandler$SingleReference,
+   org.eclipse.emf.ecore.xmi.impl.XMLHelperImpl,
+   org.eclipse.emf.ecore.xmi.impl.XMLHelperImpl$NamespaceSupport,
+   org.eclipse.emf.ecore.xmi.impl.XMLInfoImpl,
+   org.eclipse.emf.ecore.xmi.impl.XMLLoadImpl,
+   org.eclipse.emf.ecore.xmi.impl.XMLLoadImpl$AttributesProxy,
+   org.eclipse.emf.ecore.xmi.impl.XMLMapImpl,
+   org.eclipse.emf.ecore.xmi.impl.XMLOptionsImpl,
+   org.eclipse.emf.ecore.xmi.impl.XMLParserPoolImpl,
+   org.eclipse.emf.ecore.xmi.impl.XMLSaveImpl,
+   org.eclipse.emf.ecore.xmi.impl.XMLSaveImpl$1,
+   org.eclipse.emf.ecore.xmi.impl.XMLSaveImpl$Escape,
+   org.eclipse.emf.ecore.xmi.impl.XMLSaveImpl$Lookup,
+   org.eclipse.emf.ecore.xmi.impl.XMLSaveImpl$Lookup$FeatureClassifierPair,
+   org.eclipse.emf.ecore.xmi.impl.XMLSaveImpl$XMLTypeInfoImpl,
+   org.eclipse.emf.ecore.xmi.util.DefaultEcoreBuilder,
+   org.eclipse.emf.ecore.xmi.util.XMLProcessor,
+   org.eclipse.emf.ecore.xml.namespace.impl.XMLNamespacePackageImpl$1,
+   org.eclipse.emf.ecore.xml.type.impl.XMLTypePackageImpl$1,
+   org.eclipse.emf.ecore.xml.type.internal.DataValue,
+   org.eclipse.emf.ecore.xml.type.internal.DataValue$Base64,
+   org.eclipse.emf.ecore.xml.type.internal.DataValue$EncodingMap,
+   org.eclipse.emf.ecore.xml.type.internal.DataValue$HexBin,
+   org.eclipse.emf.ecore.xml.type.internal.DataValue$TypeValidator,
+   org.eclipse.emf.ecore.xml.type.internal.DataValue$URI,
+   org.eclipse.emf.ecore.xml.type.internal.DataValue$ValidationContext,
+   org.eclipse.emf.ecore.xml.type.internal.DataValue$XMLChar,
+   org.eclipse.emf.ecore.xml.type.internal.DataValue$XSSimpleType,
+   org.eclipse.emf.ecore.xml.type.internal.RegEx,
+   org.eclipse.emf.ecore.xml.type.internal.RegEx$BMPattern,
+   org.eclipse.emf.ecore.xml.type.internal.RegEx$Match,
+   org.eclipse.emf.ecore.xml.type.internal.RegEx$Op,
+   org.eclipse.emf.ecore.xml.type.internal.RegEx$REUtil,
+   org.eclipse.emf.ecore.xml.type.internal.RegEx$RegexParser,
+   org.eclipse.emf.ecore.xml.type.internal.RegEx$RegexParser$ReferencePosition,
+   org.eclipse.emf.ecore.xml.type.internal.RegEx$RegularExpression,
+   org.eclipse.emf.ecore.xml.type.internal.RegEx$RegularExpression$Context,
+   org.eclipse.emf.ecore.xml.type.internal.RegEx$Token,
+   org.eclipse.emf.ecore.xml.type.internal.RegEx$Token$FixedStringContainer,
+   org.eclipse.emf.ecore.xml.type.util.XMLTypeResourceImpl$FrameFactory,
+   org.eclipse.emf.ecore.xml.type.util.XMLTypeResourceImpl$StackFrame,
+   org.eclipse.emf.ecore.xml.type.util.XMLTypeUtil,
+   org.eclipse.emf.ecore.xml.type.util.XMLTypeUtil$CharArrayPool,
+   org.eclipse.emf.ecore.xml.type.util.XMLTypeUtil$CharArrayPool$Buffer,
+   org.eclipse.emf.ecore.xml.type.util.XMLTypeUtil$PatternMatcherImpl,
+   org.eclipse.emf.mapping.ecore2xml.Ecore2XMLRegistry$Reader,
+   org.eclipse.emf.mapping.ecore2xml.Ecore2XMLRegistry$Reader$Ecore2XMLDescriptor,
+   org.eclipse.uml2.common.util.CacheAdapter$2,
+   org.eclipse.uml2.common.util.DerivedEObjectEList$DerivedListIterator,
+   org.eclipse.uml2.common.util.UML2Util,
+   org.eclipse.uml2.common.util.UML2Util$EClassMatcher,
+   org.eclipse.uml2.common.util.UML2Util$QualifiedTextProvider,
+   org.eclipse.uml2.uml.UMLPlugin$ExtensionProcessor,
+   org.eclipse.uml2.uml.internal.impl.UMLPackageImpl$1,
+   org.eclipse.uml2.uml.internal.resource.UMLResourceFactoryImpl$1,
+   org.eclipse.uml2.uml.util.UMLUtil$2,
+   org.eclipse.uml2.uml.util.UMLUtil$OperationContext,
+   org.eclipse.uml2.uml.util.UMLUtil$ProfileApplicationHelper,
+   org.eclipse.uml2.uml.util.UMLUtil$StereotypeApplicationHelper,
+   org.eclipse.uml2.uml.util.UMLUtil$UML2EcoreConverter$5,
+   org.osgi.framework.Bundle,
+   org.osgi.framework.BundleContext
+ 
+class org.eclipse.emf.common.util.URI$URIPool$URIPoolAccessUnitBase
+  isParentFor
+   org.eclipse.emf.common.util.URI$URIPool$FileAccessUnit,
+   org.eclipse.emf.common.util.URI$URIPool$PlatformAccessUnit,
+   org.eclipse.emf.common.util.URI$URIPool$StringAccessUnit,
+   org.eclipse.emf.common.util.URI$URIPool$URIComponentsAccessUnit
+ 
+class org.eclipse.uml2.uml.internal.operations.VertexOperations
+  isParentFor
+   org.eclipse.uml2.uml.internal.operations.ConnectionPointReferenceOperations,
+   org.eclipse.uml2.uml.internal.operations.PseudostateOperations
+ 
+class org.eclipse.emf.ecore.util.EObjectContainmentWithInverseEList$Resolving
+  isParentFor
+   org.eclipse.emf.ecore.impl.EPackageImpl$2
+ 
+class org.xml.sax.helpers.DefaultHandler
+  isParentFor
+   org.eclipse.emf.ecore.plugin.EcorePlugin$1Handler,
+   org.eclipse.emf.ecore.xmi.impl.SAXWrapper,
+   org.eclipse.emf.ecore.xmi.impl.XMLHandler,
+   org.eclipse.emf.ecore.xml.type.util.XMLTypeResourceImpl$Handler
+ 
+class org.eclipse.uml2.uml.internal.impl.LinkEndDataImpl
+  isParentFor
+   org.eclipse.uml2.uml.internal.impl.LinkEndCreationDataImpl,
+   org.eclipse.uml2.uml.internal.impl.LinkEndDestructionDataImpl
+ 
+class org.eclipse.uml2.uml.internal.operations.StructuralFeatureActionOperations
+  isParentFor
+   org.eclipse.uml2.uml.internal.operations.ClearStructuralFeatureActionOperations,
+   org.eclipse.uml2.uml.internal.operations.ReadStructuralFeatureActionOperations,
+   org.eclipse.uml2.uml.internal.operations.WriteStructuralFeatureActionOperations
+ 
+class org.eclipse.emf.ecore.xmi.impl.XMISaveImpl
+  isParentFor
+   org.eclipse.emf.ecore.xmi.impl.EMOFSaveImpl,
+   org.eclipse.uml2.uml.internal.resource.UMLSaveImpl
+ 
+class org.eclipse.uml2.uml.internal.impl.IntervalImpl
+  isParentFor
+   org.eclipse.uml2.uml.internal.impl.DurationIntervalImpl,
+   org.eclipse.uml2.uml.internal.impl.TimeIntervalImpl
+ 
+interface org.eclipse.uml2.uml.MessageEvent
+  isParentFor
+   org.eclipse.uml2.uml.AnyReceiveEvent,
+   org.eclipse.uml2.uml.CallEvent,
+   org.eclipse.uml2.uml.SignalEvent
+ 
+class org.eclipse.uml2.uml.internal.impl.CentralBufferNodeImpl
+  isParentFor
+   org.eclipse.uml2.uml.internal.impl.DataStoreNodeImpl
+ 
+class org.eclipse.emf.ecore.util.ECrossReferenceAdapter
+  isParentFor
+   org.eclipse.uml2.common.util.CacheAdapter
+ 
+class org.eclipse.uml2.uml.internal.resource.UMLResourceFactoryImpl
+  isParentFor
+   org.eclipse.uml2.uml.internal.resource.CMOF202UMLResourceFactoryImpl,
+   org.eclipse.uml2.uml.internal.resource.CMOF242UMLResourceFactoryImpl,
+   org.eclipse.uml2.uml.internal.resource.CMOF2UMLResourceFactoryImpl,
+   org.eclipse.uml2.uml.internal.resource.UML212UMLResourceFactoryImpl,
+   org.eclipse.uml2.uml.internal.resource.UML22UMLResourceFactoryImpl,
+   org.eclipse.uml2.uml.internal.resource.UML302UMLResourceFactoryImpl,
+   org.eclipse.uml2.uml.internal.resource.UML402UMLResourceFactoryImpl,
+   org.eclipse.uml2.uml.internal.resource.XMI212UMLResourceFactoryImpl,
+   org.eclipse.uml2.uml.internal.resource.XMI222UMLResourceFactoryImpl,
+   org.eclipse.uml2.uml.internal.resource.XMI242UMLResourceFactoryImpl,
+   org.eclipse.uml2.uml.internal.resource.XMI2UMLResourceFactoryImpl
+ 
+interface org.eclipse.emf.ecore.EModelElement
+  isParentFor
+   org.eclipse.emf.ecore.EAnnotation,
+   org.eclipse.emf.ecore.EFactory,
+   org.eclipse.emf.ecore.ENamedElement,
+   org.eclipse.uml2.uml.Element
+ 
+class org.eclipse.uml2.common.util.DerivedSubsetEObjectEList$DerivedSubsetListIterator
+  isParentFor
+   org.eclipse.uml2.common.util.DerivedSubsetEObjectEList$ResolvingDerivedSubsetListIterator
+ 
+interface org.xml.sax.EntityResolver
+  isParentFor
+   org.eclipse.emf.ecore.xmi.XMLDefaultHandler
+ 
+class java.io.FileOutputStream
+  isParentFor
+   org.eclipse.emf.ecore.resource.impl.FileURIHandlerImpl$1
+ 
+class java.io.FilterInputStream
+  isParentFor
+   org.eclipse.emf.common.archive.ArchiveURLConnection$1
+ 
+class org.eclipse.uml2.uml.internal.operations.ActivityEdgeOperations
+  isParentFor
+   org.eclipse.uml2.uml.internal.operations.ControlFlowOperations,
+   org.eclipse.uml2.uml.internal.operations.ObjectFlowOperations
+ 
+class java.net.URLStreamHandler
+  isParentFor
+   org.eclipse.emf.common.archive.Handler
+ 
+class org.eclipse.emf.ecore.util.Switch
+  isParentFor
+   org.eclipse.emf.ecore.util.ComposedSwitch,
+   org.eclipse.emf.ecore.util.EcoreSwitch,
+   org.eclipse.emf.mapping.ecore2xml.util.Ecore2XMLSwitch,
+   org.eclipse.uml2.uml.util.UMLSwitch
+ 
+class org.eclipse.uml2.common.util.UML2Util$QualifiedTextProvider
+  isParentFor
+   org.eclipse.uml2.common.util.UML2Util$3,
+   org.eclipse.uml2.uml.util.UMLUtil$QualifiedTextProvider
+ 
+class org.eclipse.uml2.uml.internal.impl.RedefinableElementImpl
+  isParentFor
+   org.eclipse.uml2.uml.internal.impl.ActivityEdgeImpl,
+   org.eclipse.uml2.uml.internal.impl.ActivityNodeImpl,
+   org.eclipse.uml2.uml.internal.impl.ExtensionPointImpl,
+   org.eclipse.uml2.uml.internal.impl.FeatureImpl,
+   org.eclipse.uml2.uml.internal.impl.RedefinableTemplateSignatureImpl
+ 
+class org.eclipse.emf.common.util.AbstractEList
+  isParentFor
+   org.eclipse.emf.common.util.ArrayDelegatingEList,
+   org.eclipse.emf.common.util.BasicEList,
+   org.eclipse.emf.common.util.DelegatingEList
+ 
+class java.io.ByteArrayInputStream
+  isParentFor
+   org.eclipse.emf.ecore.resource.URIConverter$WriteableOutputStream$Buffer
+ 
+class org.eclipse.emf.ecore.resource.impl.ResourceSetImpl
+  isParentFor
+   org.eclipse.emf.ecore.plugin.RegistryReader$EPackageDescriptor$Dynamic$1
+ 
+interface org.eclipse.uml2.uml.ControlNode
+  isParentFor
+   org.eclipse.uml2.uml.DecisionNode,
+   org.eclipse.uml2.uml.FinalNode,
+   org.eclipse.uml2.uml.ForkNode,
+   org.eclipse.uml2.uml.InitialNode,
+   org.eclipse.uml2.uml.JoinNode,
+   org.eclipse.uml2.uml.MergeNode
+ 
+class org.eclipse.emf.ecore.util.DelegatingFeatureMap
+  isParentFor
+   org.eclipse.emf.ecore.impl.EStoreEObjectImpl$BasicEStoreFeatureMap,
+   org.eclipse.emf.ecore.util.DelegatingFeatureMap$FeatureMapEObjectImpl$1
+ 
+class org.eclipse.emf.common.util.SegmentSequence$SegmentSequencePool$AccessUnitBase
+  isParentFor
+   org.eclipse.emf.common.util.SegmentSequence$SegmentSequencePool$SegmentsAccessUnit,
+   org.eclipse.emf.common.util.SegmentSequence$SegmentSequencePool$SegmentsAndSegmentAccessUnit,
+   org.eclipse.emf.common.util.SegmentSequence$SegmentSequencePool$SegmentsAndSegmentsAccessUnit,
+   org.eclipse.emf.common.util.SegmentSequence$SegmentSequencePool$StringAccessUnit
+ 
+class org.eclipse.emf.common.archive.ArchiveURLConnection
+  isParentFor
+   org.eclipse.emf.ecore.resource.impl.ArchiveURIHandlerImpl$Archive,
+   org.eclipse.emf.ecore.resource.impl.URIConverterImpl$Archive
+ 
+interface org.eclipse.uml2.uml.TemplateableElement
+  isParentFor
+   org.eclipse.uml2.uml.Classifier,
+   org.eclipse.uml2.uml.Operation,
+   org.eclipse.uml2.uml.Package,
+   org.eclipse.uml2.uml.StringExpression
+ 
+class org.eclipse.uml2.uml.internal.operations.BehaviorOperations
+  isParentFor
+   org.eclipse.uml2.uml.internal.operations.ActivityOperations,
+   org.eclipse.uml2.uml.internal.operations.FunctionBehaviorOperations,
+   org.eclipse.uml2.uml.internal.operations.InteractionOperations,
+   org.eclipse.uml2.uml.internal.operations.StateMachineOperations
+ 
+interface org.eclipse.emf.ecore.util.EContentsEList$FeatureIterator
+  isParentFor
+   org.eclipse.emf.ecore.util.EContentsEList$FeatureListIterator
+ 
+class org.eclipse.emf.common.notify.impl.NotifierImpl
+  isParentFor
+   org.eclipse.emf.ecore.resource.impl.ResourceImpl,
+   org.eclipse.emf.ecore.resource.impl.ResourceSetImpl
+ 
+interface org.eclipse.uml2.uml.resource.CMOF2UMLResource
+  isParentFor
+   org.eclipse.uml2.uml.resource.CMOF202UMLResource,
+   org.eclipse.uml2.uml.resource.CMOF242UMLResource
+ 
+class org.eclipse.emf.ecore.xmi.impl.XMLMapImpl
+  isParentFor
+   org.eclipse.emf.mapping.ecore2xml.impl.XMLMapImpl$DelegateXMLMapImpl
+ 
+interface org.eclipse.uml2.uml.CentralBufferNode
+  isParentFor
+   org.eclipse.uml2.uml.DataStoreNode
+ 
+class org.eclipse.emf.common.notify.impl.AdapterFactoryImpl
+  isParentFor
+   org.eclipse.emf.ecore.util.EcoreAdapterFactory,
+   org.eclipse.emf.mapping.ecore2xml.util.Ecore2XMLAdapterFactory,
+   org.eclipse.uml2.uml.util.UMLAdapterFactory
+ 
+interface org.eclipse.uml2.uml.VariableAction
+  isParentFor
+   org.eclipse.uml2.uml.ClearVariableAction,
+   org.eclipse.uml2.uml.ReadVariableAction,
+   org.eclipse.uml2.uml.WriteVariableAction
+ 
+class org.eclipse.emf.ecore.xml.type.internal.RegEx$Token
+  isParentFor
+   org.eclipse.emf.ecore.xml.type.internal.RegEx$RangeToken,
+   org.eclipse.emf.ecore.xml.type.internal.RegEx$Token$CharToken,
+   org.eclipse.emf.ecore.xml.type.internal.RegEx$Token$ClosureToken,
+   org.eclipse.emf.ecore.xml.type.internal.RegEx$Token$ConcatToken,
+   org.eclipse.emf.ecore.xml.type.internal.RegEx$Token$ConditionToken,
+   org.eclipse.emf.ecore.xml.type.internal.RegEx$Token$ModifierToken,
+   org.eclipse.emf.ecore.xml.type.internal.RegEx$Token$ParenToken,
+   org.eclipse.emf.ecore.xml.type.internal.RegEx$Token$StringToken,
+   org.eclipse.emf.ecore.xml.type.internal.RegEx$Token$UnionToken
+ 
+class org.eclipse.uml2.uml.internal.impl.ExecutableNodeImpl
+  isParentFor
+   org.eclipse.uml2.uml.internal.impl.ActionImpl
+ 
+class org.eclipse.emf.ecore.xmi.impl.XMLContentHandlerImpl
+  isParentFor
+   org.eclipse.emf.ecore.xmi.impl.RootXMLContentHandlerImpl,
+   org.eclipse.emf.ecore.xmi.impl.XMLContentHandlerImpl$XMI
+ 
+class org.eclipse.uml2.uml.internal.operations.InstanceSpecificationOperations
+  isParentFor
+   org.eclipse.uml2.uml.internal.operations.EnumerationLiteralOperations
+ 
+class org.eclipse.emf.common.util.AbstractEList$NonResolvingEListIterator
+  isParentFor
+   org.eclipse.emf.common.util.ArrayDelegatingEList$NonResolvingEListIterator,
+   org.eclipse.emf.common.util.BasicEList$NonResolvingEListIterator,
+   org.eclipse.emf.common.util.DelegatingEList$NonResolvingEListIterator
+ 
+interface java.util.SortedMap
+  isParentFor
+   org.eclipse.emf.ecore.resource.ContentHandler$Registry
+ 
+class org.eclipse.emf.common.util.ECollections$BasicEmptyUnmodifiableEList
+  isParentFor
+   org.eclipse.emf.common.util.ECollections$EmptyUnmodifiableEList,
+   org.eclipse.emf.common.util.ECollections$EmptyUnmodifiableEMap
+ 
+class java.lang.IndexOutOfBoundsException
+  isParentFor
+   org.eclipse.emf.common.util.AbstractEList$BasicIndexOutOfBoundsException
+ 
+interface org.eclipse.emf.ecore.resource.Resource
+  isParentFor
+   org.eclipse.emf.ecore.resource.Resource$Internal,
+   org.eclipse.emf.ecore.xmi.XMLResource
+ 
+interface org.eclipse.uml2.uml.Relationship
+  isParentFor
+   org.eclipse.uml2.uml.Association,
+   org.eclipse.uml2.uml.DirectedRelationship
+ 
+interface org.eclipse.uml2.uml.Vertex
+  isParentFor
+   org.eclipse.uml2.uml.ConnectionPointReference,
+   org.eclipse.uml2.uml.Pseudostate,
+   org.eclipse.uml2.uml.State
+ 
+interface org.eclipse.uml2.uml.IntervalConstraint
+  isParentFor
+   org.eclipse.uml2.uml.DurationConstraint,
+   org.eclipse.uml2.uml.TimeConstraint
+ 
+class org.eclipse.uml2.uml.internal.impl.CombinedFragmentImpl
+  isParentFor
+   org.eclipse.uml2.uml.internal.impl.ConsiderIgnoreFragmentImpl
+ 
+interface org.eclipse.uml2.uml.CreateLinkAction
+  isParentFor
+   org.eclipse.uml2.uml.CreateLinkObjectAction
+ 
+class org.eclipse.uml2.uml.internal.operations.PinOperations
+  isParentFor
+   org.eclipse.uml2.uml.internal.operations.InputPinOperations,
+   org.eclipse.uml2.uml.internal.operations.OutputPinOperations
+ 
+class java.text.SimpleDateFormat
+  isParentFor
+   org.eclipse.emf.ecore.impl.EFactoryImpl$SafeSimpleDateFormat,
+   org.eclipse.emf.ecore.xml.type.impl.XMLTypeFactoryImpl$SafeSimpleDateFormat,
+   org.eclipse.emf.ecore.xml.type.internal.XMLCalendar$SafeSimpleDateFormat
+ 
+class java.lang.ThreadLocal
+  isParentFor
+   org.eclipse.emf.ecore.impl.EClassImpl$1,
+   org.eclipse.uml2.common.util.CacheAdapter$1,
+   org.eclipse.uml2.uml.util.UMLUtil$OperationContext$2
+ 
+class org.eclipse.uml2.common.util.DerivedSubsetEObjectEList
+  isParentFor
+   org.eclipse.uml2.common.util.DerivedSubsetEObjectEList$1,
+   org.eclipse.uml2.uml.internal.impl.ClassImpl$SuperClassEList,
+   org.eclipse.uml2.uml.internal.operations.ClassifierOperations$GeneralEList
+ 
+class java.util.HashMap
+  isParentFor
+   org.eclipse.emf.ecore.EDataType$Internal$ConversionDelegate$Factory$Registry$Impl,
+   org.eclipse.emf.ecore.EOperation$Internal$InvocationDelegate$Factory$Registry$Impl,
+   org.eclipse.emf.ecore.EStructuralFeature$Internal$SettingDelegate$Factory$Registry$Impl,
+   org.eclipse.emf.ecore.impl.EPackageRegistryImpl,
+   org.eclipse.emf.ecore.impl.EValidatorRegistryImpl,
+   org.eclipse.emf.ecore.impl.ValidationDelegateRegistryImpl,
+   org.eclipse.emf.ecore.util.EcoreUtil$CrossReferencer,
+   org.eclipse.emf.ecore.util.EcoreUtil$EqualityHelper,
+   org.eclipse.emf.ecore.util.QueryDelegate$Factory$Registry$Impl,
+   org.eclipse.emf.mapping.ecore2xml.impl.Ecore2XMLRegistryImpl
+ 
+class org.eclipse.emf.common.notify.impl.NotifyingListImpl
+  isParentFor
+   org.eclipse.emf.ecore.resource.impl.ResourceImpl$6,
+   org.eclipse.emf.ecore.resource.impl.ResourceImpl$7,
+   org.eclipse.emf.ecore.util.NotifyingInternalEListImpl
+ 
+class org.eclipse.emf.ecore.resource.impl.ContentHandlerImpl$Describer
+  isParentFor
+   org.eclipse.emf.ecore.xmi.impl.RootXMLContentHandlerImpl$Describer,
+   org.eclipse.emf.ecore.xmi.impl.XMLContentHandlerImpl$XMI$Describer
+ 
+class org.eclipse.uml2.uml.internal.impl.WriteLinkActionImpl
+  isParentFor
+   org.eclipse.uml2.uml.internal.impl.CreateLinkActionImpl,
+   org.eclipse.uml2.uml.internal.impl.DestroyLinkActionImpl
+ 
+class org.eclipse.emf.ecore.util.DelegatingNotifyingInternalEListImpl
+  isParentFor
+   org.eclipse.emf.ecore.util.DelegatingEcoreEList
+ 
+class java.io.IOException
+  isParentFor
+   org.eclipse.emf.ecore.resource.Resource$IOWrappedException,
+   org.eclipse.emf.ecore.xml.type.internal.DataValue$URI$MalformedURIException
+ 
+class org.eclipse.emf.ecore.xmi.impl.XMLSaveImpl$XMLTypeInfoImpl
+  isParentFor
+   org.eclipse.emf.ecore.xmi.impl.EMOFSaveImpl$EMOFXMLTypeInfoImpl
+ 
+interface org.eclipse.uml2.uml.Feature
+  isParentFor
+   org.eclipse.uml2.uml.BehavioralFeature,
+   org.eclipse.uml2.uml.Connector,
+   org.eclipse.uml2.uml.StructuralFeature
+ 
+interface org.eclipse.emf.ecore.EStructuralFeature$Internal$DynamicValueHolder
+  isParentFor
+   org.eclipse.emf.ecore.impl.BasicEObjectImpl$EPropertiesHolder
+ 
+class org.eclipse.emf.ecore.util.EObjectValidator$DynamicEClassValidator
+  isParentFor
+   org.eclipse.emf.ecore.util.EObjectValidator$1
+ 
+class org.eclipse.emf.common.EMFPlugin$OSGiDelegatingBundleActivator
+  isParentFor
+   org.eclipse.emf.common.CommonPlugin$Implementation$Activator,
+   org.eclipse.emf.ecore.plugin.EcorePlugin$Implementation$Activator,
+   org.eclipse.emf.ecore.xmi.XMIPlugin$Implementation$Activator
+ 
+class java.io.BufferedInputStream
+  isParentFor
+   org.eclipse.emf.ecore.xmi.impl.XMLContentHandlerImpl$2
+ 
+class org.eclipse.uml2.common.util.SubsetSupersetEObjectEList
+  isParentFor
+   org.eclipse.uml2.common.util.SubsetSupersetEObjectContainmentEList,
+   org.eclipse.uml2.common.util.SubsetSupersetEObjectEList$Unsettable,
+   org.eclipse.uml2.common.util.SubsetSupersetEObjectResolvingEList,
+   org.eclipse.uml2.common.util.SubsetSupersetEObjectWithInverseEList
+ 
+class org.eclipse.emf.ecore.util.EObjectWithInverseEList
+  isParentFor
+   org.eclipse.emf.ecore.util.EObjectWithInverseEList$ManyInverse,
+   org.eclipse.emf.ecore.util.EObjectWithInverseEList$Unsettable,
+   org.eclipse.emf.ecore.util.EObjectWithInverseResolvingEList
+ 
+class org.eclipse.uml2.uml.internal.impl.VertexImpl
+  isParentFor
+   org.eclipse.uml2.uml.internal.impl.ConnectionPointReferenceImpl,
+   org.eclipse.uml2.uml.internal.impl.PseudostateImpl
+ 
+class org.eclipse.uml2.uml.internal.operations.MessageEndOperations
+  isParentFor
+   org.eclipse.uml2.uml.internal.operations.GateOperations
+ 
+interface org.eclipse.uml2.uml.CallAction
+  isParentFor
+   org.eclipse.uml2.uml.CallBehaviorAction,
+   org.eclipse.uml2.uml.CallOperationAction,
+   org.eclipse.uml2.uml.StartObjectBehaviorAction
+ 
+interface org.eclipse.emf.ecore.EStructuralFeature$Setting
+  isParentFor
+   org.eclipse.emf.ecore.util.FeatureMap$Internal
+ 
+class javax.xml.namespace.QName
+  isParentFor
+   org.eclipse.emf.ecore.xml.type.internal.QName
+ 
+class org.eclipse.uml2.uml.internal.impl.ObservationImpl
+  isParentFor
+   org.eclipse.uml2.uml.internal.impl.DurationObservationImpl,
+   org.eclipse.uml2.uml.internal.impl.TimeObservationImpl
+ 
+class org.eclipse.emf.ecore.impl.EClassifierImpl
+  isParentFor
+   org.eclipse.emf.ecore.impl.EClassImpl,
+   org.eclipse.emf.ecore.impl.EDataTypeImpl
+ 
+class org.eclipse.emf.ecore.xmi.impl.SAXXMLHandler
+  isParentFor
+   org.eclipse.emf.ecore.xmi.impl.GenericXMLResourceImpl$GenericSAXXMLHandler,
+   org.eclipse.emf.ecore.xmi.impl.XMLContentHandlerImpl$1$1$1
+ 
+class org.eclipse.uml2.uml.internal.impl.AssociationImpl
+  isParentFor
+   org.eclipse.uml2.uml.internal.impl.CommunicationPathImpl,
+   org.eclipse.uml2.uml.internal.impl.ExtensionImpl
+ 
+interface org.eclipse.uml2.uml.ActivityGroup
+  isParentFor
+   org.eclipse.uml2.uml.ActivityPartition,
+   org.eclipse.uml2.uml.InterruptibleActivityRegion,
+   org.eclipse.uml2.uml.StructuredActivityNode
+ 
+interface org.eclipse.emf.common.util.EList
+  isParentFor
+   org.eclipse.emf.common.notify.NotifyingList,
+   org.eclipse.emf.common.util.EMap,
+   org.eclipse.emf.ecore.util.FeatureMap,
+   org.eclipse.emf.ecore.util.InternalEList
+ 
+class org.eclipse.uml2.uml.internal.resource.UMLLoadImpl
+  isParentFor
+   org.eclipse.uml2.uml.internal.resource.CMOF202UMLLoadImpl,
+   org.eclipse.uml2.uml.internal.resource.CMOF242UMLLoadImpl,
+   org.eclipse.uml2.uml.internal.resource.CMOF2UMLLoadImpl,
+   org.eclipse.uml2.uml.internal.resource.UML212UMLLoadImpl,
+   org.eclipse.uml2.uml.internal.resource.UML22UMLLoadImpl,
+   org.eclipse.uml2.uml.internal.resource.UML302UMLLoadImpl,
+   org.eclipse.uml2.uml.internal.resource.XMI212UMLLoadImpl,
+   org.eclipse.uml2.uml.internal.resource.XMI222UMLLoadImpl,
+   org.eclipse.uml2.uml.internal.resource.XMI242UMLLoadImpl,
+   org.eclipse.uml2.uml.internal.resource.XMI2UMLLoadImpl
+ 
+class org.eclipse.emf.ecore.xmi.impl.XMLSaveImpl
+  isParentFor
+   org.eclipse.emf.ecore.xmi.impl.XMISaveImpl
+ 
+class org.eclipse.emf.ecore.util.FeatureMapUtil$BasicFeatureEIterator
+  isParentFor
+   org.eclipse.emf.ecore.util.BasicFeatureMap$FeatureEIterator,
+   org.eclipse.emf.ecore.util.DelegatingFeatureMap$FeatureEIterator
+ 
+class org.eclipse.emf.ecore.impl.EStructuralFeatureImpl$InternalSettingDelegateSingleEObjectContainment
+  isParentFor
+   org.eclipse.emf.ecore.impl.EStructuralFeatureImpl$InternalSettingDelegateSingleEObjectContainmentResolving,
+   org.eclipse.emf.ecore.impl.EStructuralFeatureImpl$InternalSettingDelegateSingleEObjectContainmentUnsettable,
+   org.eclipse.emf.ecore.impl.EStructuralFeatureImpl$InternalSettingDelegateSingleEObjectContainmentWithInverse
+ 
+class org.eclipse.emf.ecore.resource.impl.ResourceFactoryImpl
+  isParentFor
+   org.eclipse.emf.ecore.xmi.impl.EMOFResourceFactoryImpl,
+   org.eclipse.emf.ecore.xmi.impl.EcoreResourceFactoryImpl,
+   org.eclipse.emf.ecore.xmi.impl.GenericXMLResourceFactoryImpl,
+   org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl,
+   org.eclipse.emf.ecore.xmi.impl.XMLResourceFactoryImpl,
+   org.eclipse.emf.mapping.ecore2xml.util.Ecore2XMLResourceFactoryImpl,
+   org.eclipse.uml2.uml.internal.resource.UMLResourceFactoryImpl
+ 
+interface org.eclipse.emf.ecore.EPackage
+  isParentFor
+   org.eclipse.emf.ecore.EcorePackage,
+   org.eclipse.emf.ecore.xml.namespace.XMLNamespacePackage,
+   org.eclipse.emf.ecore.xml.type.XMLTypePackage,
+   org.eclipse.emf.mapping.ecore2xml.Ecore2XMLPackage,
+   org.eclipse.uml2.types.TypesPackage,
+   org.eclipse.uml2.uml.UMLPackage
+ 
+class org.eclipse.emf.common.util.BasicEMap
+  isParentFor
+   org.eclipse.emf.ecore.resource.impl.URIMappingRegistryImpl,
+   org.eclipse.emf.ecore.util.EcoreEMap,
+   org.eclipse.emf.ecore.xmi.impl.XMLHelperImpl$1
+ 
+class org.eclipse.uml2.common.util.SubsetSupersetEObjectWithInverseResolvingEList
+  isParentFor
+   org.eclipse.uml2.common.util.SubsetSupersetEObjectWithInverseResolvingEList$ManyInverse,
+   org.eclipse.uml2.common.util.SubsetSupersetEObjectWithInverseResolvingEList$Unsettable
+ 
+class org.eclipse.emf.ecore.impl.EStructuralFeatureImpl$InternalSettingDelegateSingleEObjectWithInverse
+  isParentFor
+   org.eclipse.emf.ecore.impl.EStructuralFeatureImpl$InternalSettingDelegateSingleEObjectWithInverseUnsettable
+ 
+class org.eclipse.emf.ecore.resource.impl.ResourceSetImpl$ResourceLocator
+  isParentFor
+   org.eclipse.emf.ecore.resource.impl.ResourceSetImpl$MappedResourceLocator
+ 
+class org.eclipse.emf.ecore.util.ECrossReferenceEList$ResolvingFeatureIteratorImpl
+  isParentFor
+   org.eclipse.emf.ecore.impl.ENamedElementImpl$2$1
+ 
+class org.eclipse.emf.ecore.util.EObjectEList
+  isParentFor
+   org.eclipse.emf.ecore.util.EObjectContainmentEList,
+   org.eclipse.emf.ecore.util.EObjectEList$Unsettable,
+   org.eclipse.emf.ecore.util.EObjectResolvingEList,
+   org.eclipse.emf.ecore.util.EObjectWithInverseEList,
+   org.eclipse.uml2.common.util.SubsetSupersetEObjectEList
+ 
+class org.eclipse.uml2.uml.internal.operations.DataTypeOperations
+  isParentFor
+   org.eclipse.uml2.uml.internal.operations.EnumerationOperations
+ 
+class org.eclipse.emf.ecore.xmi.impl.XMILoadImpl
+  isParentFor
+   org.eclipse.emf.ecore.xmi.impl.EMOFLoadImpl,
+   org.eclipse.uml2.uml.internal.resource.UMLLoadImpl
+ 
+class org.eclipse.uml2.uml.util.UMLUtil$UML2EcoreConverter$ETypeMatcher
+  isParentFor
+   org.eclipse.uml2.uml.util.UMLUtil$UML2EcoreConverter$SignatureMatcher
+ 
+class org.eclipse.emf.common.util.BasicEMap$DelegatingMap
+  isParentFor
+   org.eclipse.emf.ecore.resource.impl.URIMappingRegistryImpl$URIMapImpl
+ 
+class org.eclipse.uml2.uml.internal.impl.DependencyImpl
+  isParentFor
+   org.eclipse.uml2.uml.internal.impl.AbstractionImpl,
+   org.eclipse.uml2.uml.internal.impl.DeploymentImpl,
+   org.eclipse.uml2.uml.internal.impl.UsageImpl
+ 
+class org.eclipse.uml2.uml.util.UMLUtil
+  isParentFor
+   org.eclipse.uml2.uml.internal.operations.ElementOperations
+ 
+interface org.eclipse.emf.ecore.ETypedElement
+  isParentFor
+   org.eclipse.emf.ecore.EOperation,
+   org.eclipse.emf.ecore.EParameter,
+   org.eclipse.emf.ecore.EStructuralFeature
+ 
+class org.eclipse.emf.common.util.ArrayDelegatingEList
+  isParentFor
+   org.eclipse.emf.ecore.impl.MinimalEObjectImpl$1ArrayDelegatingAdapterList
+ 
+interface org.eclipse.uml2.uml.resource.XMI2UMLResource
+  isParentFor
+   org.eclipse.uml2.uml.resource.XMI212UMLResource,
+   org.eclipse.uml2.uml.resource.XMI222UMLResource,
+   org.eclipse.uml2.uml.resource.XMI242UMLResource
+ 
+interface org.eclipse.emf.ecore.util.FeatureMap$Entry
+  isParentFor
+   org.eclipse.emf.ecore.util.FeatureMap$Entry$Internal
+ 
+interface java.util.List
+  isParentFor
+   org.eclipse.emf.common.util.EList
+ 
+interface org.eclipse.uml2.uml.InteractionFragment
+  isParentFor
+   org.eclipse.uml2.uml.CombinedFragment,
+   org.eclipse.uml2.uml.Continuation,
+   org.eclipse.uml2.uml.ExecutionSpecification,
+   org.eclipse.uml2.uml.Interaction,
+   org.eclipse.uml2.uml.InteractionOperand,
+   org.eclipse.uml2.uml.InteractionUse,
+   org.eclipse.uml2.uml.OccurrenceSpecification,
+   org.eclipse.uml2.uml.StateInvariant
+ 
+interface org.eclipse.uml2.uml.Node
+  isParentFor
+   org.eclipse.uml2.uml.Device,
+   org.eclipse.uml2.uml.ExecutionEnvironment
+ 
+class org.eclipse.emf.common.util.ECollections$UnmodifiableEList
+  isParentFor
+   org.eclipse.emf.common.util.ECollections$UnmodifiableEMap
+ 
+interface org.eclipse.uml2.uml.RedefinableElement
+  isParentFor
+   org.eclipse.uml2.uml.ActivityEdge,
+   org.eclipse.uml2.uml.ActivityNode,
+   org.eclipse.uml2.uml.Classifier,
+   org.eclipse.uml2.uml.ExtensionPoint,
+   org.eclipse.uml2.uml.Feature,
+   org.eclipse.uml2.uml.RedefinableTemplateSignature,
+   org.eclipse.uml2.uml.Region,
+   org.eclipse.uml2.uml.State,
+   org.eclipse.uml2.uml.Transition
+ 
+class org.eclipse.emf.ecore.resource.impl.DESCipherImpl
+  isParentFor
+   org.eclipse.emf.ecore.resource.impl.CryptoCipherImpl
+ 
+class org.eclipse.uml2.uml.internal.operations.CallActionOperations
+  isParentFor
+   org.eclipse.uml2.uml.internal.operations.CallBehaviorActionOperations,
+   org.eclipse.uml2.uml.internal.operations.CallOperationActionOperations,
+   org.eclipse.uml2.uml.internal.operations.StartObjectBehaviorActionOperations
+ 
+interface org.eclipse.emf.ecore.util.EContentsEList$FeatureListIterator
+  isParentFor
+   org.eclipse.emf.ecore.util.FeatureMap$ValueListIterator
+ 
+class org.eclipse.emf.ecore.util.FeatureMapUtil$FeatureEList
+  isParentFor
+   org.eclipse.emf.ecore.util.FeatureMapUtil$FeatureEList$Basic,
+   org.eclipse.emf.ecore.util.FeatureMapUtil$FeatureFeatureMap
+ 
+class org.eclipse.uml2.uml.internal.impl.ActionImpl
+  isParentFor
+   org.eclipse.uml2.uml.internal.impl.AcceptEventActionImpl,
+   org.eclipse.uml2.uml.internal.impl.ClearAssociationActionImpl,
+   org.eclipse.uml2.uml.internal.impl.CreateObjectActionImpl,
+   org.eclipse.uml2.uml.internal.impl.DestroyObjectActionImpl,
+   org.eclipse.uml2.uml.internal.impl.InvocationActionImpl,
+   org.eclipse.uml2.uml.internal.impl.LinkActionImpl,
+   org.eclipse.uml2.uml.internal.impl.OpaqueActionImpl,
+   org.eclipse.uml2.uml.internal.impl.RaiseExceptionActionImpl,
+   org.eclipse.uml2.uml.internal.impl.ReadExtentActionImpl,
+   org.eclipse.uml2.uml.internal.impl.ReadIsClassifiedObjectActionImpl,
+   org.eclipse.uml2.uml.internal.impl.ReadLinkObjectEndActionImpl,
+   org.eclipse.uml2.uml.internal.impl.ReadLinkObjectEndQualifierActionImpl,
+   org.eclipse.uml2.uml.internal.impl.ReadSelfActionImpl,
+   org.eclipse.uml2.uml.internal.impl.ReclassifyObjectActionImpl,
+   org.eclipse.uml2.uml.internal.impl.ReduceActionImpl,
+   org.eclipse.uml2.uml.internal.impl.ReplyActionImpl,
+   org.eclipse.uml2.uml.internal.impl.StartClassifierBehaviorActionImpl,
+   org.eclipse.uml2.uml.internal.impl.StructuralFeatureActionImpl,
+   org.eclipse.uml2.uml.internal.impl.StructuredActivityNodeImpl,
+   org.eclipse.uml2.uml.internal.impl.TestIdentityActionImpl,
+   org.eclipse.uml2.uml.internal.impl.UnmarshallActionImpl,
+   org.eclipse.uml2.uml.internal.impl.ValueSpecificationActionImpl,
+   org.eclipse.uml2.uml.internal.impl.VariableActionImpl
+ 
+class org.eclipse.uml2.uml.internal.impl.BehavioredClassifierImpl
+  isParentFor
+   org.eclipse.uml2.uml.internal.impl.ActorImpl,
+   org.eclipse.uml2.uml.internal.impl.UseCaseImpl
+ 
+class java.util.zip.ZipOutputStream
+  isParentFor
+   org.eclipse.emf.ecore.resource.impl.ResourceImpl$8
+ 
+class org.eclipse.uml2.uml.internal.impl.StructuredClassifierImpl
+  isParentFor
+   org.eclipse.uml2.uml.internal.impl.CollaborationImpl,
+   org.eclipse.uml2.uml.internal.impl.EncapsulatedClassifierImpl
+ 
+class org.eclipse.uml2.uml.internal.impl.ActivityGroupImpl
+  isParentFor
+   org.eclipse.uml2.uml.internal.impl.ActivityPartitionImpl,
+   org.eclipse.uml2.uml.internal.impl.InterruptibleActivityRegionImpl
+ 
+class java.net.URLConnection
+  isParentFor
+   org.eclipse.emf.common.archive.ArchiveURLConnection
+ 
+interface org.eclipse.uml2.uml.WriteLinkAction
+  isParentFor
+   org.eclipse.uml2.uml.CreateLinkAction,
+   org.eclipse.uml2.uml.DestroyLinkAction
+ 
+class org.eclipse.emf.common.util.BasicEList
+  isParentFor
+   org.eclipse.emf.common.notify.impl.BasicNotifierImpl$EAdapterList,
+   org.eclipse.emf.common.notify.impl.NotificationChainImpl,
+   org.eclipse.emf.common.notify.impl.NotifyingListImpl,
+   org.eclipse.emf.common.util.AbstractTreeIterator,
+   org.eclipse.emf.common.util.BasicEList$FastCompare,
+   org.eclipse.emf.common.util.BasicEList$UnmodifiableEList,
+   org.eclipse.emf.common.util.BasicEMap$1,
+   org.eclipse.emf.common.util.BasicEMap$2,
+   org.eclipse.emf.common.util.ECollections$4,
+   org.eclipse.emf.common.util.UniqueEList,
+   org.eclipse.emf.ecore.resource.impl.BinaryResourceImpl$EObjectInputStream$DataValueList,
+   org.eclipse.emf.ecore.resource.impl.BinaryResourceImpl$EObjectInputStream$EPackageDataList,
+   org.eclipse.emf.ecore.resource.impl.BinaryResourceImpl$EObjectInputStream$InternalEObjectList,
+   org.eclipse.emf.ecore.resource.impl.BinaryResourceImpl$EObjectInputStream$StringList,
+   org.eclipse.emf.ecore.resource.impl.BinaryResourceImpl$EObjectInputStream$URIList,
+   org.eclipse.emf.ecore.resource.impl.ExtensibleURIConverterImpl$ContentHandlerList,
+   org.eclipse.emf.ecore.resource.impl.ExtensibleURIConverterImpl$URIHandlerList,
+   org.eclipse.emf.ecore.resource.impl.ResourceSetImpl$1,
+   org.eclipse.emf.ecore.util.BasicInternalEList,
+   org.eclipse.emf.ecore.util.ECrossReferenceAdapter$InverseCrossReferencer$3,
+   org.eclipse.emf.ecore.util.EcoreEMap$1,
+   org.eclipse.emf.ecore.xmi.impl.StringSegment,
+   org.eclipse.emf.ecore.xmi.impl.XMLHandler$MyStack
+ 
+class org.eclipse.uml2.uml.internal.impl.LinkActionImpl
+  isParentFor
+   org.eclipse.uml2.uml.internal.impl.ReadLinkActionImpl,
+   org.eclipse.uml2.uml.internal.impl.WriteLinkActionImpl
+ 
+class org.eclipse.uml2.uml.internal.operations.StructuredActivityNodeOperations
+  isParentFor
+   org.eclipse.uml2.uml.internal.operations.ConditionalNodeOperations,
+   org.eclipse.uml2.uml.internal.operations.LoopNodeOperations
+ 
+class org.eclipse.uml2.uml.internal.impl.FinalNodeImpl
+  isParentFor
+   org.eclipse.uml2.uml.internal.impl.ActivityFinalNodeImpl,
+   org.eclipse.uml2.uml.internal.impl.FlowFinalNodeImpl
+ 
+class org.eclipse.emf.ecore.util.EObjectWithInverseEList$Unsettable
+  isParentFor
+   org.eclipse.emf.ecore.util.EObjectWithInverseEList$Unsettable$ManyInverse,
+   org.eclipse.emf.ecore.util.EObjectWithInverseResolvingEList$Unsettable
+ 
+class org.eclipse.emf.ecore.util.EcoreUtil$ContentTreeIterator
+  isParentFor
+   org.eclipse.emf.ecore.resource.impl.ResourceImpl$5,
+   org.eclipse.emf.ecore.util.EcoreUtil$1,
+   org.eclipse.emf.ecore.util.EcoreUtil$2,
+   org.eclipse.emf.ecore.util.EcoreUtil$3,
+   org.eclipse.emf.ecore.util.EcoreUtil$4,
+   org.eclipse.emf.ecore.util.EcoreUtil$5,
+   org.eclipse.emf.ecore.util.EcoreUtil$6
+ 
+class org.eclipse.emf.ecore.xmi.impl.XMLResourceImpl
+  isParentFor
+   org.eclipse.emf.ecore.xmi.impl.GenericXMLResourceImpl,
+   org.eclipse.emf.ecore.xmi.impl.XMIResourceImpl,
+   org.eclipse.emf.ecore.xmi.impl.XMLContentHandlerImpl$1
+ 
+class org.eclipse.uml2.uml.internal.operations.LinkActionOperations
+  isParentFor
+   org.eclipse.uml2.uml.internal.operations.ReadLinkActionOperations,
+   org.eclipse.uml2.uml.internal.operations.WriteLinkActionOperations
+ 
+class org.eclipse.uml2.uml.util.UMLUtil$PackageMerger$NameMatcher
+  isParentFor
+   org.eclipse.uml2.uml.util.UMLUtil$PackageMerger$1$2,
+   org.eclipse.uml2.uml.util.UMLUtil$PackageMerger$TypeMatcher
+ 
+class org.eclipse.emf.ecore.util.EContentsEList
+  isParentFor
+   org.eclipse.emf.ecore.impl.ENamedElementImpl$1,
+   org.eclipse.emf.ecore.util.EContentsEList$1,
+   org.eclipse.emf.ecore.util.EContentsEList$2,
+   org.eclipse.emf.ecore.util.ECrossReferenceEList
+ 
+interface org.eclipse.uml2.uml.OperationOwner
+  isParentFor
+   org.eclipse.uml2.uml.Artifact,
+   org.eclipse.uml2.uml.Class,
+   org.eclipse.uml2.uml.DataType,
+   org.eclipse.uml2.uml.Interface
+ 
+class org.eclipse.emf.ecore.resource.impl.URIHandlerImpl
+  isParentFor
+   org.eclipse.emf.ecore.resource.impl.ArchiveURIHandlerImpl,
+   org.eclipse.emf.ecore.resource.impl.EFSURIHandlerImpl,
+   org.eclipse.emf.ecore.resource.impl.FileURIHandlerImpl,
+   org.eclipse.emf.ecore.resource.impl.PlatformResourceURIHandlerImpl
+ 
+class org.eclipse.uml2.uml.internal.impl.StructuredActivityNodeImpl
+  isParentFor
+   org.eclipse.uml2.uml.internal.impl.ConditionalNodeImpl,
+   org.eclipse.uml2.uml.internal.impl.ExpansionRegionImpl,
+   org.eclipse.uml2.uml.internal.impl.LoopNodeImpl,
+   org.eclipse.uml2.uml.internal.impl.SequenceNodeImpl
+ 
+class org.eclipse.emf.ecore.xml.type.internal.RegEx$RegexParser
+  isParentFor
+   org.eclipse.emf.ecore.xml.type.internal.RegEx$ParserForXMLSchema
+ 
+class org.eclipse.emf.ecore.plugin.RegistryReader
+  isParentFor
+   org.eclipse.emf.ecore.plugin.ContentHandlerRegistryReader,
+   org.eclipse.emf.ecore.plugin.ContentParserRegistryReader,
+   org.eclipse.emf.ecore.plugin.ConversionDelegateFactoryRegistryReader,
+   org.eclipse.emf.ecore.plugin.DynamicPackageRegistryReader,
+   org.eclipse.emf.ecore.plugin.EcorePlugin$ExtensionProcessor$3,
+   org.eclipse.emf.ecore.plugin.ExtensionParserRegistryReader,
+   org.eclipse.emf.ecore.plugin.FactoryOverrideRegistryReader,
+   org.eclipse.emf.ecore.plugin.GeneratedPackageRegistryReader,
+   org.eclipse.emf.ecore.plugin.InvocationDelegateFactoryRegistryReader,
+   org.eclipse.emf.ecore.plugin.ProtocolParserRegistryReader,
+   org.eclipse.emf.ecore.plugin.QueryDelegateFactoryRegistryReader,
+   org.eclipse.emf.ecore.plugin.SettingDelegateFactoryRegistryReader,
+   org.eclipse.emf.ecore.plugin.URIMappingRegistryReader,
+   org.eclipse.emf.ecore.plugin.ValidationDelegateRegistryReader,
+   org.eclipse.uml2.uml.UMLPlugin$PackageRegistryReader
+ 
+interface org.eclipse.uml2.uml.Dependency
+  isParentFor
+   org.eclipse.uml2.uml.Abstraction,
+   org.eclipse.uml2.uml.Deployment,
+   org.eclipse.uml2.uml.Usage
+ 
+class org.eclipse.emf.ecore.impl.BasicEObjectImpl$EPropertiesHolderBaseImpl
+  isParentFor
+   org.eclipse.emf.ecore.impl.BasicEObjectImpl$EPropertiesHolderImpl
+ 
+interface org.xml.sax.ContentHandler
+  isParentFor
+   org.eclipse.emf.ecore.xmi.XMLDefaultHandler
+ 
+class org.eclipse.uml2.uml.internal.operations.InputPinOperations
+  isParentFor
+   org.eclipse.uml2.uml.internal.operations.ActionInputPinOperations,
+   org.eclipse.uml2.uml.internal.operations.ValuePinOperations
+ 
+interface org.eclipse.uml2.uml.FinalNode
+  isParentFor
+   org.eclipse.uml2.uml.ActivityFinalNode,
+   org.eclipse.uml2.uml.FlowFinalNode
+ 
+class org.eclipse.emf.ecore.util.DelegatingEcoreEList$Generic
+  isParentFor
+   org.eclipse.emf.ecore.util.DelegatingEcoreEList$Dynamic
+ 
+class org.eclipse.uml2.uml.internal.impl.InteractionFragmentImpl
+  isParentFor
+   org.eclipse.uml2.uml.internal.impl.CombinedFragmentImpl,
+   org.eclipse.uml2.uml.internal.impl.ContinuationImpl,
+   org.eclipse.uml2.uml.internal.impl.ExecutionSpecificationImpl,
+   org.eclipse.uml2.uml.internal.impl.InteractionUseImpl,
+   org.eclipse.uml2.uml.internal.impl.OccurrenceSpecificationImpl,
+   org.eclipse.uml2.uml.internal.impl.StateInvariantImpl
+ 
+class org.eclipse.uml2.uml.internal.operations.LinkEndDataOperations
+  isParentFor
+   org.eclipse.uml2.uml.internal.operations.LinkEndCreationDataOperations,
+   org.eclipse.uml2.uml.internal.operations.LinkEndDestructionDataOperations
+ 
+class org.eclipse.emf.ecore.xmi.impl.BasicResourceHandler
+  isParentFor
+   org.eclipse.uml2.uml.resource.CMOF2UMLResourceHandler,
+   org.eclipse.uml2.uml.resource.UML212UMLResourceHandler,
+   org.eclipse.uml2.uml.resource.UML22UMLResourceHandler,
+   org.eclipse.uml2.uml.resource.UML302UMLResourceHandler,
+   org.eclipse.uml2.uml.resource.UML402UMLResourceHandler
+ 
+class org.eclipse.emf.common.util.BasicEMap$BasicEMapIterator
+  isParentFor
+   org.eclipse.emf.common.util.BasicEMap$BasicEMapKeyIterator,
+   org.eclipse.emf.common.util.BasicEMap$BasicEMapValueIterator
+ 
+class org.eclipse.uml2.uml.internal.impl.ActivityNodeImpl
+  isParentFor
+   org.eclipse.uml2.uml.internal.impl.ControlNodeImpl,
+   org.eclipse.uml2.uml.internal.impl.ExecutableNodeImpl,
+   org.eclipse.uml2.uml.internal.impl.ObjectNodeImpl
+ 
+class org.eclipse.uml2.uml.UMLPlugin$PackageRegistryReader
+  isParentFor
+   org.eclipse.uml2.uml.UMLPlugin$DynamicPackageRegistryReader,
+   org.eclipse.uml2.uml.UMLPlugin$GeneratedPackageRegistryReader
+ 
+class org.eclipse.emf.common.util.Pool$ObjectAccessUnit
+  isParentFor
+   org.eclipse.emf.common.util.CommonUtil$StringPool$JavaInterningAccessUnit,
+   org.eclipse.emf.common.util.CommonUtil$StringPool$StringsAccessUnit
+ 
+class org.eclipse.uml2.uml.internal.operations.BehavioralFeatureOperations
+  isParentFor
+   org.eclipse.uml2.uml.internal.operations.OperationOperations,
+   org.eclipse.uml2.uml.internal.operations.ReceptionOperations
+ 
+interface org.eclipse.uml2.uml.ActivityNode
+  isParentFor
+   org.eclipse.uml2.uml.ControlNode,
+   org.eclipse.uml2.uml.ExecutableNode,
+   org.eclipse.uml2.uml.ObjectNode
+ 
+interface org.eclipse.emf.ecore.xmi.XMLHelper
+  isParentFor
+   org.eclipse.emf.ecore.xmi.impl.EMOFHandler$Helper
+ 
+class org.eclipse.emf.ecore.util.EObjectValidator
+  isParentFor
+   org.eclipse.emf.ecore.util.EcoreValidator,
+   org.eclipse.emf.ecore.xml.namespace.util.XMLNamespaceValidator,
+   org.eclipse.emf.ecore.xml.type.util.XMLTypeValidator,
+   org.eclipse.uml2.uml.util.UMLValidator
+ 
+class org.eclipse.uml2.uml.internal.operations.StructuredClassifierOperations
+  isParentFor
+   org.eclipse.uml2.uml.internal.operations.EncapsulatedClassifierOperations
+ 
+class org.eclipse.emf.ecore.util.DelegatingFeatureMap$FeatureEIterator
+  isParentFor
+   org.eclipse.emf.ecore.util.DelegatingFeatureMap$ResolvingFeatureEIterator
+ 
+interface org.eclipse.uml2.uml.Element
+  isParentFor
+   org.eclipse.uml2.uml.Clause,
+   org.eclipse.uml2.uml.Comment,
+   org.eclipse.uml2.uml.ExceptionHandler,
+   org.eclipse.uml2.uml.Image,
+   org.eclipse.uml2.uml.LinkEndData,
+   org.eclipse.uml2.uml.MultiplicityElement,
+   org.eclipse.uml2.uml.NamedElement,
+   org.eclipse.uml2.uml.ParameterableElement,
+   org.eclipse.uml2.uml.QualifierValue,
+   org.eclipse.uml2.uml.Relationship,
+   org.eclipse.uml2.uml.Slot,
+   org.eclipse.uml2.uml.TemplateParameter,
+   org.eclipse.uml2.uml.TemplateParameterSubstitution,
+   org.eclipse.uml2.uml.TemplateSignature,
+   org.eclipse.uml2.uml.TemplateableElement
+ 
+interface org.eclipse.uml2.uml.Property
+  isParentFor
+   org.eclipse.uml2.uml.ExtensionEnd,
+   org.eclipse.uml2.uml.Port
+ 
+class org.eclipse.emf.ecore.xmi.impl.XMLHandler$MyStack
+  isParentFor
+   org.eclipse.emf.ecore.xmi.impl.XMLHandler$MyEObjectStack
+ 
+class org.eclipse.uml2.uml.internal.impl.ControlNodeImpl
+  isParentFor
+   org.eclipse.uml2.uml.internal.impl.DecisionNodeImpl,
+   org.eclipse.uml2.uml.internal.impl.FinalNodeImpl,
+   org.eclipse.uml2.uml.internal.impl.ForkNodeImpl,
+   org.eclipse.uml2.uml.internal.impl.InitialNodeImpl,
+   org.eclipse.uml2.uml.internal.impl.JoinNodeImpl,
+   org.eclipse.uml2.uml.internal.impl.MergeNodeImpl
+ 
+interface org.eclipse.emf.ecore.EOperation
+  isParentFor
+   org.eclipse.emf.ecore.EOperation$Internal
+ 
+interface org.eclipse.uml2.uml.Association
+  isParentFor
+   org.eclipse.uml2.uml.AssociationClass,
+   org.eclipse.uml2.uml.CommunicationPath,
+   org.eclipse.uml2.uml.Extension
+ 
+class org.eclipse.emf.ecore.xmi.impl.XMLHandler
+  isParentFor
+   org.eclipse.emf.ecore.xmi.impl.SAXXMLHandler,
+   org.eclipse.emf.ecore.xmi.impl.XMIHandler
+ 
+class org.eclipse.uml2.uml.internal.operations.ClassifierOperations$GeneralEList
+  isParentFor
+   org.eclipse.uml2.uml.internal.operations.ClassifierOperations$GeneralEList$1
+ 
+interface org.eclipse.uml2.uml.LiteralSpecification
+  isParentFor
+   org.eclipse.uml2.uml.LiteralBoolean,
+   org.eclipse.uml2.uml.LiteralInteger,
+   org.eclipse.uml2.uml.LiteralNull,
+   org.eclipse.uml2.uml.LiteralReal,
+   org.eclipse.uml2.uml.LiteralString,
+   org.eclipse.uml2.uml.LiteralUnlimitedNatural
+ 
+interface org.eclipse.uml2.uml.State
+  isParentFor
+   org.eclipse.uml2.uml.FinalState
+ 
+class org.eclipse.uml2.uml.internal.impl.EncapsulatedClassifierImpl
+  isParentFor
+   org.eclipse.uml2.uml.internal.impl.ClassImpl
+ 
+interface org.eclipse.uml2.uml.CombinedFragment
+  isParentFor
+   org.eclipse.uml2.uml.ConsiderIgnoreFragment
+ 
+class org.eclipse.uml2.common.util.SubsetSupersetEObjectContainmentEList
+  isParentFor
+   org.eclipse.uml2.common.util.SubsetSupersetEObjectContainmentEList$Resolving,
+   org.eclipse.uml2.common.util.SubsetSupersetEObjectContainmentEList$Unsettable,
+   org.eclipse.uml2.common.util.SubsetSupersetEObjectContainmentWithInverseEList
+ 
+interface org.eclipse.emf.ecore.util.FeatureMap
+  isParentFor
+   org.eclipse.emf.ecore.util.FeatureMap$Internal
+ 
+class org.eclipse.emf.common.util.BasicMonitor$Delegating
+  isParentFor
+   org.eclipse.emf.common.util.BasicMonitor$Delegating$Eclipse
+ 
+interface org.xml.sax.DTDHandler
+  isParentFor
+   org.eclipse.emf.ecore.xmi.XMLDefaultHandler
+ 
+interface org.eclipse.uml2.uml.BehavioralFeature
+  isParentFor
+   org.eclipse.uml2.uml.Operation,
+   org.eclipse.uml2.uml.Reception
+ 
+class org.eclipse.emf.ecore.xml.type.internal.RegEx$Op
+  isParentFor
+   org.eclipse.emf.ecore.xml.type.internal.RegEx$Op$CharOp,
+   org.eclipse.emf.ecore.xml.type.internal.RegEx$Op$ChildOp,
+   org.eclipse.emf.ecore.xml.type.internal.RegEx$Op$ConditionOp,
+   org.eclipse.emf.ecore.xml.type.internal.RegEx$Op$RangeOp,
+   org.eclipse.emf.ecore.xml.type.internal.RegEx$Op$StringOp,
+   org.eclipse.emf.ecore.xml.type.internal.RegEx$Op$UnionOp
+ 
+interface org.eclipse.uml2.uml.ActivityContent
+  isParentFor
+   org.eclipse.uml2.uml.ActivityGroup,
+   org.eclipse.uml2.uml.ActivityNode
+ 
+interface org.eclipse.uml2.uml.StructuredActivityNode
+  isParentFor
+   org.eclipse.uml2.uml.ConditionalNode,
+   org.eclipse.uml2.uml.ExpansionRegion,
+   org.eclipse.uml2.uml.LoopNode,
+   org.eclipse.uml2.uml.SequenceNode
+ 
+class org.eclipse.emf.ecore.util.EObjectContainmentEList
+  isParentFor
+   org.eclipse.emf.ecore.impl.ETypeParameterImpl$1,
+   org.eclipse.emf.ecore.util.EObjectContainmentEList$Resolving,
+   org.eclipse.emf.ecore.util.EObjectContainmentEList$Unsettable,
+   org.eclipse.emf.ecore.util.EObjectContainmentWithInverseEList,
+   org.eclipse.emf.ecore.util.EcoreEMap$DelegateEObjectContainmentEList
+ 
+class org.eclipse.uml2.common.util.UML2Util$EStructuralFeatureMatcher
+  isParentFor
+   org.eclipse.uml2.uml.util.UMLUtil$PackageMerger$BodyMatcher,
+   org.eclipse.uml2.uml.util.UMLUtil$PackageMerger$NameMatcher,
+   org.eclipse.uml2.uml.util.UMLUtil$PackageMerger$SourceMatcher,
+   org.eclipse.uml2.uml.util.UMLUtil$UML2EcoreConverter$NameMatcher
+ 
+class org.eclipse.emf.common.util.CommonUtil$StringPool$AccessUnitBase
+  isParentFor
+   org.eclipse.emf.common.util.CommonUtil$StringPool$CharSequenceAccessUnit,
+   org.eclipse.emf.common.util.CommonUtil$StringPool$CharactersAccessUnit,
+   org.eclipse.emf.common.util.CommonUtil$StringPool$StringAccessUnit,
+   org.eclipse.emf.common.util.CommonUtil$StringPool$SubstringAccessUnit
+ 
+class org.eclipse.uml2.common.util.UML2Util
+  isParentFor
+   org.eclipse.uml2.uml.util.UMLUtil
+ 
+class org.eclipse.uml2.uml.internal.impl.StateMachineImpl
+  isParentFor
+   org.eclipse.uml2.uml.internal.impl.ProtocolStateMachineImpl
+ 
+class java.lang.RuntimeException
+  isParentFor
+   org.eclipse.emf.common.command.AbortExecutionException,
+   org.eclipse.emf.common.util.WrappedException,
+   org.eclipse.emf.ecore.xml.type.InvalidDatatypeValueException,
+   org.eclipse.emf.ecore.xml.type.internal.RegEx$ParseException
+ 
+class org.eclipse.emf.common.util.DelegatingEList$UnmodifiableEList
+  isParentFor
+   org.eclipse.emf.ecore.util.DelegatingEcoreEList$UnmodifiableEList
+ 
+interface org.eclipse.uml2.uml.Realization
+  isParentFor
+   org.eclipse.uml2.uml.ComponentRealization,
+   org.eclipse.uml2.uml.InterfaceRealization,
+   org.eclipse.uml2.uml.Substitution
+ 
+interface org.eclipse.uml2.uml.resource.UMLResource
+  isParentFor
+   org.eclipse.uml2.uml.resource.CMOF2UMLResource,
+   org.eclipse.uml2.uml.resource.UML212UMLResource,
+   org.eclipse.uml2.uml.resource.UML22UMLResource,
+   org.eclipse.uml2.uml.resource.UML302UMLResource,
+   org.eclipse.uml2.uml.resource.UML402UMLResource,
+   org.eclipse.uml2.uml.resource.XMI2UMLResource
+ 
+class org.eclipse.emf.ecore.util.NotifyingInternalEListImpl
+  isParentFor
+   org.eclipse.emf.ecore.resource.impl.ResourceImpl$ContentsEList,
+   org.eclipse.emf.ecore.resource.impl.ResourceSetImpl$ResourcesEList,
+   org.eclipse.emf.ecore.util.EcoreEList
+ 
+class org.eclipse.uml2.uml.internal.impl.ExecutionSpecificationImpl
+  isParentFor
+   org.eclipse.uml2.uml.internal.impl.ActionExecutionSpecificationImpl,
+   org.eclipse.uml2.uml.internal.impl.BehaviorExecutionSpecificationImpl
+ 
+class org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container
+  isParentFor
+   org.eclipse.emf.ecore.impl.EGenericTypeImpl,
+   org.eclipse.emf.ecore.impl.EModelElementImpl,
+   org.eclipse.emf.ecore.impl.EStringToStringMapEntryImpl,
+   org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container$Dynamic
+ 
+class org.eclipse.uml2.uml.internal.resource.UMLResourceImpl
+  isParentFor
+   org.eclipse.uml2.uml.internal.resource.CMOF202UMLResourceImpl,
+   org.eclipse.uml2.uml.internal.resource.CMOF242UMLResourceImpl,
+   org.eclipse.uml2.uml.internal.resource.CMOF2UMLResourceImpl,
+   org.eclipse.uml2.uml.internal.resource.UML212UMLResourceImpl,
+   org.eclipse.uml2.uml.internal.resource.UML22UMLResourceImpl,
+   org.eclipse.uml2.uml.internal.resource.UML302UMLResourceImpl,
+   org.eclipse.uml2.uml.internal.resource.UML402UMLResourceImpl,
+   org.eclipse.uml2.uml.internal.resource.XMI212UMLResourceImpl,
+   org.eclipse.uml2.uml.internal.resource.XMI222UMLResourceImpl,
+   org.eclipse.uml2.uml.internal.resource.XMI242UMLResourceImpl,
+   org.eclipse.uml2.uml.internal.resource.XMI2UMLResourceImpl
+ 
+class org.eclipse.uml2.uml.internal.impl.InvocationActionImpl
+  isParentFor
+   org.eclipse.uml2.uml.internal.impl.BroadcastSignalActionImpl,
+   org.eclipse.uml2.uml.internal.impl.CallActionImpl,
+   org.eclipse.uml2.uml.internal.impl.SendObjectActionImpl,
+   org.eclipse.uml2.uml.internal.impl.SendSignalActionImpl
+ 
+class org.eclipse.emf.ecore.util.EcoreEMap$DelegateEObjectContainmentEList
+  isParentFor
+   org.eclipse.emf.ecore.util.EcoreEMap$DelegateEObjectContainmentWithInverseEList,
+   org.eclipse.emf.ecore.util.EcoreEMap$Unsettable$UnsettableDelegateEObjectContainmentEList
+ 
+interface org.eclipse.uml2.uml.ObjectNode
+  isParentFor
+   org.eclipse.uml2.uml.ActivityParameterNode,
+   org.eclipse.uml2.uml.CentralBufferNode,
+   org.eclipse.uml2.uml.ExpansionNode,
+   org.eclipse.uml2.uml.Pin
+ 
+interface org.eclipse.uml2.uml.ValueSpecification
+  isParentFor
+   org.eclipse.uml2.uml.Duration,
+   org.eclipse.uml2.uml.Expression,
+   org.eclipse.uml2.uml.InstanceValue,
+   org.eclipse.uml2.uml.Interval,
+   org.eclipse.uml2.uml.LiteralSpecification,
+   org.eclipse.uml2.uml.OpaqueExpression,
+   org.eclipse.uml2.uml.TimeExpression
+ 
+interface java.util.Iterator
+  isParentFor
+   org.eclipse.emf.common.util.TreeIterator,
+   org.eclipse.emf.ecore.util.EContentsEList$FeatureIterator
+ 
+class org.eclipse.uml2.uml.internal.impl.NamespaceImpl
+  isParentFor
+   org.eclipse.uml2.uml.internal.impl.BehavioralFeatureImpl,
+   org.eclipse.uml2.uml.internal.impl.ClassifierImpl,
+   org.eclipse.uml2.uml.internal.impl.InteractionOperandImpl,
+   org.eclipse.uml2.uml.internal.impl.PackageImpl,
+   org.eclipse.uml2.uml.internal.impl.RegionImpl,
+   org.eclipse.uml2.uml.internal.impl.StateImpl,
+   org.eclipse.uml2.uml.internal.impl.TransitionImpl
+ 
+interface org.eclipse.uml2.uml.Artifact
+  isParentFor
+   org.eclipse.uml2.uml.DeploymentSpecification
+ 
+class org.eclipse.uml2.uml.util.UMLUtil$OperationContext
+  isParentFor
+   org.eclipse.uml2.uml.util.UMLUtil$OperationContext$1
+ 
