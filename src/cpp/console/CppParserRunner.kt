@@ -53,17 +53,12 @@ fun main() {
     //
     clearPackageDir(targetPath)
     model.nestedPackages.forEach { it.generateCpp(targetPath) }
-
-    val htmlPath = "/html-report-generated"
-    val rep = UML2HTMLReporter
-    rep.generateReport(model, htmlPath)
 }
 
 object UML2HTMLReporter {
     @JvmStatic
     fun generateReport(model: Model, htmlPath: String) {
-        val rep = UML2HTMLReporter
-        rep.generateReport(model, htmlPath)
+            UML2HTMLReporter.generateReport(model, htmlPath)
     }
 }
 
