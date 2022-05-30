@@ -1,9 +1,6 @@
 package uml.cpp
 
-import org.eclipse.uml2.uml.Class
-import org.eclipse.uml2.uml.Namespace
-import org.eclipse.uml2.uml.Package
-import org.eclipse.uml2.uml.Property
+import org.eclipse.uml2.uml.*
 import uml.util.createFile
 import uml.util.makePackageDir
 import java.io.PrintStream
@@ -17,7 +14,7 @@ fun Package.generateCpp(targetPath: String) {
 }
 
 fun Namespace.generateNamespace(file: PrintStream) {
-    file.println("namespace $name {")
+    file.println("namespace $name {\n")
 
     ownedMembers.filter { !it.hasKeyword("unknown") }
         .forEach {
@@ -31,10 +28,31 @@ fun Namespace.generateNamespace(file: PrintStream) {
 }
 
 fun Class.generateClass(file: PrintStream) {
-    file.println("class $name {")
+    file.println("class $name$parentsAsCPP {")
     ownedAttributes.forEach { file.println(it.propertyAsJava) }
-    file.println("}")
+    ownedOperations.forEach { it.generateOperation(file)}
+    file.println("}\n")
 }
 
+private val Classifier.parentsAsCPP: String
+    get() {
+        val parents = generalizations
+            .map { it.general }
+            .joinToString { "${it.visibility.literal} ${it.name}" }
+        return if (parents.isNotEmpty()) ": $parents" else ""
+    }
+
+fun Operation.generateOperation(file: PrintStream) {
+    file.print("\t$virtualModify${type.name} $name(")
+    val opsList = ownedParameters.filter { it.name != null }.map { "${it.type.name} ${it.name}" }
+    file.println("${opsList.joinToString(", ")})")
+}
+
+val Operation.virtualModify: String
+    get() {
+        if (isAbstract) return "virtual "
+        return ""
+    }
+
 private val Property.propertyAsJava
-    get() = "${type.name} $name;"
+    get() = "\t${type.name} $name;"
