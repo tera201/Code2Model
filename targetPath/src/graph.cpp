@@ -1,8 +1,13 @@
 namespace graph {
+
 class View {
 }
-class Node {
+
+class Node: public View {
 }
-class Edge {
+
+class Edge: public View {
+	int main(int methodATR, float atr2)
 }
+
 } // graph 
