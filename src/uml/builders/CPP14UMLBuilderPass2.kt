@@ -1,5 +1,7 @@
 package uml.builders
 
+import org.eclipse.emf.common.util.BasicEList
+import org.eclipse.emf.common.util.EList
 import org.eclipse.uml2.uml.*
 import uml.IUMLBuilder
 import uml.util.UMLUtil
@@ -26,8 +28,13 @@ class CPP14UMLBuilderPass2(override val model: Model, val mh: IMessageHandler) :
         else model
     }
 
-    override fun startClass(className: String) {
-        currentClass = currentPackage.createOwnedClass(className, false)
+    override fun startClass(className: String, parentName: String?, parentModifier: String?) {
+        currentClass = UMLUtil.getClass(currentPackage, className)
+        if (parentName != null) {
+            val parent: Class = UMLUtil.getClass(currentPackage, parentName)
+            parent.setVisibility(UMLUtil.returnModifyer(parentModifier))
+            currentClass!!.createGeneralization(parent)
+        }
     }
 
     override fun endClass() {}
@@ -45,7 +52,22 @@ class CPP14UMLBuilderPass2(override val model: Model, val mh: IMessageHandler) :
         return property
     }
 
-    override fun startMethod(funType: String, funName: String): Operation? = null
+    override fun startMethod(funType: String, funName: String, typeList: EList<String>, argList: EList<String>, isVirtual: Boolean): Operation? {
+        var op: Operation?
+        val type: Type? = UMLUtil.getType(model, funType)
+        val types: BasicEList<Type> = BasicEList()
+        for (i in typeList){
+            types.add(UMLUtil.getType(model, i))
+        }
+        if (type != null) {
+            op = currentClass?.createOwnedOperation(funName, argList, types, type)
+        }
+        else {
+            op = currentClass?.createOwnedOperation(funName, argList, types)
+        }
+        if (isVirtual) op?.setIsAbstract(isVirtual);
+        return op
+    }
     override fun addParameter(parName: String, typeName: String) {}
     override fun endMethod() {}
 }
