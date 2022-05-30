@@ -18,13 +18,31 @@ object UMLUtil {
         var root: Package = p
 
         for (name in names) {
-            println(name)
             if (root.name == name) continue
             var np = root.getNestedPackage(name)
             if (np == null) np = p.createNestedPackage(name)
             root = np
         }
         return root
+    }
+
+    fun getClass(p: Package, name: String): Class {
+        val owned: NamedElement? = p.getOwnedMember(name)
+        if (owned == null){
+            return p.createOwnedClass(name, false)
+        }
+        else {
+            return owned as Class
+        }
+    }
+
+    fun returnModifier(modifierName: String?): VisibilityKind {
+        when (modifierName) {
+            "public" -> return VisibilityKind.PUBLIC_LITERAL
+            "private" -> return VisibilityKind.PRIVATE_LITERAL
+            "protected" -> return VisibilityKind.PROTECTED_LITERAL
+        }
+        return VisibilityKind.PRIVATE_LITERAL
     }
 
     /**

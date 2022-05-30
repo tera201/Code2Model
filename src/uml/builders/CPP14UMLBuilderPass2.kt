@@ -32,7 +32,7 @@ class CPP14UMLBuilderPass2(override val model: Model, val mh: IMessageHandler) :
         currentClass = UMLUtil.getClass(currentPackage, className)
         if (parentName != null) {
             val parent: Class = UMLUtil.getClass(currentPackage, parentName)
-            parent.setVisibility(UMLUtil.returnModifyer(parentModifier))
+            parent.setVisibility(UMLUtil.returnModifier(parentModifier))
             currentClass!!.createGeneralization(parent)
         }
     }
