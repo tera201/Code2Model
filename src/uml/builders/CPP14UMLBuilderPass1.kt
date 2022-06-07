@@ -2,6 +2,7 @@ package uml.builders
 
 import org.eclipse.emf.common.util.EList
 import org.eclipse.uml2.uml.Class
+import org.eclipse.uml2.uml.Interface
 import org.eclipse.uml2.uml.Model
 import org.eclipse.uml2.uml.Operation
 import org.eclipse.uml2.uml.Package
@@ -14,6 +15,7 @@ import java.util.*
 class CPP14UMLBuilderPass1(override val model: Model, val mh: IMessageHandler) : IUMLBuilder {
     private var currentPackage: Package = model
     private var currentClass: Class? = null
+    private var currentInterface: Interface? = null
     private var packageStack: Stack<String> = Stack()
 
     override fun setName(modelName: String) {
@@ -33,11 +35,18 @@ class CPP14UMLBuilderPass1(override val model: Model, val mh: IMessageHandler) :
         else model
     }
 
-    override fun startClass(className: String, parentName: String?, parentModifier: String?) {
+    override fun startClass(className: String, parentName: String?, parentModifier: String?, isAbstract: Boolean) {
         currentClass = UMLUtil.getClass(currentPackage, className)
+        currentClass?.setIsAbstract(isAbstract)
     }
 
     override fun endClass() {}
+
+    override fun startInterface(interfaceName: String, parentName: String?, parentModifier: String?) {
+        currentInterface = UMLUtil.getInterface(currentPackage, interfaceName)
+    }
+
+    override fun endInterface() {}
 
     override fun addAttribute(attributeName: String, typeName: String): Property? {
         UMLUtil.getType(model, typeName)

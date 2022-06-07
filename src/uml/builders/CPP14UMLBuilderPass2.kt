@@ -11,6 +11,8 @@ import java.util.*
 class CPP14UMLBuilderPass2(override val model: Model, val mh: IMessageHandler) : IUMLBuilder {
     private var currentPackage: Package = model
     private var currentClass: Class? = null
+    private var currentInterface: Interface? = null
+    private var currentOwner: NamedElement? = null
     private var packageStack: Stack<String> = Stack()
 
     override fun setName(modelName: String) {}
@@ -28,16 +30,30 @@ class CPP14UMLBuilderPass2(override val model: Model, val mh: IMessageHandler) :
         else model
     }
 
-    override fun startClass(className: String, parentName: String?, parentModifier: String?) {
+    override fun startClass(className: String, parentName: String?, parentModifier: String?, isAbstract: Boolean) {
         currentClass = UMLUtil.getClass(currentPackage, className)
+        currentClass?.setIsAbstract(isAbstract)
         if (parentName != null) {
             val parent: Class = UMLUtil.getClass(currentPackage, parentName)
             parent.setVisibility(UMLUtil.returnModifier(parentModifier))
             currentClass!!.createGeneralization(parent)
         }
+        currentOwner = currentPackage.getOwnedMember(className)
     }
 
     override fun endClass() {}
+
+    override fun startInterface(interfaceName: String, parentName: String?, parentModifier: String?) {
+        currentInterface = UMLUtil.getInterface(currentPackage, interfaceName)
+        if (parentName != null) {
+            val parent: Interface = UMLUtil.getInterface(currentPackage, parentName)
+            parent.setVisibility(UMLUtil.returnModifier(parentModifier))
+            currentInterface!!.createGeneralization(parent)
+        }
+        currentOwner = currentPackage.getOwnedMember(interfaceName)
+    }
+
+    override fun endInterface() {}
 
     override fun addAttribute(attributeName: String, typeName: String): Property? {
         var property: Property? = null
@@ -47,23 +63,25 @@ class CPP14UMLBuilderPass2(override val model: Model, val mh: IMessageHandler) :
             property = UMLFactory.eINSTANCE.createProperty()
             property.type = type
             property.name = typeName
-            currentClass?.createOwnedAttribute(attributeName, type)
+            if (currentOwner?.name  == currentClass?.name) currentClass?.createOwnedAttribute(attributeName, type)
+            else currentInterface?.createOwnedAttribute(attributeName, type)
         }
         return property
     }
 
     override fun startMethod(funType: String, funName: String, typeList: EList<String>, argList: EList<String>, isVirtual: Boolean): Operation? {
-        var op: Operation?
+        val op: Operation?
         val type: Type? = UMLUtil.getType(model, funType)
         val types: BasicEList<Type> = BasicEList()
         for (i in typeList){
             types.add(UMLUtil.getType(model, i))
         }
+        val current = if (currentOwner is Class) currentOwner as Class else currentOwner as Interface
         if (type != null) {
-            op = currentClass?.createOwnedOperation(funName, argList, types, type)
+            op = current.createOwnedOperation(funName, argList, types, type)
         }
         else {
-            op = currentClass?.createOwnedOperation(funName, argList, types)
+            op = current.createOwnedOperation(funName, argList, types)
         }
         if (isVirtual) op?.setIsAbstract(isVirtual);
         return op

@@ -20,6 +20,7 @@ fun Namespace.generateNamespace(file: PrintStream) {
         .forEach {
             when (it) {
                 is Class -> it.generateClass(file)
+                is Interface -> it.generateClass(file)
                 is Namespace -> it.generateNamespace(file)
 //            is Package -> it.generateCpp(targetPath)
             }
@@ -30,7 +31,13 @@ fun Namespace.generateNamespace(file: PrintStream) {
 fun Class.generateClass(file: PrintStream) {
     file.println("class $name$parentsAsCPP {")
     ownedAttributes.forEach { file.println(it.propertyAsJava) }
-    ownedOperations.forEach { it.generateOperation(file)}
+    ownedOperations.forEach { it.generateOperation(file, false)}
+    file.println("}\n")
+}
+
+fun Interface.generateClass(file: PrintStream) {
+    file.println("class $name$parentsAsCPP {")
+    ownedOperations.forEach { it.generateOperation(file, true)}
     file.println("}\n")
 }
 
@@ -42,10 +49,11 @@ private val Classifier.parentsAsCPP: String
         return if (parents.isNotEmpty()) ": $parents" else ""
     }
 
-fun Operation.generateOperation(file: PrintStream) {
+fun Operation.generateOperation(file: PrintStream, isInterface: Boolean) {
     file.print("\t$virtualModify${type.name} $name(")
     val opsList = ownedParameters.filter { it.name != null }.map { "${it.type.name} ${it.name}" }
-    file.println("${opsList.joinToString(", ")})")
+    val fullyAbstract = if (isInterface) " = 0;" else ""
+    file.println("${opsList.joinToString(", ")})$fullyAbstract")
 }
 
 val Operation.virtualModify: String

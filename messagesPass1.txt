@@ -1,1 +1,5 @@
 info: /home/rnaryshkin/IdeaProjects/cpp2uml/CppToUMLSamples/src/samples/sample04.cpp: Parsing file:
+info: /home/rnaryshkin/IdeaProjects/cpp2uml/CppToUMLSamples/src/samples/sample02.h: Parsing file:
+info: /home/rnaryshkin/IdeaProjects/cpp2uml/CppToUMLSamples/src/samples/sample03.cpp: Parsing file:
+info: /home/rnaryshkin/IdeaProjects/cpp2uml/CppToUMLSamples/src/samples/sample05.cpp: Parsing file:
+info: /home/rnaryshkin/IdeaProjects/cpp2uml/CppToUMLSamples/src/samples/sample01.cpp: Parsing file:

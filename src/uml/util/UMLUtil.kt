@@ -36,6 +36,16 @@ object UMLUtil {
         }
     }
 
+    fun getInterface(p: Package, name: String): Interface {
+        val owned: NamedElement? = p.getOwnedMember(name)
+        if (owned == null){
+            return p.createOwnedInterface(name)
+        }
+        else {
+            return owned as Interface
+        }
+    }
+
     fun returnModifier(modifierName: String?): VisibilityKind {
         when (modifierName) {
             "public" -> return VisibilityKind.PUBLIC_LITERAL
