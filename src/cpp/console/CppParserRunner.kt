@@ -60,9 +60,11 @@ fun main() {
     // Генерация кода на языке C++.
     //
     clearPackageDir(targetPathForCode)
-    model.nestedPackages.forEach { it.generateCpp(targetPathForCode); it.saveModel(targetPathForUMLModels) }
+    model.saveModel(targetPathForUMLModels)
+    model.nestedPackages.forEach { it.generateCpp(targetPathForCode) }
 }
-fun Package.saveModel(path: String?) {
+
+fun Model.saveModel(path: String?) {
     val uri = URI.createFileURI("$path/${name}.uml")
     val reg: Resource.Factory.Registry = Resource.Factory.Registry.INSTANCE
     val m: MutableMap<String, Any> = reg.getExtensionToFactoryMap()
