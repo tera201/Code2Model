@@ -7,8 +7,13 @@ import cpp.parser.generated.CPP14Parser
 import org.antlr.v4.runtime.CharStreams
 import org.antlr.v4.runtime.CommonTokenStream
 import org.antlr.v4.runtime.tree.ParseTreeWalker
+import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl
+import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl
 import org.eclipse.uml2.uml.Model
+import org.eclipse.uml2.uml.Package
 import org.eclipse.uml2.uml.UMLFactory
+import org.eclipse.emf.ecore.resource.Resource
+import org.eclipse.emf.common.util.URI
 import uml.IUMLBuilder
 import uml.builders.CPP14UMLBuilderPass1
 import uml.builders.CPP14UMLBuilderPass2
@@ -23,7 +28,8 @@ import java.io.IOException
 import java.io.PrintStream
 
 private lateinit var sourcePath: String
-private lateinit var targetPath: String
+private lateinit var targetPathForCode: String
+private lateinit var targetPathForUMLModels: String
 private lateinit var projectPath: String
 
 fun main() {
@@ -32,9 +38,11 @@ fun main() {
         val projectDir = File(projectPath).canonicalFile
 
         sourcePath = "$projectDir/CppToUMLSamples/src"
-        targetPath = "$projectDir/targetPath/src"
+        targetPathForCode = "$projectDir/targetPath/src"
+        targetPathForUMLModels = "$projectDir/targetPath/models"
 
-        File(targetPath).mkdirs()
+        File(targetPathForCode).mkdirs()
+        File(targetPathForUMLModels).mkdirs()
 
         val dumpDir = "$projectDir/dump-dir"
         File(dumpDir).mkdirs()
@@ -51,8 +59,20 @@ fun main() {
     //
     // Генерация кода на языке C++.
     //
-    clearPackageDir(targetPath)
-    model.nestedPackages.forEach { it.generateCpp(targetPath) }
+    clearPackageDir(targetPathForCode)
+    model.nestedPackages.forEach { it.generateCpp(targetPathForCode); it.saveModel(targetPathForUMLModels) }
+}
+fun Package.saveModel(path: String?) {
+    val uri = URI.createFileURI("$path/${name}.uml")
+    val reg: Resource.Factory.Registry = Resource.Factory.Registry.INSTANCE
+    val m: MutableMap<String, Any> = reg.getExtensionToFactoryMap()
+    m[Resource.Factory.Registry.DEFAULT_EXTENSION] = XMIResourceFactoryImpl()
+    val resource: Resource = ResourceSetImpl().createResource(uri)
+    resource.getContents().add(this)
+    try {
+        resource.save(null)
+    } catch (_: IOException) {
+    }
 }
 
 object UML2HTMLReporter {
