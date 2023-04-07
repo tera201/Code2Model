@@ -2,7 +2,6 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/CppToUML.iml" filepath="$PROJECT_DIR$/CppToUML.iml" />
       <module fileurl="file://$PROJECT_DIR$/CppToUMLSamples/CppToUMLSamples.iml" filepath="$PROJECT_DIR$/CppToUMLSamples/CppToUMLSamples.iml" />
       <module fileurl="file://$USER_HOME$/git/UMLPainter/UMLPainter.iml" filepath="$USER_HOME$/git/UMLPainter/UMLPainter.iml" />
     </modules>
