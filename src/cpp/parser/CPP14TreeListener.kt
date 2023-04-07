@@ -37,7 +37,7 @@ class CPP14TreeListener(
      */
     override fun enterNamespaceDefinition(ctx: CPP14Parser.NamespaceDefinitionContext?) {
         val packageName = ctx!!.Identifier().text
-        umlBuilder.startPackage(packageName)
+        umlBuilder.startPackage(packageName, ctx.text?.toByteArray()?.size)
     }
 
     override fun exitNamespaceDefinition(ctx: CPP14Parser.NamespaceDefinitionContext?) {
@@ -52,7 +52,7 @@ class CPP14TreeListener(
      */
     override fun enterOriginalNamespaceName(ctx: OriginalNamespaceNameContext?) {
         val packageName = ctx!!.Identifier().text
-        umlBuilder.startPackage(packageName)
+        umlBuilder.startPackage(packageName, 0)
     }
 
     override fun exitOriginalNamespaceName(ctx: OriginalNamespaceNameContext?) {
@@ -92,6 +92,7 @@ class CPP14TreeListener(
                 else umlBuilder.startClass(className, classParentName, classParentModyfier, isAbstract = classType == ClassType.ABSTRACT)
             }
         }
+        umlBuilder.addClassSize(ctx?.text?.toByteArray()?.size)
     }
 
     override fun exitClassSpecifier(ctx: CPP14Parser.ClassSpecifierContext?) {

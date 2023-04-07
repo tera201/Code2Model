@@ -29,7 +29,10 @@ object UMLUtil {
     fun getClass(p: Package, name: String): Class {
         val owned: NamedElement? = p.getOwnedMember(name)
         if (owned == null){
-            return p.createOwnedClass(name, false)
+            val newClass = p.createOwnedClass(name, false)
+            newClass.createOwnedComment().body = "0"
+            newClass.createOwnedComment().body = "0"
+            return newClass
         }
         else {
             return owned as Class
@@ -39,7 +42,10 @@ object UMLUtil {
     fun getInterface(p: Package, name: String): Interface {
         val owned: NamedElement? = p.getOwnedMember(name)
         if (owned == null){
-            return p.createOwnedInterface(name)
+            val newInterface = p.createOwnedInterface(name)
+            newInterface.createOwnedComment().body = "0"
+            newInterface.createOwnedComment().body = "0"
+            return newInterface
         }
         else {
             return owned as Interface

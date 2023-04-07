@@ -22,10 +22,11 @@ class CPP14UMLBuilderPass1(override val model: Model, val mh: IMessageHandler) :
         model.name = modelName
     }
 
-    override fun startPackage(packageName: String) {
+    override fun startPackage(packageName: String, byteSize: Int?) {
         if (packageStack.empty()) packageStack.push(packageName)
         else packageStack.push("${packageStack.peek()}.$packageName")
         currentPackage = UMLUtil.getPackage(currentPackage, packageStack.peek())
+        currentPackage.createOwnedComment()?.setBody(byteSize.toString())
     }
 
     override fun endPackage() {
@@ -56,4 +57,8 @@ class CPP14UMLBuilderPass1(override val model: Model, val mh: IMessageHandler) :
     override fun startMethod(funType: String, funName: String, typeList: EList<String>, argList: EList<String>, isVirtual: Boolean): Operation? = null
     override fun addParameter(parName: String, typeName: String) {}
     override fun endMethod() {}
+
+    override fun addClassSize(byteSize: Int?) {
+//        TODO("Not yet implemented")
+    }
 }

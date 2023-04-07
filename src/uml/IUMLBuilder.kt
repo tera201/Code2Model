@@ -13,7 +13,7 @@ interface IUMLBuilder {
 
     fun setName(modelName: String)
 
-    fun startPackage(packageName: String)
+    fun startPackage(packageName: String, byteSize: Int?)
     fun endPackage()
 
     fun startClass(className: String, parentName: String? = null, parentModifier: String? = null, isAbstract: Boolean = false)
@@ -27,4 +27,5 @@ interface IUMLBuilder {
     fun startMethod(funType: String, funName: String, typeList: EList<String>, argList: EList<String>, isVirtual: Boolean): Operation?
     fun addParameter(parName: String, typeName: String)
     fun endMethod()
+    fun addClassSize(byteSize: Int?)
 }

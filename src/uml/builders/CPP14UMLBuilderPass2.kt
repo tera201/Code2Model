@@ -17,7 +17,7 @@ class CPP14UMLBuilderPass2(override val model: Model, val mh: IMessageHandler) :
 
     override fun setName(modelName: String) {}
 
-    override fun startPackage(packageName: String) {
+    override fun startPackage(packageName: String, byteSize: Int?) {
         if (packageStack.empty()) packageStack.push(packageName)
         else packageStack.push("${packageStack.peek()}.$packageName")
         currentPackage = UMLUtil.getPackage(model, packageStack.peek())
@@ -84,7 +84,12 @@ class CPP14UMLBuilderPass2(override val model: Model, val mh: IMessageHandler) :
             op = current.createOwnedOperation(funName, argList, types)
         }
         if (isVirtual) op?.setIsAbstract(isVirtual);
+        current?.ownedComments!![1].setBody((current?.ownedComments!![1].body.toInt() + 1).toString())
         return op
+    }
+
+    override fun  addClassSize(byteSize: Int?) {
+        currentOwner?.ownedComments?.get(0)?.setBody((currentOwner!!.ownedComments[0].body.toInt() + byteSize!!).toString())
     }
     override fun addParameter(parName: String, typeName: String) {}
     override fun endMethod() {}
