@@ -1,11 +1,16 @@
 package util
 
+import cpp.console.CppParserRunner
+import org.apache.logging.log4j.LogManager
+import org.apache.logging.log4j.Logger
 import java.io.IOException
 import java.nio.file.FileVisitOption
 import java.nio.file.Files
 import java.nio.file.Paths
 
 object FilesUtil {
+
+    private val log: Logger = LogManager.getLogger(FilesUtil::class.java)
     fun walkRes(root: String, fileFilter: (String) -> Boolean, action: (String) -> Unit) {
         val start = Paths.get(root)
         try {
@@ -16,8 +21,7 @@ object FilesUtil {
                 .forEach(action)
             stream.close()
         } catch (e: IOException) {
-            // TODO Auto-generated catch block
-            e.printStackTrace()
+            log.error("Parsing fail: $e")
         }
     }
 }
