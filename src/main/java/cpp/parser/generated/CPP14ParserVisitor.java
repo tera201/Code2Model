@@ -141,7 +141,7 @@ public interface CPP14ParserVisitor<T> extends ParseTreeVisitor<T> {
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitNewExpression(CPP14Parser.NewExpressionContext ctx);
+	T visitNewExpression(CPP14Parser.NewExpression_Context ctx);
 	/**
 	 * Visit a parse tree produced by {@link CPP14Parser#newPlacement}.
 	 * @param ctx the parse tree
@@ -159,7 +159,7 @@ public interface CPP14ParserVisitor<T> extends ParseTreeVisitor<T> {
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitNewDeclarator(CPP14Parser.NewDeclaratorContext ctx);
+	T visitNewDeclarator(CPP14Parser.NewDeclarator_Context ctx);
 	/**
 	 * Visit a parse tree produced by {@link CPP14Parser#noPointerNewDeclarator}.
 	 * @param ctx the parse tree
@@ -171,7 +171,7 @@ public interface CPP14ParserVisitor<T> extends ParseTreeVisitor<T> {
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitNewInitializer(CPP14Parser.NewInitializerContext ctx);
+	T visitNewInitializer(CPP14Parser.NewInitializer_Context ctx);
 	/**
 	 * Visit a parse tree produced by {@link CPP14Parser#deleteExpression}.
 	 * @param ctx the parse tree
@@ -411,7 +411,7 @@ public interface CPP14ParserVisitor<T> extends ParseTreeVisitor<T> {
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitEmptyDeclaration(CPP14Parser.EmptyDeclarationContext ctx);
+	T visitEmptyDeclaration(CPP14Parser.EmptyDeclaration_Context ctx);
 	/**
 	 * Visit a parse tree produced by {@link CPP14Parser#attributeDeclaration}.
 	 * @param ctx the parse tree

@@ -1,9 +1,9 @@
-package cpp.console
+package java20.console
 
 import cpp.parser.CPP14ErrorListener
-import cpp.parser.CPP14TreeListener
-import cpp.parser.generated.CPP14Lexer
-import cpp.parser.generated.CPP14Parser
+import java20.parser.Java20TreeListener
+import java20.parser.generated.Java20Lexer
+import java20.parser.generated.Java20Parser
 import org.antlr.v4.runtime.CharStreams
 import org.antlr.v4.runtime.CommonTokenStream
 import org.antlr.v4.runtime.tree.ParseTreeWalker
@@ -29,11 +29,11 @@ import java.io.IOException
 import java.io.PrintStream
 
 
-class CppParserRunner() {
+class JavaParserRunner() {
 
-    private val log: Logger = LogManager.getLogger(CppParserRunner::class.java)
+    private val log: Logger = LogManager.getLogger(JavaParserRunner::class.java)
 
-    class CppParserRunner() {}
+    class JavaParserRunner() {}
 
     fun collectFiles(vararg paths: String): ArrayList<String> {
         log.info("Collecting files from ${paths.toList()}")
@@ -81,15 +81,15 @@ class CppParserRunner() {
             // Входящий файл с тексом в виде кода считывается как поток символов
             val input = CharStreams.fromFileName(fileName)
 
-            // Далее класса CPP14Lexer позволяет сгруппировать символы
+            // Далее класса Java20Lexer позволяет сгруппировать символы
             // и определить тип лексем (идентификатор, число, строка и т.п.).
-            val lexer = CPP14Lexer(input)
+            val lexer = Java20Lexer(input)
 
             // Далее код разбивается на токены
             val tokens = CommonTokenStream(lexer)
 
             // Код подготавливается для использования далее в построении дерева разбора
-            val parser = CPP14Parser(tokens)
+            val parser = Java20Parser(tokens)
 
             // Код проверяется на наличие синтаксических ошибок
             val errorListener = CPP14ErrorListener(messageHandler)
@@ -97,9 +97,9 @@ class CppParserRunner() {
 
             // Позволять определить вложенность вида родитель -
             // потомок (класс - член класса/метод)
-            val tree = parser.translationUnit()
+            val tree = parser.compilationUnit()
             val walker = ParseTreeWalker()
-            val listener = CPP14TreeListener(parser, umlBuilder)
+            val listener = Java20TreeListener(parser, umlBuilder)
             walker.walk(listener, tree)
         } catch (e: Exception) {
             e.printStackTrace()
@@ -109,14 +109,14 @@ class CppParserRunner() {
     fun parseFile(fileName: String, mh: IMessageHandler) {
         try {
             val input = CharStreams.fromFileName(fileName)
-            val lexer = CPP14Lexer(input)
+            val lexer = Java20Lexer(input)
             val tokens = CommonTokenStream(lexer)
-            val parser = CPP14Parser(tokens)
+            val parser = Java20Parser(tokens)
 
             val errorListener = CPP14ErrorListener(mh)
             parser.addErrorListener(errorListener)
 
-            val tree = parser.translationUnit()
+            val tree = parser.compilationUnit()
 
             val ps = PrintStream("$fileName.txt")
             ps.println(tree.toStringTree(parser))
@@ -132,7 +132,9 @@ fun main() {
     var projectPath = "."
     val projectDir = File(projectPath).canonicalFile
 
-    var sourcePath = "$projectDir/CppToUMLSamples/src/snark-master"
+
+    var sourcePath = "$projectDir/JavaToUMLSamples/src/samples"
+//    var sourcePath = "$projectDir/CppToUMLSamples/src/snark-master"
 //    var sourcePath = "$projectDir/CppToUMLSamples/src/cpprestsdk-master"
     var targetPathForCode = "$projectDir/targetPath/src"
     var targetPathForUMLModels = "$projectDir/targetPath/models"
@@ -147,7 +149,7 @@ fun main() {
         e.printStackTrace()
     }
 
-    var runner = CppParserRunner();
+    var runner = JavaParserRunner();
 
     System.out.println(sourcePath)
 
@@ -186,7 +188,4 @@ object UML2HTMLReporter {
 }
 
 private fun test(fileName: String) =
-    fileName.endsWith(".h") or
-            fileName.endsWith(".c") or
-            fileName.endsWith(".hpp") or
-            fileName.endsWith(".cpp")
+    fileName.endsWith(".java")

@@ -165,7 +165,7 @@ public class CPP14ParserBaseVisitor<T> extends AbstractParseTreeVisitor<T> imple
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitNewExpression(CPP14Parser.NewExpressionContext ctx) { return visitChildren(ctx); }
+	@Override public T visitNewExpression(CPP14Parser.NewExpression_Context ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
@@ -186,7 +186,7 @@ public class CPP14ParserBaseVisitor<T> extends AbstractParseTreeVisitor<T> imple
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitNewDeclarator(CPP14Parser.NewDeclaratorContext ctx) { return visitChildren(ctx); }
+	@Override public T visitNewDeclarator(CPP14Parser.NewDeclarator_Context ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
@@ -200,7 +200,7 @@ public class CPP14ParserBaseVisitor<T> extends AbstractParseTreeVisitor<T> imple
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitNewInitializer(CPP14Parser.NewInitializerContext ctx) { return visitChildren(ctx); }
+	@Override public T visitNewInitializer(CPP14Parser.NewInitializer_Context ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
@@ -480,7 +480,7 @@ public class CPP14ParserBaseVisitor<T> extends AbstractParseTreeVisitor<T> imple
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitEmptyDeclaration(CPP14Parser.EmptyDeclarationContext ctx) { return visitChildren(ctx); }
+	@Override public T visitEmptyDeclaration(CPP14Parser.EmptyDeclaration_Context ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *

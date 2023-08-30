@@ -25,7 +25,7 @@ class CPP14UMLBuilderPass1(override val model: Model, val mh: IMessageHandler) :
     override fun startPackage(packageName: String, byteSize: Int?) {
         if (packageStack.empty()) packageStack.push(packageName)
         else packageStack.push("${packageStack.peek()}.$packageName")
-        currentPackage = UMLUtil.getPackage(currentPackage, packageStack.peek())
+        currentPackage = UMLUtil.getPackage(currentPackage, packageStack.peek().split(".").get(packageStack.size - 1))
         currentPackage.createOwnedComment()?.setBody(byteSize.toString())
     }
 
