@@ -1,4 +1,5 @@
-package java20.parser.generated;// Generated from Java20Parser.g4 by ANTLR 4.13.0
+// Generated from Java20Parser.g4 by ANTLR 4.13.0
+package java20.parser.generated;
 
 import org.antlr.v4.runtime.ParserRuleContext;
 import org.antlr.v4.runtime.tree.ErrorNode;
