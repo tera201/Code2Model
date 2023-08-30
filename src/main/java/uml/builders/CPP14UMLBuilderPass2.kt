@@ -84,7 +84,7 @@ class CPP14UMLBuilderPass2(override val model: Model, val mh: IMessageHandler) :
             op = current.createOwnedOperation(funName, argList, types)
         }
         if (isVirtual) op?.setIsAbstract(isVirtual);
-        current?.ownedComments!![1].setBody((current?.ownedComments!![1].body.toInt() + 1).toString())
+        current.ownedComments!![1].setBody((current.ownedComments!![1].body.toInt() + 1).toString())
         return op
     }
 

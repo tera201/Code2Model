@@ -133,9 +133,8 @@ fun main() {
     val projectDir = File(projectPath).canonicalFile
 
 
-    var sourcePath = "$projectDir/JavaToUMLSamples/src/samples"
-//    var sourcePath = "$projectDir/CppToUMLSamples/src/snark-master"
-//    var sourcePath = "$projectDir/CppToUMLSamples/src/cpprestsdk-master"
+//    var sourcePath = "$projectDir/JavaToUMLSamples/src/samples"
+    var sourcePath = "$projectDir/JavaToUMLSamples/src/JavaFXUMLGraph"
     var targetPathForCode = "$projectDir/targetPath/src"
     var targetPathForUMLModels = "$projectDir/targetPath/models"
 

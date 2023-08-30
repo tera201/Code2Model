@@ -65,12 +65,12 @@ class Java20TreeListener(
 //    }
 
     override fun enterClassDeclaration(ctx: Java20Parser.ClassDeclarationContext?) {
-        val className = ctx!!.normalClassDeclaration().typeIdentifier().text
+        val className = ctx!!.normalClassDeclaration()?.typeIdentifier()?.text
         var classType = ClassType.DEFAULT
 
         // Определение типа класса (стандартный, абстрактный, интерфейс)
-        val isAbstract = ctx.normalClassDeclaration().classModifier().stream().anyMatch{it.text == "abstract"}
-        if (isAbstract) classType = ClassType.ABSTRACT
+        val isAbstract = ctx.normalClassDeclaration()?.classModifier()?.stream()?.anyMatch{it.text == "abstract"}
+        if (isAbstract != null && isAbstract) classType = ClassType.ABSTRACT
 //        if (members != null) {
 //            classType = ClassType.INTERFACE
 //            if (!members.memberdeclaration().isEmpty()) {
@@ -85,8 +85,10 @@ class Java20TreeListener(
 //        }
 
         // Добавление класса\интерфейса в модель
-        if (classType == ClassType.INTERFACE) umlBuilder.startInterface(className)
-        else umlBuilder.startClass(className, isAbstract = classType == ClassType.ABSTRACT)
+        if (className != null) {
+            if (classType == ClassType.INTERFACE) umlBuilder.startInterface(className)
+            else umlBuilder.startClass(className, isAbstract = classType == ClassType.ABSTRACT)
+        }
 
 //        // Добавление родителей классу в моделе
 //        if (ctx.normalClassDeclaration().baseClause() != null) {
@@ -101,6 +103,33 @@ class Java20TreeListener(
     }
 
     override fun exitClassDeclaration(ctx: Java20Parser.ClassDeclarationContext?) {
+    }
+
+    override fun enterInterfaceDeclaration(ctx: Java20Parser.InterfaceDeclarationContext?) {
+        val interfaceName = ctx!!.normalInterfaceDeclaration()?.typeIdentifier()?.text
+        if (interfaceName != null) umlBuilder.startInterface(interfaceName)
+    }
+
+    override fun enterClassMemberDeclaration(ctx: Java20Parser.ClassMemberDeclarationContext?) {
+        val typeName = ctx?.fieldDeclaration()?.unannType()?.text
+        val varName = ctx?.fieldDeclaration()?.variableDeclaratorList()?.text
+        if (typeName != null && varName != null) umlBuilder.addAttribute(varName, typeName)
+    }
+
+    override fun enterMethodHeader(ctx: Java20Parser.MethodHeaderContext?) {
+        val declarator = ctx?.methodDeclarator();
+        val funName = declarator?.Identifier()?.text
+        val funType = ctx?.result()?.text
+        val typeList: BasicEList<String> = BasicEList()
+        val argNameList: BasicEList<String> = BasicEList()
+        if (declarator?.formalParameterList()?.formalParameter() != null) {
+            declarator.formalParameterList().formalParameter()?.forEach { if (it.unannType() != null) {
+                typeList.add(it.unannType().text);
+                argNameList.add(it.variableDeclaratorId().text) }
+            }
+        }
+        if (funName != null && funType != null) umlBuilder.startMethod(funType, funName, typeList,
+            argNameList, false)
     }
 
 //    override fun enterMemberdeclaration(ctx: Java20Parser.MemberdeclarationContext?) {

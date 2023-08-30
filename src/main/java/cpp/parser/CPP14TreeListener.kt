@@ -103,25 +103,25 @@ class CPP14TreeListener(
         if (ctx!!.functionDefinition() != null) return;
         if (ctx.memberDeclaratorList() != null) {
             // Добавить атрибуты в модель
-            if (ctx.declSpecifierSeq().childCount == 1) {
-                val type = ctx.declSpecifierSeq().text
-                val childs = ctx.memberDeclaratorList()!!.memberDeclarator()
+            if ((ctx.declSpecifierSeq()?.childCount ?: 0) == 1) {
+                val type = ctx.declSpecifierSeq()?.text ?: ""
+                val childs = ctx.memberDeclaratorList()?.memberDeclarator() ?: listOf()
                 for (ind in childs) {
                     umlBuilder.addAttribute(ind.text, type)
                 }
             }
             // Добавление виртуальной функции
             else {
-                val type = ctx.declSpecifierSeq().declSpecifier().get(1).text
-                val declarator = ctx.memberDeclaratorList()!!.memberDeclarator().get(0).declarator()
-                enterfunction(declarator, type, true)
+                val type = ctx.declSpecifierSeq()?.declSpecifier()?.get(1)?.text ?: ""
+                val declarator = ctx.memberDeclaratorList()?.memberDeclarator()?.get(0)?.declarator()
+                if (declarator != null) enterfunction(declarator, type, true)
             }
         }
     }
 
     override fun enterFunctionDefinition(ctx: CPP14Parser.FunctionDefinitionContext?) {
-        val size = ctx!!.declSpecifierSeq().declSpecifier().size
-        val funType = ctx.declSpecifierSeq().declSpecifier(size - 1).text
+        val size = ctx!!.declSpecifierSeq()?.declSpecifier()?.size ?: 0
+        val funType = ctx.declSpecifierSeq()?.declSpecifier()?.getOrNull(size - 1)?.text ?: ""
         val declarator = ctx.declarator()
         enterfunction(declarator, funType, size == 2)
     }
@@ -129,8 +129,8 @@ class CPP14TreeListener(
     private fun enterfunction(declarator: CPP14Parser.DeclaratorContext, type:String, isVirtual: Boolean){
         val typeList: BasicEList<String> = BasicEList()
         val argNameList: BasicEList<String> = BasicEList()
-        val funName = declarator.pointerDeclarator().noPointerDeclarator().noPointerDeclarator().text
-        val parameterAndQualifiers = declarator.pointerDeclarator().noPointerDeclarator().parametersAndQualifiers().parameterDeclarationClause()
+        val funName = declarator.pointerDeclarator()?.noPointerDeclarator()?.noPointerDeclarator()?.text ?: ""
+        val parameterAndQualifiers = declarator.pointerDeclarator()?.noPointerDeclarator()?.parametersAndQualifiers()?.parameterDeclarationClause()
         if (parameterAndQualifiers != null){
             val args = parameterAndQualifiers.parameterDeclarationList().parameterDeclaration()
             for (arg in args) {
