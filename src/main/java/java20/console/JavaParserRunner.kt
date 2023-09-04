@@ -27,6 +27,7 @@ import util.messages.IMessageHandler
 import java.io.File
 import java.io.IOException
 import java.io.PrintStream
+import javax.swing.JTextArea
 
 
 class JavaParserRunner() {
@@ -44,10 +45,15 @@ class JavaParserRunner() {
         return cppFiles
     }
 
+
+    fun buildModel(modelName: String, javaFiles: ArrayList<String>): Model  {
+        return buildModel(modelName, javaFiles, null)
+    }
+
     /**
      * Создать именованную модель для заданных файлов.
      */
-    fun buildModel(modelName: String, cppFiles: ArrayList<String>): Model {
+    fun buildModel(modelName: String, javaFiles: ArrayList<String>, logJTextArea: JTextArea?): Model {
         val projectPath = "."
         log.info("Building model")
         val model = UMLFactory.eINSTANCE.createModel()
@@ -56,21 +62,31 @@ class JavaParserRunner() {
         //
         // 1-й проход. Добавление в UML-модель пакетов и типов данных.
         //
+        if (logJTextArea != null) logJTextArea.append("1st: adding packages and data types to model\n")
         log.info("1st: adding packages and data types to model")
         val mh1 = FileMessageHandler("$projectPath/messagesPass1.txt")
         val umlBuilderPass1 = CPP14UMLBuilderPass1(model, mh1)
-        cppFiles.forEach { parseFile(it, mh1, umlBuilderPass1) }
+        if (logJTextArea != null)
+        javaFiles.forEach { parseFile(it, mh1, umlBuilderPass1, logJTextArea) }
+        else javaFiles.forEach { parseFile(it, mh1, umlBuilderPass1) }
 
         //
         // 2-й проход. Добавление в UML-модель элементов использующих пакеты и типы
         // данных.
         //
+        if (logJTextArea != null) logJTextArea.append("2st: adding elements to model\n")
         log.info("2st: adding elements to model")
         val mh2 = FileMessageHandler("$projectPath/messagesPass2.txt")
         val umlBuilderPass2 = CPP14UMLBuilderPass2(model, mh2)
-        cppFiles.forEach { parseFile(it, mh2, umlBuilderPass2) }
+        if (logJTextArea != null)
+        javaFiles.forEach { parseFile(it, mh2, umlBuilderPass2, logJTextArea) }
+        else javaFiles.forEach { parseFile(it, mh2, umlBuilderPass2) }
 
         return model
+    }
+
+    private fun parseFile(fileName: String, messageHandler: IMessageHandler, umlBuilder: IUMLBuilder, logJTextArea: JTextArea) {
+        logJTextArea.append("Parsing file: $fileName\n")
     }
 
     private fun parseFile(fileName: String, messageHandler: IMessageHandler, umlBuilder: IUMLBuilder) {
@@ -134,7 +150,9 @@ fun main() {
 
 
 //    var sourcePath = "$projectDir/JavaToUMLSamples/src/samples"
-    var sourcePath = "$projectDir/JavaToUMLSamples/src/JavaFXUMLGraph"
+//    var sourcePath = "$projectDir/JavaToUMLSamples/src/JavaFXUMLGraph"
+    var sourcePath = "$projectDir/JavaToUMLSamples/src/a-foundation-master"
+//    var sourcePath = "$projectDir/JavaToUMLSamples/src/JavaFXUMLGraph/src/main/java/umlgraph/graphview/utils/"
     var targetPathForCode = "$projectDir/targetPath/src"
     var targetPathForUMLModels = "$projectDir/targetPath/models"
 
@@ -142,8 +160,8 @@ fun main() {
         File(targetPathForCode).mkdirs()
         File(targetPathForUMLModels).mkdirs()
 
-        val dumpDir = "$projectDir/dump-dir"
-        File(dumpDir).mkdirs()
+//        val dumpDir = "$projectDir/dump-dir"
+//        File(dumpDir).mkdirs()
     } catch (e: IOException) {
         e.printStackTrace()
     }
@@ -152,14 +170,14 @@ fun main() {
 
     System.out.println(sourcePath)
 
-    // Собираем файлы на языке C++.
-    val cppFiles = runner.collectFiles(sourcePath)
+    // Collect java files.
+    val javaFiles = runner.collectFiles(sourcePath)
 
-    // Строим UML-модель для этих файлов.
-    val model =  runner.buildModel("CppSampleModel", cppFiles)
+    // Build UML-model for these files.
+    val model =  runner.buildModel("JavaSampleModel", javaFiles)
 
     //
-    // Генерация кода на языке C++.
+    // Generate C++ code.
     //
     clearPackageDir(targetPathForCode)
     model.saveModel(targetPathForUMLModels)

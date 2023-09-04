@@ -22,12 +22,9 @@ PROVIDES: 'provides';
 RECORD: 'record';
 REQUIRES: 'requires';
 SEALED: 'sealed';
-TO: 'to';
 TRANSITIVE: 'transitive';
 USES: 'uses';
 VAR: 'var';
-WITH: 'with';
-YIELD: 'yield';
 
 
 

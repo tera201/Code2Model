@@ -2309,18 +2309,6 @@ public class Java20ParserBaseListener implements Java20ParserListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterYieldStatement(Java20Parser.YieldStatementContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitYieldStatement(Java20Parser.YieldStatementContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
 	@Override public void enterPattern(Java20Parser.PatternContext ctx) { }
 	/**
 	 * {@inheritDoc}

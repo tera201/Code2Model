@@ -1919,16 +1919,6 @@ public interface Java20ParserListener extends ParseTreeListener {
 	 */
 	void exitVariableAccess(Java20Parser.VariableAccessContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link Java20Parser#yieldStatement}.
-	 * @param ctx the parse tree
-	 */
-	void enterYieldStatement(Java20Parser.YieldStatementContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link Java20Parser#yieldStatement}.
-	 * @param ctx the parse tree
-	 */
-	void exitYieldStatement(Java20Parser.YieldStatementContext ctx);
-	/**
 	 * Enter a parse tree produced by {@link Java20Parser#pattern}.
 	 * @param ctx the parse tree
 	 */

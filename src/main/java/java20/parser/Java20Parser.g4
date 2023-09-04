@@ -280,10 +280,10 @@ moduleDeclaration
 	
 moduleDirective
         : 'requires' requiresModifier*        moduleName                        ';'
-        | 'exports'  packageName       ('to' moduleName ( ',' moduleName )* )? ';'
-        | 'opens'    packageName       ('to' moduleName ( ',' moduleName )* )? ';'
+        | 'exports'  packageName       (( ',' moduleName )* )? ';'
+        | 'opens'    packageName       (( ',' moduleName )* )? ';'
 	| 'uses'      typeName                                                   ';'
-        | 'provides' typeName           'with' typeName  ( ',' typeName )*      ';'
+        | 'provides' typeName           ( ',' typeName )*      ';'
         ;
 	
 requiresModifier
@@ -890,7 +890,6 @@ statementWithoutTrailingSubstatement
         | synchronizedStatement
         | throwStatement
         | tryStatement
-        | yieldStatement
         ;
 
 
@@ -1139,14 +1138,6 @@ resource
 variableAccess
         : expressionName
         | fieldAccess
-        ;
-	
-
-// Paragraph 14.21
-//----------------
-
-yieldStatement
-        : 'yield' expression ';'
         ;
 	
 
