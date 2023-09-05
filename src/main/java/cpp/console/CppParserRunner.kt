@@ -18,7 +18,7 @@ import org.eclipse.uml2.uml.UMLFactory
 import uml.IUMLBuilder
 import uml.builders.CPP14UMLBuilderPass1
 import uml.builders.CPP14UMLBuilderPass2
-import uml.cpp.generateCpp
+import uml.decompiler.generateCpp
 import uml.util.clearPackageDir
 import util.FilesUtil
 import util.messages.FileMessage

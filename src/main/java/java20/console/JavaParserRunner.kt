@@ -18,7 +18,8 @@ import org.eclipse.uml2.uml.UMLFactory
 import uml.IUMLBuilder
 import uml.builders.CPP14UMLBuilderPass1
 import uml.builders.CPP14UMLBuilderPass2
-import uml.cpp.generateCpp
+import uml.decompiler.generateCpp
+import uml.decompiler.toKotlin
 import uml.util.clearPackageDir
 import util.FilesUtil
 import util.messages.FileMessage
@@ -81,12 +82,12 @@ class JavaParserRunner() {
         if (logJTextArea != null)
         javaFiles.forEach { parseFile(it, mh2, umlBuilderPass2, logJTextArea) }
         else javaFiles.forEach { parseFile(it, mh2, umlBuilderPass2) }
-
         return model
     }
 
     private fun parseFile(fileName: String, messageHandler: IMessageHandler, umlBuilder: IUMLBuilder, logJTextArea: JTextArea) {
         logJTextArea.append("Parsing file: $fileName\n")
+        parseFile(fileName, messageHandler, umlBuilder)
     }
 
     private fun parseFile(fileName: String, messageHandler: IMessageHandler, umlBuilder: IUMLBuilder) {
@@ -182,10 +183,21 @@ fun main() {
     clearPackageDir(targetPathForCode)
     model.saveModel(targetPathForUMLModels)
     model.nestedPackages.forEach { it.generateCpp(targetPathForCode) }
+
+    //
+    // UML --> Kotlin
+    //
+    val kotlinPath = File(".")
+        .absolutePath
+        .replace(".", "generated/kotlin/${model.name}")
+    File(kotlinPath).mkdirs()
+
+    model.toKotlin(kotlinPath)
+
 }
 
-fun Model.saveModel(path: String?) {
-    val uri = URI.createFileURI("$path/${name}.uml")
+fun Model.saveModel(file: String?) {
+    val uri = URI.createFileURI("$file")
     val reg: Resource.Factory.Registry = Resource.Factory.Registry.INSTANCE
     val m: MutableMap<String, Any> = reg.getExtensionToFactoryMap()
     m[Resource.Factory.Registry.DEFAULT_EXTENSION] = XMIResourceFactoryImpl()
@@ -204,5 +216,9 @@ object UML2HTMLReporter {
     }
 }
 
+//TODO: kick large files
 private fun test(fileName: String) =
-    fileName.endsWith(".java")
+    fileName.endsWith(".java") and
+            !fileName.contains("/test/") and
+            !fileName.contains("/jvm/") and
+            !fileName.contains("benchmark")

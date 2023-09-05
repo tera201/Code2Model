@@ -1,4 +1,4 @@
-package uml.cpp
+package uml.decompiler
 
 import org.eclipse.uml2.uml.*
 import uml.util.createFile
