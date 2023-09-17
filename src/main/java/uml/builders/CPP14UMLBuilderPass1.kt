@@ -36,9 +36,14 @@ class CPP14UMLBuilderPass1(override val model: Model, val mh: IMessageHandler) :
         else model
     }
 
-    override fun startClass(className: String, parentName: String?, parentModifier: String?, isAbstract: Boolean) {
+    override fun startClass(
+        className: String, extendName: String?, modifiers: List<String>?, isAbstract: Boolean,
+        interfaceList: List<String>?, isNested: Boolean?
+    ) {
+        if (isNested == null || isNested == false) {
         currentClass = UMLUtil.getClass(currentPackage, className)
         currentClass?.setIsAbstract(isAbstract)
+        }
     }
 
     override fun endClass() {}

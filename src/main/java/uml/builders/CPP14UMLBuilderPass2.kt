@@ -3,6 +3,7 @@ package uml.builders
 import org.eclipse.emf.common.util.BasicEList
 import org.eclipse.emf.common.util.EList
 import org.eclipse.uml2.uml.*
+import org.eclipse.uml2.uml.internal.impl.UMLFactoryImpl
 import uml.IUMLBuilder
 import uml.util.UMLUtil
 import util.messages.IMessageHandler
@@ -11,9 +12,11 @@ import java.util.*
 class CPP14UMLBuilderPass2(override val model: Model, val mh: IMessageHandler) : IUMLBuilder {
     private var currentPackage: Package = model
     private var currentClass: Class? = null
+    private var currentNestedClass: Class? = null
     private var currentInterface: Interface? = null
     private var currentOwner: NamedElement? = null
     private var packageStack: Stack<String> = Stack()
+    private val umlFactoryImpl = UMLFactoryImpl()
 
     override fun setName(modelName: String) {}
 
@@ -30,15 +33,39 @@ class CPP14UMLBuilderPass2(override val model: Model, val mh: IMessageHandler) :
         else model
     }
 
-    override fun startClass(className: String, parentName: String?, parentModifier: String?, isAbstract: Boolean) {
-        currentClass = UMLUtil.getClass(currentPackage, className)
-        currentClass?.setIsAbstract(isAbstract)
-        if (parentName != null) {
-            val parent: Class = UMLUtil.getClass(currentPackage, parentName)
-            parent.setVisibility(UMLUtil.returnModifier(parentModifier))
-            currentClass!!.createGeneralization(parent)
+    override fun startClass(
+        className: String, extendName: String?, modifiers: List<String>?, isAbstract: Boolean,
+        interfaceList: List<String>?, isNested: Boolean?
+    ) {
+        if (isNested == null || isNested == false) {
+            currentClass = UMLUtil.getClass(currentPackage, className)
+            if (modifiers != null)
+            currentClass?.setIsAbstract(isAbstract)
+            if (extendName != null) {
+                val parent: Class = umlFactoryImpl.createClass()
+                parent.name = extendName
+//                parent.setVisibility(UMLUtil.returnModifier(modifiers))
+                currentClass!!.createGeneralization(parent)
+            }
+            if (interfaceList != null) {
+                interfaceList.forEach {
+                    val interfaceRealization = umlFactoryImpl.createInterfaceRealization()
+                    val interfaceVar = umlFactoryImpl.createInterface()
+                    interfaceVar.name = it
+                    interfaceRealization.contract = interfaceVar
+                    currentClass?.interfaceRealizations?.add(interfaceRealization)
+                }
+            }
+            currentOwner = currentPackage.getOwnedMember(className)
+        } else if (isNested == true) {
+            val nestedClass: Class = umlFactoryImpl.createClass()
+            nestedClass.createOwnedComment().body = "0"
+            nestedClass.createOwnedComment().body = "0"
+            nestedClass.name = className
+            currentNestedClass = nestedClass
+            currentClass?.nestedClassifiers?.add(nestedClass)
+            currentOwner = currentPackage.getOwnedMember(className)
         }
-        currentOwner = currentPackage.getOwnedMember(className)
     }
 
     override fun endClass() {}
@@ -64,7 +91,10 @@ class CPP14UMLBuilderPass2(override val model: Model, val mh: IMessageHandler) :
             property.type = type
             property.name = typeName
             if (currentOwner?.name  == currentClass?.name) currentClass?.createOwnedAttribute(attributeName, type)
-            else currentInterface?.createOwnedAttribute(attributeName, type)
+            else if (currentOwner?.name  == currentInterface?.name) currentInterface?.
+                createOwnedAttribute(attributeName, type)
+            else if (currentOwner == null && currentNestedClass != null) currentNestedClass?.
+                createOwnedAttribute(attributeName, type)
         }
         return property
     }
@@ -76,15 +106,16 @@ class CPP14UMLBuilderPass2(override val model: Model, val mh: IMessageHandler) :
         for (i in typeList){
             types.add(UMLUtil.getType(model, i))
         }
-        val current = if (currentOwner is Class) currentOwner as Class else currentOwner as Interface
+        val current = if (currentOwner is Class) currentOwner as Class else if (currentOwner is Interface) currentOwner as Interface else currentNestedClass
         if (type != null) {
-            op = current.createOwnedOperation(funName, argList, types, type)
+            op = current?.createOwnedOperation(funName, argList, types, type)
         }
         else {
-            op = current.createOwnedOperation(funName, argList, types)
+            op = current?.createOwnedOperation(funName, argList, types)
         }
         if (isVirtual) op?.setIsAbstract(isVirtual);
-        current.ownedComments!![1].setBody((current.ownedComments!![1].body.toInt() + 1).toString())
+        current?.ownedComments!![1].setBody((current.ownedComments!![1].body.toInt() + 1).toString())
+//        }
         return op
     }
 

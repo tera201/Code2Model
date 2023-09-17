@@ -141,8 +141,8 @@ fun main() {
         File(targetPathForCode).mkdirs()
         File(targetPathForUMLModels).mkdirs()
 
-        val dumpDir = "$projectDir/dump-dir"
-        File(dumpDir).mkdirs()
+//        val dumpDir = "$projectDir/dump-dir"
+//        File(dumpDir).mkdirs()
     } catch (e: IOException) {
         e.printStackTrace()
     }

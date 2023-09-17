@@ -16,7 +16,10 @@ interface IUMLBuilder {
     fun startPackage(packageName: String, byteSize: Int?)
     fun endPackage()
 
-    fun startClass(className: String, parentName: String? = null, parentModifier: String? = null, isAbstract: Boolean = false)
+    fun startClass(
+        className: String, extendName: String? = null, modifiers: List<String>? = null, isAbstract: Boolean = false,
+        interfaceList: List<String>? = null, isNested: Boolean? = null
+    )
     fun endClass()
 
     fun startInterface(interfaceName: String, parentName: String? = null, parentModifier: String? = null)

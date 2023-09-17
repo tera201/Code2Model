@@ -5,8 +5,8 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>org.example</groupId>
-    <artifactId>cpp-to-uml</artifactId>
-    <version>1.2-SNAPSHOT</version>
+    <artifactId>code-to-uml</artifactId>
+    <version>0.0.2-SNAPSHOT</version>
 
     <distributionManagement>
         <repository>
