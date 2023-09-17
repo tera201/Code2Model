@@ -81,7 +81,10 @@ class CPP14TreeListener(
 
         // Добавление класса\интерфейса в модель
         if (classType == ClassType.INTERFACE) umlBuilder.startInterface(className)
-        else umlBuilder.startClass(className, isAbstract = classType == ClassType.ABSTRACT)
+        else umlBuilder.startClass(
+            className, null, null,
+            isAbstract = classType == ClassType.ABSTRACT, null, null
+        )
 
         // Добавление родителей классу в моделе
         if (ctx.classHead().baseClause() != null) {
@@ -89,7 +92,10 @@ class CPP14TreeListener(
                 val classParentModyfier = parentClass.accessSpecifier().text
                 val classParentName = parentClass.baseTypeSpecifier().text
                 if (classType == ClassType.INTERFACE) umlBuilder.startInterface(className, classParentName, classParentModyfier)
-                else umlBuilder.startClass(className, classParentName, classParentModyfier, isAbstract = classType == ClassType.ABSTRACT)
+                else umlBuilder.startClass(
+                    className, classParentName, null,
+                    isAbstract = classType == ClassType.ABSTRACT, null, null
+                )
             }
         }
         umlBuilder.addClassSize(ctx?.text?.toByteArray()?.size)

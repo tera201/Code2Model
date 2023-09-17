@@ -24,18 +24,27 @@ fun Package.generatePackage(packageDir: String) {
 }
 
 fun Class.generateClass(packageDir: String) {
-    val ps = createFile(packageDir, name) ?: return
+    val ps = createFile(packageDir, name, "java") ?: return
 
     ps.println(packageAsJava)
     ps.println(importsAsJava)
 
     ps.format("%n${modifiers}class $name$parentsAsJava$interfacesAsJava {%n%n")
-
     ownedAttributes.forEach { ps.println(it.propertyAsJava) }
     ownedOperations.forEach { ps.println(it.operationAsJava) }
+    nestedClassifiers.forEach {ps.println(it.nestedClasses)}
     ps.println("}")
     ps.close()
 }
+
+private val Classifier.nestedClasses: String
+    get() {
+        var body = "class $name$parentsAsJava {"
+        attributes.forEach { body += "${it.propertyAsJava}\n" }
+        operations.forEach { body += "${it.operationAsJava}\n" }
+        body += "}\n"
+        return body
+    }
 
 private val Class.modifiers: String
     get() {
@@ -121,7 +130,7 @@ private val Enumeration.modifiers: String
     }
 
 fun Enumeration.generateEnumeration(packageDir: String) {
-    val ps = createFile(packageDir, name) ?: return
+    val ps = createFile(packageDir, name, "java") ?: return
 
     ps.println(packageAsJava)
     ps.println(importsAsJava)
@@ -142,7 +151,7 @@ private val Interface.modifiers: String
     }
 
 fun Interface.generateInterface(packageDir: String) {
-    val ps = createFile(packageDir, name) ?: return
+    val ps = createFile(packageDir, name, "java") ?: return
 
     ps.println(packageAsJava)
     ps.println(importsAsJava)
