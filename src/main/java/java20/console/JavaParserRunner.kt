@@ -15,6 +15,7 @@ import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl
 import org.eclipse.uml2.uml.Model
 import org.eclipse.uml2.uml.UMLFactory
+import org.eclipse.uml2.uml.internal.impl.ModelImpl
 import uml.IUMLBuilder
 import uml.builders.CPP14UMLBuilderPass1
 import uml.builders.CPP14UMLBuilderPass2
@@ -207,6 +208,12 @@ fun Model.saveModel(file: String?) {
         resource.save(null)
     } catch (_: IOException) {
     }
+}
+
+fun loadModelFromFile(file: String?) : ModelImpl {
+    val uri = URI.createFileURI("$file")
+    val resource = ResourceSetImpl().getResource(uri, true)
+    return resource.contents.get(0) as ModelImpl
 }
 
 object UML2HTMLReporter {
