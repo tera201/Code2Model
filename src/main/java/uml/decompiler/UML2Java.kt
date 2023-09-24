@@ -78,7 +78,7 @@ private val Classifier.importsAsJava
 private val Classifier.parentsAsJava: String
     get() {
         val parents = generalizations
-            .map { it.general }
+            .mapNotNull { it.general }
             .filter { !it.javaName.endsWith("java.lang.Object") }
             .joinToString { it.name }
         return if (parents.isNotEmpty()) " extends $parents" else ""
@@ -86,7 +86,7 @@ private val Classifier.parentsAsJava: String
 
 private val Class.interfacesAsJava: String
     get() {
-        val implemented = interfaceRealizations.joinToString { it.contract.name }
+        val implemented = interfaceRealizations.joinToString { if (it.contract != null) it.contract.name  else ""}
         return if (implemented.isNotEmpty()) " implements $implemented" else ""
     }
 

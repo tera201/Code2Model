@@ -11,11 +11,14 @@ import org.apache.logging.log4j.LogManager
 import org.apache.logging.log4j.Logger
 import org.eclipse.emf.common.util.URI
 import org.eclipse.emf.ecore.resource.Resource
+import org.eclipse.emf.ecore.resource.ResourceSet
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl
+import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl.ResourceLocator
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl
 import org.eclipse.uml2.uml.Model
 import org.eclipse.uml2.uml.UMLFactory
-import org.eclipse.uml2.uml.internal.impl.ModelImpl
+import org.eclipse.uml2.uml.UMLPackage
+import org.eclipse.uml2.uml.internal.resource.UMLResourceFactoryImpl
 import uml.IUMLBuilder
 import uml.builders.CPP14UMLBuilderPass1
 import uml.builders.CPP14UMLBuilderPass2
@@ -29,6 +32,7 @@ import util.messages.IMessageHandler
 import java.io.File
 import java.io.IOException
 import java.io.PrintStream
+import java.util.*
 import javax.swing.JTextArea
 
 
@@ -87,12 +91,12 @@ class JavaParserRunner() {
     }
 
     private fun parseFile(fileName: String, messageHandler: IMessageHandler, umlBuilder: IUMLBuilder, logJTextArea: JTextArea) {
-        logJTextArea.append("Parsing file: $fileName\n")
+//        logJTextArea.append("Parsing file: $fileName\n")
         parseFile(fileName, messageHandler, umlBuilder)
     }
 
     private fun parseFile(fileName: String, messageHandler: IMessageHandler, umlBuilder: IUMLBuilder) {
-        log.info("Parsing file: $fileName")
+//        log.info("Parsing file: $fileName")
         messageHandler.info(FileMessage("Parsing file:", fileName))
 
         try {
@@ -155,8 +159,9 @@ fun main() {
 //    var sourcePath = "$projectDir/JavaToUMLSamples/src/JavaFXUMLGraph"
     var sourcePath = "$projectDir/JavaToUMLSamples/src/a-foundation-master"
 //    var sourcePath = "$projectDir/JavaToUMLSamples/src/JavaFXUMLGraph/src/main/java/umlgraph/graphview/utils/"
-    var targetPathForCode = "$projectDir/targetPath/src"
-    var targetPathForUMLModels = "$projectDir/targetPath/models"
+    var targetPathForCode = "$projectDir/target/src"
+    var targetPathForUMLModels = "$projectDir/target/models/"
+    val targetModelFile = "$targetPathForUMLModels/model.uml"
 
     try {
         File(targetPathForCode).mkdirs()
@@ -182,7 +187,7 @@ fun main() {
     // Generate C++ code.
     //
     clearPackageDir(targetPathForCode)
-    model.saveModel(targetPathForUMLModels)
+    model.saveModel(targetModelFile)
     model.nestedPackages.forEach { it.generateCpp(targetPathForCode) }
 
     //
@@ -192,9 +197,23 @@ fun main() {
         .absolutePath
         .replace(".", "generated/kotlin/${model.name}")
     File(kotlinPath).mkdirs()
-
     model.toKotlin(kotlinPath)
 
+}
+
+fun Model.saveModel2(file: String?) {
+    Resource.Factory.Registry.INSTANCE.extensionToFactoryMap["uml"] =
+        UMLResourceFactoryImpl()
+    UMLPackage.eINSTANCE.eClass()
+    val resourceSet: ResourceSet = ResourceSetImpl()
+    val resource = resourceSet.createResource(URI.createFileURI(file))
+    resource.getContents().add(this);
+    try {
+        resource.save(Collections.EMPTY_MAP)
+    } catch (e: IOException) {
+        e.printStackTrace()
+    }
+    resource.unload();
 }
 
 fun Model.saveModel(file: String?) {
@@ -202,25 +221,34 @@ fun Model.saveModel(file: String?) {
     val reg: Resource.Factory.Registry = Resource.Factory.Registry.INSTANCE
     val m: MutableMap<String, Any> = reg.getExtensionToFactoryMap()
     m[Resource.Factory.Registry.DEFAULT_EXTENSION] = XMIResourceFactoryImpl()
-    val resource: Resource = ResourceSetImpl().createResource(uri)
+    val resourceIml = ResourceSetImpl()
+    val resource = resourceIml.createResource(uri)
     resource.getContents().add(this)
+    println(resourceIml.getResourceFactoryRegistry())
     try {
         resource.save(null)
     } catch (_: IOException) {
     }
 }
 
-fun loadModelFromFile(file: String?) : ModelImpl {
-    val uri = URI.createFileURI("$file")
-    val resource = ResourceSetImpl().getResource(uri, true)
-    return resource.contents.get(0) as ModelImpl
-}
+fun loadModel(file: String?): Model? {
+    val uri = URI.createFileURI(file)
+    val resourceSet = ResourceSetImpl()
+    UMLPackage.eINSTANCE.eClass()
 
-object UML2HTMLReporter {
-    @JvmStatic
-    fun generateReport(model: Model, htmlPath: String) {
-            UML2HTMLReporter.generateReport(model, htmlPath)
+    // Регистрация XMIResourceFactory для всех файлов *.uml
+    resourceSet.resourceFactoryRegistry.extensionToFactoryMap["uml"] = XMIResourceFactoryImpl()
+
+    try {
+        // Загрузка ресурса
+        val resource = resourceSet.getResource(uri, true)
+
+        // Преобразование первого элемента ресурса в Model и возвращение его
+        return resource.contents[0] as? org.eclipse.uml2.uml.Model
+    } catch (e: IOException) {
+        e.printStackTrace()
     }
+    return null
 }
 
 //TODO: kick large files
