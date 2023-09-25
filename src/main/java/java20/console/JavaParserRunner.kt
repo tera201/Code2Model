@@ -21,6 +21,7 @@ import uml.builders.CPP14UMLBuilderPass1
 import uml.builders.CPP14UMLBuilderPass2
 import uml.decompiler.generateCpp
 import uml.decompiler.toKotlin
+import uml.util.UMLModelHandler
 import uml.util.clearPackageDir
 import util.FilesUtil
 import util.messages.FileMessage
@@ -155,8 +156,8 @@ fun main() {
 //    var sourcePath = "$projectDir/JavaToUMLSamples/src/JavaFXUMLGraph"
     var sourcePath = "$projectDir/JavaToUMLSamples/src/a-foundation-master"
 //    var sourcePath = "$projectDir/JavaToUMLSamples/src/JavaFXUMLGraph/src/main/java/umlgraph/graphview/utils/"
-    var targetPathForCode = "$projectDir/targetPath/src"
-    var targetPathForUMLModels = "$projectDir/targetPath/models"
+    var targetPathForCode = "$projectDir/target/src"
+    var targetPathForUMLModels = "$projectDir/target/models"
 
     try {
         File(targetPathForCode).mkdirs()
@@ -190,10 +191,16 @@ fun main() {
     //
     val kotlinPath = File(".")
         .absolutePath
-        .replace(".", "generated/kotlin/${model.name}")
+        .replace(".", "target/generated/kotlin/${model.name}")
     File(kotlinPath).mkdirs()
 
     model.toKotlin(kotlinPath)
+    val handler = UMLModelHandler()
+    handler.saveModelToFile(model, "$targetPathForUMLModels/model.json")
+    val loadedModel: ModelImpl? = handler.loadModelFromFile("$targetPathForUMLModels/model.json")
+    println(loadedModel)
+    if (loadedModel != null)
+    handler.saveModelToFile(loadedModel, "$targetPathForUMLModels/loadedModel.json")
 
 }
 
