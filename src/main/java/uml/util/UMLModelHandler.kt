@@ -23,6 +23,7 @@ class UMLModelHandler {
         module.addSerializer(ClassImpl::class.java, CustomClassSerializer())
             .addSerializer(InterfaceImpl::class.java, CustomInterfaceSerializer())
             .addSerializer(PackageImpl::class.java, CustomPackageSerializer())
+            .addSerializer(EnumerationImpl::class.java, CustomEnumerationSerializer())
     }
 
     private fun applyDeserializers(module: SimpleModule) {

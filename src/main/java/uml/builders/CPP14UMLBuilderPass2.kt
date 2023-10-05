@@ -81,6 +81,8 @@ class CPP14UMLBuilderPass2(override val model: Model, val mh: IMessageHandler) :
     }
 
     override fun endInterface() {}
+    override fun startEnumeration(enumerationName: String) {}
+    override fun endEnumeration() {}
 
     override fun addAttribute(attributeName: String, typeName: String): Property? {
         var property: Property? = null
