@@ -12,7 +12,7 @@
         <repository>
             <id>github</id>
             <name>GitHub Maven Packages</name>
-            <url>https://maven.pkg.github.com/tera201/Cpp2UML</url>
+            <url>https://maven.pkg.github.com/tera201/Code2UML</url>
         </repository>
     </distributionManagement>
 
