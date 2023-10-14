@@ -52,6 +52,19 @@ object UMLUtil {
         }
     }
 
+    fun getEnum(p: Package, name: String): Enumeration {
+        val owned: NamedElement? = p.getOwnedMember(name)
+        if (owned == null){
+            val newEnumeration = p.createOwnedEnumeration(name)
+            newEnumeration.createOwnedComment().body = "0"
+            newEnumeration.createOwnedComment().body = "0"
+            return newEnumeration
+        }
+        else {
+            return owned as Enumeration
+        }
+    }
+
     fun returnModifier(modifierName: String?): VisibilityKind {
         when (modifierName) {
             "public" -> return VisibilityKind.PUBLIC_LITERAL

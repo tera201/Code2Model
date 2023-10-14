@@ -55,20 +55,15 @@ class Java20TreeListener(
         val interfaceList = ctx.normalClassDeclaration()?.classImplements()?.interfaceTypeList()?.interfaceType()?.
             stream()?.map { it.text }?.toList()
 
-        // Определение типа класса (стандартный, абстрактный, интерфейс)
         val modifiers = ctx.normalClassDeclaration()?.classModifier()?.stream()?.filter { it.text in setOf("private", "public", "protected", "static", "final") }?.map { it.text }?.toList()
         val isAbstract = ctx.normalClassDeclaration()?.classModifier()?.stream()?.anyMatch{it.text == "abstract"}
         if (isAbstract != null && isAbstract) classType = ClassType.ABSTRACT
 
-        // Добавление класса\интерфейса в модель
         if (className != null) {
-            if (classType == ClassType.INTERFACE) umlBuilder.startInterface(className)
-            else umlBuilder.startClass(
+            umlBuilder.startClass(
                 className, parent, modifiers, isAbstract = classType == ClassType.ABSTRACT,
-                interfaceList, isNested
-            )
+                interfaceList, isNested)
         }
-
         umlBuilder.addClassSize(ctx.text?.toByteArray()?.size)
     }
 
@@ -78,6 +73,12 @@ class Java20TreeListener(
     override fun enterInterfaceDeclaration(ctx: Java20Parser.InterfaceDeclarationContext?) {
         val interfaceName = ctx!!.normalInterfaceDeclaration()?.typeIdentifier()?.text
         if (interfaceName != null) umlBuilder.startInterface(interfaceName)
+        umlBuilder.addClassSize(ctx.text?.toByteArray()?.size)
+    }
+
+    override fun enterEnumDeclaration(ctx: Java20Parser.EnumDeclarationContext?) {
+        val enumName = ctx!!.typeIdentifier().text
+        if (enumName != null) umlBuilder.startEnumeration(enumName)
     }
 
     override fun enterClassMemberDeclaration(ctx: Java20Parser.ClassMemberDeclarationContext?) {

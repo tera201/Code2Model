@@ -53,6 +53,11 @@ class CPP14UMLBuilderPass1(override val model: Model, val mh: IMessageHandler) :
     }
 
     override fun endInterface() {}
+    override fun startEnumeration(enumerationName: String) {
+        UMLUtil.getEnum(currentPackage, enumerationName)
+    }
+
+    override fun endEnumeration() {}
 
     override fun addAttribute(attributeName: String, typeName: String): Property? {
         UMLUtil.getType(model, typeName)
@@ -62,8 +67,5 @@ class CPP14UMLBuilderPass1(override val model: Model, val mh: IMessageHandler) :
     override fun startMethod(funType: String, funName: String, typeList: EList<String>, argList: EList<String>, isVirtual: Boolean): Operation? = null
     override fun addParameter(parName: String, typeName: String) {}
     override fun endMethod() {}
-
-    override fun addClassSize(byteSize: Int?) {
-//        TODO("Not yet implemented")
-    }
+    override fun addClassSize(byteSize: Int?) {}
 }

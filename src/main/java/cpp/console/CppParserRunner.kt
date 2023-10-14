@@ -134,8 +134,8 @@ fun main() {
 
     var sourcePath = "$projectDir/CppToUMLSamples/src/snark-master"
 //    var sourcePath = "$projectDir/CppToUMLSamples/src/cpprestsdk-master"
-    var targetPathForCode = "$projectDir/targetPath/src"
-    var targetPathForUMLModels = "$projectDir/targetPath/models"
+    var targetPathForCode = "$projectDir/target/generated/cpp"
+    var targetPathForUMLModels = "$projectDir/target/models"
 
     try {
         File(targetPathForCode).mkdirs()

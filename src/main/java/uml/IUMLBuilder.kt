@@ -25,6 +25,9 @@ interface IUMLBuilder {
     fun startInterface(interfaceName: String, parentName: String? = null, parentModifier: String? = null)
     fun endInterface()
 
+    fun startEnumeration(enumerationName: String)
+    fun endEnumeration()
+
     fun addAttribute(attributeName: String, typeName: String): Property?
 
     fun startMethod(funType: String, funName: String, typeList: EList<String>, argList: EList<String>, isVirtual: Boolean): Operation?
