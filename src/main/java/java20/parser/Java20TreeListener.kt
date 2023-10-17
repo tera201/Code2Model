@@ -46,6 +46,21 @@ class Java20TreeListener(
 //        ctx!!.Identifier().forEach{umlBuilder.endPackage()}
     }
 
+    override fun enterRecordDeclaration(ctx: Java20Parser.RecordDeclarationContext?) {
+        val className = ctx!!.typeIdentifier()?.text
+        val modifiers = ctx.classModifier()
+            ?.stream()?.filter { it.text in setOf("private", "public", "protected", "static", "final") }?.map { it.text }?.toList()
+        val interfaceList = ctx.classImplements()?.interfaceTypeList()?.interfaceType()?.stream()?.map { it.text }?.toList() // start from 1
+        val isNested =  ctx.getParent()?.getParent()?.getParent()?.text?.startsWith("package")?.not()
+        if (className != null) {
+            umlBuilder.startClass(
+                className, null, modifiers, false,
+                interfaceList, isNested
+            )
+        }
+        umlBuilder.addClassSize(ctx.text?.toByteArray()?.size)
+    }
+
     override fun enterClassDeclaration(ctx: Java20Parser.ClassDeclarationContext?) {
         val className = ctx!!.normalClassDeclaration()?.typeIdentifier()?.text
         var classType = ClassType.DEFAULT
