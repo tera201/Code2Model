@@ -16,6 +16,13 @@ class Java20TreeListener(
 
     private var packageNum = 0
 
+    override fun enterImportDeclaration(ctx: Java20Parser.ImportDeclarationContext?) {
+        val singleTypeImportDeclaration = ctx?.singleTypeImportDeclaration()?.typeName()?.text
+        val staticImportOnDemandDeclaration = ctx?.staticImportOnDemandDeclaration()?.typeName()?.text
+        val singleStaticImportDeclaration = ctx?.singleStaticImportDeclaration()?.typeName()?.text
+        val typeImportOnDemandDeclaration = ctx?.typeImportOnDemandDeclaration()?.packageOrTypeName()?.text
+    }
+
     /**
      * translationUnit:
      *    declarationseq? EOF
@@ -43,13 +50,12 @@ class Java20TreeListener(
     }
 
     override fun exitPackageDeclaration(ctx: Java20Parser.PackageDeclarationContext?) {
-//        ctx!!.Identifier().forEach{umlBuilder.endPackage()}
     }
 
     override fun enterRecordDeclaration(ctx: Java20Parser.RecordDeclarationContext?) {
         val className = ctx!!.typeIdentifier()?.text
-        val modifiers = ctx.classModifier()
-            ?.stream()?.filter { it.text in setOf("private", "public", "protected", "static", "final") }?.map { it.text }?.toList()
+        val modifiers = ctx.classModifier()?.stream()
+            ?.filter { it.text in setOf("private", "public", "protected", "static", "final") }?.map { it.text }?.toList()
         val interfaceList = ctx.classImplements()?.interfaceTypeList()?.interfaceType()?.stream()?.map { it.text }?.toList() // start from 1
         val isNested =  ctx.getParent()?.getParent()?.getParent()?.text?.startsWith("package")?.not()
         if (className != null) {
