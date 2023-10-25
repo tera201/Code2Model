@@ -41,20 +41,19 @@ class CPP14UMLBuilderPass2(override val model: Model, val mh: IMessageHandler) :
             currentClass = UMLUtil.getClass(currentPackage, className)
             if (modifiers != null)
             currentClass?.setIsAbstract(isAbstract)
+            val visibility = modifiers?.filter { it in setOf("private", "public", "protected") }?.first()
+            currentClass?.visibility = UMLUtil.returnModifier(visibility)
             if (extendName != null) {
                 val parent: Class = umlFactoryImpl.createClass()
                 parent.name = extendName
-//                parent.setVisibility(UMLUtil.returnModifier(modifiers))
                 currentClass!!.createGeneralization(parent)
             }
-            if (interfaceList != null) {
-                interfaceList.forEach {
-                    val interfaceRealization = umlFactoryImpl.createInterfaceRealization()
-                    val interfaceVar = umlFactoryImpl.createInterface()
-                    interfaceVar.name = it
-                    interfaceRealization.contract = interfaceVar
-                    currentClass?.interfaceRealizations?.add(interfaceRealization)
-                }
+            interfaceList?.forEach {
+                val interfaceRealization = umlFactoryImpl.createInterfaceRealization()
+                val interfaceVar = umlFactoryImpl.createInterface()
+                interfaceVar.name = it
+                interfaceRealization.contract = interfaceVar
+                currentClass?.interfaceRealizations?.add(interfaceRealization)
             }
             currentOwner = currentPackage.getOwnedMember(className)
         } else if (isNested == true) {

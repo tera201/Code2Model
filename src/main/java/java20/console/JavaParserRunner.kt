@@ -154,7 +154,8 @@ fun main() {
 
 //    var sourcePath = "$projectDir/JavaToUMLSamples/src/samples"
 //    var sourcePath = "$projectDir/JavaToUMLSamples/src/JavaFXUMLGraph"
-    var sourcePath = "$projectDir/JavaToUMLSamples/src/a-foundation-master"
+//    var sourcePath = "$projectDir/JavaToUMLSamples/src/a-foundation-master"
+    var sourcePath = "$projectDir/JavaToUMLSamples/src/smev-bot"
 //    var sourcePath = "$projectDir/JavaToUMLSamples/src/JavaFXUMLGraph/src/main/java/umlgraph/graphview/utils/"
     var targetPathForCode = "$projectDir/target/src"
     var targetPathForUMLModels = "$projectDir/target/models"
@@ -196,11 +197,11 @@ fun main() {
 
     model.toKotlin(kotlinPath)
     val handler = UMLModelHandler()
-    handler.saveModelToFile(model, "$targetPathForUMLModels/model.json")
-    val loadedModel: ModelImpl? = handler.loadModelFromFile("$targetPathForUMLModels/model.json")
-    println(loadedModel)
-    if (loadedModel != null)
-    handler.saveModelToFile(loadedModel, "$targetPathForUMLModels/loadedModel.json")
+    handler.saveModelToFile(model, "$targetPathForUMLModels/Dimonmodel.json")
+//    val loadedModel: ModelImpl? = handler.loadModelFromFile("$targetPathForUMLModels/model.json")
+//    println(loadedModel)
+//    if (loadedModel != null)
+//    handler.saveModelToFile(loadedModel, "$targetPathForUMLModels/loadedModel.json")
 
 }
 
