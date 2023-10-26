@@ -6,6 +6,7 @@ import org.eclipse.uml2.uml.*
 import org.eclipse.uml2.uml.internal.impl.UMLFactoryImpl
 import uml.IUMLBuilder
 import uml.helpers.BuilderClass
+import uml.helpers.BuilderInterface
 import uml.util.UMLUtil
 import util.messages.IMessageHandler
 import java.util.*
@@ -65,14 +66,13 @@ class CPP14UMLBuilderPass2(override val model: Model, val mh: IMessageHandler) :
 
     override fun endClass() {}
 
-    override fun startInterface(interfaceName: String, parentName: String?, parentModifier: String?) {
-        currentInterface = UMLUtil.getInterface(currentPackage, interfaceName)
-        if (parentName != null) {
-            val parent: Interface = UMLUtil.getInterface(currentPackage, parentName)
-            parent.setVisibility(UMLUtil.returnModifier(parentModifier))
+    override fun startInterface(interfaceBuilderInterface: BuilderInterface) {
+        currentInterface = UMLUtil.getInterface(currentPackage, interfaceBuilderInterface.name)
+        interfaceBuilderInterface.parentsNameList?.forEach {
+            val parent: Interface = UMLUtil.getInterface(currentPackage, it)
             currentInterface!!.createGeneralization(parent)
         }
-        currentOwner = currentPackage.getOwnedMember(interfaceName)
+        currentOwner = currentPackage.getOwnedMember(interfaceBuilderInterface.name)
     }
 
     override fun endInterface() {}

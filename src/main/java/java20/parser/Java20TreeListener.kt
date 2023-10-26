@@ -113,7 +113,7 @@ class Java20TreeListener(
         val parentList = ctx.interfaceExtends()?.interfaceTypeList()?.interfaceType()?.stream()?.map { it.text }?.toList()
         val modifiers = getBuilderInterfaceModifier(ctx.interfaceModifier())
         val builderInterface = BuilderInterface(builderImports, interfaceName, modifiers, parentList, isNested)
-        umlBuilder.startInterface(interfaceName)
+        umlBuilder.startInterface(builderInterface)
         umlBuilder.addClassSize(ctx.text?.toByteArray()?.size)
     }
 

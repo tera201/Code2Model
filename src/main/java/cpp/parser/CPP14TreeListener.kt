@@ -7,6 +7,7 @@ import org.eclipse.emf.common.util.BasicEList
 import uml.IUMLBuilder
 import uml.helpers.BuilderClass
 import uml.helpers.BuilderImports
+import uml.helpers.BuilderInterface
 
 class CPP14TreeListener(
     val parser: CPP14Parser,
@@ -85,7 +86,7 @@ class CPP14TreeListener(
         val builderClass = BuilderClass(className, isAbstact, false)
 
         // Добавление класса\интерфейса в модель
-        if (classType == ClassType.INTERFACE) umlBuilder.startInterface(className)
+        if (classType == ClassType.INTERFACE) umlBuilder.startInterface(BuilderInterface(className))
         else umlBuilder.startClass(
             builderClass
         )
@@ -96,7 +97,7 @@ class CPP14TreeListener(
                 val classParentModyfier = parentClass.accessSpecifier().text
                 val classParentName = parentClass.baseTypeSpecifier().text
                 val builderClass = BuilderClass(className, isAbstact, classParentName, false)
-                if (classType == ClassType.INTERFACE) umlBuilder.startInterface(className, classParentName, classParentModyfier)
+                if (classType == ClassType.INTERFACE) umlBuilder.startInterface(BuilderInterface(className, listOf(classParentName)))
                 else umlBuilder.startClass(builderClass)
             }
         }

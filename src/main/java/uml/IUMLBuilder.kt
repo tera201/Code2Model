@@ -5,6 +5,7 @@ import org.eclipse.uml2.uml.Model
 import org.eclipse.uml2.uml.Operation
 import org.eclipse.uml2.uml.Property
 import uml.helpers.BuilderClass
+import uml.helpers.BuilderInterface
 
 /**
  * Интерфейс построителя UML-модели.
@@ -21,7 +22,7 @@ interface IUMLBuilder {
     )
     fun endClass()
 
-    fun startInterface(interfaceName: String, parentName: String? = null, parentModifier: String? = null)
+    fun startInterface(interfaceBuilderInterface: BuilderInterface)
     fun endInterface()
 
     fun startEnumeration(enumerationName: String)

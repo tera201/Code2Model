@@ -18,7 +18,10 @@ data class BuilderInterface(
     val modifiers: BuilderInterfaceModifiers,
     val parentsNameList: List<String>?,
     val isNested: Boolean
-)
+) {
+    constructor(name: String) : this(BuilderImports(), name, BuilderInterfaceModifiers(false, true), null, false)
+    constructor(name: String, parentsNameList: List<String>?) : this(BuilderImports(), name, BuilderInterfaceModifiers(false, true), parentsNameList, false)
+}
 
 data class BuilderImports (
     val elementImports: List<String> = ArrayList(),
