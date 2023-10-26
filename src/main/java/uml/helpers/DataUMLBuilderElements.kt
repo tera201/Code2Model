@@ -29,7 +29,7 @@ data class BuilderImports (
 
 data class BuilderInterfaceModifiers(
     val isAbstract: Boolean,
-    val isPublic: String?
+    val isPublic: Boolean
 )
 
 data class BuilderClassModifiers(
