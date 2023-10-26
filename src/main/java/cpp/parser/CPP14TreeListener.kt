@@ -5,6 +5,8 @@ import cpp.parser.generated.CPP14Parser.OriginalNamespaceNameContext
 import cpp.parser.generated.CPP14ParserBaseListener
 import org.eclipse.emf.common.util.BasicEList
 import uml.IUMLBuilder
+import uml.helpers.BuilderClass
+import uml.helpers.BuilderImports
 
 class CPP14TreeListener(
     val parser: CPP14Parser,
@@ -61,6 +63,7 @@ class CPP14TreeListener(
     }
 
     override fun enterClassSpecifier(ctx: CPP14Parser.ClassSpecifierContext?) {
+        val builderImports = BuilderImports()
         val className = ctx!!.classHead().classHeadName().className().text
         var classType = ClassType.DEFAULT
 
@@ -78,12 +81,13 @@ class CPP14TreeListener(
                 if (numFullVirtualFun == 0) classType = ClassType.DEFAULT
             }
         }
+        val isAbstact = classType == ClassType.ABSTRACT;
+        val builderClass = BuilderClass(className, isAbstact, false)
 
         // Добавление класса\интерфейса в модель
         if (classType == ClassType.INTERFACE) umlBuilder.startInterface(className)
         else umlBuilder.startClass(
-            className, null, null,
-            isAbstract = classType == ClassType.ABSTRACT, null, null
+            builderClass
         )
 
         // Добавление родителей классу в моделе
@@ -91,11 +95,9 @@ class CPP14TreeListener(
             for (parentClass in ctx.classHead().baseClause().baseSpecifierList().baseSpecifier()) {
                 val classParentModyfier = parentClass.accessSpecifier().text
                 val classParentName = parentClass.baseTypeSpecifier().text
+                val builderClass = BuilderClass(className, isAbstact, classParentName, false)
                 if (classType == ClassType.INTERFACE) umlBuilder.startInterface(className, classParentName, classParentModyfier)
-                else umlBuilder.startClass(
-                    className, classParentName, null,
-                    isAbstract = classType == ClassType.ABSTRACT, null, null
-                )
+                else umlBuilder.startClass(builderClass)
             }
         }
         umlBuilder.addClassSize(ctx?.text?.toByteArray()?.size)

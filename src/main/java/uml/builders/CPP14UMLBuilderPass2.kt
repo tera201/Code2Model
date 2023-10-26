@@ -5,6 +5,7 @@ import org.eclipse.emf.common.util.EList
 import org.eclipse.uml2.uml.*
 import org.eclipse.uml2.uml.internal.impl.UMLFactoryImpl
 import uml.IUMLBuilder
+import uml.helpers.BuilderClass
 import uml.util.UMLUtil
 import util.messages.IMessageHandler
 import java.util.*
@@ -33,37 +34,32 @@ class CPP14UMLBuilderPass2(override val model: Model, val mh: IMessageHandler) :
         else model
     }
 
-    override fun startClass(
-        className: String, extendName: String?, modifiers: List<String>?, isAbstract: Boolean,
-        interfaceList: List<String>?, isNested: Boolean?
-    ) {
-        if (isNested == null || isNested == false) {
-            currentClass = UMLUtil.getClass(currentPackage, className)
-            if (modifiers != null)
-            currentClass?.setIsAbstract(isAbstract)
-            val visibility = modifiers?.filter { it in setOf("private", "public", "protected") }?.first()
-            currentClass?.visibility = UMLUtil.returnModifier(visibility)
-            if (extendName != null) {
+    override fun startClass(builderClass: BuilderClass) {
+        if (!builderClass.isNested) {
+            currentClass = UMLUtil.getClass(currentPackage, builderClass.name)
+            currentClass?.setIsAbstract(builderClass.modifiers.isAbstract)
+            currentClass?.visibility = UMLUtil.returnModifier(builderClass.modifiers.visibility)
+            if (builderClass.parentName != null) {
                 val parent: Class = umlFactoryImpl.createClass()
-                parent.name = extendName
+                parent.name = builderClass.parentName
                 currentClass!!.createGeneralization(parent)
             }
-            interfaceList?.forEach {
+            builderClass.interfaceList?.forEach {
                 val interfaceRealization = umlFactoryImpl.createInterfaceRealization()
                 val interfaceVar = umlFactoryImpl.createInterface()
                 interfaceVar.name = it
                 interfaceRealization.contract = interfaceVar
                 currentClass?.interfaceRealizations?.add(interfaceRealization)
             }
-            currentOwner = currentPackage.getOwnedMember(className)
-        } else if (isNested == true) {
+            currentOwner = currentPackage.getOwnedMember(builderClass.name)
+        } else {
             val nestedClass: Class = umlFactoryImpl.createClass()
             nestedClass.createOwnedComment().body = "0"
             nestedClass.createOwnedComment().body = "0"
-            nestedClass.name = className
+            nestedClass.name = builderClass.name
             currentNestedClass = nestedClass
             currentClass?.nestedClassifiers?.add(nestedClass)
-            currentOwner = currentPackage.getOwnedMember(className)
+            currentOwner = currentPackage.getOwnedMember(builderClass.name)
         }
     }
 

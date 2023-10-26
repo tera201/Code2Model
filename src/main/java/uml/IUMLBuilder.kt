@@ -4,6 +4,7 @@ import org.eclipse.emf.common.util.EList
 import org.eclipse.uml2.uml.Model
 import org.eclipse.uml2.uml.Operation
 import org.eclipse.uml2.uml.Property
+import uml.helpers.BuilderClass
 
 /**
  * Интерфейс построителя UML-модели.
@@ -16,9 +17,7 @@ interface IUMLBuilder {
     fun startPackage(packageName: String, byteSize: Int?)
     fun endPackage()
 
-    fun startClass(
-        className: String, extendName: String? = null, modifiers: List<String>? = null, isAbstract: Boolean = false,
-        interfaceList: List<String>? = null, isNested: Boolean? = null
+    fun startClass(builderClass: BuilderClass
     )
     fun endClass()
 
