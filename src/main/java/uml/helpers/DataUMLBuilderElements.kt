@@ -1,5 +1,7 @@
 package uml.helpers
 
+import org.eclipse.emf.common.util.EList
+
 data class BuilderClass (
     val imports: BuilderImports,
     val name: String,
@@ -22,6 +24,19 @@ data class BuilderInterface(
     constructor(name: String) : this(BuilderImports(), name, BuilderInterfaceModifiers(false, true), null, false)
     constructor(name: String, parentsNameList: List<String>?) : this(BuilderImports(), name, BuilderInterfaceModifiers(false, true), parentsNameList, false)
 }
+
+data class BuilderMethod(
+    val funType: String,
+    val funName: String,
+    val typeList: EList<String>,
+    val argList: EList<String>,
+    val isAbstract: Boolean
+)
+
+data class BuilderAttribute (
+    val typeName: String,
+    val name: String
+)
 
 data class BuilderImports (
     val elementImports: List<String> = ArrayList(),

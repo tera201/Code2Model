@@ -122,24 +122,26 @@ class Java20TreeListener(
         if (enumName != null) umlBuilder.startEnumeration(enumName)
     }
 
-    override fun enterClassMemberDeclaration(ctx: Java20Parser.ClassMemberDeclarationContext?) {
-        val typeName = ctx?.fieldDeclaration()?.unannType()?.text
-        val varName = ctx?.fieldDeclaration()?.variableDeclaratorList()?.text
+    override fun enterFieldDeclaration(ctx: Java20Parser.FieldDeclarationContext?) {
+        val typeName = ctx!!.unannType().text
+        val varName = ctx!!.variableDeclaratorList().text
+        val builderAttribute = BuilderAttribute(typeName, varName)
         if (typeName != null && varName != null) umlBuilder.addAttribute(varName, typeName)
     }
 
     override fun enterMethodHeader(ctx: Java20Parser.MethodHeaderContext?) {
-        val declarator = ctx?.methodDeclarator();
-        val funName = declarator?.Identifier()?.text
-        val funType = ctx?.result()?.text
+        val declarator = ctx!!.methodDeclarator();
+        val funName = declarator.Identifier().text
+        val funType = ctx.result().text
         val typeList: BasicEList<String> = BasicEList()
         val argNameList: BasicEList<String> = BasicEList()
-        if (declarator?.formalParameterList()?.formalParameter() != null) {
+        if (declarator.formalParameterList()?.formalParameter() != null) {
             declarator.formalParameterList().formalParameter()?.forEach { if (it.unannType() != null) {
                 typeList.add(it.unannType().text);
                 argNameList.add(it.variableDeclaratorId().text) }
             }
         }
+        val builderMethod = BuilderMethod(funType, funName, typeList, argNameList, false)
         if (funName != null && funType != null) umlBuilder.startMethod(funType, funName, typeList,
             argNameList, false)
     }
