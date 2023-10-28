@@ -8,6 +8,8 @@ import org.eclipse.uml2.uml.Operation
 import org.eclipse.uml2.uml.Package
 import org.eclipse.uml2.uml.Property
 import uml.IUMLBuilder
+import uml.helpers.BuilderClass
+import uml.helpers.BuilderInterface
 import uml.util.UMLUtil
 import util.messages.IMessageHandler
 import java.util.*
@@ -36,20 +38,18 @@ class CPP14UMLBuilderPass1(override val model: Model, val mh: IMessageHandler) :
         else model
     }
 
-    override fun startClass(
-        className: String, extendName: String?, modifiers: List<String>?, isAbstract: Boolean,
-        interfaceList: List<String>?, isNested: Boolean?
+    override fun startClass(builderClass: BuilderClass
     ) {
-        if (isNested == null || isNested == false) {
-        currentClass = UMLUtil.getClass(currentPackage, className)
-        currentClass?.setIsAbstract(isAbstract)
+        if (!builderClass.isNested) {
+        currentClass = UMLUtil.getClass(currentPackage, builderClass.name)
+        currentClass?.setIsAbstract(builderClass.modifiers.isAbstract)
         }
     }
 
     override fun endClass() {}
 
-    override fun startInterface(interfaceName: String, parentName: String?, parentModifier: String?) {
-        currentInterface = UMLUtil.getInterface(currentPackage, interfaceName)
+    override fun startInterface(interfaceBuilderInterface: BuilderInterface) {
+        currentInterface = UMLUtil.getInterface(currentPackage, interfaceBuilderInterface.name)
     }
 
     override fun endInterface() {}

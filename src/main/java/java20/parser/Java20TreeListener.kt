@@ -1,26 +1,40 @@
 package java20.parser
 
 import java20.parser.generated.Java20Parser
+import java20.parser.generated.Java20Parser.ClassModifierContext
+import java20.parser.generated.Java20Parser.InterfaceModifierContext
 import java20.parser.generated.Java20ParserBaseListener
 import org.eclipse.emf.common.util.BasicEList
 import uml.IUMLBuilder
+import uml.helpers.*
 
 class Java20TreeListener(
     val parser: Java20Parser,
     private val umlBuilder: IUMLBuilder,
 ) : Java20ParserBaseListener() {
 
-    enum class ClassType {
-        DEFAULT, ABSTRACT, INTERFACE
-    }
-
     private var packageNum = 0
+    private var singleTypeImportDeclarationList = ArrayList<String>()
+    private var staticImportOnDemandDeclarationList = ArrayList<String>()
+    private var singleStaticImportDeclarationList = ArrayList<String>()
+    private var typeImportOnDemandDeclarationList = ArrayList<String>()
 
     override fun enterImportDeclaration(ctx: Java20Parser.ImportDeclarationContext?) {
         val singleTypeImportDeclaration = ctx?.singleTypeImportDeclaration()?.typeName()?.text
         val staticImportOnDemandDeclaration = ctx?.staticImportOnDemandDeclaration()?.typeName()?.text
         val singleStaticImportDeclaration = ctx?.singleStaticImportDeclaration()?.typeName()?.text
         val typeImportOnDemandDeclaration = ctx?.typeImportOnDemandDeclaration()?.packageOrTypeName()?.text
+        if (singleTypeImportDeclaration != null) singleTypeImportDeclarationList.add(singleTypeImportDeclaration)
+        if (staticImportOnDemandDeclaration != null) staticImportOnDemandDeclarationList.add(staticImportOnDemandDeclaration)
+        if (singleStaticImportDeclaration != null) singleStaticImportDeclarationList.add(singleStaticImportDeclaration)
+        if (typeImportOnDemandDeclaration != null) typeImportOnDemandDeclarationList.add(typeImportOnDemandDeclaration)
+    }
+
+    fun resetImports() {
+        singleTypeImportDeclarationList.clear()
+        staticImportOnDemandDeclarationList.clear()
+        singleStaticImportDeclarationList.clear()
+        typeImportOnDemandDeclarationList.clear()
     }
 
     /**
@@ -49,51 +63,57 @@ class Java20TreeListener(
 
     }
 
-    override fun exitPackageDeclaration(ctx: Java20Parser.PackageDeclarationContext?) {
+    fun getBuilderClassModifier(classModifiers: List<ClassModifierContext>): BuilderClassModifiers {
+        val isAbstract = classModifiers.stream().anyMatch{it.text  == "abstract"}
+        val isStatic = classModifiers.stream().anyMatch{it.text  == "static"}
+        val isFinal = classModifiers.stream().anyMatch{it.text  == "final"}
+        val visibility = classModifiers.stream().filter{it.text in setOf("private", "public", "protected")}.map { it.text }.findAny().get()
+        return BuilderClassModifiers(isAbstract, isStatic, isFinal, visibility)
     }
 
     override fun enterRecordDeclaration(ctx: Java20Parser.RecordDeclarationContext?) {
-        val className = ctx!!.typeIdentifier()?.text
-        val modifiers = ctx.classModifier()?.stream()
-            ?.filter { it.text in setOf("private", "public", "protected", "static", "final") }?.map { it.text }?.toList()
+        val builderImports = BuilderImports(singleTypeImportDeclarationList, typeImportOnDemandDeclarationList, singleStaticImportDeclarationList, staticImportOnDemandDeclarationList);
+        resetImports()
+        val className = ctx!!.typeIdentifier()!!.text
+        val builderModifiers = getBuilderClassModifier(ctx.classModifier())
         val interfaceList = ctx.classImplements()?.interfaceTypeList()?.interfaceType()?.stream()?.map { it.text }?.toList() // start from 1
-        val isNested =  ctx.getParent()?.getParent()?.getParent()?.text?.startsWith("package")?.not()
-        if (className != null) {
-            umlBuilder.startClass(
-                className, null, modifiers, false,
-                interfaceList, isNested
-            )
-        }
+        val isNested =  ctx.getParent()?.getParent()?.getParent()?.text?.startsWith("package")?.not() == true
+        val builderClass = BuilderClass(builderImports, className, builderModifiers, null, interfaceList, isNested)
+        umlBuilder.startClass(builderClass)
         umlBuilder.addClassSize(ctx.text?.toByteArray()?.size)
     }
 
-    override fun enterClassDeclaration(ctx: Java20Parser.ClassDeclarationContext?) {
-        val className = ctx!!.normalClassDeclaration()?.typeIdentifier()?.text
-        var classType = ClassType.DEFAULT
-        val isNested =  ctx.getParent()?.getParent()?.text?.startsWith("package")?.not()
-
-        val parent = ctx.normalClassDeclaration()?.classExtends()?.classType()?.text
-        val interfaceList = ctx.normalClassDeclaration()?.classImplements()?.interfaceTypeList()?.interfaceType()?.
-            stream()?.map { it.text }?.toList()
-
-        val modifiers = ctx.normalClassDeclaration()?.classModifier()?.stream()?.filter { it.text in setOf("private", "public", "protected", "static", "final") }?.map { it.text }?.toList()
-        val isAbstract = ctx.normalClassDeclaration()?.classModifier()?.stream()?.anyMatch{it.text == "abstract"}
-        if (isAbstract != null && isAbstract) classType = ClassType.ABSTRACT
-
-        if (className != null) {
-            umlBuilder.startClass(
-                className, parent, modifiers, isAbstract = classType == ClassType.ABSTRACT,
-                interfaceList, isNested)
-        }
+    override fun enterNormalClassDeclaration(ctx: Java20Parser.NormalClassDeclarationContext?) {
+        val builderImports = BuilderImports(singleTypeImportDeclarationList, typeImportOnDemandDeclarationList, singleStaticImportDeclarationList, staticImportOnDemandDeclarationList);
+        resetImports()
+        val className = ctx!!.typeIdentifier()!!.text
+        val isNested =  ctx.getParent()?.getParent()?.getParent()?.text?.startsWith("package")?.not() == true
+        val extendName = ctx.classExtends()?.classType()?.text
+        val interfaceList = ctx.classImplements()?.interfaceTypeList()?.interfaceType()?.stream()?.map { it.text }?.toList()
+        val builderModifiers = getBuilderClassModifier(ctx.classModifier())
+        val builderClass = BuilderClass(builderImports, className, builderModifiers, extendName, interfaceList, isNested)
+        umlBuilder.startClass(builderClass)
         umlBuilder.addClassSize(ctx.text?.toByteArray()?.size)
     }
 
     override fun exitClassDeclaration(ctx: Java20Parser.ClassDeclarationContext?) {
     }
 
-    override fun enterInterfaceDeclaration(ctx: Java20Parser.InterfaceDeclarationContext?) {
-        val interfaceName = ctx!!.normalInterfaceDeclaration()?.typeIdentifier()?.text
-        if (interfaceName != null) umlBuilder.startInterface(interfaceName)
+    fun getBuilderInterfaceModifier(interfaceModifiers: List<InterfaceModifierContext>): BuilderInterfaceModifiers {
+        val isAbstract = interfaceModifiers.stream().anyMatch{it.text == "abstract"}
+        val isPublic = interfaceModifiers.stream().anyMatch{it.text == "public"}
+        return BuilderInterfaceModifiers(isAbstract, isPublic)
+    }
+
+    override fun enterNormalInterfaceDeclaration(ctx: Java20Parser.NormalInterfaceDeclarationContext?) {
+        val builderImports = BuilderImports(singleTypeImportDeclarationList, typeImportOnDemandDeclarationList, singleStaticImportDeclarationList, staticImportOnDemandDeclarationList);
+        resetImports()
+        val interfaceName = ctx!!.typeIdentifier().text
+        val isNested =  ctx.getParent()?.getParent()?.getParent()?.text?.startsWith("package")?.not() == true
+        val parentList = ctx.interfaceExtends()?.interfaceTypeList()?.interfaceType()?.stream()?.map { it.text }?.toList()
+        val modifiers = getBuilderInterfaceModifier(ctx.interfaceModifier())
+        val builderInterface = BuilderInterface(builderImports, interfaceName, modifiers, parentList, isNested)
+        umlBuilder.startInterface(builderInterface)
         umlBuilder.addClassSize(ctx.text?.toByteArray()?.size)
     }
 
@@ -102,24 +122,26 @@ class Java20TreeListener(
         if (enumName != null) umlBuilder.startEnumeration(enumName)
     }
 
-    override fun enterClassMemberDeclaration(ctx: Java20Parser.ClassMemberDeclarationContext?) {
-        val typeName = ctx?.fieldDeclaration()?.unannType()?.text
-        val varName = ctx?.fieldDeclaration()?.variableDeclaratorList()?.text
+    override fun enterFieldDeclaration(ctx: Java20Parser.FieldDeclarationContext?) {
+        val typeName = ctx!!.unannType().text
+        val varName = ctx!!.variableDeclaratorList().text
+        val builderAttribute = BuilderAttribute(typeName, varName)
         if (typeName != null && varName != null) umlBuilder.addAttribute(varName, typeName)
     }
 
     override fun enterMethodHeader(ctx: Java20Parser.MethodHeaderContext?) {
-        val declarator = ctx?.methodDeclarator();
-        val funName = declarator?.Identifier()?.text
-        val funType = ctx?.result()?.text
+        val declarator = ctx!!.methodDeclarator();
+        val funName = declarator.Identifier().text
+        val funType = ctx.result().text
         val typeList: BasicEList<String> = BasicEList()
         val argNameList: BasicEList<String> = BasicEList()
-        if (declarator?.formalParameterList()?.formalParameter() != null) {
+        if (declarator.formalParameterList()?.formalParameter() != null) {
             declarator.formalParameterList().formalParameter()?.forEach { if (it.unannType() != null) {
                 typeList.add(it.unannType().text);
                 argNameList.add(it.variableDeclaratorId().text) }
             }
         }
+        val builderMethod = BuilderMethod(funType, funName, typeList, argNameList, false)
         if (funName != null && funType != null) umlBuilder.startMethod(funType, funName, typeList,
             argNameList, false)
     }
