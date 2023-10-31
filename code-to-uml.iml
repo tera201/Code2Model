@@ -4,7 +4,9 @@
     <content url="file://$MODULE_DIR$" dumb="true">
       <excludeFolder url="file://$MODULE_DIR$/CppToUMLSamples" />
       <excludeFolder url="file://$MODULE_DIR$/JavaToUMLSamples" />
-      <excludeFolder url="file://$MODULE_DIR$/generated" />
     </content>
+  </component>
+  <component name="SonarLintModuleSettings">
+    <option name="uniqueId" value="c02f00a1-f555-4377-b252-81ddb4940d92" />
   </component>
 </module>
