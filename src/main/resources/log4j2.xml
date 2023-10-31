@@ -6,10 +6,10 @@
         </Console>
     </Appenders>
     <Loggers>
-        <Logger name="cpp.console" level="INFO" additivity="false">
+        <Logger name="org.tera201.code2uml.cpp.console" level="INFO" additivity="false">
             <AppenderRef ref="Console"/>
         </Logger>
-        <Logger name="java20.console" level="INFO" additivity="false">
+        <Logger name="org.tera201.code2uml.java20.console" level="INFO" additivity="false">
             <AppenderRef ref="Console"/>
         </Logger>
         <Root level="error">
