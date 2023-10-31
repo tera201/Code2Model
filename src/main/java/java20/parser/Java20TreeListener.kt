@@ -7,6 +7,7 @@ import java20.parser.generated.Java20ParserBaseListener
 import org.eclipse.emf.common.util.BasicEList
 import uml.IUMLBuilder
 import uml.helpers.*
+import kotlin.jvm.optionals.getOrNull
 
 class Java20TreeListener(
     val parser: Java20Parser,
@@ -67,7 +68,7 @@ class Java20TreeListener(
         val isAbstract = classModifiers.stream().anyMatch{it.text  == "abstract"}
         val isStatic = classModifiers.stream().anyMatch{it.text  == "static"}
         val isFinal = classModifiers.stream().anyMatch{it.text  == "final"}
-        val visibility = classModifiers.stream().filter{it.text in setOf("private", "public", "protected")}.map { it.text }.findAny().get()
+        val visibility = classModifiers.stream().filter{it.text in setOf("private", "public", "protected")}.map { it.text }.findAny().getOrNull()
         return BuilderClassModifiers(isAbstract, isStatic, isFinal, visibility)
     }
 
