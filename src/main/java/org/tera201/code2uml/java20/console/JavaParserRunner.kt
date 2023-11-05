@@ -17,8 +17,8 @@ import org.eclipse.uml2.uml.Model
 import org.eclipse.uml2.uml.UMLFactory
 import org.eclipse.uml2.uml.internal.impl.ModelImpl
 import org.tera201.code2uml.uml.IUMLBuilder
-import org.tera201.code2uml.uml.builders.CPP14UMLBuilderPass1
-import org.tera201.code2uml.uml.builders.CPP14UMLBuilderPass2
+import org.tera201.code2uml.uml.builders.CodeUMLBuilderPass1
+import org.tera201.code2uml.uml.builders.CodeUMLBuilderPass2
 import org.tera201.code2uml.uml.decompiler.generateCpp
 import org.tera201.code2uml.uml.decompiler.toKotlin
 import org.tera201.code2uml.uml.util.UMLModelHandler
@@ -68,7 +68,7 @@ class JavaParserRunner() {
         if (logJTextArea != null) logJTextArea.append("1st: adding packages and data types to model\n")
         log.info("1st: adding packages and data types to model")
         val mh1 = FileMessageHandler("$projectPath/messagesPass1.txt")
-        val umlBuilderPass1 = CPP14UMLBuilderPass1(model, mh1)
+        val umlBuilderPass1 = CodeUMLBuilderPass1(model, mh1)
         if (logJTextArea != null)
         javaFiles.forEach { parseFile(it, mh1, umlBuilderPass1, logJTextArea) }
         else javaFiles.forEach { parseFile(it, mh1, umlBuilderPass1) }
@@ -80,7 +80,7 @@ class JavaParserRunner() {
         if (logJTextArea != null) logJTextArea.append("2st: adding elements to model\n")
         log.info("2st: adding elements to model")
         val mh2 = FileMessageHandler("$projectPath/messagesPass2.txt")
-        val umlBuilderPass2 = CPP14UMLBuilderPass2(model, mh2)
+        val umlBuilderPass2 = CodeUMLBuilderPass2(model, mh2)
         if (logJTextArea != null)
         javaFiles.forEach { parseFile(it, mh2, umlBuilderPass2, logJTextArea) }
         else javaFiles.forEach { parseFile(it, mh2, umlBuilderPass2) }
@@ -150,23 +150,13 @@ class JavaParserRunner() {
 fun main() {
     var projectPath = "."
     val projectDir = File(projectPath).canonicalFile
-
-
-//    var sourcePath = "$projectDir/JavaToUMLSamples/src/samples"
-//    var sourcePath = "$projectDir/JavaToUMLSamples/src/JavaFXUMLGraph"
-//    var sourcePath = "$projectDir/JavaToUMLSamples/src/a-foundation-master"
-//    var sourcePath = "$projectDir/JavaToUMLSamples/src/smev-bot"
-    var sourcePath = "/Users/tera201/.gradle/caches/modules-2/files-2.1/com.jetbrains.intellij.idea/ideaIC/2023.1/79ab2d2970b44e4c36be667e173da87c982a9814/ideaIC-2023.1/bin/UmlToolkitCache/antlr4"
-//    var sourcePath = "$projectDir/JavaToUMLSamples/src/JavaFXUMLGraph/src/main/java/umlgraph/graphview/utils/"
+    var sourcePath = "$projectDir/JavaToUMLSamples/src/a-foundation-master"
     var targetPathForCode = "$projectDir/target/src"
     var targetPathForUMLModels = "$projectDir/target/models"
 
     try {
         File(targetPathForCode).mkdirs()
         File(targetPathForUMLModels).mkdirs()
-
-//        val dumpDir = "$projectDir/dump-dir"
-//        File(dumpDir).mkdirs()
     } catch (e: IOException) {
         e.printStackTrace()
     }
