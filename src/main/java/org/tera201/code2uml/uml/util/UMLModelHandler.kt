@@ -1,5 +1,6 @@
 package org.tera201.code2uml.uml.util
 
+import com.fasterxml.jackson.core.type.TypeReference
 import com.fasterxml.jackson.databind.*
 import com.fasterxml.jackson.databind.module.SimpleModule
 import org.eclipse.emf.common.util.EList
@@ -65,6 +66,16 @@ class UMLModelHandler {
         } catch (e: IOException) {
             e.printStackTrace()
             return null
+        }
+    }
+
+    fun loadListModelFromFile(filename: String): ArrayList<ModelImpl>? {
+        return try {
+            val typeReference = object : TypeReference<ArrayList<ModelImpl>>() {}
+            objectMapper.readValue(File(filename), typeReference)
+        } catch (e: IOException) {
+            e.printStackTrace()
+            null
         }
     }
 }

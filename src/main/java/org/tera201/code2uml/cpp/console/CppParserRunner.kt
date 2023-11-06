@@ -16,8 +16,8 @@ import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl
 import org.eclipse.uml2.uml.Model
 import org.eclipse.uml2.uml.UMLFactory
 import org.tera201.code2uml.uml.IUMLBuilder
-import org.tera201.code2uml.uml.builders.CPP14UMLBuilderPass1
-import org.tera201.code2uml.uml.builders.CPP14UMLBuilderPass2
+import org.tera201.code2uml.uml.builders.CodeUMLBuilderPass1
+import org.tera201.code2uml.uml.builders.CodeUMLBuilderPass2
 import org.tera201.code2uml.uml.decompiler.generateCpp
 import org.tera201.code2uml.uml.util.clearPackageDir
 import org.tera201.code2uml.util.FilesUtil
@@ -58,7 +58,7 @@ class CppParserRunner() {
         //
         log.info("1st: adding packages and data types to model")
         val mh1 = FileMessageHandler("$projectPath/messagesPass1.txt")
-        val umlBuilderPass1 = CPP14UMLBuilderPass1(model, mh1)
+        val umlBuilderPass1 = CodeUMLBuilderPass1(model, mh1)
         cppFiles.forEach { parseFile(it, mh1, umlBuilderPass1) }
 
         //
@@ -67,7 +67,7 @@ class CppParserRunner() {
         //
         log.info("2st: adding elements to model")
         val mh2 = FileMessageHandler("$projectPath/messagesPass2.txt")
-        val umlBuilderPass2 = CPP14UMLBuilderPass2(model, mh2)
+        val umlBuilderPass2 = CodeUMLBuilderPass2(model, mh2)
         cppFiles.forEach { parseFile(it, mh2, umlBuilderPass2) }
 
         return model

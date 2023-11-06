@@ -11,7 +11,7 @@ import org.tera201.code2uml.uml.util.UMLUtil
 import org.tera201.code2uml.util.messages.IMessageHandler
 import java.util.*
 
-class CPP14UMLBuilderPass2(override val model: Model, val mh: IMessageHandler) : IUMLBuilder {
+class CodeUMLBuilderPass2(override val model: Model, val mh: IMessageHandler) : IUMLBuilder {
     private var currentPackage: Package = model
     private var currentClass: Class? = null
     private var currentNestedClass: Class? = null

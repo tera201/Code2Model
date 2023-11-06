@@ -6,7 +6,7 @@
 
     <groupId>org.tera201</groupId>
     <artifactId>code-to-uml</artifactId>
-    <version>0.0.2</version>
+    <version>0.0.3</version>
 
     <distributionManagement>
         <repository>
