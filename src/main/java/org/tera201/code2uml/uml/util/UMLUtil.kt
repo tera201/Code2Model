@@ -6,6 +6,8 @@ import org.eclipse.uml2.uml.*
  * Набор вспомогательных методов для работы с элементами UML-модели.
  */
 object UMLUtil {
+
+    val lock = Any()
     /**
      * Для квалифицированного имени выдать пакет в модели соответствующий этому имени.
      * Если для какого либо имени в цепочке пакета еще нет, пакет с таким именем создается.
@@ -14,28 +16,33 @@ object UMLUtil {
      * @return пакет с этим квалифицированным именем
      */
     fun getPackage(p: Package, javaQName: String): Package {
-        val names = javaQName.split(".").toTypedArray()
-        var root: Package = p
 
-        for (name in names) {
-            if (root.name == name) continue
-            var np = root.getNestedPackage(name)
-            if (np == null) np = p.createNestedPackage(name)
-            root = np
+        synchronized(lock) {
+            val names = javaQName.split(".").toTypedArray()
+            var root: Package = p
+
+            for (name in names) {
+                if (root.name == name) continue
+                var np = root.getNestedPackage(name)
+                if (np == null) np = p.createNestedPackage(name)
+                root = np
+            }
+            return root
         }
-        return root
     }
 
     fun getClass(p: Package, name: String): Class {
-        val owned: NamedElement? = p.getOwnedMember(name)
-        if (owned == null){
-            val newClass = p.createOwnedClass(name, false)
-            newClass.createOwnedComment().body = "0"
-            newClass.createOwnedComment().body = "0"
-            return newClass
-        }
-        else {
-            return owned as Class
+
+        synchronized(lock) {
+            val owned: NamedElement? = p.getOwnedMember(name)
+            if (owned == null) {
+                val newClass = p.createOwnedClass(name, false)
+                newClass.createOwnedComment().body = "0"
+                newClass.createOwnedComment().body = "0"
+                return newClass
+            } else {
+                return owned as Class
+            }
         }
     }
 
@@ -82,27 +89,30 @@ object UMLUtil {
      * @return тип с этим квалифицированным именем
      */
     fun getType(model: Model, javaQName: String): Type? {
-        val names = javaQName.split(".").toTypedArray()
-        var root: Package = model
-        var type: Type? = null
 
-        for (name in names) {
-            val np = root.getNestedPackage(name)
-            if (np != null) {
-                // name - это имя пакета.
-                root = np
-                continue
+        synchronized(lock) {
+            val names = javaQName.split(".").toTypedArray()
+            var root: Package = model
+            var type: Type? = null
+
+            for (name in names) {
+                val np = root.getNestedPackage(name)
+                if (np != null) {
+                    // name - это имя пакета.
+                    root = np
+                    continue
+                }
+                type = root.getOwnedType(name)
+                if (type != null) // name - это имя типа.
+                    break
+                type = root.createOwnedType(name, UMLPackage.Literals.ASSOCIATION) // eClass?
+
+                // TODO Продолжить поиск, если квалифицированное имя
+                // - это имя типа вложенного в тип.
+                // Например, класс вложенный в другой класс.
             }
-            type = root.getOwnedType(name)
-            if (type != null) // name - это имя типа.
-                break
-            type = root.createOwnedType(name, UMLPackage.Literals.ASSOCIATION) // eClass?
-
-            // TODO Продолжить поиск, если квалифицированное имя 
-            // - это имя типа вложенного в тип. 
-            // Например, класс вложенный в другой класс.
+            return type
         }
-        return type
     }
 
     /**
