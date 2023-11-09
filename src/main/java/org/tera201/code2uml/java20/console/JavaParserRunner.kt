@@ -34,7 +34,6 @@ import java.util.concurrent.CompletableFuture
 import java.util.concurrent.ExecutorService
 import java.util.concurrent.Executors
 import javax.swing.JTextArea
-import kotlin.math.log
 
 
 class JavaParserRunner() {
@@ -57,12 +56,16 @@ class JavaParserRunner() {
         return buildModel(modelName, javaFiles, null)
     }
 
+
+    fun buildModel(modelName: String, javaFiles: ArrayList<String>, numThreads:Int): Model  {
+        return buildModel(modelName, javaFiles, null, numThreads)
+    }
+
     /**
      * Создать именованную модель для заданных файлов.
      */
-    fun buildModel(modelName: String, javaFiles: ArrayList<String>, logJTextArea: JTextArea?): Model {
+    fun buildModel(modelName: String, javaFiles: ArrayList<String>, logJTextArea: JTextArea?, numThreads:Int): Model {
         val projectPath = "."
-        val numThreads = 6
         val executorService: ExecutorService = Executors.newFixedThreadPool(numThreads)
         log.info("Building model")
         val model = UMLFactory.eINSTANCE.createModel()
@@ -72,58 +75,57 @@ class JavaParserRunner() {
         // 1-й проход. Добавление в UML-модель пакетов и типов данных.
         //
         if (logJTextArea != null) logJTextArea.append("1st: adding packages and data types to model\n")
-        log.info("1st: adding packages and data types to model")
+        log.debug("1st: adding packages and data types to model")
         val mh1 = FileMessageHandler("$projectPath/messagesPass1.txt")
         val fileFutures = javaFiles.map { file ->
             CompletableFuture.runAsync({
                 val umlBuilderPass1 = CodeUMLBuilderPass1(model, mh1)
-                if (logJTextArea != null)
-                parseFile(file, mh1, umlBuilderPass1, logJTextArea)
-                else parseFile(file, mh1, umlBuilderPass1)
+                parseFile(file, mh1, umlBuilderPass1)
             }, executorService)
         }
         val allOf = CompletableFuture.allOf(*fileFutures.toTypedArray())
         allOf.join()
-
-//        val umlBuilderPass1 = CodeUMLBuilderPass1(model, mh1)
-//        if (logJTextArea != null)
-//        javaFiles.forEach { parseFile(it, mh1, umlBuilderPass1, logJTextArea) }
-//        else javaFiles.forEach { parseFile(it, mh1, umlBuilderPass1) }
 
         //
         // 2-й проход. Добавление в UML-модель элементов использующих пакеты и типы
         // данных.
         //
         if (logJTextArea != null) logJTextArea.append("2st: adding elements to model\n")
-        log.info("2st: adding elements to model")
+        log.debug("2st: adding elements to model")
         val mh2 = FileMessageHandler("$projectPath/messagesPass2.txt")
         val fileFutures2 = javaFiles.map { file ->
             CompletableFuture.runAsync({
                 val umlBuilderPass2 = CodeUMLBuilderPass2(model, mh2)
-                if (logJTextArea != null)
-                    parseFile(file, mh1, umlBuilderPass2, logJTextArea)
-                else parseFile(file, mh1, umlBuilderPass2)
+                parseFile(file, mh1, umlBuilderPass2)
             }, executorService)
         }
         val allOf2 = CompletableFuture.allOf(*fileFutures2.toTypedArray())
         allOf2.join()
-        executorService.close()
+        executorService.shutdown()
         return model
-
-//        val umlBuilderPass2 = CodeUMLBuilderPass2(model, mh2)
-//        if (logJTextArea != null)
-//        javaFiles.forEach { parseFile(it, mh2, umlBuilderPass2, logJTextArea) }
-//        else javaFiles.forEach { parseFile(it, mh2, umlBuilderPass2) }
-//        return model
     }
+    fun buildModel(modelName: String, javaFiles: ArrayList<String>, logJTextArea: JTextArea?): Model {
+        val projectPath = "."
+        log.info("Building model")
+        val model = UMLFactory.eINSTANCE.createModel()
+        model.name = modelName
 
-    private fun parseFile(fileName: String, messageHandler: IMessageHandler, umlBuilder: IUMLBuilder, logJTextArea: JTextArea) {
-        logJTextArea.append("Parsing file: $fileName\n")
-        parseFile(fileName, messageHandler, umlBuilder)
+        if (logJTextArea != null) logJTextArea.append("1st: adding packages and data types to model\n")
+        log.debug("1st: adding packages and data types to model")
+        val mh1 = FileMessageHandler("$projectPath/messagesPass1.txt")
+        val umlBuilderPass1 = CodeUMLBuilderPass1(model, mh1)
+        javaFiles.forEach { parseFile(it, mh1, umlBuilderPass1) }
+
+        if (logJTextArea != null) logJTextArea.append("2st: adding elements to model\n")
+        log.debug("2st: adding elements to model")
+        val mh2 = FileMessageHandler("$projectPath/messagesPass2.txt")
+        val umlBuilderPass2 = CodeUMLBuilderPass2(model, mh2)
+        javaFiles.forEach { parseFile(it, mh2, umlBuilderPass2) }
+        return model
     }
 
     private fun parseFile(fileName: String, messageHandler: IMessageHandler, umlBuilder: IUMLBuilder) {
-//        log.info("Parsing file: $fileName")
+        log.debug("Parsing file: $fileName")
         messageHandler.info(FileMessage("Parsing file:", fileName))
 
         try {
@@ -200,7 +202,7 @@ fun main() {
     val javaFiles = runner.collectFiles(sourcePath)
 
     // Build UML-model for these files.
-    val model =  runner.buildModel("JavaSampleModel", javaFiles)
+    val model =  runner.buildModel("JavaSampleModel", javaFiles, 4)
     println("Model end")
 
     //
