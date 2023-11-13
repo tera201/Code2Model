@@ -47,28 +47,32 @@ object UMLUtil {
     }
 
     fun getInterface(p: Package, name: String): Interface {
-        val owned: NamedElement? = p.getOwnedMember(name)
-        if (owned == null){
-            val newInterface = p.createOwnedInterface(name)
-            newInterface.createOwnedComment().body = "0"
-            newInterface.createOwnedComment().body = "0"
-            return newInterface
-        }
-        else {
-            return owned as Interface
+
+        synchronized(lock) {
+            val owned: NamedElement? = p.getOwnedMember(name)
+            if (owned == null) {
+                val newInterface = p.createOwnedInterface(name)
+                newInterface.createOwnedComment().body = "0"
+                newInterface.createOwnedComment().body = "0"
+                return newInterface
+            } else {
+                return owned as Interface
+            }
         }
     }
 
     fun getEnum(p: Package, name: String): Enumeration {
-        val owned: NamedElement? = p.getOwnedMember(name)
-        if (owned == null){
-            val newEnumeration = p.createOwnedEnumeration(name)
-            newEnumeration.createOwnedComment().body = "0"
-            newEnumeration.createOwnedComment().body = "0"
-            return newEnumeration
-        }
-        else {
-            return owned as Enumeration
+
+        synchronized(lock) {
+            val owned: NamedElement? = p.getOwnedMember(name)
+            if (owned == null) {
+                val newEnumeration = p.createOwnedEnumeration(name)
+                newEnumeration.createOwnedComment().body = "0"
+                newEnumeration.createOwnedComment().body = "0"
+                return newEnumeration
+            } else {
+                return owned as Enumeration
+            }
         }
     }
 
