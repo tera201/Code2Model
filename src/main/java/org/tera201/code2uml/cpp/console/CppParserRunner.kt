@@ -10,6 +10,7 @@ import org.antlr.v4.runtime.tree.ParseTreeWalker
 import org.apache.logging.log4j.LogManager
 import org.apache.logging.log4j.Logger
 import org.eclipse.emf.common.util.URI
+import org.eclipse.emf.ecore.EcoreFactory
 import org.eclipse.emf.ecore.resource.Resource
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl
@@ -32,10 +33,12 @@ import java.io.PrintStream
 class CppParserRunner() {
 
     private val log: Logger = LogManager.getLogger(CppParserRunner::class.java)
+    private var modelPath:String? = null
 
     class CppParserRunner() {}
 
     fun collectFiles(vararg paths: String): ArrayList<String> {
+        modelPath = paths[0]
         log.info("Collecting files from ${paths.toList()}")
         val cppFiles = ArrayList<String>()
 
@@ -52,6 +55,11 @@ class CppParserRunner() {
         log.info("Building model")
         val model = UMLFactory.eINSTANCE.createModel()
         model.name = modelName
+
+        val annotation = EcoreFactory.eINSTANCE.createEAnnotation()
+        annotation.source = "ResourcePath"
+        annotation.getDetails().put("path", modelPath);
+        model.eAnnotations.add(annotation)
 
         //
         // 1-й проход. Добавление в UML-модель пакетов и типов данных.
@@ -99,7 +107,7 @@ class CppParserRunner() {
             // потомок (класс - член класса/метод)
             val tree = parser.translationUnit()
             val walker = ParseTreeWalker()
-            val listener = CPP14TreeListener(parser, umlBuilder)
+            val listener = CPP14TreeListener(parser, umlBuilder, fileName)
             walker.walk(listener, tree)
         } catch (e: Exception) {
             e.printStackTrace()

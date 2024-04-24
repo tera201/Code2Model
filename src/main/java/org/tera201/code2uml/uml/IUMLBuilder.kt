@@ -15,17 +15,16 @@ interface IUMLBuilder {
 
     fun setName(modelName: String)
 
-    fun startPackage(packageName: String, byteSize: Int?)
+    fun startPackage(packageName: String, byteSize: Int?, filePath: String)
     fun endPackage()
 
-    fun startClass(builderClass: BuilderClass
-    )
+    fun startClass(builderClass: BuilderClass, filePath: String)
     fun endClass()
 
-    fun startInterface(interfaceBuilderInterface: BuilderInterface)
+    fun startInterface(interfaceBuilderInterface: BuilderInterface, filePath: String)
     fun endInterface()
 
-    fun startEnumeration(enumerationName: String)
+    fun startEnumeration(enumerationName: String, filePath: String)
     fun endEnumeration()
 
     fun addAttribute(attributeName: String, typeName: String): Property?

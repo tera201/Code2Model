@@ -1,18 +1,16 @@
 package org.tera201.code2uml.uml.builders
 
 import org.eclipse.emf.common.util.EList
-import org.eclipse.uml2.uml.Class
-import org.eclipse.uml2.uml.Interface
-import org.eclipse.uml2.uml.Model
-import org.eclipse.uml2.uml.Operation
-import org.eclipse.uml2.uml.Package
-import org.eclipse.uml2.uml.Property
+import org.eclipse.emf.ecore.EAnnotation
+import org.eclipse.emf.ecore.EcoreFactory
+import org.eclipse.uml2.uml.*
 import org.tera201.code2uml.uml.IUMLBuilder
 import org.tera201.code2uml.uml.helpers.BuilderClass
 import org.tera201.code2uml.uml.helpers.BuilderInterface
 import org.tera201.code2uml.uml.util.UMLUtil
 import org.tera201.code2uml.util.messages.IMessageHandler
 import java.util.*
+
 
 class CodeUMLBuilderPass1(override val model: Model, val mh: IMessageHandler) : IUMLBuilder {
     private var currentPackage: Package = model
@@ -24,10 +22,11 @@ class CodeUMLBuilderPass1(override val model: Model, val mh: IMessageHandler) : 
         model.name = modelName
     }
 
-    override fun startPackage(packageName: String, byteSize: Int?) {
+    override fun startPackage(packageName: String, byteSize: Int?, filePath: String) {
         if (packageStack.empty()) packageStack.push(packageName)
         else packageStack.push("${packageStack.peek()}.$packageName")
         currentPackage = UMLUtil.getPackage(currentPackage, packageStack.peek().split(".").get(packageStack.size - 1))
+        currentPackage.eAnnotations.add(getPathAnnotation(filePath.substringBeforeLast("/")))
         currentPackage.createOwnedComment()?.setBody(byteSize.toString())
     }
 
@@ -38,23 +37,26 @@ class CodeUMLBuilderPass1(override val model: Model, val mh: IMessageHandler) : 
         else model
     }
 
-    override fun startClass(builderClass: BuilderClass
-    ) {
+    override fun startClass(builderClass: BuilderClass, filePath: String) {
         if (!builderClass.isNested) {
-        currentClass = UMLUtil.getClass(currentPackage, builderClass.name)
-        currentClass?.setIsAbstract(builderClass.modifiers.isAbstract)
+            currentClass = UMLUtil.getClass(currentPackage, builderClass.name)
+            currentClass?.setIsAbstract(builderClass.modifiers.isAbstract)
+            currentClass?.eAnnotations?.add(getPathAnnotation(filePath))
+
         }
     }
 
     override fun endClass() {}
 
-    override fun startInterface(interfaceBuilderInterface: BuilderInterface) {
+    override fun startInterface(interfaceBuilderInterface: BuilderInterface, filePath: String) {
         currentInterface = UMLUtil.getInterface(currentPackage, interfaceBuilderInterface.name)
+        currentInterface?.eAnnotations?.add(getPathAnnotation(filePath))
     }
 
     override fun endInterface() {}
-    override fun startEnumeration(enumerationName: String) {
-        UMLUtil.getEnum(currentPackage, enumerationName)
+    override fun startEnumeration(enumerationName: String, filePath: String) {
+        val enumeration = UMLUtil.getEnum(currentPackage, enumerationName)
+        enumeration.eAnnotations?.add(getPathAnnotation(filePath))
     }
 
     override fun endEnumeration() {}
@@ -68,4 +70,11 @@ class CodeUMLBuilderPass1(override val model: Model, val mh: IMessageHandler) : 
     override fun addParameter(parName: String, typeName: String) {}
     override fun endMethod() {}
     override fun addClassSize(byteSize: Int?) {}
+
+    private fun getPathAnnotation(filePath: String): EAnnotation {
+        val annotation = EcoreFactory.eINSTANCE.createEAnnotation()
+        annotation.source = "ResourcePath"
+        annotation.getDetails().put("path", filePath);
+        return annotation
+    }
 }

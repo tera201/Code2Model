@@ -12,6 +12,7 @@ import org.tera201.code2uml.uml.helpers.BuilderInterface
 class CPP14TreeListener(
     val parser: CPP14Parser,
     private val umlBuilder: IUMLBuilder,
+    private val filePath: String,
 ) : CPP14ParserBaseListener() {
 
     enum class ClassType {
@@ -40,7 +41,7 @@ class CPP14TreeListener(
      */
     override fun enterNamespaceDefinition(ctx: CPP14Parser.NamespaceDefinitionContext?) {
         val packageName = ctx!!.Identifier().text
-        umlBuilder.startPackage(packageName, ctx.text?.toByteArray()?.size)
+        umlBuilder.startPackage(packageName, ctx.text?.toByteArray()?.size, filePath)
     }
 
     override fun exitNamespaceDefinition(ctx: CPP14Parser.NamespaceDefinitionContext?) {
@@ -55,7 +56,7 @@ class CPP14TreeListener(
      */
     override fun enterOriginalNamespaceName(ctx: OriginalNamespaceNameContext?) {
         val packageName = ctx!!.Identifier().text
-        umlBuilder.startPackage(packageName, 0)
+        umlBuilder.startPackage(packageName, 0, filePath)
     }
 
     override fun exitOriginalNamespaceName(ctx: OriginalNamespaceNameContext?) {
@@ -86,9 +87,9 @@ class CPP14TreeListener(
         val builderClass = BuilderClass(className, isAbstact, false)
 
         // Добавление класса\интерфейса в модель
-        if (classType == ClassType.INTERFACE) umlBuilder.startInterface(BuilderInterface(className))
+        if (classType == ClassType.INTERFACE) umlBuilder.startInterface(BuilderInterface(className), filePath)
         else umlBuilder.startClass(
-            builderClass
+            builderClass, filePath
         )
 
         // Добавление родителей классу в моделе
@@ -97,8 +98,8 @@ class CPP14TreeListener(
                 val classParentModyfier = parentClass.accessSpecifier().text
                 val classParentName = parentClass.baseTypeSpecifier().text
                 val builderClass = BuilderClass(className, isAbstact, classParentName, false)
-                if (classType == ClassType.INTERFACE) umlBuilder.startInterface(BuilderInterface(className, listOf(classParentName)))
-                else umlBuilder.startClass(builderClass)
+                if (classType == ClassType.INTERFACE) umlBuilder.startInterface(BuilderInterface(className, listOf(classParentName)), filePath)
+                else umlBuilder.startClass(builderClass, filePath)
             }
         }
         umlBuilder.addClassSize(ctx?.text?.toByteArray()?.size)

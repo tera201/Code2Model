@@ -10,6 +10,7 @@ import org.antlr.v4.runtime.tree.ParseTreeWalker
 import org.apache.logging.log4j.LogManager
 import org.apache.logging.log4j.Logger
 import org.eclipse.emf.common.util.URI
+import org.eclipse.emf.ecore.EcoreFactory
 import org.eclipse.emf.ecore.resource.Resource
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl
@@ -39,10 +40,12 @@ import javax.swing.JTextArea
 class JavaParserRunner() {
 
     private val log: Logger = LogManager.getLogger(JavaParserRunner::class.java)
+    private var modelPath:String? = null
 
     class JavaParserRunner() {}
 
     fun collectFiles(vararg paths: String): ArrayList<String> {
+        modelPath = paths[0]
         log.info("Collecting files from ${paths.toList()}")
         val cppFiles = ArrayList<String>()
 
@@ -70,6 +73,11 @@ class JavaParserRunner() {
         log.info("Building model")
         val model = UMLFactory.eINSTANCE.createModel()
         model.name = modelName
+
+        val annotation = EcoreFactory.eINSTANCE.createEAnnotation()
+        annotation.source = "ResourcePath"
+        annotation.getDetails().put("path", modelPath);
+        model.eAnnotations.add(annotation)
 
         //
         // 1-й проход. Добавление в UML-модель пакетов и типов данных.
@@ -109,6 +117,11 @@ class JavaParserRunner() {
         log.info("Building model")
         val model = UMLFactory.eINSTANCE.createModel()
         model.name = modelName
+
+        val annotation = EcoreFactory.eINSTANCE.createEAnnotation()
+        annotation.source = "ResourcePath"
+        annotation.getDetails().put("path", modelPath);
+        model.eAnnotations.add(annotation)
 
         if (logJTextArea != null) logJTextArea.append("1st: adding packages and data types to model\n")
         log.debug("1st: adding packages and data types to model")
@@ -150,7 +163,7 @@ class JavaParserRunner() {
             // потомок (класс - член класса/метод)
             val tree = parser.compilationUnit()
             val walker = ParseTreeWalker()
-            val listener = Java20TreeListener(parser, umlBuilder)
+            val listener = Java20TreeListener(parser, umlBuilder, fileName)
             walker.walk(listener, tree)
         } catch (e: Exception) {
             e.printStackTrace()
@@ -264,5 +277,4 @@ object UML2HTMLReporter {
 private fun test(fileName: String) =
     fileName.endsWith(".java") and
             !fileName.contains("/test/") and
-            !fileName.contains("/jvm/") and
-            !fileName.contains("benchmark")
+            !fileName.contains("/jvm/")

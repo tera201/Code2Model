@@ -22,7 +22,7 @@ class CodeUMLBuilderPass2(override val model: Model, val mh: IMessageHandler) : 
 
     override fun setName(modelName: String) {}
 
-    override fun startPackage(packageName: String, byteSize: Int?) {
+    override fun startPackage(packageName: String, byteSize: Int?, filePath: String) {
         if (packageStack.empty()) packageStack.push(packageName)
         else packageStack.push("${packageStack.peek()}.$packageName")
         currentPackage = UMLUtil.getPackage(model, packageStack.peek())
@@ -35,7 +35,7 @@ class CodeUMLBuilderPass2(override val model: Model, val mh: IMessageHandler) : 
         else model
     }
 
-    override fun startClass(builderClass: BuilderClass) {
+    override fun startClass(builderClass: BuilderClass, filePath: String) {
         if (!builderClass.isNested) {
             currentClass = UMLUtil.getClass(currentPackage, builderClass.name)
             currentClass?.setIsAbstract(builderClass.modifiers.isAbstract)
@@ -66,7 +66,7 @@ class CodeUMLBuilderPass2(override val model: Model, val mh: IMessageHandler) : 
 
     override fun endClass() {}
 
-    override fun startInterface(interfaceBuilderInterface: BuilderInterface) {
+    override fun startInterface(interfaceBuilderInterface: BuilderInterface, filePath: String) {
         currentInterface = UMLUtil.getInterface(currentPackage, interfaceBuilderInterface.name)
         interfaceBuilderInterface.parentsNameList?.forEach {
             val parent: Interface = UMLUtil.getInterface(currentPackage, it)
@@ -76,7 +76,7 @@ class CodeUMLBuilderPass2(override val model: Model, val mh: IMessageHandler) : 
     }
 
     override fun endInterface() {}
-    override fun startEnumeration(enumerationName: String) {}
+    override fun startEnumeration(enumerationName: String, filePath: String) {}
     override fun endEnumeration() {}
 
     override fun addAttribute(attributeName: String, typeName: String): Property? {
