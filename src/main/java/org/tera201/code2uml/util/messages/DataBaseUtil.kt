@@ -10,11 +10,10 @@ class DataBaseUtil(url:String) {
     var conn: Connection
     init {
         try {
-            DriverManager.getConnection("jdbc:sqlite:" + url).use { conn ->
-                if (conn != null) {
-//                    println("A new database has been created.")
-                }
-            }
+//            DriverManager.getConnection("jdbc:sqlite:" + url).use { conn ->
+////                if (conn != null) {
+////                }
+//            }
             createTables("jdbc:sqlite:" + url)
         } catch (e: SQLException) {
             println(e.message)
@@ -34,13 +33,10 @@ class DataBaseUtil(url:String) {
                     stmt.executeQuery(sqlLastId).use { rs ->
                         if (rs.next()) {
                             val insertedId = rs.getInt(1)
-//                            println("A new model was inserted with ID: $insertedId")
                             return insertedId
                         }
                     }
                 }
-            } else {
-//                println("The model already exists and was not inserted: $name")
             }
         }
         return -1
@@ -56,7 +52,6 @@ class DataBaseUtil(url:String) {
                     val id = rs.getInt("id")
                     return id
                 } else {
-//                    println("No record found with modelName: $modelName")
                     return null
                 }
             }
@@ -70,10 +65,8 @@ class DataBaseUtil(url:String) {
             pstmt.executeQuery().use { rs ->
                 if (rs.next()) {
                     val id = rs.getInt("id")
-//                    println("Found ID: $id for name: $name and filePath: $filePath")
                     return id
                 } else {
-//                    println("No record found with package: $packageName")
                     return null
                 }
             }
@@ -100,13 +93,10 @@ class DataBaseUtil(url:String) {
                     stmt.executeQuery(sqlLastId).use { rs ->
                         if (rs.next()) {
                             val insertedId = rs.getInt(1)
-//                            println("A new package was inserted with ID: $insertedId")
                             return insertedId
                         }
                     }
                 }
-            } else {
-//                println("No new package was inserted, likely already exists.")
             }
         }
         return -1 // return an invalid ID if no new record was inserted
@@ -119,12 +109,7 @@ class DataBaseUtil(url:String) {
         conn.prepareStatement(sqlInsert).use { pstmt ->
             pstmt.setInt(1, packageParentId)
             pstmt.setInt(2, packageChildId)
-            val affectedRows = pstmt.executeUpdate()
-            if (affectedRows > 0) {
-//                println("A new package relationship was inserted with ID -> ID: $packageParentId -> $packageChildId")
-                } else {
-//                println("No new package was inserted, likely already exists.")
-            }
+            pstmt.executeUpdate()
         }
     }
 
@@ -150,13 +135,10 @@ class DataBaseUtil(url:String) {
                     stmt.executeQuery(sqlLastId).use { rs ->
                         if (rs.next()) {
                             val insertedId = rs.getInt(1)
-//                            println("A new class was inserted with ID: $insertedId")
                             return insertedId
                         }
                     }
                 }
-            } else {
-//                println("No new class was inserted, likely already exists.")
             }
         }
         return -1 // return an invalid ID if no new record was inserted
@@ -171,7 +153,6 @@ class DataBaseUtil(url:String) {
                     val id = rs.getInt("id")
                     return id
                 } else {
-//                    println("No record found with name: $name")
                     return null
                 }
             }
@@ -186,10 +167,8 @@ class DataBaseUtil(url:String) {
             pstmt.executeQuery().use { rs ->
                 if (rs.next()) {
                     val id = rs.getInt("id")
-//                    println("Found ID: $id for name: $name and filePath: $filePath")
                     return id
                 } else {
-//                    println("No record found with name: $name and filePath: $filePath")
                     return null
                 }
             }
@@ -205,14 +184,50 @@ class DataBaseUtil(url:String) {
             pstmt.setInt(1, type)
             pstmt.setInt(2, modificator)
             pstmt.setInt(3, classId)
-            val affectedRows = pstmt.executeUpdate()
-            if (affectedRows > 0) {
-//                println("Class updated successfully.")
-            } else {
-//                println("No class was updated. Check if the ID is correct.")
-            }
+            pstmt.executeUpdate()
         }
     }
+
+    fun updateSizeForInterface(id: Int, size: Int) {
+        updateSize(id, size, "Interfaces")
+    }
+
+    fun updateSizeForClass(id: Int, size: Int) {
+        updateSize(id, size, "Classes")
+    }
+
+    fun updateSize(id: Int, size: Int, table: String) {
+        val sqlUpdate = """
+        UPDATE $table SET size = ? WHERE id = ?
+    """.trimIndent()
+
+        conn.prepareStatement(sqlUpdate).use { pstmt ->
+            pstmt.setInt(1, size)
+            pstmt.setInt(2, id)
+            pstmt.executeUpdate()
+        }
+    }
+
+    fun addSizeForInterface(id: Int, size: Int) {
+        addSize(id, size, "Interfaces")
+    }
+
+    fun addSizeForClass(id: Int, size: Int) {
+        addSize(id, size, "Classes")
+    }
+
+    fun addSize(id: Int, size: Int, table: String) {
+        val sqlUpdate = """
+        UPDATE $table SET size = size + ? WHERE id = ?
+    """.trimIndent()
+
+        conn.prepareStatement(sqlUpdate).use { pstmt ->
+            pstmt.setInt(1, size)
+            pstmt.setInt(2, id)
+            pstmt.executeUpdate()
+        }
+    }
+
     fun insertClassRelationShip(classId: Int, interfaceId: Int?, parentClassId:Int?) {
         if (interfaceId == null && parentClassId == null) return
         val sqlInsert = """
@@ -222,12 +237,7 @@ class DataBaseUtil(url:String) {
             pstmt.setInt(1, classId)
             pstmt.setIntOrNull(2, interfaceId)
             pstmt.setIntOrNull(3, parentClassId)
-            val affectedRows = pstmt.executeUpdate()
-            if (affectedRows > 0) {
-//                println("A new class relationship for ID: $classId")
-            } else {
-//                println("No new class relationship was inserted, likely already exists.")
-            }
+            pstmt.executeUpdate()
         }
     }
 
@@ -251,13 +261,10 @@ class DataBaseUtil(url:String) {
                     stmt.executeQuery(sqlLastId).use { rs ->
                         if (rs.next()) {
                             val insertedId = rs.getInt(1)
-//                            println("A new interface was inserted with ID: $insertedId")
                             return insertedId
                         }
                     }
                 }
-            } else {
-//                println("No new interface was inserted, likely already exists.")
             }
         }
         return -1 // return an invalid ID if no new record was inserted
@@ -271,10 +278,8 @@ class DataBaseUtil(url:String) {
             pstmt.executeQuery().use { rs ->
                 if (rs.next()) {
                     val id = rs.getInt("id")
-//                    println("Found ID: $id for name: $name and filePath: $filePath")
                     return id
                 } else {
-//                    println("No record found with name: $name and filePath: $filePath")
                     return null
                 }
             }
@@ -290,10 +295,20 @@ class DataBaseUtil(url:String) {
                     val id = rs.getInt("id")
                     return id
                 } else {
-//                    println("No record found with name: $name")
                     return null
                 }
             }
+        }
+    }
+
+    fun insertInterfaceRelationShip(interfaceId: Int, parentInterfaceId: Int) {
+        val sqlInsert = """
+        INSERT OR IGNORE INTO InterfaceRelationship(interfaceId, parentInterfaceId) VALUES(?, ?)
+    """.trimIndent()
+        conn.prepareStatement(sqlInsert).use { pstmt ->
+            pstmt.setInt(1, interfaceId)
+            pstmt.setInt(2, parentInterfaceId)
+            pstmt.executeUpdate()
         }
     }
 
@@ -315,13 +330,10 @@ class DataBaseUtil(url:String) {
                     stmt.executeQuery(sqlLastId).use { rs ->
                         if (rs.next()) {
                             val insertedId = rs.getInt(1)
-//                            println("A new enumeration was inserted with ID: $insertedId")
                             return insertedId
                         }
                     }
                 }
-            } else {
-//                println("No new enumeration was inserted, likely already exists.")
             }
         }
         return -1 // return an invalid ID if no new record was inserted
@@ -337,14 +349,31 @@ class DataBaseUtil(url:String) {
                     val id = rs.getInt("id")
                     return id
                 } else {
-//                    println("No record found with name: $name and filePath: $filePath")
                     return null
                 }
             }
         }
     }
 
+    fun insertMethod(name: String, type:String, modelId: Int, packageId: Int, classId: Int?, interfaceId: Int?) {
+        if (classId == null && interfaceId == null) return
+        val sqlInsert = """
+        INSERT OR IGNORE INTO Methods(name, type, modelId, packageId, classId, interfaceId) VALUES(?, ?, ?, ?, ?, ?)
+    """.trimIndent()
+
+        conn.prepareStatement(sqlInsert).use { pstmt ->
+            pstmt.setString(1, name)
+            pstmt.setString(2, type)
+            pstmt.setInt(3, modelId)
+            pstmt.setInt(4, packageId)
+            pstmt.setIntOrNull(5, classId)
+            pstmt.setIntOrNull(6, interfaceId)
+            pstmt.executeUpdate()
+        }
+    }
+
 }
+
 fun main() {
     var projectPath = "."
     val projectDir = File(projectPath).canonicalFile

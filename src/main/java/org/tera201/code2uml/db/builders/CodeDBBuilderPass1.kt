@@ -1,14 +1,11 @@
-package org.tera201.code2uml.uml.builders
+package org.tera201.code2uml.db.builders
 
 import org.eclipse.emf.common.util.EList
 import org.eclipse.emf.ecore.EAnnotation
 import org.eclipse.emf.ecore.EcoreFactory
-import org.eclipse.uml2.uml.*
 import org.tera201.code2uml.uml.DBBuilder
-import org.tera201.code2uml.uml.IUMLBuilder
 import org.tera201.code2uml.uml.helpers.BuilderClass
 import org.tera201.code2uml.uml.helpers.BuilderInterface
-import org.tera201.code2uml.uml.util.UMLUtil
 import org.tera201.code2uml.util.messages.DataBaseUtil
 import org.tera201.code2uml.util.messages.IMessageHandler
 import java.util.*
@@ -87,15 +84,12 @@ class CodeDBBuilderPass1(override val model: Int, val mh: IMessageHandler, overr
 
     override fun endEnumeration() {}
 
-    override fun addAttribute(attributeName: String, typeName: String): Property? {
-//        UMLUtil.getType(model, typeName)
-        return null
-    }
+    override fun addAttribute(attributeName: String, typeName: String) {}
 
-    override fun startMethod(funType: String, funName: String, typeList: EList<String>, argList: EList<String>, isVirtual: Boolean): Operation? = null
+    override fun startMethod(funType: String, funName: String, typeList: EList<String>, argList: EList<String>, isVirtual: Boolean) {}
     override fun addParameter(parName: String, typeName: String) {}
     override fun endMethod() {}
-    override fun addClassSize(byteSize: Int?) {}
+    override fun addClassSize(byteSize: Int) {}
 
     private fun getPathAnnotation(filePath: String): EAnnotation {
         val annotation = EcoreFactory.eINSTANCE.createEAnnotation()

@@ -73,6 +73,24 @@ fun createTables(url: String) {
         );
     """.trimIndent()
 
+    val sqlCreateMethod = """
+        CREATE TABLE IF NOT EXISTS Methods (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            name TEXT NOT NULL,
+            type TEXT NOT NULL,
+            modelId INTEGER,
+            packageId INTEGER,
+            classId INTEGER,
+            interfaceId INTEGER,
+            FOREIGN KEY (modelId) REFERENCES Models(id),
+            FOREIGN KEY (packageId) REFERENCES Packages(id),
+            FOREIGN KEY (classId) REFERENCES Classes(id),
+            FOREIGN KEY (interfaceId) REFERENCES Interfaces(id),
+            UNIQUE (name, modelId, packageId, classId),
+            UNIQUE (name, modelId, packageId, interfaceId) 
+        );
+    """.trimIndent()
+
     val sqlCreatePackageRelationship = """
         CREATE TABLE IF NOT EXISTS PackageRelationship (
             packageParentId INTEGER,
@@ -114,6 +132,7 @@ fun createTables(url: String) {
                 stmt.execute(sqlCreateClass)
                 stmt.execute(sqlCreateInterface)
                 stmt.execute(sqlCreateEnumeration)
+                stmt.execute(sqlCreateMethod)
                 stmt.execute(sqlCreatePackageRelationship)
                 stmt.execute(sqlCreateClassRelationship)
                 stmt.execute(sqlCreateInterfaceRelationship)
@@ -131,6 +150,7 @@ fun dropTables(url: String) {
     val sqlDropClasses = "DROP TABLE IF EXISTS Classes"
     val sqlDropInterfaces = "DROP TABLE IF EXISTS Interfaces"
     val sqlDropEnumerations = "DROP TABLE IF EXISTS Enumerations"
+    val sqlDropMethods = "DROP TABLE IF EXISTS Methods"
     val sqlDropPackageRelationship = "DROP TABLE IF EXISTS PackageRelationship"
     val sqlDropClassRelationship = "DROP TABLE IF EXISTS ClassRelationship"
     val sqlDropInterfaceRelationship = "DROP TABLE IF EXISTS InterfaceRelationship"
@@ -143,6 +163,7 @@ fun dropTables(url: String) {
                 stmt.execute(sqlDropClasses)
                 stmt.execute(sqlDropInterfaces)
                 stmt.execute(sqlDropEnumerations)
+                stmt.execute(sqlDropMethods)
                 stmt.execute(sqlDropPackageRelationship)
                 stmt.execute(sqlDropClassRelationship)
                 stmt.execute(sqlDropInterfaceRelationship)

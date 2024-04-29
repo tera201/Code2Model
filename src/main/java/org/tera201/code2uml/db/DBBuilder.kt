@@ -29,10 +29,10 @@ interface DBBuilder {
     fun startEnumeration(enumerationName: String, filePath: String)
     fun endEnumeration()
 
-    fun addAttribute(attributeName: String, typeName: String): Property?
+    fun addAttribute(attributeName: String, typeName: String)
 
-    fun startMethod(funType: String, funName: String, typeList: EList<String>, argList: EList<String>, isVirtual: Boolean): Operation?
+    fun startMethod(funType: String, funName: String, typeList: EList<String>, argList: EList<String>, isVirtual: Boolean)
     fun addParameter(parName: String, typeName: String)
     fun endMethod()
-    fun addClassSize(byteSize: Int?)
+    fun addClassSize(byteSize: Int)
 }

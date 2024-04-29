@@ -82,7 +82,7 @@ class Java20DBTreeListener(
         val isNested =  ctx.getParent()?.getParent()?.getParent()?.text?.startsWith("package")?.not() == true
         val builderClass = BuilderClass(builderImports, className, builderModifiers, null, interfaceList, isNested)
         dbBuilder.startClass(builderClass, filePath)
-        dbBuilder.addClassSize(ctx.text?.toByteArray()?.size)
+        ctx.text?.toByteArray()?.size?.let { dbBuilder.addClassSize(it) }
     }
 
     override fun enterNormalClassDeclaration(ctx: Java20Parser.NormalClassDeclarationContext?) {
@@ -95,7 +95,7 @@ class Java20DBTreeListener(
         val builderModifiers = getBuilderClassModifier(ctx.classModifier())
         val builderClass = BuilderClass(builderImports, className, builderModifiers, extendName, interfaceList, isNested)
         dbBuilder.startClass(builderClass, filePath)
-        dbBuilder.addClassSize(ctx.text?.toByteArray()?.size)
+        ctx.text?.toByteArray()?.size?.let { dbBuilder.addClassSize(it) }
     }
 
     override fun exitClassDeclaration(ctx: Java20Parser.ClassDeclarationContext?) {
@@ -116,7 +116,7 @@ class Java20DBTreeListener(
         val modifiers = getBuilderInterfaceModifier(ctx.interfaceModifier())
         val builderInterface = BuilderInterface(builderImports, interfaceName, modifiers, parentList, isNested)
         dbBuilder.startInterface(builderInterface, filePath)
-        dbBuilder.addClassSize(ctx.text?.toByteArray()?.size)
+        ctx.text?.toByteArray()?.size?.let { dbBuilder.addClassSize(it) }
     }
 
     override fun enterEnumDeclaration(ctx: Java20Parser.EnumDeclarationContext?) {

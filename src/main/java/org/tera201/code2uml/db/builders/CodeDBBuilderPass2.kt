@@ -1,14 +1,11 @@
-package org.tera201.code2uml.uml.builders
+package org.tera201.code2uml.db.builders
 
-import org.eclipse.emf.common.util.BasicEList
 import org.eclipse.emf.common.util.EList
 import org.eclipse.uml2.uml.*
 import org.eclipse.uml2.uml.internal.impl.UMLFactoryImpl
 import org.tera201.code2uml.uml.DBBuilder
-import org.tera201.code2uml.uml.IUMLBuilder
 import org.tera201.code2uml.uml.helpers.BuilderClass
 import org.tera201.code2uml.uml.helpers.BuilderInterface
-import org.tera201.code2uml.uml.util.UMLUtil
 import org.tera201.code2uml.util.messages.DataBaseUtil
 import org.tera201.code2uml.util.messages.IMessageHandler
 import java.util.*
@@ -18,7 +15,7 @@ class CodeDBBuilderPass2(override val model: Int, val mh: IMessageHandler, overr
     private var currentClass: Int? = null
     private var currentNestedClass: Int? = null
     private var currentInterface: Int? = null
-    private var currentOwner: Int? = null
+    private var currentOwner: Type? = null
     private var packageStackId: Stack<String> = Stack()
     private var packageStackName: Stack<String> = Stack()
     private val umlFactoryImpl = UMLFactoryImpl()
@@ -44,6 +41,7 @@ class CodeDBBuilderPass2(override val model: Int, val mh: IMessageHandler, overr
     override fun startClass(builderClass: BuilderClass, filePath: String) {
         if (!builderClass.isNested) {
             currentClass = dataBaseUtil.getClassIdByNameAndFilePath(builderClass.name, filePath)
+            currentOwner = Type.CLASS
             builderClass.interfaceList?.forEach {
                 currentClass?.let { it1 -> dataBaseUtil.insertClassRelationShip(it1, dataBaseUtil.getInterfaceIdByName(it.substringBefore("<")), null) }
             }
@@ -54,6 +52,7 @@ class CodeDBBuilderPass2(override val model: Int, val mh: IMessageHandler, overr
                 currentClass?.let { dataBaseUtil.insertClassRelationShip(it, null, dataBaseUtil.getClassIdByName(builderClass.parentName.substringBefore("<"))) }
             }
         } else {
+            currentOwner = null
 //            val nestedClass: Class = umlFactoryImpl.createClass()
 //            nestedClass.createOwnedComment().body = "0"
 //            nestedClass.createOwnedComment().body = "0"
@@ -67,58 +66,42 @@ class CodeDBBuilderPass2(override val model: Int, val mh: IMessageHandler, overr
     override fun endClass() {}
 
     override fun startInterface(interfaceBuilderInterface: BuilderInterface, filePath: String) {
-//        currentInterface = UMLUtil.getInterface(currentPackage, interfaceBuilderInterface.name)
-//        interfaceBuilderInterface.parentsNameList?.forEach {
-//            val parent: Interface = UMLUtil.getInterface(currentPackage, it)
-//            currentInterface!!.createGeneralization(parent)
-//        }
-//        currentOwner = currentPackage.getOwnedMember(interfaceBuilderInterface.name)
+        currentInterface = dataBaseUtil.getInterfaceIdByNameAndFilePath(interfaceBuilderInterface.name, filePath)
+        currentOwner = Type.INTERFACE
+        interfaceBuilderInterface.parentsNameList?.forEach {
+            val interfaceId = dataBaseUtil.getInterfaceIdByName(it)
+            currentInterface?.let { it1 ->
+                if (interfaceId != null) {
+                    dataBaseUtil.insertInterfaceRelationShip(it1, interfaceId)
+                }
+            }
+        }
     }
 
     override fun endInterface() {}
     override fun startEnumeration(enumerationName: String, filePath: String) {}
     override fun endEnumeration() {}
 
-    override fun addAttribute(attributeName: String, typeName: String): Property? {
-        var property: Property? = null
-//        val type: Type? = UMLUtil.getType(model, typeName)
-//
-//        if (type != null) {
-//            property = UMLFactory.eINSTANCE.createProperty()
-//            property.type = type
-//            property.name = typeName
-//            if (currentOwner?.name  == currentClass?.name) currentClass?.createOwnedAttribute(attributeName, type)
-//            else if (currentOwner?.name  == currentInterface?.name) currentInterface?.
-//                createOwnedAttribute(attributeName, type)
-//            else if (currentOwner == null && currentNestedClass != null) currentNestedClass?.
-//                createOwnedAttribute(attributeName, type)
-//        }
-        return property
+    override fun addAttribute(attributeName: String, typeName: String) {}
+
+    override fun startMethod(funType: String, funName: String, typeList: EList<String>, argList: EList<String>, isVirtual: Boolean) {
+        if(currentOwner == Type.CLASS)
+            currentPackage?.let { dataBaseUtil.insertMethod(funName, funType, model, it, currentClass, null) }
+        else if (currentOwner == Type.INTERFACE)
+            currentPackage?.let { dataBaseUtil.insertMethod(funName, funType, model, it, null, currentInterface) }
     }
 
-    override fun startMethod(funType: String, funName: String, typeList: EList<String>, argList: EList<String>, isVirtual: Boolean): Operation? {
-        val op: Operation? = null
-//        val type: Type? = UMLUtil.getType(model, funType)
-//        val types: BasicEList<Type> = BasicEList()
-//        for (i in typeList){
-//            types.add(UMLUtil.getType(model, i))
-//        }
-//        val current = if (currentOwner is Class) currentOwner as Class else if (currentOwner is Interface) currentOwner as Interface else currentNestedClass
-//        if (type != null) {
-//            op = current?.createOwnedOperation(funName, argList, types, type)
-//        }
-//        else {
-//            op = current?.createOwnedOperation(funName, argList, types)
-//        }
-//        if (isVirtual) op?.setIsAbstract(isVirtual);
-//        current?.ownedComments!![1].setBody((current.ownedComments!![1].body.toInt() + 1).toString())
-////        }
-        return op
-    }
-
-    override fun  addClassSize(byteSize: Int?) {
-//        currentOwner?.ownedComments?.get(0)?.setBody((currentOwner!!.ownedComments[0].body.toInt() + byteSize!!).toString())
+    override fun  addClassSize(byteSize: Int) {
+        if(currentOwner == Type.CLASS)
+            currentClass?.let { dataBaseUtil.updateSizeForClass(it, byteSize) }
+        else if (currentOwner == Type.INTERFACE)
+            currentInterface?.let { dataBaseUtil.updateSizeForInterface(it, byteSize) }
     }
     override fun addParameter(parName: String, typeName: String) {}
     override fun endMethod() {}
+}
+
+enum class Type {
+    CLASS,
+    INTERFACE
 }

@@ -1,7 +1,7 @@
 package org.tera201.code2uml.java20.console
 
 import org.tera201.code2uml.cpp.parser.CPP14ErrorListener
-import org.tera201.code2uml.java20.parser.Java20TreeListener
+import org.tera201.code2uml.java20.parser.Java20DBTreeListener
 import org.tera201.code2uml.java20.parser.generated.Java20Lexer
 import org.tera201.code2uml.java20.parser.generated.Java20Parser
 import org.antlr.v4.runtime.CharStreams
@@ -9,30 +9,12 @@ import org.antlr.v4.runtime.CommonTokenStream
 import org.antlr.v4.runtime.tree.ParseTreeWalker
 import org.apache.logging.log4j.LogManager
 import org.apache.logging.log4j.Logger
-import org.eclipse.emf.common.util.URI
-import org.eclipse.emf.ecore.EcoreFactory
-import org.eclipse.emf.ecore.resource.Resource
-import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl
-import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl
-import org.eclipse.uml2.uml.Model
-import org.eclipse.uml2.uml.UMLFactory
-import org.eclipse.uml2.uml.internal.impl.ModelImpl
-import org.tera201.code2uml.java20.parser.Java20DBTreeListener
 import org.tera201.code2uml.uml.DBBuilder
-import org.tera201.code2uml.uml.IUMLBuilder
-import org.tera201.code2uml.uml.builders.CodeDBBuilderPass1
-import org.tera201.code2uml.uml.builders.CodeDBBuilderPass2
-import org.tera201.code2uml.uml.builders.CodeUMLBuilderPass1
-import org.tera201.code2uml.uml.builders.CodeUMLBuilderPass2
-import org.tera201.code2uml.uml.decompiler.generateCpp
-import org.tera201.code2uml.uml.decompiler.toKotlin
-import org.tera201.code2uml.uml.util.UMLModelHandler
+import org.tera201.code2uml.db.builders.CodeDBBuilderPass1
+import org.tera201.code2uml.db.builders.CodeDBBuilderPass2
 import org.tera201.code2uml.uml.util.clearPackageDir
 import org.tera201.code2uml.util.FilesUtil
-import org.tera201.code2uml.util.messages.DataBaseUtil
-import org.tera201.code2uml.util.messages.FileMessage
-import org.tera201.code2uml.util.messages.FileMessageHandler
-import org.tera201.code2uml.util.messages.IMessageHandler
+import org.tera201.code2uml.util.messages.*
 import java.io.File
 import java.io.IOException
 import java.io.PrintStream
@@ -211,6 +193,7 @@ fun main() {
 
     // Build UML-model for these files.
     val model =  runner.buildModel(dataBaseUtil, "JavaSampleModel", javaFiles, 4)
+    println(dataBaseUtil.getClass(1))
 
     //
     // Generate C++ code.
