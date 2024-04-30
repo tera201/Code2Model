@@ -16,8 +16,10 @@ import org.tera201.code2uml.uml.util.clearPackageDir
 import org.tera201.code2uml.util.FilesUtil
 import org.tera201.code2uml.util.messages.*
 import java.io.File
+import java.io.FileInputStream
 import java.io.IOException
 import java.io.PrintStream
+import java.security.MessageDigest
 import java.util.concurrent.CompletableFuture
 import java.util.concurrent.ExecutorService
 import java.util.concurrent.Executors
@@ -42,74 +44,59 @@ class JavaParserRunnerDB() {
     }
 
 
-    fun buildModel(dataBaseUtil: DataBaseUtil, modelName: String, javaFiles: ArrayList<String>)  {
-        buildModel(dataBaseUtil, modelName, javaFiles, null)
+    fun buildModel(dataBaseUtil: DataBaseUtil, modelName: String, javaFiles: ArrayList<String>):Int  {
+        return buildModel(dataBaseUtil, modelName, javaFiles, null, null)
     }
 
 
-    fun buildModel(dataBaseUtil: DataBaseUtil, modelName: String, javaFiles: ArrayList<String>, numThreads:Int)  {
-        buildModel(dataBaseUtil, modelName, javaFiles, null, numThreads)
+    fun buildModel(dataBaseUtil: DataBaseUtil, modelName: String, javaFiles: ArrayList<String>, numThreads:Int?):Int  {
+        return buildModel(dataBaseUtil, modelName, javaFiles, null, numThreads)
+    }
+
+
+    fun buildModel(dataBaseUtil: DataBaseUtil, modelName: String, javaFiles: ArrayList<String>, logJTextArea: JTextArea?):Int  {
+        return buildModel(dataBaseUtil, modelName, javaFiles, logJTextArea, null)
     }
 
     /**
      * Создать именованную модель для заданных файлов.
      */
-    fun buildModel(dataBaseUtil: DataBaseUtil, modelName: String, javaFiles: ArrayList<String>, logJTextArea: JTextArea?, numThreads:Int) {
+    fun buildModel(dataBaseUtil: DataBaseUtil, modelName: String, javaFiles: ArrayList<String>, logJTextArea: JTextArea?, numThreads:Int?):Int {
         val projectPath = "."
-        val executorService: ExecutorService = Executors.newFixedThreadPool(numThreads)
+        val executorService: ExecutorService? = numThreads?.let { Executors.newFixedThreadPool(it) }
         log.info("Building model")
         var modelId = dataBaseUtil.getModelIdByNameAndFilePath(modelName, modelPath!!)
         if (modelId == null) {modelId = dataBaseUtil.insertModel(modelName, modelPath!!)}
+        else return modelId
 
         //
-        // 1-й проход. Добавление в UML-модель пакетов и типов данных.
+        // 1st step
         //
-        if (logJTextArea != null) logJTextArea.append("1st: adding packages and data types to model\n")
-        log.debug("1st: adding packages and data types to model")
-        val mh1 = FileMessageHandler("$projectPath/messagesPass1.txt")
-        val fileFutures = javaFiles.map { file ->
-            CompletableFuture.runAsync({
-                val umlBuilderPass1 = CodeDBBuilderPass1(modelId, mh1, dataBaseUtil)
-                parseFile(file, mh1, umlBuilderPass1)
-            }, executorService)
-        }
-        val allOf = CompletableFuture.allOf(*fileFutures.toTypedArray())
-        allOf.join()
-
-        //
-        // 2-й проход. Добавление в UML-модель элементов использующих пакеты и типы
-        // данных.
-        //
-        if (logJTextArea != null) logJTextArea.append("2st: adding elements to model\n")
-        log.debug("2st: adding elements to model")
-        val mh2 = FileMessageHandler("$projectPath/messagesPass2.txt")
-        val fileFutures2 = javaFiles.map { file ->
-            CompletableFuture.runAsync({
-                val umlBuilderPass2 = CodeDBBuilderPass2(modelId, mh2, dataBaseUtil)
-                parseFile(file, mh1, umlBuilderPass2)
-            }, executorService)
-        }
-        val allOf2 = CompletableFuture.allOf(*fileFutures2.toTypedArray())
-        allOf2.join()
-        executorService.shutdown()
-    }
-    fun buildModel(dataBaseUtil: DataBaseUtil, modelName: String, javaFiles: ArrayList<String>, logJTextArea: JTextArea?) {
-        val projectPath = "."
-        log.info("Building model")
-        var modelId = dataBaseUtil.getModelIdByNameAndFilePath(modelName, modelPath!!)
-        if (modelId == null) {modelId = dataBaseUtil.insertModel(modelName, modelPath!!)}
-
         if (logJTextArea != null) logJTextArea.append("1st: adding packages and data types to model\n")
         log.debug("1st: adding packages and data types to model")
         val mh1 = FileMessageHandler("$projectPath/messagesPass1.txt")
         val dbBuilderPass1 = CodeDBBuilderPass1(modelId, mh1, dataBaseUtil)
-        javaFiles.forEach { parseFile(it, mh1, dbBuilderPass1) }
+        parseFilesWithAsync(javaFiles, mh1, dbBuilderPass1, executorService)
 
+        //
+        // 2nd step
+        //
         if (logJTextArea != null) logJTextArea.append("2st: adding elements to model\n")
         log.debug("2st: adding elements to model")
         val mh2 = FileMessageHandler("$projectPath/messagesPass2.txt")
         val dbBuilderPass2 = CodeDBBuilderPass2(modelId, mh2, dataBaseUtil)
-        javaFiles.forEach { parseFile(it, mh2, dbBuilderPass2) }
+        parseFilesWithAsync(javaFiles, mh1, dbBuilderPass2, executorService)
+        executorService?.shutdown()
+        return modelId
+    }
+
+    fun parseFilesWithAsync(javaFiles: ArrayList<String>, mh: IMessageHandler, umlBuilder: DBBuilder, executorService: ExecutorService?) {
+        if (executorService != null) {
+            val fileFutures =  javaFiles.map { file -> CompletableFuture.runAsync({parseFile(file, mh, umlBuilder)}, executorService)}
+            val allOf = CompletableFuture.allOf(*fileFutures.toTypedArray())
+            allOf.join()
+        }
+        else  javaFiles.map { file -> parseFile(file, mh, umlBuilder)}
     }
 
     private fun parseFile(fileName: String, messageHandler: IMessageHandler, umlBuilder: DBBuilder) {
@@ -204,6 +191,31 @@ fun main() {
     val executionTime = (endTime - startTime) / 1000.0
     println("Время выполнения программы: $executionTime секунд")
 
+}
+
+fun calculateChecksum(filePath: String, algorithm: String = "SHA-256"): String {
+    val buffer = ByteArray(8192)
+    val md = MessageDigest.getInstance(algorithm)
+
+    FileInputStream(File(filePath)).use { fis ->
+        var numRead: Int
+        while (fis.read(buffer).also { numRead = it } != -1) {
+            md.update(buffer, 0, numRead)
+        }
+    }
+
+    return bytesToHex(md.digest())
+}
+
+private fun bytesToHex(bytes: ByteArray): String {
+    val hexArray = "0123456789ABCDEF".toCharArray()
+    val hexChars = CharArray(bytes.size * 2)
+    for (i in bytes.indices) {
+        val v = bytes[i].toInt() and 0xFF
+        hexChars[i * 2] = hexArray[v ushr 4]
+        hexChars[i * 2 + 1] = hexArray[v and 0x0F]
+    }
+    return String(hexChars)
 }
 
 //TODO: kick large files

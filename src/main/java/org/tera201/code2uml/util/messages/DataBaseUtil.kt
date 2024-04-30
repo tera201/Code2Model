@@ -49,8 +49,7 @@ class DataBaseUtil(url:String) {
             pstmt.setString(2, filePath)
             pstmt.executeQuery().use { rs ->
                 if (rs.next()) {
-                    val id = rs.getInt("id")
-                    return id
+                    return rs.getInt("id")
                 } else {
                     return null
                 }
@@ -58,10 +57,25 @@ class DataBaseUtil(url:String) {
         }
     }
 
-    fun getPackageIdByPackage(packageName: String): Int? {
-        val sql = "SELECT id FROM Packages WHERE package = ?"
+    fun getModelNameById(id: Int): String? {
+        val sql = "SELECT * FROM Models WHERE id = ?"
+        conn.prepareStatement(sql).use { pstmt ->
+            pstmt.setInt(1, id)
+            pstmt.executeQuery().use { rs ->
+                if (rs.next()) {
+                    return rs.getString("name")
+                } else {
+                    return null
+                }
+            }
+        }
+    }
+
+    fun getPackageIdByPackageName(packageName: String, modelId: Int): Int? {
+        val sql = "SELECT id FROM Packages WHERE package = ? AND modelId = ?"
         conn.prepareStatement(sql).use { pstmt ->
             pstmt.setString(1, packageName)
+            pstmt.setInt(2, modelId)
             pstmt.executeQuery().use { rs ->
                 if (rs.next()) {
                     val id = rs.getInt("id")

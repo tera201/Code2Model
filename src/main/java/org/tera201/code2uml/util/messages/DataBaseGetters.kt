@@ -1,11 +1,27 @@
 package org.tera201.code2uml.util.messages
 
-import org.tera201.code2uml.uml.db.ClassDB
-import org.tera201.code2uml.uml.db.EnumerationDB
-import org.tera201.code2uml.uml.db.InterfaceDB
-import org.tera201.code2uml.uml.db.PackageDB
+import org.tera201.code2uml.uml.db.*
 
 
+fun DataBaseUtil.getModel(id: Int):ModelDB {
+
+    val sqlPackage = "SELECT * FROM Models WHERE id = ?"
+    var modelDB = ModelDB(id, "", "")
+
+    conn.prepareStatement(sqlPackage).use { pstmt ->
+        pstmt.setInt(1, id)
+        pstmt.executeQuery().use { rs ->
+            while (rs.next()) {
+                modelDB = ModelDB(
+                    id = rs.getInt("id"),
+                    name = rs.getString("name"),
+                    filePath = rs.getString("filePath"),
+                )
+            }
+        }
+    }
+    return modelDB
+}
 
 fun DataBaseUtil.getPackage(packageId: Int):PackageDB {
     val sqlPackage = "SELECT * FROM Packages WHERE id = ?"
@@ -153,6 +169,32 @@ fun DataBaseUtil.getRootPackageIds(modelId: Int): List<Int> {
     }
 
     return packages
+}
+
+fun DataBaseUtil.getClassIdsByPackageId(packageId: Int): List<Int> {
+    return getIdsByPackageId(packageId, "Classes")
+}
+
+fun DataBaseUtil.getInterfacesIdsByPackageId(packageId: Int): List<Int> {
+    return getIdsByPackageId(packageId, "Interfaces")
+}
+
+fun DataBaseUtil.getEnumerationsIdsByPackageId(packageId: Int): List<Int> {
+    return getIdsByPackageId(packageId, "Enumerations")
+}
+
+private fun DataBaseUtil.getIdsByPackageId(packageId: Int, table: String): List<Int> {
+    val objectIds = mutableListOf<Int>()
+    val sql = "SELECT * FROM $table WHERE packageId = ?"
+    conn.prepareStatement(sql).use { pstmt ->
+        pstmt.setInt(1, packageId)
+        pstmt.executeQuery().use { rs ->
+            while (rs.next()) {
+                objectIds.add(rs.getInt("id"))
+            }
+        }
+    }
+    return objectIds
 }
 
 fun DataBaseUtil.getMethodsCountForClass(classId: Int): Int {

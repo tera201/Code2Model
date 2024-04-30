@@ -1,7 +1,6 @@
 package org.tera201.code2uml.db.builders
 
 import org.eclipse.emf.common.util.EList
-import org.eclipse.uml2.uml.*
 import org.eclipse.uml2.uml.internal.impl.UMLFactoryImpl
 import org.tera201.code2uml.uml.DBBuilder
 import org.tera201.code2uml.uml.helpers.BuilderClass
@@ -25,7 +24,7 @@ class CodeDBBuilderPass2(override val model: Int, val mh: IMessageHandler, overr
     override fun startPackage(packageName: String, byteSize: Int?, filePath: String) {
         if (packageStackName.empty()) packageStackName.push(packageName)
         else packageStackName.push("${packageStackName.peek()}.$packageName")
-        currentPackage = dataBaseUtil.getPackageIdByPackage(packageStackName.peek())
+        currentPackage = dataBaseUtil.getPackageIdByPackageName(packageStackName.peek(), model)
         if (packageStackId.empty()) packageStackId.push(currentPackage.toString())
         else packageStackId.push("${packageStackId.peek()}.$currentPackage")
     }

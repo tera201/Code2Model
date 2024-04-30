@@ -25,7 +25,7 @@ class CodeDBBuilderPass1(override val model: Int, val mh: IMessageHandler, overr
     override fun startPackage(packageName: String, byteSize: Int?, filePath: String) {
         if (packageStackName.empty()) packageStackName.push(packageName)
         else packageStackName.push("${packageStackName.peek()}.$packageName")
-        val findId = dataBaseUtil.getPackageIdByPackage(packageStackName.peek())
+        val findId = dataBaseUtil.getPackageIdByPackageName(packageStackName.peek(), model)
 
         if (findId != null) {
             currentPackage = findId
