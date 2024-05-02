@@ -13,20 +13,21 @@ import org.tera201.code2uml.util.messages.DataBaseUtil
  */
 interface DBBuilder {
     val dataBaseUtil: DataBaseUtil
+    val projectId: Int
     val model: Int
 
     fun setName(modelName: String)
 
-    fun startPackage(packageName: String, byteSize: Int?, filePath: String)
+    fun startPackage(packageName: String, byteSize: Int?, filePath: String, checksum: String)
     fun endPackage()
 
-    fun startClass(builderClass: BuilderClass, filePath: String)
+    fun startClass(builderClass: BuilderClass, filePath: String, checksum: String)
     fun endClass()
 
-    fun startInterface(interfaceBuilderInterface: BuilderInterface, filePath: String)
+    fun startInterface(interfaceBuilderInterface: BuilderInterface, filePath: String, checksum: String)
     fun endInterface()
 
-    fun startEnumeration(enumerationName: String, filePath: String)
+    fun startEnumeration(enumerationName: String, filePath: String, checksum: String)
     fun endEnumeration()
 
     fun addAttribute(attributeName: String, typeName: String)

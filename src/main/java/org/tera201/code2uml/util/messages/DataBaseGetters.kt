@@ -23,9 +23,9 @@ fun DataBaseUtil.getModel(id: Int):ModelDB {
     return modelDB
 }
 
-fun DataBaseUtil.getPackage(packageId: Int):PackageDB {
+fun DataBaseUtil.getPackage(packageId: Int, modelId: Int):PackageDB {
     val sqlPackage = "SELECT * FROM Packages WHERE id = ?"
-    var packageDB = PackageDB(packageId, "", "", "", 0L)
+    var packageDB = PackageDB(packageId, "", "", 0L)
 
     conn.prepareStatement(sqlPackage).use { pstmt ->
         pstmt.setInt(1, packageId)
@@ -35,17 +35,17 @@ fun DataBaseUtil.getPackage(packageId: Int):PackageDB {
                     id = rs.getInt("id"),
                     name = rs.getString("name"),
                     packageName = rs.getString("package"),
-                    filePath = rs.getString("filePath"),
                     size = rs.getLong("size"),
                 )
             }
         }
     }
 
-    val sqlMethods = "SELECT packageParentId, packageChildId FROM PackageRelationship WHERE packageParentId = ? OR packageChildId = ?"
+    val sqlMethods = "SELECT packageParentId, packageChildId FROM PackageRelationship WHERE modelId = ? AND (packageParentId = ? OR packageChildId = ?)"
     conn.prepareStatement(sqlMethods).use { pstmt ->
-        pstmt.setInt(1, packageId)
+        pstmt.setInt(1, modelId)
         pstmt.setInt(2, packageId)
+        pstmt.setInt(3, packageId)
         pstmt.executeQuery().use { rs ->
             while (rs.next()) {
                 val parent = rs.getInt("packageParentId")
@@ -58,11 +58,21 @@ fun DataBaseUtil.getPackage(packageId: Int):PackageDB {
             }
         }
     }
+
+    val sqlChecksum = "SELECT checksum FROM PackageChecksumRelations WHERE packageId = ?"
+    conn.prepareStatement(sqlChecksum).use { pstmt ->
+        pstmt.setInt(1, packageId)
+        pstmt.executeQuery().use { rs ->
+            while (rs.next()) {
+                packageDB.checksumList.add(rs.getString("checksum"))
+            }
+        }
+    }
     return packageDB
 
 }
 
-fun DataBaseUtil.getClass(classId: Int): ClassDB {
+fun DataBaseUtil.getClass(classId: Int, modelId: Int): ClassDB {
 
     val sqlPackage = "SELECT * FROM Classes WHERE id = ?"
     var classDB = ClassDB(classId, "", "", 0L, "", 0, 0)
@@ -75,7 +85,7 @@ fun DataBaseUtil.getClass(classId: Int): ClassDB {
                     name = rs.getString("name"),
                     filePath = rs.getString("filePath"),
                     size = rs.getLong("size"),
-                    getPackage(rs.getInt("packageId")).packageName,
+                    getPackage(rs.getInt("packageId"), modelId).packageName,
                     type = rs.getInt("type"),
                     modificator = rs.getInt("modificator"),
                     methodCount = getMethodsCountForClass(classId)
@@ -98,7 +108,7 @@ fun DataBaseUtil.getClass(classId: Int): ClassDB {
     return classDB
 }
 
-fun DataBaseUtil.getEnumerations(enumerationId: Int):EnumerationDB {
+fun DataBaseUtil.getEnumerations(enumerationId: Int, modelId: Int):EnumerationDB {
 
     val sqlPackage = "SELECT * FROM Enumerations WHERE id = ?"
     var enumerationDB = EnumerationDB(enumerationId, "", "", 0L, "")
@@ -112,7 +122,7 @@ fun DataBaseUtil.getEnumerations(enumerationId: Int):EnumerationDB {
                     name = rs.getString("name"),
                     filePath = rs.getString("filePath"),
                     size = rs.getLong("size"),
-                    getPackage(rs.getInt("packageId")).packageName
+                    getPackage(rs.getInt("packageId"), modelId).packageName
                 )
             }
         }
@@ -120,7 +130,7 @@ fun DataBaseUtil.getEnumerations(enumerationId: Int):EnumerationDB {
     return enumerationDB
 }
 
-fun DataBaseUtil.getInterface(interfaceId: Int): InterfaceDB {
+fun DataBaseUtil.getInterface(interfaceId: Int, modelId: Int): InterfaceDB {
     val sqlPackage = "SELECT * FROM Interfaces WHERE id = ?"
     var interfaceDB = InterfaceDB(interfaceId, "", "", 0L, "")
     conn.prepareStatement(sqlPackage).use { pstmt ->
@@ -132,7 +142,7 @@ fun DataBaseUtil.getInterface(interfaceId: Int): InterfaceDB {
                     name = rs.getString("name"),
                     filePath = rs.getString("filePath"),
                     size = rs.getLong("size"),
-                    getPackage(rs.getInt("packageId")).packageName,
+                    getPackage(rs.getInt("packageId"), modelId).packageName,
                     methodCount = getMethodsCountForInterface(interfaceId)
                 )
             }
@@ -154,13 +164,15 @@ fun DataBaseUtil.getInterface(interfaceId: Int): InterfaceDB {
 fun DataBaseUtil.getRootPackageIds(modelId: Int): List<Int> {
     val packages = mutableListOf<Int>()
     val sql = """
-        SELECT p.*
+        SELECT DISTINCT p.*
         FROM Packages p
-        LEFT JOIN PackageRelationship pr ON p.id = pr.packageChildId
-        WHERE p.modelId = ? AND pr.packageChildId IS NULL;
+        LEFT JOIN PackageRelationship pr ON p.id = pr.packageChildId AND pr.modelId = ?
+        LEFT JOIN ModelPackageRelations mpr On p.id = mpr.packageId
+        WHERE pr.packageChildId IS NULL AND mpr.modelId = ?;
     """
     conn.prepareStatement(sql).use { pstmt ->
         pstmt.setInt(1, modelId)
+        pstmt.setInt(2, modelId)
         pstmt.executeQuery().use { rs ->
             while (rs.next()) {
                 packages.add(rs.getInt("id"))
@@ -171,23 +183,24 @@ fun DataBaseUtil.getRootPackageIds(modelId: Int): List<Int> {
     return packages
 }
 
-fun DataBaseUtil.getClassIdsByPackageId(packageId: Int): List<Int> {
-    return getIdsByPackageId(packageId, "Classes")
+fun DataBaseUtil.getClassIdsByPackageId(modelId: Int, packageId: Int): List<Int> {
+    return getIdsByPackageId(modelId, packageId, "Classes")
 }
 
-fun DataBaseUtil.getInterfacesIdsByPackageId(packageId: Int): List<Int> {
-    return getIdsByPackageId(packageId, "Interfaces")
+fun DataBaseUtil.getInterfacesIdsByPackageId(modelId: Int, packageId: Int): List<Int> {
+    return getIdsByPackageId(modelId, packageId, "Interfaces")
 }
 
-fun DataBaseUtil.getEnumerationsIdsByPackageId(packageId: Int): List<Int> {
-    return getIdsByPackageId(packageId, "Enumerations")
+fun DataBaseUtil.getEnumerationsIdsByPackageId(modelId: Int, packageId: Int): List<Int> {
+    return getIdsByPackageId(modelId, packageId, "Enumerations")
 }
 
-private fun DataBaseUtil.getIdsByPackageId(packageId: Int, table: String): List<Int> {
+private fun DataBaseUtil.getIdsByPackageId(modelId: Int, packageId: Int, table: String): List<Int> {
     val objectIds = mutableListOf<Int>()
-    val sql = "SELECT * FROM $table WHERE packageId = ?"
+    val sql = "SELECT tb.* FROM $table tb LEFT JOIN FileModelRelations fmr on tb.checksum = fmr.checksum WHERE packageId = ? and modelId = ?"
     conn.prepareStatement(sql).use { pstmt ->
         pstmt.setInt(1, packageId)
+        pstmt.setInt(2, modelId)
         pstmt.executeQuery().use { rs ->
             while (rs.next()) {
                 objectIds.add(rs.getInt("id"))

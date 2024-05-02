@@ -11,7 +11,9 @@ fun createTables(url: String) {
             id INTEGER PRIMARY KEY AUTOINCREMENT,
             name TEXT NOT NULL,
             filePath TEXT NOT NULL,
-            UNIQUE (name, filePath)
+            projectId INTEGER NOT NULL,
+            FOREIGN KEY (projectId) REFERENCES Projects(id),
+            UNIQUE (name, filePath, projectId)
         );
     """.trimIndent()
 
@@ -20,12 +22,30 @@ fun createTables(url: String) {
             id INTEGER PRIMARY KEY AUTOINCREMENT,
             name TEXT NOT NULL,
             package TEXT NOT NULL,
-            filePath TEXT NOT NULL,
             size LONG NOT NULL,
+            projectId INTEGER NOT NULL,
+            FOREIGN KEY (projectId) REFERENCES Projects(id),
+            UNIQUE (name, package, projectId) 
+        );
+    """.trimIndent()
+
+    val sqlCreateModelPackageRelations = """
+        CREATE TABLE IF NOT EXISTS ModelPackageRelations (
             modelId INTEGER,
+            packageId INTEGER,
             FOREIGN KEY (modelId) REFERENCES Models(id),
-            UNIQUE (name, package, filePath, modelId) 
-            
+            FOREIGN KEY (packageId) REFERENCES Packages(id),
+            UNIQUE (modelId, packageId) 
+        );
+    """.trimIndent()
+
+    val sqlCreatePackageChecksumRelations = """
+        CREATE TABLE IF NOT EXISTS PackageChecksumRelations (
+            packageId INTEGER,
+            checksum TEXT,
+            FOREIGN KEY (packageId) REFERENCES Packages(id),
+            FOREIGN KEY (checksum) REFERENCES Files(checksum),
+            UNIQUE (packageId, checksum) 
         );
     """.trimIndent()
 
@@ -35,13 +55,13 @@ fun createTables(url: String) {
             name TEXT NOT NULL,
             filePath TEXT NOT NULL,
             size LONG NOT NULL,
-            modelId INTEGER,
             packageId INTEGER,
             type INTEGER,
             modificator INTEGER,
-            FOREIGN KEY (modelId) REFERENCES Models(id),
+            checksum TEXT,
             FOREIGN KEY (packageId) REFERENCES Packages(id),
-            UNIQUE (name, filePath, modelId, packageId) 
+            FOREIGN KEY (checksum) REFERENCES Files(checksum),
+            UNIQUE (name, filePath, packageId, checksum) 
         );
     """.trimIndent()
 
@@ -51,11 +71,11 @@ fun createTables(url: String) {
             name TEXT NOT NULL,
             filePath TEXT NOT NULL,
             size LONG NOT NULL,
-            modelId INTEGER,
             packageId INTEGER,
-            FOREIGN KEY (modelId) REFERENCES Models(id),
+            checksum TEXT,
             FOREIGN KEY (packageId) REFERENCES Packages(id),
-            UNIQUE (name, filePath, modelId, packageId) 
+            FOREIGN KEY (checksum) REFERENCES Files(checksum),
+            UNIQUE (name, filePath, packageId, checksum) 
         );
     """.trimIndent()
 
@@ -65,11 +85,11 @@ fun createTables(url: String) {
             name TEXT NOT NULL,
             filePath TEXT NOT NULL,
             size LONG NOT NULL,
-            modelId INTEGER,
             packageId INTEGER,
-            FOREIGN KEY (modelId) REFERENCES Models(id),
+            checksum TEXT,
             FOREIGN KEY (packageId) REFERENCES Packages(id),
-            UNIQUE (name, filePath, modelId, packageId) 
+            FOREIGN KEY (checksum) REFERENCES Files(checksum),
+            UNIQUE (name, filePath, packageId, checksum) 
         );
     """.trimIndent()
 
@@ -95,9 +115,11 @@ fun createTables(url: String) {
         CREATE TABLE IF NOT EXISTS PackageRelationship (
             packageParentId INTEGER,
             packageChildId INTEGER,
+            modelId INTEGER,
             FOREIGN KEY (packageParentId) REFERENCES Packages(id),
             FOREIGN KEY (packageChildId) REFERENCES Packages(id),
-            UNIQUE (packageParentId, packageChildId) 
+            FOREIGN KEY (modelId) REFERENCES Models(id),
+            UNIQUE (packageParentId, packageChildId, modelId) 
         );
     """.trimIndent()
 
@@ -124,6 +146,46 @@ fun createTables(url: String) {
         );
     """.trimIndent()
 
+    val sqlCreateProjects = """
+        CREATE TABLE IF NOT EXISTS Projects (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            name TEXT NOT NULL,
+            filePath TEXT NOT NULL,
+            UNIQUE (name, filePath)
+        );
+    """.trimIndent()
+
+    val sqlCreateFiles = """
+        CREATE TABLE IF NOT EXISTS Files (
+            checksum TEXT PRIMARY KEY,
+            fileName TEXT NOT NULL,
+            projectId INTEGER NOT NULL,
+            FOREIGN KEY (projectId) REFERENCES Projects(id),
+            UNIQUE (checksum, projectId)
+        );
+    """.trimIndent()
+
+    val sqlCreateFilePaths = """
+        CREATE TABLE IF NOT EXISTS FilePaths (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            checksum TEXT,
+            filePath TEXT NOT NULL,
+            FOREIGN KEY (checksum) REFERENCES Files(checksum),
+            UNIQUE (checksum, filePath)
+        );
+    """.trimIndent()
+
+    val sqlCreateFileModelRelations = """
+        CREATE TABLE IF NOT EXISTS FileModelRelations (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            checksum TEXT,
+            modelId INTEGER,
+            FOREIGN KEY (checksum) REFERENCES Files(checksum),
+            FOREIGN KEY (modelId) REFERENCES Models(id),
+            UNIQUE (checksum, modelId)
+        );
+    """.trimIndent()
+
     try {
         DriverManager.getConnection(url).use { conn ->
             conn.createStatement().use { stmt ->
@@ -136,6 +198,12 @@ fun createTables(url: String) {
                 stmt.execute(sqlCreatePackageRelationship)
                 stmt.execute(sqlCreateClassRelationship)
                 stmt.execute(sqlCreateInterfaceRelationship)
+                stmt.execute(sqlCreateProjects)
+                stmt.execute(sqlCreateFiles)
+                stmt.execute(sqlCreateFilePaths)
+                stmt.execute(sqlCreateFileModelRelations)
+                stmt.execute(sqlCreateModelPackageRelations)
+                stmt.execute(sqlCreatePackageChecksumRelations)
                 println("Tables have been created.")
             }
         }

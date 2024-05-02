@@ -12,7 +12,8 @@ import kotlin.jvm.optionals.getOrNull
 class Java20DBTreeListener(
     val parser: Java20Parser,
     private val dbBuilder: DBBuilder,
-    private val filePath: String
+    private val filePath: String,
+    private val checksum: String
 ) : Java20ParserBaseListener() {
 
     private var packageNum = 0
@@ -60,7 +61,7 @@ class Java20DBTreeListener(
      * ;
      */
     override fun enterPackageDeclaration(ctx: Java20Parser.PackageDeclarationContext?) {
-        ctx!!.Identifier().forEach{dbBuilder.startPackage(it.text, ctx.text?.toByteArray()?.size, filePath)}
+        ctx!!.Identifier().forEach{dbBuilder.startPackage(it.text, ctx.text?.toByteArray()?.size, filePath, checksum)}
         packageNum = ctx.Identifier().size
 
     }
@@ -81,7 +82,7 @@ class Java20DBTreeListener(
         val interfaceList = ctx.classImplements()?.interfaceTypeList()?.interfaceType()?.stream()?.map { it.text }?.toList() // start from 1
         val isNested =  ctx.getParent()?.getParent()?.getParent()?.text?.startsWith("package")?.not() == true
         val builderClass = BuilderClass(builderImports, className, builderModifiers, null, interfaceList, isNested)
-        dbBuilder.startClass(builderClass, filePath)
+        dbBuilder.startClass(builderClass, filePath, checksum)
         ctx.text?.toByteArray()?.size?.let { dbBuilder.addClassSize(it) }
     }
 
@@ -94,7 +95,7 @@ class Java20DBTreeListener(
         val interfaceList = ctx.classImplements()?.interfaceTypeList()?.interfaceType()?.stream()?.map { it.text }?.toList()
         val builderModifiers = getBuilderClassModifier(ctx.classModifier())
         val builderClass = BuilderClass(builderImports, className, builderModifiers, extendName, interfaceList, isNested)
-        dbBuilder.startClass(builderClass, filePath)
+        dbBuilder.startClass(builderClass, filePath, checksum)
         ctx.text?.toByteArray()?.size?.let { dbBuilder.addClassSize(it) }
     }
 
@@ -115,13 +116,13 @@ class Java20DBTreeListener(
         val parentList = ctx.interfaceExtends()?.interfaceTypeList()?.interfaceType()?.stream()?.map { it.text }?.toList()
         val modifiers = getBuilderInterfaceModifier(ctx.interfaceModifier())
         val builderInterface = BuilderInterface(builderImports, interfaceName, modifiers, parentList, isNested)
-        dbBuilder.startInterface(builderInterface, filePath)
+        dbBuilder.startInterface(builderInterface, filePath, checksum)
         ctx.text?.toByteArray()?.size?.let { dbBuilder.addClassSize(it) }
     }
 
     override fun enterEnumDeclaration(ctx: Java20Parser.EnumDeclarationContext?) {
         val enumName = ctx!!.typeIdentifier().text
-        if (enumName != null) dbBuilder.startEnumeration(enumName, filePath)
+        if (enumName != null) dbBuilder.startEnumeration(enumName, filePath, checksum)
     }
 
     override fun enterFieldDeclaration(ctx: Java20Parser.FieldDeclarationContext?) {

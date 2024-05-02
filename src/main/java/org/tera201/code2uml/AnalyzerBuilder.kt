@@ -7,7 +7,7 @@ import org.tera201.code2uml.java20.console.JavaParserRunnerDB
 import org.tera201.code2uml.util.messages.DataBaseUtil
 import javax.swing.JTextArea
 
-class AnalyzerBuilder(private var language: Language, private var modelName: String, private var path: String, private var pathToDB:String) {
+class AnalyzerBuilder(private var language: Language, private var projectName: String, private var modelName: String, private var path: String, private var pathToDB:String) {
     private var numThread:Int? = null
     private var textArea:JTextArea? = null
 
@@ -33,8 +33,8 @@ class AnalyzerBuilder(private var language: Language, private var modelName: Str
                 val javaFiles = javaParserRunner.collectFiles(path)
                 val dataBaseUtil = DataBaseUtil(pathToDB)
                 val model:Int
-                if (numThread != null) model = javaParserRunner.buildModel(dataBaseUtil, modelName, javaFiles, textArea, numThread!!)
-                else model = javaParserRunner.buildModel(dataBaseUtil, modelName, javaFiles, textArea)
+                if (numThread != null) model = javaParserRunner.buildModel(dataBaseUtil, projectName, modelName, javaFiles, textArea, numThread!!)
+                else model = javaParserRunner.buildModel(dataBaseUtil, projectName, modelName, javaFiles, textArea)
                 return model
             }
 
