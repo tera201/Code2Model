@@ -397,6 +397,34 @@ class DataBaseUtil(url:String) {
         return -1
     }
 
+    fun insertNewRelationsForModel(modelId: Int, checksum:String) {
+        val sql = """
+        INSERT OR IGNORE INTO PackageRelationship (packageParentId, packageChildId, modelId)
+        SELECT pr.packageParentId, pr.packageChildId, ?
+        FROM PackageRelationship pr
+        JOIN PackageChecksumRelations pcr1 ON pr.packageParentId = pcr1.packageId
+        JOIN PackageChecksumRelations pcr2 ON pr.packageChildId = pcr2.packageId
+        WHERE pcr1.checksum = pcr2.checksum AND pcr1.checksum = ?;
+    """
+        conn.prepareStatement(sql).use { pstmt ->
+            pstmt.setInt(1, modelId)
+            pstmt.setString(2, checksum)
+            pstmt.executeUpdate()
+        }
+        val sqlModelPackageRelations = """
+        INSERT OR IGNORE INTO ModelPackageRelations (modelId, packageId)
+        SELECT ?, pcr.packageId
+        FROM PackageChecksumRelations pcr
+        WHERE pcr.checksum = ?;
+    """
+        conn.prepareStatement(sqlModelPackageRelations).use { pstmt ->
+            pstmt.setInt(1, modelId)
+            pstmt.setString(2, checksum)
+            pstmt.executeUpdate()
+        }
+        insertFileModelRelation(checksum, modelId)
+    }
+
     fun isFileModelRelationExist(checksum: String, modelId: Int): Boolean {
         val sql = "SELECT * FROM FileModelRelations WHERE checksum = ? AND modelId = ?"
         conn.prepareStatement(sql).use { pstmt ->

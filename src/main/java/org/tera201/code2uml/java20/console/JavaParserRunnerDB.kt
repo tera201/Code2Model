@@ -78,6 +78,14 @@ class JavaParserRunnerDB() {
         var modelId = dataBaseUtil.getModelIdByNameAndFilePath(modelName, modelPath!!)
         val projectId = createOrGetProject(dataBaseUtil, projectName, modelPath!!)
         if (modelId == null) {modelId = dataBaseUtil.insertModel(modelName, modelPath!!, projectId)}
+        javaFiles.filter { file ->
+            val checksum = checksumMap.getOrDefault(file, calculateChecksum(file))
+            (dataBaseUtil.isFileExist(checksum) && dataBaseUtil.isFileModelRelationExist(checksum, modelId).not())
+        }.forEach {
+            val checksum = checksumMap.getOrDefault(it, calculateChecksum(it))
+            dataBaseUtil.insertNewRelationsForModel(modelId, checksum)
+            dataBaseUtil.insertFilePath(checksum, it)
+        }
 
         val javaFilesUnanalyzed = javaFiles.filter { file ->
             val checksum = checksumMap.getOrDefault(file, calculateChecksum(file))
@@ -140,11 +148,7 @@ class JavaParserRunnerDB() {
         val checksum = checksumMap.getOrDefault(filePath, calculateChecksum(filePath))
         if (dbBuilder.dataBaseUtil.isFileExist(checksum) && dbBuilder.dataBaseUtil.isFileModelRelationExist(checksum, dbBuilder.model)) {
             return
-        } else if (dbBuilder.dataBaseUtil.isFileExist(checksum) && dbBuilder is CodeDBBuilderPass2) {
-            dbBuilder.dataBaseUtil.insertFileModelRelation(checksum, dbBuilder.model)
-            println("Skip file for 2 step analyzing")
-            return
-        }  else if (dbBuilder is CodeDBBuilderPass2) {
+        } else if (dbBuilder is CodeDBBuilderPass2) {
             println("2 step analyzing")
             dbBuilder.dataBaseUtil.insertFile(checksum, fileName, dbBuilder.projectId)
             dbBuilder.dataBaseUtil.insertFilePath(checksum, filePath)
