@@ -99,9 +99,9 @@ fun DataBaseUtil.getClass(classId: Int, modelId: Int): ClassDB {
         pstmt.executeQuery().use { rs ->
             while (rs.next()) {
                 val interfaceId = rs.getInt("interfaceId")
-                rs.wasNull().not().apply { classDB.interfaceIdList.add(interfaceId) }
+                if (rs.wasNull().not().and(interfaceId != 0)) { classDB.interfaceIdList.add(interfaceId) }
                 val parent = rs.getInt("parentClassId")
-                rs.wasNull().not().apply { classDB.parentClassIdList.add(parent) }
+               if (rs.wasNull().not().and(parent != 0))  { classDB.parentClassIdList.add(parent) }
             }
         }
     }
