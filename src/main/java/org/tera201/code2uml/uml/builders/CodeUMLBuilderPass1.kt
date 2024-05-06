@@ -40,7 +40,7 @@ class CodeUMLBuilderPass1(override val model: Model, val mh: IMessageHandler) : 
     override fun startClass(builderClass: BuilderClass, filePath: String) {
         if (!builderClass.isNested) {
             currentClass = UMLUtil.getClass(currentPackage, builderClass.name)
-            currentClass?.setIsAbstract(builderClass.modifiers.isAbstract)
+            builderClass.modifiers?.let { currentClass?.setIsAbstract(it.isAbstract) }
             currentClass?.eAnnotations?.add(getPathAnnotation(filePath))
 
         }

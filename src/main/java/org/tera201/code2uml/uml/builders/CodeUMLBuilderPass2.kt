@@ -38,8 +38,8 @@ class CodeUMLBuilderPass2(override val model: Model, val mh: IMessageHandler) : 
     override fun startClass(builderClass: BuilderClass, filePath: String) {
         if (!builderClass.isNested) {
             currentClass = UMLUtil.getClass(currentPackage, builderClass.name)
-            currentClass?.setIsAbstract(builderClass.modifiers.isAbstract)
-            currentClass?.visibility = UMLUtil.returnModifier(builderClass.modifiers.visibility)
+            builderClass.modifiers?.let { currentClass?.setIsAbstract(it.isAbstract) }
+            currentClass?.visibility = UMLUtil.returnModifier(builderClass.modifiers?.visibility)
             if (builderClass.parentName != null) {
                 val parent: Class = umlFactoryImpl.createClass()
                 parent.name = builderClass.parentName
