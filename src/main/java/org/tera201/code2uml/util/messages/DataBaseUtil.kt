@@ -16,6 +16,9 @@ class DataBaseUtil(url:String) {
             println(e.message)
         }
         conn = DriverManager.getConnection("jdbc:sqlite:" + url)
+        conn.createStatement().use { stmt ->
+            stmt.execute("PRAGMA foreign_keys = ON;")
+        }
     }
 
     private fun getLastInsertId():Int {
@@ -70,6 +73,15 @@ class DataBaseUtil(url:String) {
             if (pstmt.executeUpdate() > 0) return getLastInsertId()
         }
         return -1
+    }
+
+    fun deleteModel(id: Int):Boolean {
+        val sql = "DELETE FROM Models WHERE id = ?"
+        conn.prepareStatement(sql).use { pstmt ->
+            pstmt.setInt(1, id)
+            if (pstmt.executeUpdate() > 0) return true
+        }
+        return false
     }
 
     fun getModelIdByNameAndFilePath(modelName: String, filePath: String): Int? {
@@ -332,19 +344,17 @@ class DataBaseUtil(url:String) {
         }
     }
 
-    fun insertMethod(name: String, type:String, modelId: Int, packageId: Int, classId: Int?, interfaceId: Int?) {
+    fun insertMethod(name: String, type:String, classId: Int?, interfaceId: Int?) {
         if (classId == null && interfaceId == null) return
         val sqlInsert = """
-        INSERT OR IGNORE INTO Methods(name, type, modelId, packageId, classId, interfaceId) VALUES(?, ?, ?, ?, ?, ?)
+        INSERT OR IGNORE INTO Methods(name, type, classId, interfaceId) VALUES(?, ?, ?, ?)
     """.trimIndent()
 
         conn.prepareStatement(sqlInsert).use { pstmt ->
             pstmt.setString(1, name)
             pstmt.setString(2, type)
-            pstmt.setInt(3, modelId)
-            pstmt.setInt(4, packageId)
-            pstmt.setIntOrNull(5, classId)
-            pstmt.setIntOrNull(6, interfaceId)
+            pstmt.setIntOrNull(3, classId)
+            pstmt.setIntOrNull(4, interfaceId)
             pstmt.executeUpdate()
         }
     }

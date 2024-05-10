@@ -1,18 +1,17 @@
 package org.tera201.code2uml.java20.console
 
-import org.tera201.code2uml.cpp.parser.CPP14ErrorListener
-import org.tera201.code2uml.java20.parser.Java20DBTreeListener
-import org.tera201.code2uml.java20.parser.generated.Java20Lexer
-import org.tera201.code2uml.java20.parser.generated.Java20Parser
 import org.antlr.v4.runtime.CharStreams
 import org.antlr.v4.runtime.CommonTokenStream
 import org.antlr.v4.runtime.tree.ParseTreeWalker
 import org.apache.logging.log4j.LogManager
 import org.apache.logging.log4j.Logger
-import org.tera201.code2uml.uml.DBBuilder
+import org.tera201.code2uml.cpp.parser.CPP14ErrorListener
 import org.tera201.code2uml.db.builders.CodeDBBuilderPass1
 import org.tera201.code2uml.db.builders.CodeDBBuilderPass2
-import org.tera201.code2uml.java20.parser.Java20DBTreeListener1
+import org.tera201.code2uml.java20.parser.Java20DBTreeListener
+import org.tera201.code2uml.java20.parser.generated.Java20Lexer
+import org.tera201.code2uml.java20.parser.generated.Java20Parser
+import org.tera201.code2uml.uml.DBBuilder
 import org.tera201.code2uml.uml.util.clearPackageDir
 import org.tera201.code2uml.util.FilesUtil
 import org.tera201.code2uml.util.messages.*
@@ -95,7 +94,7 @@ class JavaParserRunnerDB() {
         //
         // 1st step
         //
-        if (logJTextArea != null) logJTextArea.append("1st: adding packages and data types to model\n")
+        logJTextArea?.append("1st: adding packages and data types to model\n")
         log.debug("1st: adding packages and data types to model")
         val mh1 = FileMessageHandler("$projectPath/messagesPass1.txt")
         parseFilesBuilder1WithAsync(javaFilesUnanalyzed, mh1, projectId, modelId, dataBaseUtil, executorService)
@@ -103,7 +102,7 @@ class JavaParserRunnerDB() {
         //
         // 2nd step
         //
-        if (logJTextArea != null) logJTextArea.append("2st: adding elements to model\n")
+        logJTextArea?.append("2st: adding elements to model\n")
         log.debug("2st: adding elements to model")
         val mh2 = FileMessageHandler("$projectPath/messagesPass2.txt")
         parseFilesBuilder2WithAsync(javaFilesUnanalyzed, mh2, projectId, modelId, dataBaseUtil, executorService)
@@ -146,11 +145,10 @@ class JavaParserRunnerDB() {
         log.debug("Parsing file: $filePath")
         val fileName = filePath.substringAfterLast("/")
         val checksum = checksumMap.getOrDefault(filePath, calculateChecksum(filePath))
-        if (dbBuilder.dataBaseUtil.isFileExist(checksum) && dbBuilder.dataBaseUtil.isFileModelRelationExist(checksum, dbBuilder.model)) {
+        dbBuilder.dataBaseUtil.insertFile(checksum, fileName, dbBuilder.projectId)
+        if (dbBuilder.dataBaseUtil.isFileModelRelationExist(checksum, dbBuilder.model)) {
             return
         } else if (dbBuilder is CodeDBBuilderPass2) {
-            println("2 step analyzing")
-            dbBuilder.dataBaseUtil.insertFile(checksum, fileName, dbBuilder.projectId)
             dbBuilder.dataBaseUtil.insertFilePath(checksum, filePath)
             dbBuilder.dataBaseUtil.insertFileModelRelation(checksum, dbBuilder.model)
         }

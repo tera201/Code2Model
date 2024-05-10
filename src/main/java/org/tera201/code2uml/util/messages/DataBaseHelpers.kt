@@ -33,7 +33,7 @@ fun createTables(url: String) {
         CREATE TABLE IF NOT EXISTS ModelPackageRelations (
             modelId INTEGER,
             packageId INTEGER,
-            FOREIGN KEY (modelId) REFERENCES Models(id),
+            FOREIGN KEY (modelId) REFERENCES Models(id) ON DELETE CASCADE,
             FOREIGN KEY (packageId) REFERENCES Packages(id),
             UNIQUE (modelId, packageId) 
         );
@@ -87,8 +87,8 @@ fun createTables(url: String) {
             size LONG NOT NULL,
             packageId INTEGER,
             checksum TEXT,
-            FOREIGN KEY (packageId) REFERENCES Packages(id),
-            FOREIGN KEY (checksum) REFERENCES Files(checksum),
+            FOREIGN KEY (packageId) REFERENCES Packages(id) ON DELETE CASCADE,
+            FOREIGN KEY (checksum) REFERENCES Files(checksum) ON DELETE CASCADE,
             UNIQUE (name, filePath, packageId, checksum) 
         );
     """.trimIndent()
@@ -98,16 +98,12 @@ fun createTables(url: String) {
             id INTEGER PRIMARY KEY AUTOINCREMENT,
             name TEXT NOT NULL,
             type TEXT NOT NULL,
-            modelId INTEGER,
-            packageId INTEGER,
             classId INTEGER,
             interfaceId INTEGER,
-            FOREIGN KEY (modelId) REFERENCES Models(id),
-            FOREIGN KEY (packageId) REFERENCES Packages(id),
             FOREIGN KEY (classId) REFERENCES Classes(id),
             FOREIGN KEY (interfaceId) REFERENCES Interfaces(id),
-            UNIQUE (name, modelId, packageId, classId),
-            UNIQUE (name, modelId, packageId, interfaceId) 
+            UNIQUE (name, classId),
+            UNIQUE (name, interfaceId) 
         );
     """.trimIndent()
 
@@ -118,7 +114,7 @@ fun createTables(url: String) {
             modelId INTEGER,
             FOREIGN KEY (packageParentId) REFERENCES Packages(id),
             FOREIGN KEY (packageChildId) REFERENCES Packages(id),
-            FOREIGN KEY (modelId) REFERENCES Models(id),
+            FOREIGN KEY (modelId) REFERENCES Models(id) ON DELETE CASCADE,
             UNIQUE (packageParentId, packageChildId, modelId) 
         );
     """.trimIndent()
@@ -181,7 +177,7 @@ fun createTables(url: String) {
             checksum TEXT,
             modelId INTEGER,
             FOREIGN KEY (checksum) REFERENCES Files(checksum),
-            FOREIGN KEY (modelId) REFERENCES Models(id),
+            FOREIGN KEY (modelId) REFERENCES Models(id) ON DELETE CASCADE,
             UNIQUE (checksum, modelId)
         );
     """.trimIndent()

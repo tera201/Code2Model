@@ -79,9 +79,9 @@ class CodeDBBuilderPass2(override val projectId: Int, override val model: Int, o
 
     override fun startMethod(funType: String, funName: String, typeList: EList<String>, argList: EList<String>, isVirtual: Boolean) {
         if(currentOwner == Type.CLASS)
-            currentPackage?.let { dataBaseUtil.insertMethod(funName, funType, model, it, currentClass, null) }
+            currentPackage?.let { dataBaseUtil.insertMethod(funName, funType, currentClass, null) }
         else if (currentOwner == Type.INTERFACE)
-            currentPackage?.let { dataBaseUtil.insertMethod(funName, funType, model, it, null, currentInterface) }
+            currentPackage?.let { dataBaseUtil.insertMethod(funName, funType, null, currentInterface) }
     }
 
     override fun  addClassSize(byteSize: Int) {
