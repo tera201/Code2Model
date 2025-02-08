@@ -1,6 +1,9 @@
 plugins {
     kotlin("jvm") version "1.8.20"
-    id("maven-publish")
+}
+
+java {
+    toolchain.languageVersion.set(JavaLanguageVersion.of(17))
 }
 
 group = "org.tera201"
@@ -35,8 +38,4 @@ dependencies {
 
 tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile> {
     kotlinOptions.jvmTarget = "17"
-}
-
-java {
-    toolchain.languageVersion.set(JavaLanguageVersion.of(17))
 }
