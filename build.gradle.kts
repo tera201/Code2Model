@@ -32,7 +32,6 @@ dependencies {
     implementation("com.fasterxml.jackson.core:jackson-databind:2.15.1")
     implementation("com.fasterxml.jackson.core:jackson-annotations:2.15.1")
 
-    // Local JAR dependency (equivalent to <scope>system</scope>)
     implementation(files("lib/CloudUML-1.0.0.jar"))
 }
 
