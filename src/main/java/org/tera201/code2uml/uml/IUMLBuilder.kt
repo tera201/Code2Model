@@ -8,7 +8,7 @@ import org.tera201.code2uml.uml.helpers.BuilderClass
 import org.tera201.code2uml.uml.helpers.BuilderInterface
 
 /**
- * Интерфейс построителя UML-модели.
+ * UML Model Builder Interface.
  */
 interface IUMLBuilder {
     val model: Model

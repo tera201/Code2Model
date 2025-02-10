@@ -25,161 +25,162 @@ import java.util.concurrent.ExecutorService
 import java.util.concurrent.Executors
 import javax.swing.JTextArea
 
-
-class JavaParserRunnerDB() {
+/**
+ * Class responsible for running the Java parser, collecting files, and building UML models.
+ */
+class JavaParserRunnerDB {
 
     private val log: Logger = LogManager.getLogger(JavaParserRunner::class.java)
     private var modelPath: String? = null
     private var checksumMap = mutableMapOf<String, String>()
 
-    class JavaParserRunner() {}
-
+    /**
+     * Collects Java files from given paths and stores them in a list.
+     */
     fun collectFiles(vararg paths: String): ArrayList<String> {
         modelPath = paths[0]
         log.info("Collecting files from ${paths.toList()}")
-        val cppFiles = ArrayList<String>()
+        val javaFiles = ArrayList<String>()
         checksumMap.clear()
 
-        paths.forEach { FilesUtil.walkRes(it, ::test, cppFiles::add) }
-        cppFiles.forEach { checksumMap.put(it, calculateChecksum(it)) }
+        // Walk through directories and collect Java files
+        paths.forEach { FilesUtil.walkRes(it, ::test, javaFiles::add) }
 
-        return cppFiles
-    }
+        // Compute checksum for each file
+        javaFiles.forEach { checksumMap[it] = calculateChecksum(it) }
 
-    fun createOrGetProject(dataBaseUtil: DataBaseUtil, name:String, filePath: String):Int {
-        val projectId = dataBaseUtil.getProjectId(name, filePath)
-        if (projectId == null) {return dataBaseUtil.insertProject(name, filePath)}
-        else return projectId
-    }
-
-
-    fun buildModel(dataBaseUtil: DataBaseUtil, projectName: String, modelName: String, javaFiles: ArrayList<String>):Int  {
-        return buildModel(dataBaseUtil, projectName, modelName, javaFiles, null, null)
-    }
-
-
-    fun buildModel(dataBaseUtil: DataBaseUtil, projectName: String, modelName: String, javaFiles: ArrayList<String>, numThreads:Int?):Int  {
-        return buildModel(dataBaseUtil, projectName, modelName, javaFiles, null, numThreads)
-    }
-
-
-    fun buildModel(dataBaseUtil: DataBaseUtil, projectName: String, modelName: String, javaFiles: ArrayList<String>, logJTextArea: JTextArea?):Int  {
-        return buildModel(dataBaseUtil, projectName, modelName, javaFiles, logJTextArea, null)
+        return javaFiles
     }
 
     /**
-     * Создать именованную модель для заданных файлов.
+     * Creates or retrieves a project from the database by name and file path.
      */
-    fun buildModel(dataBaseUtil: DataBaseUtil, projectName: String, modelName: String, javaFiles: ArrayList<String>, logJTextArea: JTextArea?, numThreads:Int?):Int {
+    fun createOrGetProject(dataBaseUtil: DataBaseUtil, name: String, filePath: String): Int {
+        val projectId = dataBaseUtil.getProjectId(name, filePath)
+        return projectId ?: dataBaseUtil.insertProject(name, filePath)
+    }
+
+    /**
+     * Builds a UML model for the given Java files.
+     */
+    fun buildModel(dataBaseUtil: DataBaseUtil, projectName: String, modelName: String, javaFiles: ArrayList<String>, logJTextArea: JTextArea? = null, numThreads: Int? = null): Int {
         val projectPath = "."
         val executorService: ExecutorService? = numThreads?.let { Executors.newFixedThreadPool(it) }
+
         log.info("Building model")
-        var modelId = dataBaseUtil.getModelIdByNameAndFilePath(modelName, modelPath!!)
-        val projectId = createOrGetProject(dataBaseUtil, projectName, modelPath!!)
-        if (modelId == null) {modelId = dataBaseUtil.insertModel(modelName, modelPath!!, projectId)}
+
+        // Retrieve or create project and model in the database
+        var modelId = dataBaseUtil.getModelIdByNameAndFilePath(modelName, projectPath)
+        val projectId = createOrGetProject(dataBaseUtil, projectName, projectPath)
+
+        // Insert new model if necessary
+        if (modelId == null) modelId = dataBaseUtil.insertModel(modelName, projectPath, projectId)
+
+        // Filter files that are not already in the model
         javaFiles.filter { file ->
             val checksum = checksumMap.getOrDefault(file, calculateChecksum(file))
-            (dataBaseUtil.isFileExist(checksum) && dataBaseUtil.isFileModelRelationExist(checksum, modelId).not())
+            dataBaseUtil.isFileExist(checksum) && !dataBaseUtil.isFileModelRelationExist(checksum, modelId)
         }.forEach {
             val checksum = checksumMap.getOrDefault(it, calculateChecksum(it))
             dataBaseUtil.insertNewRelationsForModel(modelId, checksum)
             dataBaseUtil.insertFilePath(checksum, it)
         }
 
+        // Files that need analysis
         val javaFilesUnanalyzed = javaFiles.filter { file ->
             val checksum = checksumMap.getOrDefault(file, calculateChecksum(file))
-            (dataBaseUtil.isFileExist(checksum) && dataBaseUtil.isFileModelRelationExist(checksum, modelId)).not()
+            !dataBaseUtil.isFileModelRelationExist(checksum, modelId)
         }
 
-        //
-        // 1st step
-        //
+        // Step 1: Add packages and data types to model
         logJTextArea?.append("1st: adding packages and data types to model\n")
         log.debug("1st: adding packages and data types to model")
         val mh1 = FileMessageHandler("$projectPath/messagesPass1.txt")
-        parseFilesBuilder1WithAsync(javaFilesUnanalyzed, mh1, projectId, modelId, dataBaseUtil, executorService)
+        parseFilesWithAsync(javaFilesUnanalyzed, mh1, projectId, modelId, dataBaseUtil, executorService, ::parseFilesBuilder1)
 
-        //
-        // 2nd step
-        //
-        logJTextArea?.append("2st: adding elements to model\n")
-        log.debug("2st: adding elements to model")
+        // Step 2: Add elements to model
+        logJTextArea?.append("2nd: adding elements to model\n")
+        log.debug("2nd: adding elements to model")
         val mh2 = FileMessageHandler("$projectPath/messagesPass2.txt")
-        parseFilesBuilder2WithAsync(javaFilesUnanalyzed, mh2, projectId, modelId, dataBaseUtil, executorService)
+        parseFilesWithAsync(javaFilesUnanalyzed, mh2, projectId, modelId, dataBaseUtil, executorService, ::parseFilesBuilder2)
+
+        // Shutdown executor service if used
         executorService?.shutdown()
+
         return modelId
     }
 
-    fun parseFilesBuilder1WithAsync(javaFiles: List<String>, mh: IMessageHandler, projectId: Int, modelId: Int, dataBaseUtil: DataBaseUtil, executorService: ExecutorService?) {
+    /**
+     * Parse files asynchronously with a given step builder.
+     */
+    private fun parseFilesWithAsync(
+        javaFiles: List<String>,
+        messageHandler: IMessageHandler,
+        projectId: Int,
+        modelId: Int,
+        dataBaseUtil: DataBaseUtil,
+        executorService: ExecutorService?,
+        parseStep: (List<String>, IMessageHandler, Int, Int, DataBaseUtil, ExecutorService?) -> Unit
+    ) {
         if (executorService != null) {
-            val fileFutures =  javaFiles.map { file -> CompletableFuture.runAsync({
-                val dbBuilderPass1 = CodeDBBuilderPass1(projectId, modelId, dataBaseUtil)
-                parseFile(file, mh, dbBuilderPass1)}, executorService)
+            val fileFutures = javaFiles.map { file ->
+                CompletableFuture.runAsync({ parseStep(listOf(file), messageHandler, projectId, modelId, dataBaseUtil, executorService) }, executorService)
             }
-            val allOf = CompletableFuture.allOf(*fileFutures.toTypedArray())
-            allOf.join()
-        }
-        else  {
-            val dbBuilderPass1 = CodeDBBuilderPass1(projectId, modelId, dataBaseUtil)
-            javaFiles.map {file -> {parseFile(file, mh, dbBuilderPass1)}
-            }
+            CompletableFuture.allOf(*fileFutures.toTypedArray()).join()
+        } else {
+            parseStep(javaFiles, messageHandler, projectId, modelId, dataBaseUtil, null)
         }
     }
 
-    fun parseFilesBuilder2WithAsync(javaFiles: List<String>, mh: IMessageHandler, projectId: Int, modelId: Int, dataBaseUtil: DataBaseUtil, executorService: ExecutorService?) {
-        if (executorService != null) {
-            val fileFutures =  javaFiles.map { file -> CompletableFuture.runAsync({
-                val dbBuilderPass2 = CodeDBBuilderPass2(projectId, modelId, dataBaseUtil)
-                parseFile(file, mh, dbBuilderPass2)}, executorService)
-            }
-            val allOf = CompletableFuture.allOf(*fileFutures.toTypedArray())
-            allOf.join()
-        }
-        else  {
-            val dbBuilderPass2 = CodeDBBuilderPass2(projectId, modelId, dataBaseUtil)
-            javaFiles.map {file -> parseFile(file, mh, dbBuilderPass2)}
-        }
+    /**
+     * Parse files for the first step (adding packages and data types).
+     */
+    private fun parseFilesBuilder1(javaFiles: List<String>, mh: IMessageHandler, projectId: Int, modelId: Int, dataBaseUtil: DataBaseUtil, executorService: ExecutorService?) {
+        val dbBuilderPass1 = CodeDBBuilderPass1(projectId, modelId, dataBaseUtil)
+        javaFiles.forEach { parseFile(it, mh, dbBuilderPass1) }
     }
 
+    /**
+     * Parse files for the second step (adding elements).
+     */
+    private fun parseFilesBuilder2(javaFiles: List<String>, mh: IMessageHandler, projectId: Int, modelId: Int, dataBaseUtil: DataBaseUtil, executorService: ExecutorService?) {
+        val dbBuilderPass2 = CodeDBBuilderPass2(projectId, modelId, dataBaseUtil)
+        javaFiles.forEach { parseFile(it, mh, dbBuilderPass2) }
+    }
+
+    /**
+     * Parse a single Java file and update the database.
+     */
     private fun parseFile(filePath: String, messageHandler: IMessageHandler, dbBuilder: DBBuilder) {
         log.debug("Parsing file: $filePath")
         val fileName = filePath.substringAfterLast("/")
         val checksum = checksumMap.getOrDefault(filePath, calculateChecksum(filePath))
+
+        // Insert file if it's not already in the database
         dbBuilder.dataBaseUtil.insertFile(checksum, fileName, dbBuilder.projectId)
-        if (dbBuilder.dataBaseUtil.isFileModelRelationExist(checksum, dbBuilder.model)) {
-            return
-        } else if (dbBuilder is CodeDBBuilderPass2) {
+        if (dbBuilder.dataBaseUtil.isFileModelRelationExist(checksum, dbBuilder.model)) return
+
+        // Insert file-path relation if needed
+        if (dbBuilder is CodeDBBuilderPass2) {
             dbBuilder.dataBaseUtil.insertFilePath(checksum, filePath)
             dbBuilder.dataBaseUtil.insertFileModelRelation(checksum, dbBuilder.model)
         }
+
         messageHandler.info(FileMessage("Parsing file:", filePath))
 
         try {
-            // Входящий файл с тексом в виде кода считывается как поток символов
             val input = CharStreams.fromFileName(filePath)
-
-            // Далее класса Java20Lexer позволяет сгруппировать символы
-            // и определить тип лексем (идентификатор, число, строка и т.п.).
             val lexer = Java20Lexer(input)
-
-            // Далее код разбивается на токены
             val tokens = CommonTokenStream(lexer)
-
-            // Код подготавливается для использования далее в построении дерева разбора
             val parser = Java20Parser(tokens)
-
-            // Код проверяется на наличие синтаксических ошибок
             val errorListener = CPP14ErrorListener(messageHandler)
             parser.addErrorListener(errorListener)
 
-            // Позволять определить вложенность вида родитель -
-            // потомок (класс - член класса/метод)
+            // Build the parse tree
             val tree = parser.compilationUnit()
             val walker = ParseTreeWalker()
-//            if (dbBuilder is CodeDBBuilderPass1) {
-//                val  listener = Java20DBTreeListener1(parser, dbBuilder, filePath, checksum)
-//                walker.walk(listener, tree)
-//            } else
+
+            // Walk the parse tree and build the model
             val listener = Java20DBTreeListener(parser, dbBuilder, filePath, checksum)
             walker.walk(listener, tree)
         } catch (e: Exception) {
@@ -187,6 +188,9 @@ class JavaParserRunnerDB() {
         }
     }
 
+    /**
+     * Parse a single file for debugging or logging purposes.
+     */
     fun parseFile(fileName: String, mh: IMessageHandler) {
         try {
             val input = CharStreams.fromFileName(fileName)
@@ -207,16 +211,52 @@ class JavaParserRunnerDB() {
         }
     }
 
+    /**
+     * Calculates the checksum for a file using the specified algorithm (default: SHA-256).
+     */
+    fun calculateChecksum(filePath: String, algorithm: String = "SHA-256"): String {
+        val buffer = ByteArray(8192)
+        val md = MessageDigest.getInstance(algorithm)
+
+        FileInputStream(File(filePath)).use { fis ->
+            var numRead: Int
+            while (fis.read(buffer).also { numRead = it } != -1) {
+                md.update(buffer, 0, numRead)
+            }
+        }
+
+        return bytesToHex(md.digest())
+    }
+
+    /**
+     * Converts a byte array to its hexadecimal string representation.
+     */
+    private fun bytesToHex(bytes: ByteArray): String {
+        val hexArray = "0123456789ABCDEF".toCharArray()
+        val hexChars = CharArray(bytes.size * 2)
+        for (i in bytes.indices) {
+            val v = bytes[i].toInt() and 0xFF
+            hexChars[i * 2] = hexArray[v ushr 4]
+            hexChars[i * 2 + 1] = hexArray[v and 0x0F]
+        }
+        return String(hexChars)
+    }
+
+    /**
+     * Test function to determine if a file should be processed (i.e., is a Java file and not in test or jvm directories).
+     */
+    private fun test(fileName: String): Boolean =
+        fileName.endsWith(".java") && !fileName.contains("/test/") && !fileName.contains("/jvm/")
 }
 
 fun main() {
     val startTime = System.currentTimeMillis()
-    var projectPath = "."
+    val projectPath = "."
     val projectDir = File(projectPath).canonicalFile
-    var sourcePath = "$projectDir/JavaToUMLSamples/src/a-foundation-master"
-    var targetPathForCode = "$projectDir/target/src"
-    var targetPathForUMLModels = "$projectDir/target/models"
-    var dbUrl = "$projectDir/JavaToUMLSamples/db/model.db"
+    val sourcePath = "$projectDir/JavaToUMLSamples/src/a-foundation-master"
+    val targetPathForCode = "$projectDir/target/src"
+    val targetPathForUMLModels = "$projectDir/target/models"
+    val dbUrl = "$projectDir/JavaToUMLSamples/db/model.db"
     val dataBaseUtil = DataBaseUtil(dbUrl)
 
     try {
@@ -226,54 +266,18 @@ fun main() {
         e.printStackTrace()
     }
 
-    var runner = JavaParserRunnerDB();
+    val runner = JavaParserRunnerDB()
 
-    System.out.println(sourcePath)
-
-    // Collect java files.
+    // Collect java files
     val javaFiles = runner.collectFiles(sourcePath)
 
-    // Build UML-model for these files.
-    val model =  runner.buildModel(dataBaseUtil, "JavaSampleModel", "master", javaFiles, 4)
+    // Build UML model for these files
+    val model = runner.buildModel(dataBaseUtil, "JavaSampleModel", "master", javaFiles, null,4)
 
-    //
-    // Generate C++ code.
-    //
     clearPackageDir(targetPathForCode)
     println("Model saved")
+
     val endTime = System.currentTimeMillis()
     val executionTime = (endTime - startTime) / 1000.0
-    println("Время выполнения программы: $executionTime секунд")
-
+    println("Execution time: $executionTime seconds")
 }
-
-fun calculateChecksum(filePath: String, algorithm: String = "SHA-256"): String {
-    val buffer = ByteArray(8192)
-    val md = MessageDigest.getInstance(algorithm)
-
-    FileInputStream(File(filePath)).use { fis ->
-        var numRead: Int
-        while (fis.read(buffer).also { numRead = it } != -1) {
-            md.update(buffer, 0, numRead)
-        }
-    }
-
-    return bytesToHex(md.digest())
-}
-
-private fun bytesToHex(bytes: ByteArray): String {
-    val hexArray = "0123456789ABCDEF".toCharArray()
-    val hexChars = CharArray(bytes.size * 2)
-    for (i in bytes.indices) {
-        val v = bytes[i].toInt() and 0xFF
-        hexChars[i * 2] = hexArray[v ushr 4]
-        hexChars[i * 2 + 1] = hexArray[v and 0x0F]
-    }
-    return String(hexChars)
-}
-
-//TODO: kick large files
-private fun test(fileName: String) =
-    fileName.endsWith(".java") and
-            !fileName.contains("/test/") and
-            !fileName.contains("/jvm/")

@@ -25,6 +25,7 @@ dependencies {
     implementation("org.antlr:antlr4:4.13.0")
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
     testImplementation("org.jetbrains.kotlin:kotlin-test")
+    implementation("org.xerial:sqlite-jdbc:3.45.3.0")
 
     implementation("org.apache.logging.log4j:log4j-core:2.12.4")
 

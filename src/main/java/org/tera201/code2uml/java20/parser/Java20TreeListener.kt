@@ -9,6 +9,7 @@ import org.tera201.code2uml.uml.IUMLBuilder
 import org.tera201.code2uml.uml.helpers.*
 import kotlin.jvm.optionals.getOrNull
 
+@Deprecated("Use Java20DBTreeListener instead")
 class Java20TreeListener(
     val parser: Java20Parser,
     private val umlBuilder: IUMLBuilder,
