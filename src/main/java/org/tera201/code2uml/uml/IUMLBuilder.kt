@@ -8,24 +8,23 @@ import org.tera201.code2uml.uml.helpers.BuilderClass
 import org.tera201.code2uml.uml.helpers.BuilderInterface
 
 /**
- * Интерфейс построителя UML-модели.
+ * UML Model Builder Interface.
  */
 interface IUMLBuilder {
     val model: Model
 
     fun setName(modelName: String)
 
-    fun startPackage(packageName: String, byteSize: Int?)
+    fun startPackage(packageName: String, byteSize: Int?, filePath: String)
     fun endPackage()
 
-    fun startClass(builderClass: BuilderClass
-    )
+    fun startClass(builderClass: BuilderClass, filePath: String)
     fun endClass()
 
-    fun startInterface(interfaceBuilderInterface: BuilderInterface)
+    fun startInterface(interfaceBuilderInterface: BuilderInterface, filePath: String)
     fun endInterface()
 
-    fun startEnumeration(enumerationName: String)
+    fun startEnumeration(enumerationName: String, filePath: String)
     fun endEnumeration()
 
     fun addAttribute(attributeName: String, typeName: String): Property?

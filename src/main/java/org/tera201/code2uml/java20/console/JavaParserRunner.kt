@@ -10,12 +10,12 @@ import org.antlr.v4.runtime.tree.ParseTreeWalker
 import org.apache.logging.log4j.LogManager
 import org.apache.logging.log4j.Logger
 import org.eclipse.emf.common.util.URI
+import org.eclipse.emf.ecore.EcoreFactory
 import org.eclipse.emf.ecore.resource.Resource
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl
 import org.eclipse.uml2.uml.Model
 import org.eclipse.uml2.uml.UMLFactory
-import org.eclipse.uml2.uml.internal.impl.ModelImpl
 import org.tera201.code2uml.uml.IUMLBuilder
 import org.tera201.code2uml.uml.builders.CodeUMLBuilderPass1
 import org.tera201.code2uml.uml.builders.CodeUMLBuilderPass2
@@ -35,135 +35,131 @@ import java.util.concurrent.ExecutorService
 import java.util.concurrent.Executors
 import javax.swing.JTextArea
 
+@Deprecated("Use JavaParserRunnerDB instead")
+class JavaParserRunner {
 
-class JavaParserRunner() {
-
+    // Logger for logging important information
     private val log: Logger = LogManager.getLogger(JavaParserRunner::class.java)
 
-    class JavaParserRunner() {}
+    // Path to model
+    private var modelPath: String? = null
 
+    /**
+     * Collect Java files from given paths.
+     *
+     * @param paths Vararg of paths to search for Java files.
+     * @return List of Java files found.
+     */
     fun collectFiles(vararg paths: String): ArrayList<String> {
+        modelPath = paths[0]
         log.info("Collecting files from ${paths.toList()}")
-        val cppFiles = ArrayList<String>()
-
-        paths.forEach { FilesUtil.walkRes(it, ::test, cppFiles::add) }
-
-        return cppFiles
-    }
-
-
-    fun buildModel(modelName: String, javaFiles: ArrayList<String>): Model  {
-        return buildModel(modelName, javaFiles, null)
-    }
-
-
-    fun buildModel(modelName: String, javaFiles: ArrayList<String>, numThreads:Int): Model  {
-        return buildModel(modelName, javaFiles, null, numThreads)
+        val javaFiles = ArrayList<String>()
+        paths.forEach { FilesUtil.walkRes(it, ::test, javaFiles::add) }
+        return javaFiles
     }
 
     /**
-     * Создать именованную модель для заданных файлов.
+     * Build UML model using the collected Java files.
+     *
+     * @param modelName Name of the model to be created.
+     * @param javaFiles List of Java files to be included in the model.
+     * @return Created UML Model.
      */
-    fun buildModel(modelName: String, javaFiles: ArrayList<String>, logJTextArea: JTextArea?, numThreads:Int): Model {
-        val projectPath = "."
+    fun buildModel(modelName: String, javaFiles: ArrayList<String>, logJTextArea: JTextArea? = null, numThreads: Int = 1): Model {
         val executorService: ExecutorService = Executors.newFixedThreadPool(numThreads)
-        log.info("Building model")
+        log.info("Building model: $modelName")
+
+        // Initialize UML model and annotations
         val model = UMLFactory.eINSTANCE.createModel()
         model.name = modelName
+        val annotation = EcoreFactory.eINSTANCE.createEAnnotation()
+        annotation.source = "ResourcePath"
+        annotation.getDetails().put("path", modelPath)
+        model.eAnnotations.add(annotation)
 
-        //
-        // 1-й проход. Добавление в UML-модель пакетов и типов данных.
-        //
-        if (logJTextArea != null) logJTextArea.append("1st: adding packages and data types to model\n")
-        log.debug("1st: adding packages and data types to model")
-        val mh1 = FileMessageHandler("$projectPath/messagesPass1.txt")
-        val fileFutures = javaFiles.map { file ->
+        // Process files in two passes
+        processFilesInPasses(model, javaFiles, logJTextArea, executorService)
+
+        // Shutdown executor service after processing
+        executorService.shutdown()
+
+        return model
+    }
+
+    /**
+     * Process Java files in two passes:
+     * 1. Adding packages and data types to the model.
+     * 2. Adding elements that use these packages and types.
+     */
+    private fun processFilesInPasses(model: Model, javaFiles: ArrayList<String>, logJTextArea: JTextArea?, executorService: ExecutorService) {
+        // Pass 1: Add packages and data types
+        logPass("1st: Adding packages and data types", logJTextArea)
+        val mh1 = FileMessageHandler("messagesPass1.txt")
+        val fileFutures1 = javaFiles.map { file ->
             CompletableFuture.runAsync({
                 val umlBuilderPass1 = CodeUMLBuilderPass1(model, mh1)
                 parseFile(file, mh1, umlBuilderPass1)
             }, executorService)
         }
-        val allOf = CompletableFuture.allOf(*fileFutures.toTypedArray())
-        allOf.join()
+        CompletableFuture.allOf(*fileFutures1.toTypedArray()).join()
 
-        //
-        // 2-й проход. Добавление в UML-модель элементов использующих пакеты и типы
-        // данных.
-        //
-        if (logJTextArea != null) logJTextArea.append("2st: adding elements to model\n")
-        log.debug("2st: adding elements to model")
-        val mh2 = FileMessageHandler("$projectPath/messagesPass2.txt")
+        // Pass 2: Add elements that use the packages and data types
+        logPass("2nd: Adding elements to the model", logJTextArea)
+        val mh2 = FileMessageHandler("messagesPass2.txt")
         val fileFutures2 = javaFiles.map { file ->
             CompletableFuture.runAsync({
                 val umlBuilderPass2 = CodeUMLBuilderPass2(model, mh2)
-                parseFile(file, mh1, umlBuilderPass2)
+                parseFile(file, mh2, umlBuilderPass2)
             }, executorService)
         }
-        val allOf2 = CompletableFuture.allOf(*fileFutures2.toTypedArray())
-        allOf2.join()
-        executorService.shutdown()
-        return model
-    }
-    fun buildModel(modelName: String, javaFiles: ArrayList<String>, logJTextArea: JTextArea?): Model {
-        val projectPath = "."
-        log.info("Building model")
-        val model = UMLFactory.eINSTANCE.createModel()
-        model.name = modelName
-
-        if (logJTextArea != null) logJTextArea.append("1st: adding packages and data types to model\n")
-        log.debug("1st: adding packages and data types to model")
-        val mh1 = FileMessageHandler("$projectPath/messagesPass1.txt")
-        val umlBuilderPass1 = CodeUMLBuilderPass1(model, mh1)
-        javaFiles.forEach { parseFile(it, mh1, umlBuilderPass1) }
-
-        if (logJTextArea != null) logJTextArea.append("2st: adding elements to model\n")
-        log.debug("2st: adding elements to model")
-        val mh2 = FileMessageHandler("$projectPath/messagesPass2.txt")
-        val umlBuilderPass2 = CodeUMLBuilderPass2(model, mh2)
-        javaFiles.forEach { parseFile(it, mh2, umlBuilderPass2) }
-        return model
+        CompletableFuture.allOf(*fileFutures2.toTypedArray()).join()
     }
 
+    /**
+     * Log the current pass stage with optional JTextArea logging.
+     */
+    private fun logPass(message: String, logJTextArea: JTextArea?) {
+        log.debug(message)
+        logJTextArea?.append("$message\n")
+    }
+
+    /**
+     * Parse a single Java file and build UML representation using the provided builder.
+     *
+     * @param fileName Name of the Java file to parse.
+     * @param messageHandler Message handler to capture parsing messages.
+     * @param umlBuilder UML builder used to construct the model.
+     */
     private fun parseFile(fileName: String, messageHandler: IMessageHandler, umlBuilder: IUMLBuilder) {
         log.debug("Parsing file: $fileName")
         messageHandler.info(FileMessage("Parsing file:", fileName))
 
         try {
-            // Входящий файл с тексом в виде кода считывается как поток символов
             val input = CharStreams.fromFileName(fileName)
-
-            // Далее класса Java20Lexer позволяет сгруппировать символы
-            // и определить тип лексем (идентификатор, число, строка и т.п.).
             val lexer = Java20Lexer(input)
-
-            // Далее код разбивается на токены
             val tokens = CommonTokenStream(lexer)
-
-            // Код подготавливается для использования далее в построении дерева разбора
             val parser = Java20Parser(tokens)
-
-            // Код проверяется на наличие синтаксических ошибок
             val errorListener = CPP14ErrorListener(messageHandler)
             parser.addErrorListener(errorListener)
 
-            // Позволять определить вложенность вида родитель -
-            // потомок (класс - член класса/метод)
             val tree = parser.compilationUnit()
             val walker = ParseTreeWalker()
-            val listener = Java20TreeListener(parser, umlBuilder)
+            val listener = Java20TreeListener(parser, umlBuilder, fileName)
             walker.walk(listener, tree)
         } catch (e: Exception) {
             e.printStackTrace()
         }
     }
 
-    fun parseFile(fileName: String, mh: IMessageHandler) {
+    /**
+     * Parse the file and output the syntax tree to a text file.
+     */
+    fun parseFileToText(fileName: String, mh: IMessageHandler) {
         try {
             val input = CharStreams.fromFileName(fileName)
             val lexer = Java20Lexer(input)
             val tokens = CommonTokenStream(lexer)
             val parser = Java20Parser(tokens)
-
             val errorListener = CPP14ErrorListener(mh)
             parser.addErrorListener(errorListener)
 
@@ -177,63 +173,90 @@ class JavaParserRunner() {
         }
     }
 
+    /**
+     * Test function to determine if a file should be processed (i.e., is a Java file and not in test or jvm directories).
+     */
+    private fun test(fileName: String): Boolean =
+        fileName.endsWith(".java") && !fileName.contains("/test/") && !fileName.contains("/jvm/")
 }
 
 fun main() {
     val startTime = System.currentTimeMillis()
-    var projectPath = "."
+    val projectPath = "."
     val projectDir = File(projectPath).canonicalFile
-    var sourcePath = "$projectDir/JavaToUMLSamples/src/a-foundation-master"
-    var targetPathForCode = "$projectDir/target/src"
-    var targetPathForUMLModels = "$projectDir/target/models"
+    val sourcePath = "$projectDir/JavaToUMLSamples/src/a-foundation-master"
+    val targetPathForCode = "$projectDir/target/src"
+    val targetPathForUMLModels = "$projectDir/target/models"
 
-    try {
-        File(targetPathForCode).mkdirs()
-        File(targetPathForUMLModels).mkdirs()
-    } catch (e: IOException) {
-        e.printStackTrace()
-    }
+    // Create necessary directories
+    createDirectories(targetPathForCode, targetPathForUMLModels)
 
-    var runner = JavaParserRunner();
+    val runner = JavaParserRunner()
 
-    System.out.println(sourcePath)
-
-    // Collect java files.
+    // Collect Java files
     val javaFiles = runner.collectFiles(sourcePath)
 
-    // Build UML-model for these files.
-    val model =  runner.buildModel("JavaSampleModel", javaFiles, 4)
-    println("Model end")
+    // Build UML model for the collected files
+    val model = runner.buildModel("JavaSampleModel", javaFiles, null, 4)
 
-    //
-    // Generate C++ code.
-    //
+    // Generate C++ code and save UML models
+    generateCppAndSaveModel(model, targetPathForCode, targetPathForUMLModels)
+
+    // Convert UML to Kotlin and save the result
+    convertUMLToKotlin(model, targetPathForUMLModels)
+
+    // Save the final UML model to a JSON file
+    saveModelToFile(model, targetPathForUMLModels)
+
+    val endTime = System.currentTimeMillis()
+    val executionTime = (endTime - startTime) / 1000.0
+    println("Program execution time: $executionTime seconds")
+}
+
+/**
+ * Create necessary directories for code and UML models.
+ */
+fun createDirectories(vararg paths: String) {
+    paths.forEach {
+        try {
+            File(it).mkdirs()
+        } catch (e: IOException) {
+            e.printStackTrace()
+        }
+    }
+}
+
+/**
+ * Generate C++ code from UML model and save the model.
+ */
+fun generateCppAndSaveModel(model: Model, targetPathForCode: String, targetPathForUMLModels: String) {
     clearPackageDir(targetPathForCode)
     model.saveModel(targetPathForUMLModels)
     model.nestedPackages.forEach { it.generateCpp(targetPathForCode) }
+}
 
-    //
-    // UML --> Kotlin
-    //
+/**
+ * Convert UML model to Kotlin and save to the target directory.
+ */
+fun convertUMLToKotlin(model: Model, targetPathForUMLModels: String) {
     val kotlinPath = File(".")
         .absolutePath
         .replace(".", "target/generated/kotlin/${model.name}")
     File(kotlinPath).mkdirs()
-
     model.toKotlin(kotlinPath)
-    val handler = UMLModelHandler()
-    handler.saveModelToFile(model, "$targetPathForUMLModels/Dimonmodel.json")
-    println("Model saved")
-    val endTime = System.currentTimeMillis()
-    val executionTime = (endTime - startTime) / 1000.0
-    println("Время выполнения программы: $executionTime секунд")
-//    val loadedModel: ModelImpl? = handler.loadModelFromFile("$targetPathForUMLModels/model.json")
-//    println(loadedModel)
-//    if (loadedModel != null)
-//    handler.saveModelToFile(loadedModel, "$targetPathForUMLModels/loadedModel.json")
-
 }
 
+/**
+ * Save the UML model to a file in the specified directory.
+ */
+fun saveModelToFile(model: Model, targetPathForUMLModels: String) {
+    val handler = UMLModelHandler()
+    handler.saveModelToFile(model, "$targetPathForUMLModels/Dimonmodel.json")
+}
+
+/**
+ * Extension function to save the UML model to a file.
+ */
 fun Model.saveModel(file: String?) {
     val uri = URI.createFileURI("$file")
     val reg: Resource.Factory.Registry = Resource.Factory.Registry.INSTANCE
@@ -246,23 +269,3 @@ fun Model.saveModel(file: String?) {
     } catch (_: IOException) {
     }
 }
-
-fun loadModelFromFile(file: String?) : ModelImpl {
-    val uri = URI.createFileURI("$file")
-    val resource = ResourceSetImpl().getResource(uri, true)
-    return resource.contents.get(0) as ModelImpl
-}
-
-object UML2HTMLReporter {
-    @JvmStatic
-    fun generateReport(model: Model, htmlPath: String) {
-            UML2HTMLReporter.generateReport(model, htmlPath)
-    }
-}
-
-//TODO: kick large files
-private fun test(fileName: String) =
-    fileName.endsWith(".java") and
-            !fileName.contains("/test/") and
-            !fileName.contains("/jvm/") and
-            !fileName.contains("benchmark")

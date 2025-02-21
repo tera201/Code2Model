@@ -9,9 +9,11 @@ import org.tera201.code2uml.uml.IUMLBuilder
 import org.tera201.code2uml.uml.helpers.*
 import kotlin.jvm.optionals.getOrNull
 
+@Deprecated("Use Java20DBTreeListener instead")
 class Java20TreeListener(
     val parser: Java20Parser,
     private val umlBuilder: IUMLBuilder,
+    private val filePath: String
 ) : Java20ParserBaseListener() {
 
     private var packageNum = 0
@@ -59,7 +61,7 @@ class Java20TreeListener(
      * ;
      */
     override fun enterPackageDeclaration(ctx: Java20Parser.PackageDeclarationContext?) {
-        ctx!!.Identifier().forEach{umlBuilder.startPackage(it.text, ctx.text?.toByteArray()?.size)}
+        ctx!!.Identifier().forEach{umlBuilder.startPackage(it.text, ctx.text?.toByteArray()?.size, filePath)}
         packageNum = ctx.Identifier().size
 
     }
@@ -80,7 +82,7 @@ class Java20TreeListener(
         val interfaceList = ctx.classImplements()?.interfaceTypeList()?.interfaceType()?.stream()?.map { it.text }?.toList() // start from 1
         val isNested =  ctx.getParent()?.getParent()?.getParent()?.text?.startsWith("package")?.not() == true
         val builderClass = BuilderClass(builderImports, className, builderModifiers, null, interfaceList, isNested)
-        umlBuilder.startClass(builderClass)
+        umlBuilder.startClass(builderClass, filePath)
         umlBuilder.addClassSize(ctx.text?.toByteArray()?.size)
     }
 
@@ -93,7 +95,7 @@ class Java20TreeListener(
         val interfaceList = ctx.classImplements()?.interfaceTypeList()?.interfaceType()?.stream()?.map { it.text }?.toList()
         val builderModifiers = getBuilderClassModifier(ctx.classModifier())
         val builderClass = BuilderClass(builderImports, className, builderModifiers, extendName, interfaceList, isNested)
-        umlBuilder.startClass(builderClass)
+        umlBuilder.startClass(builderClass, filePath)
         umlBuilder.addClassSize(ctx.text?.toByteArray()?.size)
     }
 
@@ -114,13 +116,13 @@ class Java20TreeListener(
         val parentList = ctx.interfaceExtends()?.interfaceTypeList()?.interfaceType()?.stream()?.map { it.text }?.toList()
         val modifiers = getBuilderInterfaceModifier(ctx.interfaceModifier())
         val builderInterface = BuilderInterface(builderImports, interfaceName, modifiers, parentList, isNested)
-        umlBuilder.startInterface(builderInterface)
+        umlBuilder.startInterface(builderInterface, filePath)
         umlBuilder.addClassSize(ctx.text?.toByteArray()?.size)
     }
 
     override fun enterEnumDeclaration(ctx: Java20Parser.EnumDeclarationContext?) {
         val enumName = ctx!!.typeIdentifier().text
-        if (enumName != null) umlBuilder.startEnumeration(enumName)
+        if (enumName != null) umlBuilder.startEnumeration(enumName, filePath)
     }
 
     override fun enterFieldDeclaration(ctx: Java20Parser.FieldDeclarationContext?) {
