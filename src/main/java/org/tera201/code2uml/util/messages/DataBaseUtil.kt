@@ -14,19 +14,18 @@ class DataBaseUtil(url:String) {
             throw RuntimeException("SQLite JDBC driver not found!", e)
         }
         conn = createDatabaseConnection("jdbc:sqlite:$url")
-        enableForeignKeys()
     }
 
     private fun createDatabaseConnection(dbUrl: String): Connection {
         return try {
-            DriverManager.getConnection(dbUrl).also { createTables(it) }
+            DriverManager.getConnection(dbUrl).also { enableForeignKeys(it) }.also { createTables(it) }
         } catch (e: SQLException) {
             throw RuntimeException("Error connecting to the database: ${e.message}", e)
         }
     }
 
-    private fun enableForeignKeys() {
-        conn.createStatement().use { it.execute("PRAGMA foreign_keys = ON;") }
+    private fun enableForeignKeys(connection: Connection) {
+        connection.createStatement().use { it.execute("PRAGMA foreign_keys = ON;") }
     }
 
     /** Helper function to set parameters for PreparedStatements */
@@ -87,6 +86,7 @@ class DataBaseUtil(url:String) {
 
     fun insertModel(name: String, filePath: String, projectId: Int): Int {
         val sql = "INSERT OR IGNORE INTO Models(name, filePath, projectId) VALUES(?, ?, ?)"
+        println("+ Models($name, $filePath, $projectId)")
         return if (executeUpdate(sql, name, filePath, projectId)) getLastInsertId() else -1
     }
 

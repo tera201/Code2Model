@@ -49,6 +49,109 @@ fun createTables(connection: Connection) {
             );
         """.trimIndent(),
 
+        "PackageChecksumRelations" to """
+            CREATE TABLE IF NOT EXISTS PackageChecksumRelations (
+                packageId INTEGER,
+                checksum TEXT,
+                FOREIGN KEY (packageId) REFERENCES Packages(id),
+                FOREIGN KEY (checksum) REFERENCES Files(checksum),
+                UNIQUE (packageId, checksum) 
+            );
+        """.trimIndent(),
+
+        "Class" to """
+            CREATE TABLE IF NOT EXISTS Classes (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                name TEXT NOT NULL,
+                filePath TEXT NOT NULL,
+                size LONG NOT NULL,
+                packageId INTEGER,
+                type INTEGER,
+                modificator INTEGER,
+                checksum TEXT,
+                FOREIGN KEY (packageId) REFERENCES Packages(id),
+                FOREIGN KEY (checksum) REFERENCES Files(checksum),
+                UNIQUE (name, filePath, packageId, checksum) 
+            );
+        """.trimIndent(),
+
+        "Interface" to """
+            CREATE TABLE IF NOT EXISTS Interfaces (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                name TEXT NOT NULL,
+                filePath TEXT NOT NULL,
+                size LONG NOT NULL,
+                packageId INTEGER,
+                checksum TEXT,
+                FOREIGN KEY (packageId) REFERENCES Packages(id),
+                FOREIGN KEY (checksum) REFERENCES Files(checksum),
+                UNIQUE (name, filePath, packageId, checksum) 
+            );
+        """.trimIndent(),
+
+        "Enumeration" to """
+            CREATE TABLE IF NOT EXISTS Enumerations (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                name TEXT NOT NULL,
+                filePath TEXT NOT NULL,
+                size LONG NOT NULL,
+                packageId INTEGER,
+                checksum TEXT,
+                FOREIGN KEY (packageId) REFERENCES Packages(id) ON DELETE CASCADE,
+                FOREIGN KEY (checksum) REFERENCES Files(checksum) ON DELETE CASCADE,
+                UNIQUE (name, filePath, packageId, checksum) 
+            );
+        """.trimIndent(),
+
+        "Method" to """
+            CREATE TABLE IF NOT EXISTS Methods (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                name TEXT NOT NULL,
+                type TEXT NOT NULL,
+                classId INTEGER,
+                interfaceId INTEGER,
+                FOREIGN KEY (classId) REFERENCES Classes(id),
+                FOREIGN KEY (interfaceId) REFERENCES Interfaces(id),
+                UNIQUE (name, classId),
+                UNIQUE (name, interfaceId) 
+            );
+        """.trimIndent(),
+
+        "PackageRelationship" to """
+            CREATE TABLE IF NOT EXISTS PackageRelationship (
+                packageParentId INTEGER,
+                packageChildId INTEGER,
+                modelId INTEGER,
+                FOREIGN KEY (packageParentId) REFERENCES Packages(id),
+                FOREIGN KEY (packageChildId) REFERENCES Packages(id),
+                FOREIGN KEY (modelId) REFERENCES Models(id) ON DELETE CASCADE,
+                UNIQUE (packageParentId, packageChildId, modelId) 
+            );
+        """.trimIndent(),
+
+        "ClassRelationship" to """
+            CREATE TABLE IF NOT EXISTS ClassRelationship (
+                classId INTEGER,
+                interfaceId INTEGER,
+                parentClassId INTEGER,
+                FOREIGN KEY (classId) REFERENCES Classes(id),
+                FOREIGN KEY (interfaceId) REFERENCES Interfaces(id),
+                FOREIGN KEY (parentClassId) REFERENCES Classes(id),
+                UNIQUE (classId, interfaceId), 
+                UNIQUE (classId,parentClassId) 
+            );
+        """.trimIndent(),
+
+        "InterfaceRelationship" to """
+            CREATE TABLE IF NOT EXISTS InterfaceRelationship (
+                interfaceId INTEGER,
+                parentInterfaceId INTEGER,
+                FOREIGN KEY (interfaceId) REFERENCES Interfaces(id),
+                FOREIGN KEY (parentInterfaceId) REFERENCES Interfaces(id),
+                UNIQUE (interfaceId, parentInterfaceId) 
+            );
+        """.trimIndent(),
+
         "Projects" to """
             CREATE TABLE IF NOT EXISTS Projects (
                 id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -77,7 +180,17 @@ fun createTables(connection: Connection) {
                 FOREIGN KEY (modelId) REFERENCES Models(id) ON DELETE CASCADE,
                 UNIQUE (checksum, modelId)
             );
-        """.trimIndent()
+        """.trimIndent(),
+
+        "FilePaths" to """
+            CREATE TABLE IF NOT EXISTS FilePaths (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                checksum TEXT,
+                filePath TEXT NOT NULL,
+                FOREIGN KEY (checksum) REFERENCES Files(checksum),
+                UNIQUE (checksum, filePath)
+            );
+        """.trimIndent(),
     )
 
     // Establish database connection and execute table creation queries
@@ -101,8 +214,9 @@ fun createTables(connection: Connection) {
 fun dropTables(url: String) {
     // List of table names to drop
     val tableNames = listOf(
-        "Models", "Packages", "Classes", "Interfaces", "Enumerations",
-        "Methods", "PackageRelationship", "ClassRelationship", "InterfaceRelationship"
+        "Models", "Packages", "Class", "Interface", "Enumeration", "Method", "PackageRelationship", "ClassRelationship",
+        "InterfaceRelationship", "Projects", "Files", "FilePaths", "FileModelRelations", "ModelPackageRelations",
+        "PackageChecksumRelations"
     )
 
     try {
