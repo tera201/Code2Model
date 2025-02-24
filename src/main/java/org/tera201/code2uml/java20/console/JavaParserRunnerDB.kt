@@ -9,6 +9,7 @@ import org.tera201.code2uml.cpp.parser.CPP14ErrorListener
 import org.tera201.code2uml.db.builders.CodeDBBuilderPass1
 import org.tera201.code2uml.db.builders.CodeDBBuilderPass2
 import org.tera201.code2uml.java20.parser.Java20DBTreeListener
+import org.tera201.code2uml.java20.parser.Java20ErrorListener
 import org.tera201.code2uml.java20.parser.generated.Java20Lexer
 import org.tera201.code2uml.java20.parser.generated.Java20Parser
 import org.tera201.code2uml.uml.DBBuilder
@@ -30,7 +31,7 @@ import javax.swing.JTextArea
  */
 class JavaParserRunnerDB {
 
-    private val log: Logger = LogManager.getLogger(JavaParserRunner::class.java)
+    private val log: Logger = LogManager.getLogger(JavaParserRunnerDB::class.java)
     private var modelPath: String? = null
     private var checksumMap = mutableMapOf<String, String>()
 
@@ -55,7 +56,7 @@ class JavaParserRunnerDB {
     /**
      * Creates or retrieves a project from the database by name and file path.
      */
-    fun createOrGetProject(dataBaseUtil: DataBaseUtil, name: String, filePath: String): Int {
+    private fun createOrGetProject(dataBaseUtil: DataBaseUtil, name: String, filePath: String): Int {
         val projectId = dataBaseUtil.getProjectId(name, filePath)
         return projectId ?: dataBaseUtil.insertProject(name, filePath)
     }
@@ -70,8 +71,8 @@ class JavaParserRunnerDB {
         log.info("Building model")
 
         // Retrieve or create project and model in the database
-        var modelId = dataBaseUtil.getModelIdByNameAndFilePath(modelName, projectPath)
         val projectId = createOrGetProject(dataBaseUtil, projectName, projectPath)
+        var modelId = dataBaseUtil.getModelId(modelName, projectPath, projectId)
 
         // Insert new model if necessary
         if (modelId == null) modelId = dataBaseUtil.insertModel(modelName, projectPath, projectId)
@@ -95,14 +96,12 @@ class JavaParserRunnerDB {
         // Step 1: Add packages and data types to model
         logJTextArea?.append("1st: adding packages and data types to model\n")
         log.debug("1st: adding packages and data types to model")
-        val mh1 = FileMessageHandler("$projectPath/messagesPass1.txt")
-        parseFilesWithAsync(javaFilesUnanalyzed, mh1, projectId, modelId, dataBaseUtil, executorService, ::parseFilesBuilder1)
+        parseFilesWithAsync(javaFilesUnanalyzed, projectId, modelId, dataBaseUtil, executorService, ::parseFilesBuilder1)
 
         // Step 2: Add elements to model
         logJTextArea?.append("2nd: adding elements to model\n")
         log.debug("2nd: adding elements to model")
-        val mh2 = FileMessageHandler("$projectPath/messagesPass2.txt")
-        parseFilesWithAsync(javaFilesUnanalyzed, mh2, projectId, modelId, dataBaseUtil, executorService, ::parseFilesBuilder2)
+        parseFilesWithAsync(javaFilesUnanalyzed, projectId, modelId, dataBaseUtil, executorService, ::parseFilesBuilder2)
 
         // Shutdown executor service if used
         executorService?.shutdown()
@@ -115,43 +114,43 @@ class JavaParserRunnerDB {
      */
     private fun parseFilesWithAsync(
         javaFiles: List<String>,
-        messageHandler: IMessageHandler,
         projectId: Int,
         modelId: Int,
         dataBaseUtil: DataBaseUtil,
         executorService: ExecutorService?,
-        parseStep: (List<String>, IMessageHandler, Int, Int, DataBaseUtil, ExecutorService?) -> Unit
+        parseStep: (List<String>, Int, Int, DataBaseUtil) -> Unit
     ) {
         if (executorService != null) {
-            val fileFutures = javaFiles.map { file ->
-                CompletableFuture.runAsync({ parseStep(listOf(file), messageHandler, projectId, modelId, dataBaseUtil, executorService) }, executorService)
+            val groupedFiles = javaFiles.groupBy { File(it).parent }
+            val fileFutures = groupedFiles.values.map { files ->
+                CompletableFuture.runAsync({ parseStep(files, projectId, modelId, dataBaseUtil) }, executorService)
             }
             CompletableFuture.allOf(*fileFutures.toTypedArray()).join()
         } else {
-            parseStep(javaFiles, messageHandler, projectId, modelId, dataBaseUtil, null)
+            parseStep(javaFiles, projectId, modelId, dataBaseUtil)
         }
     }
 
     /**
      * Parse files for the first step (adding packages and data types).
      */
-    private fun parseFilesBuilder1(javaFiles: List<String>, mh: IMessageHandler, projectId: Int, modelId: Int, dataBaseUtil: DataBaseUtil, executorService: ExecutorService?) {
+    private fun parseFilesBuilder1(javaFiles: List<String>, projectId: Int, modelId: Int, dataBaseUtil: DataBaseUtil) {
         val dbBuilderPass1 = CodeDBBuilderPass1(projectId, modelId, dataBaseUtil)
-        javaFiles.forEach { parseFile(it, mh, dbBuilderPass1) }
+        javaFiles.forEach { parseFile(it, dbBuilderPass1) }
     }
 
     /**
      * Parse files for the second step (adding elements).
      */
-    private fun parseFilesBuilder2(javaFiles: List<String>, mh: IMessageHandler, projectId: Int, modelId: Int, dataBaseUtil: DataBaseUtil, executorService: ExecutorService?) {
+    private fun parseFilesBuilder2(javaFiles: List<String>, projectId: Int, modelId: Int, dataBaseUtil: DataBaseUtil) {
         val dbBuilderPass2 = CodeDBBuilderPass2(projectId, modelId, dataBaseUtil)
-        javaFiles.forEach { parseFile(it, mh, dbBuilderPass2) }
+        javaFiles.forEach { parseFile(it, dbBuilderPass2) }
     }
 
     /**
      * Parse a single Java file and update the database.
      */
-    private fun parseFile(filePath: String, messageHandler: IMessageHandler, dbBuilder: DBBuilder) {
+    private fun parseFile(filePath: String, dbBuilder: DBBuilder) {
         log.debug("Parsing file: $filePath")
         val fileName = filePath.substringAfterLast("/")
         val checksum = checksumMap.getOrDefault(filePath, calculateChecksum(filePath))
@@ -166,15 +165,17 @@ class JavaParserRunnerDB {
             dbBuilder.dataBaseUtil.insertFileModelRelation(checksum, dbBuilder.model)
         }
 
-        messageHandler.info(FileMessage("Parsing file:", filePath))
-
         try {
             val input = CharStreams.fromFileName(filePath)
             val lexer = Java20Lexer(input)
             val tokens = CommonTokenStream(lexer)
             val parser = Java20Parser(tokens)
-            val errorListener = CPP14ErrorListener(messageHandler)
+
+            parser.removeErrorListeners()
+            lexer.removeErrorListeners()
+            val errorListener = Java20ErrorListener()
             parser.addErrorListener(errorListener)
+            lexer.addErrorListener(errorListener)
 
             // Build the parse tree
             val tree = parser.compilationUnit()
