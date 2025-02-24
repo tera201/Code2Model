@@ -58,7 +58,7 @@ class JavaParserRunnerDB {
      */
     private fun createOrGetProject(dataBaseUtil: DataBaseUtil, name: String, filePath: String): Int {
         val projectId = dataBaseUtil.getProjectId(name, filePath)
-        return projectId ?: dataBaseUtil.insertProject(name, filePath)
+        return if (projectId == -1) dataBaseUtil.insertProject(name, filePath) else projectId
     }
 
     /**
@@ -75,7 +75,7 @@ class JavaParserRunnerDB {
         var modelId = dataBaseUtil.getModelId(modelName, projectPath, projectId)
 
         // Insert new model if necessary
-        if (modelId == null) modelId = dataBaseUtil.insertModel(modelName, projectPath, projectId)
+        if (modelId == -1) modelId = dataBaseUtil.insertModel(modelName, projectPath, projectId)
 
         // Filter files that are not already in the model
         javaFiles.filter { file ->

@@ -42,7 +42,7 @@ class DataBaseUtil(url:String) {
     }
 
     /** Generic function to execute a SELECT query */
-    private fun <T> executeQuery(sql: String, vararg params: Any?, mapper: (ResultSet) -> T): T? {
+    private fun <T> executeQuery(sql: String, vararg params: Any?, mapper: (ResultSet) -> T): T {
         return conn.prepareStatement(sql).use { pstmt ->
             setParams(pstmt, params)
             pstmt.executeQuery().use { rs -> mapper(rs) }
@@ -60,12 +60,12 @@ class DataBaseUtil(url:String) {
     /** Helper function to fetch last inserted ID */
     private fun getLastInsertId(): Int {
         val sql = "SELECT last_insert_rowid()"
-        return executeQuery(sql) { rs -> if (rs.next()) rs.getInt(1) else -1 } ?: -1
+        return executeQuery(sql) { rs -> if (rs.next()) rs.getInt(1) else -1 }
     }
 
     /** Executes a query that returns a single Int (e.g., fetching an ID) */
-    private fun getIdResult(rs: ResultSet): Int? {
-        return if (rs.next()) rs.getInt("id") else null
+    private fun getIdResult(rs: ResultSet): Int {
+        return if (rs.next()) rs.getInt("id") else -1
     }
 
     /** Executes a query that checks if a record exists */
@@ -86,15 +86,14 @@ class DataBaseUtil(url:String) {
 
     fun insertModel(name: String, filePath: String, projectId: Int): Int {
         val sql = "INSERT OR IGNORE INTO Models(name, filePath, projectId) VALUES(?, ?, ?)"
-        println("+ Models($name, $filePath, $projectId)")
-        return if (executeUpdate(sql, name, filePath, projectId)) getLastInsertId() else -1
+        return if (executeUpdate(sql, name, filePath, projectId)) getModelId(name, filePath, projectId) else -1
     }
 
     fun insertPackageAndGetId(
         name: String, packageName:String, size: Long, projectId: Int
     ): Int {
         val sqlInsert = "INSERT OR IGNORE INTO Packages(name, package, size, projectId) VALUES(?, ?, ?, ?)"
-        return if (executeUpdate(sqlInsert, name, packageName, size, projectId)) getLastInsertId() else -1
+        return if (executeUpdate(sqlInsert, name, packageName, size, projectId)) getPackageId(name, packageName, size, projectId) else -1
     }
 
     fun insertModelPackageRelation(modelId: Int, packageId: Int) {
@@ -114,18 +113,27 @@ class DataBaseUtil(url:String) {
 
     fun insertClassAndGetId(name: String, filePath: String, size: Long, packageId: Int, type: Int, modificator: Int, checksum:String): Int {
         val sqlInsert = "INSERT OR IGNORE INTO Classes(name, filePath, size, packageId, type, modificator, checksum) VALUES(?, ?, ?, ?, ?, ?, ?)"
-        return if (executeUpdate(sqlInsert, name, filePath, size, packageId, type, modificator, checksum)) getLastInsertId() else -1
+        return if (executeUpdate(sqlInsert, name, filePath, size, packageId, type, modificator, checksum)) getClassId(name, filePath, checksum) else -1
+    }
+
+    fun insertImportedClass(name: String, extendedByClassId: Int, packageId: Int) {
+        val sqlInsert = "INSERT OR IGNORE INTO ImportedClasses(name, classId, packageId) VALUES(?, ?, ?)"
+        executeUpdate(sqlInsert, name, extendedByClassId, packageId)
     }
 
     fun insertClassRelationShip(classId: Int, interfaceId: Int?, parentClassId:Int?) {
         if (interfaceId == null && parentClassId == null) return
         val sqlInsert = "INSERT OR IGNORE INTO ClassRelationship(classId, interfaceId, parentClassId) VALUES(?, ?, ?)"
-        executeUpdate(sqlInsert, classId, interfaceId, parentClassId)
+        try {
+            executeUpdate(sqlInsert, classId, interfaceId, parentClassId)
+        } catch (e: SQLException) {
+            println("+ ClassRelationship($classId, $interfaceId, $parentClassId)")
+        }
     }
 
     fun insertInterfaceAndGetId(name: String, filePath: String, size: Long, packageId: Int, checksum:String): Int {
         val sqlInsert = "INSERT OR IGNORE INTO Interfaces(name, filePath, size, packageId, checksum) VALUES(?, ?, ?, ?, ?)"
-        return if (executeUpdate(sqlInsert, name, filePath, size, packageId, checksum)) getLastInsertId() else -1
+        return if (executeUpdate(sqlInsert, name, filePath, size, packageId, checksum)) getInterfaceId(name, filePath, packageId, checksum) else -1
     }
 
     fun insertInterfaceRelationShip(interfaceId: Int, parentInterfaceId: Int) {
@@ -135,7 +143,7 @@ class DataBaseUtil(url:String) {
 
     fun insertEnumerationAndGetId(name: String, filePath: String, size: Long, packageId: Int, checksum:String): Int {
         val sqlInsert = "INSERT OR IGNORE INTO Enumerations(name, filePath, size, packageId, checksum) VALUES(?, ?, ?, ?, ?)"
-        return if (executeUpdate(sqlInsert, name, filePath, size, packageId, checksum)) getLastInsertId() else -1
+        return if (executeUpdate(sqlInsert, name, filePath, size, packageId, checksum)) getEnumerationId(name, filePath, checksum) else -1
     }
 
     fun insertMethod(name: String, type:String, classId: Int?, interfaceId: Int?) {
@@ -183,12 +191,17 @@ class DataBaseUtil(url:String) {
 
     // ---- GET FUNCTIONS ----
 
-    fun getProjectId(projectName: String, filePath: String): Int? {
+    fun getProjectId(projectName: String, filePath: String): Int {
         val sql = "SELECT id FROM Projects WHERE name = ? AND filePath = ?"
         return executeQuery(sql, projectName, filePath) { getIdResult(it) }
     }
 
-    fun getModelIdByNameAndFilePath(modelName: String, filePath: String): Int? {
+    fun getModelId(modelName: String, filePath: String, projectId: Int): Int {
+        val sql = "SELECT id FROM Models WHERE name = ? AND filePath = ? AND projectId = ?"
+        return executeQuery(sql, modelName, filePath, projectId) { getIdResult(it) }
+    }
+
+    fun getModelIdByNameAndFilePath(modelName: String, filePath: String): Int {
         val sql = "SELECT id FROM Models WHERE name = ? AND filePath = ?"
         return executeQuery(sql, modelName, filePath) { getIdResult(it) }
     }
@@ -198,37 +211,42 @@ class DataBaseUtil(url:String) {
         return executeQuery(sql, id) { rs -> if (rs.next()) rs.getString("name") else null }
     }
 
-    fun getClassIdByName(name: String): Int? {
+    fun getClassIdByName(name: String): Int {
         val sql = "SELECT id FROM Classes WHERE name = ?"
         return executeQuery(sql, name) { getIdResult(it) }
     }
 
-    fun getClassId(name: String, filePath: String, checksum: String): Int? {
+    fun getClassId(name: String, filePath: String, checksum: String): Int {
         val sql = "SELECT id FROM Classes WHERE name = ? AND filePath = ? AND checksum = ?"
         return executeQuery(sql, name, filePath, checksum) { getIdResult(it) }
     }
 
-    fun getInterfaceId(name: String, filePath: String, checksum: String): Int? {
-        val sql = "SELECT id FROM Interfaces WHERE name = ? AND filePath = ? AND checksum = ?"
-        return executeQuery(sql, name, filePath, checksum) { getIdResult(it) }
+    fun getInterfaceId(name: String, filePath: String, packageId:Int, checksum: String): Int {
+        val sql = "SELECT id FROM Interfaces WHERE name = ? AND filePath = ? AND packageId = ? AND checksum = ?"
+        return executeQuery(sql, name, filePath, packageId, checksum) { getIdResult(it) }
     }
 
-    fun getInterfaceIdByName(name: String): Int? {
+    fun getInterfaceIdByName(name: String): Int {
         val sql = "SELECT id FROM Interfaces WHERE name = ?"
         return executeQuery(sql, name) { getIdResult(it) }
     }
 
-    fun getEnumerationId(name: String, filePath: String, checksum: String): Int? {
+    fun getEnumerationId(name: String, filePath: String, checksum: String): Int {
         val sql = "SELECT id FROM Enumerations WHERE name = ? AND filePath = ? AND checksum = ?"
         return executeQuery(sql, name, filePath, checksum) { getIdResult(it) }
     }
 
-    fun getPackageIdByPackageName(packageName: String, projectId: Int): Int? {
+    fun getPackageId(name: String, packageName:String, size: Long, projectId: Int): Int {
+        val sql = "SELECT id FROM Packages WHERE name = ? AND package = ? AND size = ? AND projectId = ?"
+        return executeQuery(sql, name, packageName, size, projectId) { getIdResult(it) }
+    }
+
+    fun getPackageIdByPackageName(packageName: String, projectId: Int): Int {
         val sql = "SELECT id FROM Packages WHERE package = ? AND projectId = ?"
         return executeQuery(sql, packageName, projectId) { getIdResult(it) }
     }
 
-    fun getFilePathId(checksum:String, filePath: String):Int? {
+    fun getFilePathId(checksum:String, filePath: String):Int {
         val sql = "SELECT * FROM Files WHERE checksum = ? AND filePath = ?"
         return executeQuery(sql, checksum, filePath) { getIdResult(it) }
     }

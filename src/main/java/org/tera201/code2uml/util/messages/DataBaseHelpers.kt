@@ -55,7 +55,7 @@ fun createTables(connection: Connection) {
                 checksum TEXT,
                 FOREIGN KEY (packageId) REFERENCES Packages(id),
                 FOREIGN KEY (checksum) REFERENCES Files(checksum),
-                UNIQUE (packageId, checksum) 
+                UNIQUE (packageId, checksum)
             );
         """.trimIndent(),
 
@@ -158,6 +158,18 @@ fun createTables(connection: Connection) {
                 name TEXT NOT NULL,
                 filePath TEXT NOT NULL,
                 UNIQUE (name, filePath)
+            );
+        """.trimIndent(),
+
+        "ImportedClasses" to """
+            CREATE TABLE IF NOT EXISTS ImportedClasses (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                name TEXT NOT NULL,
+                classId INTEGER,
+                packageId INTEGER,
+                FOREIGN KEY (classId) REFERENCES Classes(id),
+                FOREIGN KEY (packageId) REFERENCES Packages(id),
+                UNIQUE (name, classId) 
             );
         """.trimIndent(),
 
