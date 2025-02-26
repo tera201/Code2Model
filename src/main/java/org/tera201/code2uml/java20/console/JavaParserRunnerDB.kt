@@ -77,16 +77,6 @@ class JavaParserRunnerDB {
         // Insert new model if necessary
         if (modelId == -1) modelId = dataBaseUtil.insertModel(modelName, projectPath, projectId)
 
-        // Filter files that are not already in the model
-        javaFiles.filter { file ->
-            val checksum = checksumMap.getOrDefault(file, calculateChecksum(file))
-            dataBaseUtil.isFileExist(checksum) && !dataBaseUtil.isFileModelRelationExist(checksum, modelId)
-        }.forEach {
-            val checksum = checksumMap.getOrDefault(it, calculateChecksum(it))
-            dataBaseUtil.insertNewRelationsForModel(modelId, checksum)
-            dataBaseUtil.insertFilePath(checksum, it)
-        }
-
         // Files that need analysis
         val javaFilesUnanalyzed = javaFiles.filter { file ->
             val checksum = checksumMap.getOrDefault(file, calculateChecksum(file))
