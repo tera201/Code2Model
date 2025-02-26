@@ -8,15 +8,29 @@ import java.sql.PreparedStatement
 import java.sql.SQLException
 
 private val log: Logger = LogManager.getLogger(DataBaseUtil::class.java)
-/**
- * Creates necessary tables in the SQLite database if they do not already exist.
- *
- * @param url JDBC connection URL to the database.
- */
-fun createTables(connection: Connection) {
-    // Map containing table creation SQL statements
-    val tableCreationQueries = mapOf(
-        "Models" to """
+
+// Map containing table creation SQL statements
+private val tableCreationQueries = mapOf(
+    "Projects" to """
+            CREATE TABLE IF NOT EXISTS Projects (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                name TEXT NOT NULL,
+                filePath TEXT NOT NULL,
+                UNIQUE (name, filePath)
+            );
+        """.trimIndent(),
+
+    "Files" to """
+            CREATE TABLE IF NOT EXISTS Files (
+                checksum TEXT PRIMARY KEY,
+                fileName TEXT NOT NULL,
+                projectId INTEGER NOT NULL,
+                FOREIGN KEY (projectId) REFERENCES Projects(id),
+                UNIQUE (checksum, projectId)
+            );
+        """.trimIndent(),
+
+    "Models" to """
             CREATE TABLE IF NOT EXISTS Models (
                 id INTEGER PRIMARY KEY AUTOINCREMENT,
                 name TEXT NOT NULL,
@@ -27,7 +41,7 @@ fun createTables(connection: Connection) {
             );
         """.trimIndent(),
 
-        "Packages" to """
+    "Packages" to """
             CREATE TABLE IF NOT EXISTS Packages (
                 id INTEGER PRIMARY KEY AUTOINCREMENT,
                 name TEXT NOT NULL,
@@ -39,27 +53,17 @@ fun createTables(connection: Connection) {
             );
         """.trimIndent(),
 
-        "ModelPackageRelations" to """
-            CREATE TABLE IF NOT EXISTS ModelPackageRelations (
-                modelId INTEGER,
-                packageId INTEGER,
-                FOREIGN KEY (modelId) REFERENCES Models(id) ON DELETE CASCADE,
-                FOREIGN KEY (packageId) REFERENCES Packages(id),
-                UNIQUE (modelId, packageId)
-            );
-        """.trimIndent(),
-
-        "PackageChecksumRelations" to """
-            CREATE TABLE IF NOT EXISTS PackageChecksumRelations (
-                packageId INTEGER,
+    "FilePaths" to """
+            CREATE TABLE IF NOT EXISTS FilePaths (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
                 checksum TEXT,
-                FOREIGN KEY (packageId) REFERENCES Packages(id),
+                filePath TEXT NOT NULL,
                 FOREIGN KEY (checksum) REFERENCES Files(checksum),
-                UNIQUE (packageId, checksum)
+                UNIQUE (checksum, filePath)
             );
         """.trimIndent(),
 
-        "Class" to """
+    "Classes" to """
             CREATE TABLE IF NOT EXISTS Classes (
                 id INTEGER PRIMARY KEY AUTOINCREMENT,
                 name TEXT NOT NULL,
@@ -75,7 +79,7 @@ fun createTables(connection: Connection) {
             );
         """.trimIndent(),
 
-        "Interface" to """
+    "Interfaces" to """
             CREATE TABLE IF NOT EXISTS Interfaces (
                 id INTEGER PRIMARY KEY AUTOINCREMENT,
                 name TEXT NOT NULL,
@@ -89,7 +93,7 @@ fun createTables(connection: Connection) {
             );
         """.trimIndent(),
 
-        "Enumeration" to """
+    "Enumerations" to """
             CREATE TABLE IF NOT EXISTS Enumerations (
                 id INTEGER PRIMARY KEY AUTOINCREMENT,
                 name TEXT NOT NULL,
@@ -103,7 +107,18 @@ fun createTables(connection: Connection) {
             );
         """.trimIndent(),
 
-        "Method" to """
+    "FileModelRelations" to """
+            CREATE TABLE IF NOT EXISTS FileModelRelations (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                checksum TEXT,
+                modelId INTEGER,
+                FOREIGN KEY (checksum) REFERENCES Files(checksum),
+                FOREIGN KEY (modelId) REFERENCES Models(id) ON DELETE CASCADE,
+                UNIQUE (checksum, modelId)
+            );
+        """.trimIndent(),
+
+    "Methods" to """
             CREATE TABLE IF NOT EXISTS Methods (
                 id INTEGER PRIMARY KEY AUTOINCREMENT,
                 name TEXT NOT NULL,
@@ -117,7 +132,27 @@ fun createTables(connection: Connection) {
             );
         """.trimIndent(),
 
-        "PackageRelationship" to """
+    "ModelPackageRelations" to """
+            CREATE TABLE IF NOT EXISTS ModelPackageRelations (
+                modelId INTEGER,
+                packageId INTEGER,
+                FOREIGN KEY (modelId) REFERENCES Models(id) ON DELETE CASCADE,
+                FOREIGN KEY (packageId) REFERENCES Packages(id),
+                UNIQUE (modelId, packageId)
+            );
+        """.trimIndent(),
+
+    "PackageChecksumRelations" to """
+            CREATE TABLE IF NOT EXISTS PackageChecksumRelations (
+                packageId INTEGER,
+                checksum TEXT,
+                FOREIGN KEY (packageId) REFERENCES Packages(id),
+                FOREIGN KEY (checksum) REFERENCES Files(checksum),
+                UNIQUE (packageId, checksum)
+            );
+        """.trimIndent(),
+
+    "PackageRelationship" to """
             CREATE TABLE IF NOT EXISTS PackageRelationship (
                 packageParentId INTEGER,
                 packageChildId INTEGER,
@@ -129,7 +164,7 @@ fun createTables(connection: Connection) {
             );
         """.trimIndent(),
 
-        "ClassRelationship" to """
+    "ClassRelationship" to """
             CREATE TABLE IF NOT EXISTS ClassRelationship (
                 classId INTEGER,
                 interfaceId INTEGER,
@@ -142,7 +177,7 @@ fun createTables(connection: Connection) {
             );
         """.trimIndent(),
 
-        "InterfaceRelationship" to """
+    "InterfaceRelationship" to """
             CREATE TABLE IF NOT EXISTS InterfaceRelationship (
                 interfaceId INTEGER,
                 parentInterfaceId INTEGER,
@@ -152,16 +187,7 @@ fun createTables(connection: Connection) {
             );
         """.trimIndent(),
 
-        "Projects" to """
-            CREATE TABLE IF NOT EXISTS Projects (
-                id INTEGER PRIMARY KEY AUTOINCREMENT,
-                name TEXT NOT NULL,
-                filePath TEXT NOT NULL,
-                UNIQUE (name, filePath)
-            );
-        """.trimIndent(),
-
-        "ImportedClasses" to """
+    "ImportedClasses" to """
             CREATE TABLE IF NOT EXISTS ImportedClasses (
                 id INTEGER PRIMARY KEY AUTOINCREMENT,
                 name TEXT NOT NULL,
@@ -172,39 +198,14 @@ fun createTables(connection: Connection) {
                 UNIQUE (name, classId) 
             );
         """.trimIndent(),
+)
 
-        "Files" to """
-            CREATE TABLE IF NOT EXISTS Files (
-                checksum TEXT PRIMARY KEY,
-                fileName TEXT NOT NULL,
-                projectId INTEGER NOT NULL,
-                FOREIGN KEY (projectId) REFERENCES Projects(id),
-                UNIQUE (checksum, projectId)
-            );
-        """.trimIndent(),
-
-        "FileModelRelations" to """
-            CREATE TABLE IF NOT EXISTS FileModelRelations (
-                id INTEGER PRIMARY KEY AUTOINCREMENT,
-                checksum TEXT,
-                modelId INTEGER,
-                FOREIGN KEY (checksum) REFERENCES Files(checksum),
-                FOREIGN KEY (modelId) REFERENCES Models(id) ON DELETE CASCADE,
-                UNIQUE (checksum, modelId)
-            );
-        """.trimIndent(),
-
-        "FilePaths" to """
-            CREATE TABLE IF NOT EXISTS FilePaths (
-                id INTEGER PRIMARY KEY AUTOINCREMENT,
-                checksum TEXT,
-                filePath TEXT NOT NULL,
-                FOREIGN KEY (checksum) REFERENCES Files(checksum),
-                UNIQUE (checksum, filePath)
-            );
-        """.trimIndent(),
-    )
-
+/**
+ * Creates necessary tables in the SQLite database if they do not already exist.
+ *
+ * @param url JDBC connection URL to the database.
+ */
+fun createTables(connection: Connection) {
     // Establish database connection and execute table creation queries
     try {
         connection.createStatement().use { stmt ->
@@ -223,22 +224,13 @@ fun createTables(connection: Connection) {
  *
  * @param url JDBC connection URL to the database.
  */
-fun dropTables(url: String) {
-    // List of table names to drop
-    val tableNames = listOf(
-        "Models", "Packages", "Class", "Interface", "Enumeration", "Method", "PackageRelationship", "ClassRelationship",
-        "InterfaceRelationship", "Projects", "Files", "FilePaths", "FileModelRelations", "ModelPackageRelations",
-        "PackageChecksumRelations"
-    )
-
+fun dropTables(connection: Connection) {
     try {
-        DriverManager.getConnection(url).use { conn ->
-            conn.createStatement().use { stmt ->
-                for (table in tableNames) {
+        connection.createStatement().use { stmt ->
+                for (table in tableCreationQueries.keys) {
                     stmt.execute("DROP TABLE IF EXISTS $table")
                     log.info("Dropped table: $table")
                 }
-            }
         }
     } catch (e: SQLException) {
         log.error("Error dropping tables: ${e.message}")

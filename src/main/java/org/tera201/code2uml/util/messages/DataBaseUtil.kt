@@ -24,6 +24,14 @@ class DataBaseUtil(url:String) {
         }
     }
 
+    fun recreateTables() {
+        createTables(conn)
+    }
+
+    fun clearTables() {
+        dropTables(conn)
+    }
+
     private fun enableForeignKeys(connection: Connection) {
         connection.createStatement().use { it.execute("PRAGMA foreign_keys = ON;") }
     }
@@ -159,9 +167,9 @@ class DataBaseUtil(url:String) {
         return if (executeUpdate(sql, checksum, fileName, projectId)) getLastInsertId() else -1
     }
 
-    fun insertFilePath(checksum:String, filePath: String):Int {
+    fun insertFilePath(checksum:String, filePath: String):Boolean {
         val sql = "INSERT OR IGNORE INTO FilePaths(checksum, filePath) VALUES(?, ?)"
-        return if (executeUpdate(sql, checksum, filePath)) getLastInsertId() else -1
+        return executeUpdate(sql, checksum, filePath)
     }
 
     fun insertNewRelationsForModel(modelId: Int, checksum:String) {
@@ -184,9 +192,9 @@ class DataBaseUtil(url:String) {
         insertFileModelRelation(checksum, modelId)
     }
 
-    fun insertFileModelRelation(checksum:String, modelId: Int):Int {
+    fun insertFileModelRelation(checksum:String, modelId: Int) {
         val sql = "INSERT OR IGNORE INTO FileModelRelations(checksum, modelId) VALUES(?, ?)"
-        return if (executeUpdate(sql, checksum, modelId)) getLastInsertId() else -1
+        executeUpdate(sql, checksum, modelId)
     }
 
     // ---- GET FUNCTIONS ----
@@ -293,15 +301,23 @@ class DataBaseUtil(url:String) {
 
     fun isFileExist(checksum: String): Boolean {
         val sql = "SELECT * FROM Files WHERE checksum = ?"
-        conn.prepareStatement(sql).use { pstmt ->
-            pstmt.setString(1, checksum)
-            return isExistExecute(pstmt)
-        }
+        return executeQuery(sql, checksum) { rs -> rs.next() }
     }
 
     fun isFileModelRelationExist(checksum: String, modelId: Int): Boolean {
         val sql = "SELECT * FROM FileModelRelations WHERE checksum = ? AND modelId = ?"
-        return executeQuery(sql, checksum, modelId) { rs -> rs.next() } ?: false
+        return executeQuery(sql, checksum, modelId) { rs -> rs.next() }
+    }
+
+    companion object {
+        @Volatile
+        private var instance: DataBaseUtil? = null
+
+        fun getInstance(databaseUrl: String): DataBaseUtil {
+            return instance ?: synchronized(this) {
+                instance ?: DataBaseUtil(databaseUrl).also { instance = it }
+            }
+        }
     }
 
 }
@@ -310,5 +326,6 @@ fun main() {
     val projectPath = "."
     val projectDir = File(projectPath).canonicalFile
     val dbUrl = "$projectDir/JavaToUMLSamples/db/model.db"
-    dropTables("jdbc:sqlite:" + dbUrl)
+    val dataBaseUtil = DataBaseUtil.getInstance(dbUrl)
+    dataBaseUtil.clearTables()
 }
