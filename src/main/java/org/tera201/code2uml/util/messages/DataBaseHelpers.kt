@@ -25,7 +25,7 @@ private val tableCreationQueries = mapOf(
                 checksum TEXT PRIMARY KEY,
                 fileName TEXT NOT NULL,
                 projectId INTEGER NOT NULL,
-                FOREIGN KEY (projectId) REFERENCES Projects(id),
+                FOREIGN KEY (projectId) REFERENCES Projects(id) ON DELETE CASCADE,
                 UNIQUE (checksum, projectId)
             );
         """.trimIndent(),
@@ -36,7 +36,7 @@ private val tableCreationQueries = mapOf(
                 name TEXT NOT NULL,
                 filePath TEXT NOT NULL,
                 projectId INTEGER NOT NULL,
-                FOREIGN KEY (projectId) REFERENCES Projects(id),
+                FOREIGN KEY (projectId) REFERENCES Projects(id) ON DELETE CASCADE,
                 UNIQUE (name, filePath, projectId)
             );
         """.trimIndent(),
@@ -48,7 +48,7 @@ private val tableCreationQueries = mapOf(
                 package TEXT NOT NULL,
                 size LONG NOT NULL,
                 projectId INTEGER NOT NULL,
-                FOREIGN KEY (projectId) REFERENCES Projects(id),
+                FOREIGN KEY (projectId) REFERENCES Projects(id) ON DELETE CASCADE,
                 UNIQUE (name, package, projectId)
             );
         """.trimIndent(),
@@ -58,7 +58,7 @@ private val tableCreationQueries = mapOf(
                 id INTEGER PRIMARY KEY AUTOINCREMENT,
                 checksum TEXT,
                 filePath TEXT NOT NULL,
-                FOREIGN KEY (checksum) REFERENCES Files(checksum),
+                FOREIGN KEY (checksum) REFERENCES Files(checksum) ON DELETE CASCADE,
                 UNIQUE (checksum, filePath)
             );
         """.trimIndent(),
@@ -73,8 +73,8 @@ private val tableCreationQueries = mapOf(
                 type INTEGER,
                 modificator INTEGER,
                 checksum TEXT,
-                FOREIGN KEY (packageId) REFERENCES Packages(id),
-                FOREIGN KEY (checksum) REFERENCES Files(checksum),
+                FOREIGN KEY (packageId) REFERENCES Packages(id) ON DELETE CASCADE,
+                FOREIGN KEY (checksum) REFERENCES Files(checksum) ON DELETE CASCADE,
                 UNIQUE (name, filePath, packageId, checksum) 
             );
         """.trimIndent(),
@@ -87,8 +87,8 @@ private val tableCreationQueries = mapOf(
                 size LONG NOT NULL,
                 packageId INTEGER,
                 checksum TEXT,
-                FOREIGN KEY (packageId) REFERENCES Packages(id),
-                FOREIGN KEY (checksum) REFERENCES Files(checksum),
+                FOREIGN KEY (packageId) REFERENCES Packages(id) ON DELETE CASCADE,
+                FOREIGN KEY (checksum) REFERENCES Files(checksum) ON DELETE CASCADE,
                 UNIQUE (name, filePath, packageId, checksum) 
             );
         """.trimIndent(),
@@ -125,8 +125,8 @@ private val tableCreationQueries = mapOf(
                 type TEXT NOT NULL,
                 classId INTEGER,
                 interfaceId INTEGER,
-                FOREIGN KEY (classId) REFERENCES Classes(id),
-                FOREIGN KEY (interfaceId) REFERENCES Interfaces(id),
+                FOREIGN KEY (classId) REFERENCES Classes(id) ON DELETE CASCADE,
+                FOREIGN KEY (interfaceId) REFERENCES Interfaces(id) ON DELETE CASCADE,
                 UNIQUE (name, classId),
                 UNIQUE (name, interfaceId) 
             );
@@ -137,7 +137,7 @@ private val tableCreationQueries = mapOf(
                 modelId INTEGER,
                 packageId INTEGER,
                 FOREIGN KEY (modelId) REFERENCES Models(id) ON DELETE CASCADE,
-                FOREIGN KEY (packageId) REFERENCES Packages(id),
+                FOREIGN KEY (packageId) REFERENCES Packages(id) ON DELETE CASCADE,
                 UNIQUE (modelId, packageId)
             );
         """.trimIndent(),
@@ -146,8 +146,8 @@ private val tableCreationQueries = mapOf(
             CREATE TABLE IF NOT EXISTS PackageChecksumRelations (
                 packageId INTEGER,
                 checksum TEXT,
-                FOREIGN KEY (packageId) REFERENCES Packages(id),
-                FOREIGN KEY (checksum) REFERENCES Files(checksum),
+                FOREIGN KEY (packageId) REFERENCES Packages(id) ON DELETE CASCADE,
+                FOREIGN KEY (checksum) REFERENCES Files(checksum) ON DELETE CASCADE,
                 UNIQUE (packageId, checksum)
             );
         """.trimIndent(),
@@ -157,8 +157,8 @@ private val tableCreationQueries = mapOf(
                 packageParentId INTEGER,
                 packageChildId INTEGER,
                 modelId INTEGER,
-                FOREIGN KEY (packageParentId) REFERENCES Packages(id),
-                FOREIGN KEY (packageChildId) REFERENCES Packages(id),
+                FOREIGN KEY (packageParentId) REFERENCES Packages(id) ON DELETE CASCADE,
+                FOREIGN KEY (packageChildId) REFERENCES Packages(id) ON DELETE CASCADE,
                 FOREIGN KEY (modelId) REFERENCES Models(id) ON DELETE CASCADE,
                 UNIQUE (packageParentId, packageChildId, modelId) 
             );
@@ -169,9 +169,9 @@ private val tableCreationQueries = mapOf(
                 classId INTEGER,
                 interfaceId INTEGER,
                 parentClassId INTEGER,
-                FOREIGN KEY (classId) REFERENCES Classes(id),
-                FOREIGN KEY (interfaceId) REFERENCES Interfaces(id),
-                FOREIGN KEY (parentClassId) REFERENCES Classes(id),
+                FOREIGN KEY (classId) REFERENCES Classes(id) ON DELETE CASCADE,
+                FOREIGN KEY (interfaceId) REFERENCES Interfaces(id) ON DELETE CASCADE,
+                FOREIGN KEY (parentClassId) REFERENCES Classes(id) ON DELETE CASCADE,
                 UNIQUE (classId, interfaceId), 
                 UNIQUE (classId,parentClassId) 
             );
@@ -181,8 +181,8 @@ private val tableCreationQueries = mapOf(
             CREATE TABLE IF NOT EXISTS InterfaceRelationship (
                 interfaceId INTEGER,
                 parentInterfaceId INTEGER,
-                FOREIGN KEY (interfaceId) REFERENCES Interfaces(id),
-                FOREIGN KEY (parentInterfaceId) REFERENCES Interfaces(id),
+                FOREIGN KEY (interfaceId) REFERENCES Interfaces(id) ON DELETE CASCADE,
+                FOREIGN KEY (parentInterfaceId) REFERENCES Interfaces(id) ON DELETE CASCADE,
                 UNIQUE (interfaceId, parentInterfaceId) 
             );
         """.trimIndent(),
@@ -193,8 +193,8 @@ private val tableCreationQueries = mapOf(
                 name TEXT NOT NULL,
                 classId INTEGER,
                 packageId INTEGER,
-                FOREIGN KEY (classId) REFERENCES Classes(id),
-                FOREIGN KEY (packageId) REFERENCES Packages(id),
+                FOREIGN KEY (classId) REFERENCES Classes(id) ON DELETE CASCADE,
+                FOREIGN KEY (packageId) REFERENCES Packages(id) ON DELETE CASCADE,
                 UNIQUE (name, classId) 
             );
         """.trimIndent(),

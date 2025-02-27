@@ -266,6 +266,16 @@ class DataBaseUtil(url:String) {
         return executeUpdate(sql, id)
     }
 
+    fun deleteModelId(modelName: String, filePath: String, projectId: Int): Int {
+        val sql = "DELETE FROM Models WHERE name = ? AND filePath = ? AND projectId = ?"
+        return executeQuery(sql, modelName, filePath, projectId) { getIdResult(it) }
+    }
+
+    fun deleteProject(id: Int):Boolean {
+        val sql = "DELETE FROM Projects WHERE id = ?"
+        return executeUpdate(sql, id)
+    }
+
     // ---- UPDATE FUNCTIONS ----
 
     fun updateClass(classId: Int, type: Int, modificator: Int) {
