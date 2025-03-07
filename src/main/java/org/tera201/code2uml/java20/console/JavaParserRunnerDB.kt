@@ -24,6 +24,7 @@ import java.security.MessageDigest
 import java.util.concurrent.CompletableFuture
 import java.util.concurrent.ExecutorService
 import java.util.concurrent.Executors
+import javax.swing.JProgressBar
 import javax.swing.JTextArea
 
 /**
@@ -64,7 +65,7 @@ class JavaParserRunnerDB {
     /**
      * Builds a UML model for the given Java files.
      */
-    fun buildModel(dataBaseUtil: DataBaseUtil, projectName: String, modelName: String, javaFiles: ArrayList<String>, logJTextArea: JTextArea? = null, numThreads: Int? = null): Int {
+    fun buildModel(dataBaseUtil: DataBaseUtil, projectName: String, modelName: String, javaFiles: ArrayList<String>, logJTextArea: JTextArea? = null, progressBar: JProgressBar? = null, numThreads: Int? = null): Int {
         val projectPath = "."
         val executorService: ExecutorService? = numThreads?.let { Executors.newFixedThreadPool(it) }
 
@@ -83,15 +84,18 @@ class JavaParserRunnerDB {
             !dataBaseUtil.isFileModelRelationExist(checksum, modelId)
         }
 
+        progressBar?.minimum = 0
+        progressBar?.maximum = javaFilesUnanalyzed.size * 2;
+
         // Step 1: Add packages and data types to model
         logJTextArea?.append("1st: adding packages and data types to model\n")
         log.debug("1st: adding packages and data types to model")
-        parseFilesWithAsync(javaFilesUnanalyzed, projectId, modelId, dataBaseUtil, executorService, ::parseFilesBuilder1)
+        parseFilesWithAsync(javaFilesUnanalyzed, projectId, modelId, dataBaseUtil, executorService, ::parseFilesBuilder1, progressBar)
 
         // Step 2: Add elements to model
         logJTextArea?.append("2nd: adding elements to model\n")
         log.debug("2nd: adding elements to model")
-        parseFilesWithAsync(javaFilesUnanalyzed, projectId, modelId, dataBaseUtil, executorService, ::parseFilesBuilder2)
+        parseFilesWithAsync(javaFilesUnanalyzed, projectId, modelId, dataBaseUtil, executorService, ::parseFilesBuilder2, progressBar)
 
         // Shutdown executor service if used
         executorService?.shutdown()
@@ -108,33 +112,48 @@ class JavaParserRunnerDB {
         modelId: Int,
         dataBaseUtil: DataBaseUtil,
         executorService: ExecutorService?,
-        parseStep: (List<String>, Int, Int, DataBaseUtil) -> Unit
+        parseStep: (List<String>, Int, Int, DataBaseUtil, JProgressBar?) -> Unit,
+        progressBar: JProgressBar?
     ) {
         if (executorService != null) {
             val groupedFiles = javaFiles.groupBy { File(it).parent }
             val fileFutures = groupedFiles.values.map { files ->
-                CompletableFuture.runAsync({ parseStep(files, projectId, modelId, dataBaseUtil) }, executorService)
+                CompletableFuture.runAsync({ parseStep(files, projectId, modelId, dataBaseUtil, progressBar) }, executorService)
             }
             CompletableFuture.allOf(*fileFutures.toTypedArray()).join()
         } else {
-            parseStep(javaFiles, projectId, modelId, dataBaseUtil)
+            parseStep(javaFiles, projectId, modelId, dataBaseUtil, progressBar)
         }
     }
 
     /**
      * Parse files for the first step (adding packages and data types).
      */
-    private fun parseFilesBuilder1(javaFiles: List<String>, projectId: Int, modelId: Int, dataBaseUtil: DataBaseUtil) {
+    private fun parseFilesBuilder1(javaFiles: List<String>,
+                                   projectId: Int,
+                                   modelId: Int,
+                                   dataBaseUtil: DataBaseUtil,
+                                   progressBar: JProgressBar? ) {
         val dbBuilderPass1 = CodeDBBuilderPass1(projectId, modelId, dataBaseUtil)
-        javaFiles.forEach { parseFile(it, dbBuilderPass1) }
+        javaFiles.forEach {
+            parseFile(it, dbBuilderPass1)
+            progressBar?.let { progressBar.value = progressBar.value.plus(1) }
+        }
     }
 
     /**
      * Parse files for the second step (adding elements).
      */
-    private fun parseFilesBuilder2(javaFiles: List<String>, projectId: Int, modelId: Int, dataBaseUtil: DataBaseUtil) {
+    private fun parseFilesBuilder2(javaFiles: List<String>,
+                                   projectId: Int,
+                                   modelId: Int,
+                                   dataBaseUtil: DataBaseUtil,
+                                   progressBar: JProgressBar? ) {
         val dbBuilderPass2 = CodeDBBuilderPass2(projectId, modelId, dataBaseUtil)
-        javaFiles.forEach { parseFile(it, dbBuilderPass2) }
+        javaFiles.forEach {
+            parseFile(it, dbBuilderPass2)
+            progressBar?.let { progressBar.value = progressBar.value.plus(1) }
+        }
     }
 
     /**
@@ -263,7 +282,7 @@ fun main() {
     val javaFiles = runner.collectFiles(sourcePath)
 
     // Build UML model for these files
-    val model = runner.buildModel(dataBaseUtil, "JavaSampleModel", "master", javaFiles, null,4)
+    val model = runner.buildModel(dataBaseUtil, "JavaSampleModel", "master", javaFiles, null, null,4)
 
     clearPackageDir(targetPathForCode)
     println("Model saved")

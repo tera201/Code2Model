@@ -5,6 +5,7 @@ import org.tera201.code2uml.cpp.console.CppParserRunner
 import org.tera201.code2uml.java20.console.JavaParserRunner
 import org.tera201.code2uml.java20.console.JavaParserRunnerDB
 import org.tera201.code2uml.util.messages.DataBaseUtil
+import javax.swing.JProgressBar
 import javax.swing.JTextArea
 
 class AnalyzerBuilder(
@@ -16,10 +17,13 @@ class AnalyzerBuilder(
 ) {
     private var numThread: Int = 0
     private var textArea: JTextArea? = null
+    private var progressBar: JProgressBar? = null
 
     fun threads(numThread: Int?) = apply { this.numThread = numThread ?: 0 }
 
     fun textArea(textArea: JTextArea?) = apply { this.textArea = textArea }
+
+    fun progressBar(progressBar: JProgressBar) = apply { this.progressBar = progressBar }
 
     fun setPathToDB(pathToDB: String) = apply { this.pathToDB = pathToDB }
 
@@ -27,7 +31,7 @@ class AnalyzerBuilder(
         Language.Java -> {
             val javaParserRunner = JavaParserRunnerDB()
             val javaFiles = javaParserRunner.collectFiles(path)
-            javaParserRunner.buildModel(dataBaseUtil, projectName, modelName, javaFiles, textArea, numThread)
+            javaParserRunner.buildModel(dataBaseUtil, projectName, modelName, javaFiles, textArea, progressBar, numThread)
         }
         Language.Cpp -> TODO()
     }
