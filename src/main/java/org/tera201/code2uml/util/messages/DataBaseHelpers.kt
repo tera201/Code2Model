@@ -73,8 +73,10 @@ private val tableCreationQueries = mapOf(
                 type INTEGER,
                 modificator INTEGER,
                 checksum TEXT,
+                nestedIn INTEGER,
                 FOREIGN KEY (packageId) REFERENCES Packages(id) ON DELETE CASCADE,
                 FOREIGN KEY (checksum) REFERENCES Files(checksum) ON DELETE CASCADE,
+                FOREIGN KEY (id) REFERENCES Classes(id) ON DELETE CASCADE,
                 UNIQUE (name, filePath, packageId, checksum) 
             );
         """.trimIndent(),

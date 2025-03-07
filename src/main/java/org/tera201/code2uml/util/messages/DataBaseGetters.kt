@@ -75,11 +75,13 @@ fun DataBaseUtil.getPackage(packageId: Int, modelId: Int):PackageDB {
 fun DataBaseUtil.getClass(classId: Int, modelId: Int): ClassDB {
 
     val sqlPackage = "SELECT * FROM Classes WHERE id = ?"
-    var classDB = ClassDB(classId, "", "", 0L, "", 0, 0)
+    var classDB = ClassDB(classId, "", "", 0L, "", 0, 0, false)
     conn.prepareStatement(sqlPackage).use { pstmt ->
         pstmt.setInt(1, classId)
         pstmt.executeQuery().use { rs ->
             while (rs.next()) {
+                rs.getInt("nestedIn")
+                val isNested = if (rs.wasNull()) false else true
                 classDB = ClassDB(
                     id = rs.getInt("id"),
                     name = rs.getString("name"),
@@ -88,11 +90,13 @@ fun DataBaseUtil.getClass(classId: Int, modelId: Int): ClassDB {
                     getPackage(rs.getInt("packageId"), modelId).packageName,
                     type = rs.getInt("type"),
                     modificator = rs.getInt("modificator"),
+                    isNested =  isNested,
                     methodCount = getMethodsCountForClass(classId)
                 )
             }
         }
     }
+
     val sqlMethods = "SELECT * FROM ClassRelationship WHERE classId = ?"
     conn.prepareStatement(sqlMethods).use { pstmt ->
         pstmt.setInt(1, classId)
@@ -105,6 +109,21 @@ fun DataBaseUtil.getClass(classId: Int, modelId: Int): ClassDB {
             }
         }
     }
+
+    val innerClassIdList = mutableListOf<Int>()
+    val sqlInnerClassIds = "SELECT * FROM Classes WHERE nestedIn = ?"
+    conn.prepareStatement(sqlInnerClassIds).use { pstmt ->
+        pstmt.setInt(1, classId)
+        pstmt.executeQuery().use { rs ->
+            while (rs.next()) {
+                val innerClassId = rs.getInt("id")
+                if (rs.wasNull().not().and(innerClassId != 0)) {
+                    innerClassIdList.add(innerClassId)
+                }
+            }
+        }
+    }
+    innerClassIdList.map { getClass(it, modelId) }.forEach { classDB.nestedClassList.add(it) }
     return classDB
 }
 

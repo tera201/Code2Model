@@ -8,7 +8,9 @@ data class ClassDB(
     val packageName: String,
     val type: Int,
     val modificator: Int,
+    val isNested: Boolean,
     val methodCount: Int = 0,
     val parentClassIdList: MutableList<Int> = mutableListOf(),
-    val interfaceIdList: MutableList<Int> = mutableListOf()
+    val interfaceIdList: MutableList<Int> = mutableListOf(),
+    val nestedClassList: MutableList<ClassDB> = mutableListOf()
     )

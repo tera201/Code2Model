@@ -32,22 +32,18 @@ class CodeDBBuilderPass2(override val projectId: Int, override val model: Int, o
     }
 
     override fun startClass(builderClass: BuilderClass, filePath: String, checksum: String) {
-        if (!builderClass.isNested) {
-            currentClass = dataBaseUtil.getClassId(builderClass.name, filePath, checksum).takeIf { it != -1 }
-            if (currentClass == null) return
-            currentOwner = Type.CLASS
-            builderClass.interfaceList?.forEach {
-                val interfaceId = dataBaseUtil.getInterfaceIdByName(it.substringBefore("<"))
-                if (interfaceId == -1) dataBaseUtil.insertImportedClass(it.substringBefore("<"), currentClass!!, currentPackage!!)
-                else dataBaseUtil.insertClassRelationShip(currentClass!!, interfaceId, null)
-            }
-            if (builderClass.parentName != null) {
-                val parentClassId = dataBaseUtil.getClassIdByName(builderClass.parentName.substringBefore("<"))
-                if (parentClassId == -1) dataBaseUtil.insertImportedClass(builderClass.parentName.substringBefore("<"), currentClass!!, currentPackage!!)
-                else dataBaseUtil.insertClassRelationShip(currentClass!!, null, parentClassId)
-            }
-        } else {
-            currentOwner = null
+        currentClass = dataBaseUtil.getClassId(builderClass.name, filePath, checksum).takeIf { it != -1 }
+        if (currentClass == null) return
+        currentOwner = Type.CLASS
+        builderClass.interfaceList?.forEach {
+            val interfaceId = dataBaseUtil.getInterfaceIdByName(it.substringBefore("<"))
+            if (interfaceId == -1) dataBaseUtil.insertImportedClass(it.substringBefore("<"), currentClass!!, currentPackage!!)
+            else dataBaseUtil.insertClassRelationShip(currentClass!!, interfaceId, null)
+        }
+        if (builderClass.parentName != null) {
+            val parentClassId = dataBaseUtil.getClassIdByName(builderClass.parentName.substringBefore("<"))
+            if (parentClassId == -1) dataBaseUtil.insertImportedClass(builderClass.parentName.substringBefore("<"), currentClass!!, currentPackage!!)
+            else dataBaseUtil.insertClassRelationShip(currentClass!!, null, parentClassId)
         }
     }
 

@@ -119,9 +119,9 @@ class DataBaseUtil(url:String) {
         executeUpdate(sqlInsert, packageParentId, packageChildId, modelId)
     }
 
-    fun insertClassAndGetId(name: String, filePath: String, size: Long, packageId: Int, type: Int, modificator: Int, checksum:String): Int {
-        val sqlInsert = "INSERT OR IGNORE INTO Classes(name, filePath, size, packageId, type, modificator, checksum) VALUES(?, ?, ?, ?, ?, ?, ?)"
-        return if (executeUpdate(sqlInsert, name, filePath, size, packageId, type, modificator, checksum)) getClassId(name, filePath, checksum) else -1
+    fun insertClassAndGetId(name: String, filePath: String, size: Long, packageId: Int, type: Int, modificator: Int, checksum:String, nestedIn: Int?): Int {
+        val sqlInsert = "INSERT OR IGNORE INTO Classes(name, filePath, size, packageId, type, modificator, checksum, nestedIn) VALUES(?, ?, ?, ?, ?, ?, ?, ?)"
+        return if (executeUpdate(sqlInsert, name, filePath, size, packageId, type, modificator, checksum, nestedIn)) getClassId(name, filePath, checksum) else -1
     }
 
     fun insertImportedClass(name: String, extendedByClassId: Int, packageId: Int) {

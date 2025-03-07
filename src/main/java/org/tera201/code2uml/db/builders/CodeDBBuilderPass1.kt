@@ -47,12 +47,12 @@ class CodeDBBuilderPass1(override val projectId: Int, override val model: Int, o
 
     override fun startClass(builderClass: BuilderClass, filePath: String, checksum: String) {
         if (!builderClass.isNested) {
-            val classId = dataBaseUtil.getClassId(builderClass.name, filePath, checksum)
-            if (classId == -1) {
-                currentPackage?.let {currentClass = dataBaseUtil.insertClassAndGetId(builderClass.name, filePath, 0, it, 0, 0, checksum) }
+            currentClass = dataBaseUtil.getClassId(builderClass.name, filePath, checksum)
+            if (currentClass == -1) {
+                currentPackage?.let {currentClass = dataBaseUtil.insertClassAndGetId(builderClass.name, filePath, 0, it, 0, 0, checksum, null) }
             }
         } else {
-//            currentPackage?.let {dataBaseUtil.insertClassAndGetId(builderClass.name, filePath, 0, model, it, 0, 0) }
+            currentPackage?.let {dataBaseUtil.insertClassAndGetId(builderClass.name, filePath, 0, it, 0, 0, checksum, currentClass) }
         }
     }
 
@@ -60,8 +60,8 @@ class CodeDBBuilderPass1(override val projectId: Int, override val model: Int, o
 
     override fun startInterface(interfaceBuilderInterface: BuilderInterface, filePath: String, checksum: String) {
         currentPackage?.let {
-            val interfaceId = dataBaseUtil.getInterfaceId(interfaceBuilderInterface.name, filePath, it, checksum)
-            if (interfaceId == -1) {
+            currentInterface = dataBaseUtil.getInterfaceId(interfaceBuilderInterface.name, filePath, it, checksum)
+            if (currentInterface == -1) {
                 currentInterface =
                     dataBaseUtil.insertInterfaceAndGetId(interfaceBuilderInterface.name, filePath, 0, it, checksum)
             }
