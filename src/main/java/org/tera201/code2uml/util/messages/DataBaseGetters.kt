@@ -73,16 +73,13 @@ fun DataBaseUtil.getPackage(packageId: Int, modelId: Int):PackageDB {
 }
 
 fun DataBaseUtil.getClass(classId: Int, modelId: Int): ClassDB {
-
     val sqlPackage = "SELECT * FROM Classes WHERE id = ?"
-    var classDB = ClassDB(classId, "", "", 0L, "", 0, 0, false)
+    val classDB = ClassDB(classId, "", "", 0L, "", 0, 0)
     conn.prepareStatement(sqlPackage).use { pstmt ->
         pstmt.setInt(1, classId)
         pstmt.executeQuery().use { rs ->
             while (rs.next()) {
-                rs.getInt("nestedIn")
-                val isNested = if (rs.wasNull()) false else true
-                classDB = ClassDB(
+                return ClassDB(
                     id = rs.getInt("id"),
                     name = rs.getString("name"),
                     filePath = rs.getString("filePath"),
@@ -90,13 +87,18 @@ fun DataBaseUtil.getClass(classId: Int, modelId: Int): ClassDB {
                     getPackage(rs.getInt("packageId"), modelId).packageName,
                     type = rs.getInt("type"),
                     modificator = rs.getInt("modificator"),
-                    isNested =  isNested,
+                    nestedIn = rs.getInt("nestedIn"),
                     methodCount = getMethodsCountForClass(classId)
                 )
             }
         }
     }
+    return classDB
+}
 
+
+fun DataBaseUtil.getClassFull(classId: Int, modelId: Int): ClassDB {
+    val classDB = getClass(classId, modelId)
     val sqlMethods = "SELECT * FROM ClassRelationship WHERE classId = ?"
     conn.prepareStatement(sqlMethods).use { pstmt ->
         pstmt.setInt(1, classId)
@@ -110,20 +112,21 @@ fun DataBaseUtil.getClass(classId: Int, modelId: Int): ClassDB {
         }
     }
 
-    val innerClassIdList = mutableListOf<Int>()
     val sqlInnerClassIds = "SELECT * FROM Classes WHERE nestedIn = ?"
+    var nestedSize = 0L
     conn.prepareStatement(sqlInnerClassIds).use { pstmt ->
         pstmt.setInt(1, classId)
         pstmt.executeQuery().use { rs ->
             while (rs.next()) {
                 val innerClassId = rs.getInt("id")
+                nestedSize += rs.getLong("size")
                 if (rs.wasNull().not().and(innerClassId != 0)) {
-                    innerClassIdList.add(innerClassId)
+                    classDB.nestedClassList.add(innerClassId)
                 }
             }
         }
     }
-    innerClassIdList.map { getClass(it, modelId) }.forEach { classDB.nestedClassList.add(it) }
+    classDB.size -= nestedSize
     return classDB
 }
 
