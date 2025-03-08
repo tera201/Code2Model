@@ -31,9 +31,10 @@ class CodeDBBuilderPass1(override val projectId: Int, override val model: Int, o
                 byteSize!!.toLong(),
                 projectId
             )
-            dataBaseUtil.insertModelPackageRelation(model, currentPackage!!)
-            dataBaseUtil.insertPackageChecksumRelation(currentPackage!!, checksum)
         }
+
+        dataBaseUtil.insertModelPackageRelation(model, currentPackage!!)
+        dataBaseUtil.insertPackageChecksumRelation(currentPackage!!, checksum)
 
         packageStackId.push(currentPackage)
         if(oldPackage != null) dataBaseUtil.insertPackageRelationShip(oldPackage, currentPackage!!, model)

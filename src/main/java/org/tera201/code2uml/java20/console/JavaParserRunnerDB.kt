@@ -78,6 +78,11 @@ class JavaParserRunnerDB {
         // Insert new model if necessary
         if (modelId == -1) modelId = dataBaseUtil.insertModel(modelName, projectPath, projectId)
 
+        javaFiles.map { checksumMap.getOrDefault(it, calculateChecksum(it)) }
+            .filter { checksum -> dataBaseUtil.isFileExist(checksum) }
+            .forEach { checksum -> dataBaseUtil.insertNewRelationsForModel(modelId, checksum)
+        }
+
         // Files that need analysis
         val javaFilesUnanalyzed = javaFiles.filter { file ->
             val checksum = checksumMap.getOrDefault(file, calculateChecksum(file))
@@ -182,9 +187,10 @@ class JavaParserRunnerDB {
 
             parser.removeErrorListeners()
             lexer.removeErrorListeners()
-            val errorListener = Java20ErrorListener()
-            parser.addErrorListener(errorListener)
-            lexer.addErrorListener(errorListener)
+
+//            val errorListener = Java20ErrorListener()
+//            parser.addErrorListener(errorListener)
+//            lexer.addErrorListener(errorListener)
 
             // Build the parse tree
             val tree = parser.compilationUnit()
