@@ -24,20 +24,20 @@ class CodeDBBuilderPass1(override val projectId: Int, override val model: Int, o
 
         currentPackage = dataBaseUtil.getPackageIdByPackageName(packageStackName.peek(), projectId)
 
-        if (currentPackage == null) {
+        if (currentPackage == -1) {
             currentPackage = dataBaseUtil.insertPackageAndGetId(
                 packageName,
                 packageStackName.peek(),
                 byteSize!!.toLong(),
                 projectId
             )
-            dataBaseUtil.insertModelPackageRelation(model, currentPackage!!)
         }
+
+        dataBaseUtil.insertModelPackageRelation(model, currentPackage!!)
+        dataBaseUtil.insertPackageChecksumRelation(currentPackage!!, checksum)
 
         packageStackId.push(currentPackage)
         if(oldPackage != null) dataBaseUtil.insertPackageRelationShip(oldPackage, currentPackage!!, model)
-        dataBaseUtil.insertModelPackageRelation(model, currentPackage!!)
-        dataBaseUtil.insertPackageChecksumRelation(currentPackage!!, checksum)
     }
 
     override fun endPackage() {
@@ -48,28 +48,31 @@ class CodeDBBuilderPass1(override val projectId: Int, override val model: Int, o
 
     override fun startClass(builderClass: BuilderClass, filePath: String, checksum: String) {
         if (!builderClass.isNested) {
-            val classId = dataBaseUtil.getClassId(builderClass.name, filePath, checksum)
-            if (classId == null) {
-                currentPackage?.let {currentClass = dataBaseUtil.insertClassAndGetId(builderClass.name, filePath, 0, it, 0, 0, checksum) }
+            currentClass = dataBaseUtil.getClassId(builderClass.name, filePath, checksum)
+            if (currentClass == -1) {
+                currentPackage?.let {currentClass = dataBaseUtil.insertClassAndGetId(builderClass.name, filePath, 0, it, 0, 0, checksum, null) }
             }
         } else {
-//            currentPackage?.let {dataBaseUtil.insertClassAndGetId(builderClass.name, filePath, 0, model, it, 0, 0) }
+            currentPackage?.let {dataBaseUtil.insertClassAndGetId(builderClass.name, filePath, 0, it, 0, 0, checksum, currentClass) }
         }
     }
 
     override fun endClass() {}
 
     override fun startInterface(interfaceBuilderInterface: BuilderInterface, filePath: String, checksum: String) {
-        val interfaceId = dataBaseUtil.getInterfaceId(interfaceBuilderInterface.name, filePath, checksum)
-        if (interfaceId == null) {
-            currentPackage?.let {currentInterface = dataBaseUtil.insertInterfaceAndGetId(interfaceBuilderInterface.name, filePath, 0, it, checksum) }
+        currentPackage?.let {
+            currentInterface = dataBaseUtil.getInterfaceId(interfaceBuilderInterface.name, filePath, it, checksum)
+            if (currentInterface == -1) {
+                currentInterface =
+                    dataBaseUtil.insertInterfaceAndGetId(interfaceBuilderInterface.name, filePath, 0, it, checksum)
+            }
         }
     }
 
     override fun endInterface() {}
     override fun startEnumeration(enumerationName: String, filePath: String, checksum: String) {
         val enumerationId = dataBaseUtil.getEnumerationId(enumerationName, filePath, checksum)
-        if (enumerationId == null) {
+        if (enumerationId == -1) {
             currentPackage?.let { dataBaseUtil.insertEnumerationAndGetId(enumerationName, filePath, 0, it, checksum) }
         }
     }
