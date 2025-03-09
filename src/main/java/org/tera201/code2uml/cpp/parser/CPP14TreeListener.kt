@@ -3,14 +3,10 @@ package org.tera201.code2uml.cpp.parser
 import org.tera201.code2uml.cpp.parser.generated.CPP14Parser
 import org.tera201.code2uml.cpp.parser.generated.CPP14Parser.OriginalNamespaceNameContext
 import org.tera201.code2uml.cpp.parser.generated.CPP14ParserBaseListener
-import org.eclipse.emf.common.util.BasicEList
-import org.tera201.code2uml.uml.IUMLBuilder
 import org.tera201.code2uml.uml.helpers.BuilderClass
-import org.tera201.code2uml.uml.helpers.BuilderInterface
 
 class CPP14TreeListener(
     private val parser: CPP14Parser,
-    private val umlBuilder: IUMLBuilder,
     private val filePath: String
 ) : CPP14ParserBaseListener() {
 
@@ -35,7 +31,7 @@ class CPP14TreeListener(
      */
     override fun enterNamespaceDefinition(ctx: CPP14Parser.NamespaceDefinitionContext?) {
         val packageName = ctx!!.Identifier().text
-        umlBuilder.startPackage(packageName, ctx.text?.toByteArray()?.size, filePath)
+//        umlBuilder.startPackage(packageName, ctx.text?.toByteArray()?.size, filePath)
     }
 
     /**
@@ -43,7 +39,7 @@ class CPP14TreeListener(
      * Ends the UML package for the namespace.
      */
     override fun exitNamespaceDefinition(ctx: CPP14Parser.NamespaceDefinitionContext?) {
-        umlBuilder.endPackage()
+//        umlBuilder.endPackage()
     }
 
     /**
@@ -52,7 +48,7 @@ class CPP14TreeListener(
      */
     override fun enterOriginalNamespaceName(ctx: OriginalNamespaceNameContext?) {
         val packageName = ctx!!.Identifier().text
-        umlBuilder.startPackage(packageName, 0, filePath)
+//        umlBuilder.startPackage(packageName, 0, filePath)
     }
 
     /**
@@ -60,7 +56,7 @@ class CPP14TreeListener(
      * Ends the UML package for the original namespace.
      */
     override fun exitOriginalNamespaceName(ctx: OriginalNamespaceNameContext?) {
-        umlBuilder.endPackage()
+//        umlBuilder.endPackage()
     }
 
     /**
@@ -78,7 +74,7 @@ class CPP14TreeListener(
         // Add parent classes (inheritance)
         processParentClasses(ctx, classType, builderClass)
 
-        umlBuilder.addClassSize(ctx.text?.toByteArray()?.size)
+//        umlBuilder.addClassSize(ctx.text?.toByteArray()?.size)
     }
 
     // Exit class specification (no action needed at the moment)
@@ -121,10 +117,10 @@ class CPP14TreeListener(
      * Starts the UML class or interface depending on the class type.
      */
     private fun startClassOrInterface(classType: ClassType, builderClass: BuilderClass, className: String) {
-        when (classType) {
-            ClassType.INTERFACE -> umlBuilder.startInterface(BuilderInterface(className), filePath)
-            else -> umlBuilder.startClass(builderClass, filePath)
-        }
+//        when (classType) {
+//            ClassType.INTERFACE -> umlBuilder.startInterface(BuilderInterface(className), filePath)
+//            else -> umlBuilder.startClass(builderClass, filePath)
+//        }
     }
 
     /**
@@ -167,7 +163,7 @@ class CPP14TreeListener(
         if (declSpecifierSeq?.childCount == 1) {
             // Add attributes to the UML model
             val type = declSpecifierSeq.text
-            memberDeclarators.forEach { umlBuilder.addAttribute(it.text, type) }
+//            memberDeclarators.forEach { umlBuilder.addAttribute(it.text, type) }
         } else {
             // Add virtual function to the UML model
             val type = declSpecifierSeq?.declSpecifier()?.get(1)?.text ?: ""
@@ -194,8 +190,8 @@ class CPP14TreeListener(
      * @param isVirtual Whether the function is virtual.
      */
     private fun enterFunction(declarator: CPP14Parser.DeclaratorContext, type: String, isVirtual: Boolean) {
-        val typeList = BasicEList<String>()
-        val argNameList = BasicEList<String>()
+        val typeList = mutableListOf<String>()
+        val argNameList = mutableListOf<String>()
         val funName = declarator.pointerDeclarator()?.noPointerDeclarator()?.noPointerDeclarator()?.text ?: ""
         val parameterClause = declarator.pointerDeclarator()?.noPointerDeclarator()?.parametersAndQualifiers()?.parameterDeclarationClause()
 
@@ -203,8 +199,6 @@ class CPP14TreeListener(
             arg.declSpecifierSeq()?.let { typeList.add(it.text) }
             arg.declarator()?.let { argNameList.add(it.text) }
         }
-
-        umlBuilder.startMethod(type, funName, typeList, argNameList, isVirtual)
     }
 
     // Exit member declaration (No action needed at the moment)

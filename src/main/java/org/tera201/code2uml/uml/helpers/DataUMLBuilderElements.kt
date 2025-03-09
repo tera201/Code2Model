@@ -1,7 +1,5 @@
 package org.tera201.code2uml.uml.helpers
 
-import org.eclipse.emf.common.util.EList
-
 /**
  * Represents a class in the UML model with its properties.
  */
@@ -44,8 +42,8 @@ data class BuilderInterface(
 data class BuilderMethod(
     val returnType: String,   // Return type of the function
     val name: String,         // Function name
-    val parameterTypes: EList<String>, // List of parameter types
-    val parameterNames: EList<String>, // List of parameter names
+    val parameterTypes: List<String>, // List of parameter types
+    val parameterNames: List<String>, // List of parameter names
     val isAbstract: Boolean   // Whether the function is abstract
 )
 

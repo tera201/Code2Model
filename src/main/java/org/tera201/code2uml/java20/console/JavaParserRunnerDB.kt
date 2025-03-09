@@ -5,7 +5,6 @@ import org.antlr.v4.runtime.CommonTokenStream
 import org.antlr.v4.runtime.tree.ParseTreeWalker
 import org.apache.logging.log4j.LogManager
 import org.apache.logging.log4j.Logger
-import org.tera201.code2uml.cpp.parser.CPP14ErrorListener
 import org.tera201.code2uml.db.builders.CodeDBBuilderPass1
 import org.tera201.code2uml.db.builders.CodeDBBuilderPass2
 import org.tera201.code2uml.java20.parser.Java20DBTreeListener
@@ -19,7 +18,6 @@ import org.tera201.code2uml.util.messages.*
 import java.io.File
 import java.io.FileInputStream
 import java.io.IOException
-import java.io.PrintStream
 import java.security.MessageDigest
 import java.util.concurrent.CompletableFuture
 import java.util.concurrent.ExecutorService
@@ -200,29 +198,6 @@ class JavaParserRunnerDB {
             val listener = Java20DBTreeListener(parser, dbBuilder, filePath, checksum)
             walker.walk(listener, tree)
         } catch (e: Exception) {
-            e.printStackTrace()
-        }
-    }
-
-    /**
-     * Parse a single file for debugging or logging purposes.
-     */
-    fun parseFile(fileName: String, mh: IMessageHandler) {
-        try {
-            val input = CharStreams.fromFileName(fileName)
-            val lexer = Java20Lexer(input)
-            val tokens = CommonTokenStream(lexer)
-            val parser = Java20Parser(tokens)
-
-            val errorListener = CPP14ErrorListener(mh)
-            parser.addErrorListener(errorListener)
-
-            val tree = parser.compilationUnit()
-
-            val ps = PrintStream("$fileName.txt")
-            ps.println(tree.toStringTree(parser))
-            ps.close()
-        } catch (e: IOException) {
             e.printStackTrace()
         }
     }
