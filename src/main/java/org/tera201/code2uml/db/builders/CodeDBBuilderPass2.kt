@@ -1,6 +1,5 @@
 package org.tera201.code2uml.db.builders
 
-import org.eclipse.emf.common.util.EList
 import org.tera201.code2uml.uml.DBBuilder
 import org.tera201.code2uml.uml.helpers.BuilderClass
 import org.tera201.code2uml.uml.helpers.BuilderInterface
@@ -68,7 +67,7 @@ class CodeDBBuilderPass2(override val projectId: Int, override val model: Int, o
 
     override fun addAttribute(attributeName: String, typeName: String) {}
 
-    override fun startMethod(funType: String, funName: String, typeList: EList<String>, argList: EList<String>, isVirtual: Boolean) {
+    override fun startMethod(funType: String, funName: String, typeList: List<String>, argList: List<String>, isVirtual: Boolean) {
         if(currentOwner == Type.CLASS)
             currentPackage.takeIf { it != -1 }?.let { dataBaseUtil.insertMethod(funName, funType, currentClass, null) }
         else if (currentOwner == Type.INTERFACE)

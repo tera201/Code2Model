@@ -4,7 +4,6 @@ import org.tera201.code2uml.java20.parser.generated.Java20Parser
 import org.tera201.code2uml.java20.parser.generated.Java20Parser.ClassModifierContext
 import org.tera201.code2uml.java20.parser.generated.Java20Parser.InterfaceModifierContext
 import org.tera201.code2uml.java20.parser.generated.Java20ParserBaseListener
-import org.eclipse.emf.common.util.BasicEList
 import org.tera201.code2uml.uml.DBBuilder
 import org.tera201.code2uml.uml.helpers.*
 
@@ -177,8 +176,8 @@ class Java20DBTreeListener(
             val funName = declarator.Identifier().text
             val funType = it.result().text
 
-            val typeList = BasicEList<String>()
-            val argNameList = BasicEList<String>()
+            val typeList = mutableListOf<String>()
+            val argNameList = mutableListOf<String>()
             declarator.formalParameterList()?.formalParameter()?.forEach { param ->
                 param.unannType()?.text?.let(typeList::add)
                 param.variableDeclaratorId()?.text?.let(argNameList::add)

@@ -1,6 +1,5 @@
 package org.tera201.code2uml.db.builders
 
-import org.eclipse.emf.common.util.EList
 import org.tera201.code2uml.uml.DBBuilder
 import org.tera201.code2uml.uml.helpers.BuilderClass
 import org.tera201.code2uml.uml.helpers.BuilderInterface
@@ -81,7 +80,7 @@ class CodeDBBuilderPass1(override val projectId: Int, override val model: Int, o
 
     override fun addAttribute(attributeName: String, typeName: String) {}
 
-    override fun startMethod(funType: String, funName: String, typeList: EList<String>, argList: EList<String>, isVirtual: Boolean) {}
+    override fun startMethod(funType: String, funName: String, typeList: List<String>, argList: List<String>, isVirtual: Boolean) {}
     override fun addParameter(parName: String, typeName: String) {}
     override fun endMethod() {}
     override fun addClassSize(byteSize: Int) {}

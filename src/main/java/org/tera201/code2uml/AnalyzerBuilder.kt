@@ -1,8 +1,5 @@
 package org.tera201.code2uml
 
-import org.eclipse.uml2.uml.Model
-import org.tera201.code2uml.cpp.console.CppParserRunner
-import org.tera201.code2uml.java20.console.JavaParserRunner
 import org.tera201.code2uml.java20.console.JavaParserRunnerDB
 import org.tera201.code2uml.util.messages.DataBaseUtil
 import javax.swing.JProgressBar
@@ -34,18 +31,5 @@ class AnalyzerBuilder(
             javaParserRunner.buildModel(dataBaseUtil, projectName, modelName, javaFiles, textArea, progressBar, numThread)
         }
         Language.Cpp -> TODO()
-    }
-
-    fun build(): Model = when (language) {
-        Language.Java -> {
-            val javaParserRunner = JavaParserRunner()
-            val javaFiles = javaParserRunner.collectFiles(path)
-            javaParserRunner.buildModel(modelName, javaFiles, textArea, numThread)
-        }
-        Language.Cpp -> {
-            val cppParserRunner = CppParserRunner()
-            val cppFiles = cppParserRunner.collectFiles(path)
-            cppParserRunner.buildModel(modelName, cppFiles)
-        }
     }
 }
