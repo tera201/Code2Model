@@ -73,14 +73,13 @@ fun DataBaseUtil.getPackage(packageId: Int, modelId: Int):PackageDB {
 }
 
 fun DataBaseUtil.getClass(classId: Int, modelId: Int): ClassDB {
-
     val sqlPackage = "SELECT * FROM Classes WHERE id = ?"
-    var classDB = ClassDB(classId, "", "", 0L, "", 0, 0)
+    val classDB = ClassDB(classId, "", "", 0L, "", 0, 0)
     conn.prepareStatement(sqlPackage).use { pstmt ->
         pstmt.setInt(1, classId)
         pstmt.executeQuery().use { rs ->
             while (rs.next()) {
-                classDB = ClassDB(
+                return ClassDB(
                     id = rs.getInt("id"),
                     name = rs.getString("name"),
                     filePath = rs.getString("filePath"),
@@ -88,11 +87,18 @@ fun DataBaseUtil.getClass(classId: Int, modelId: Int): ClassDB {
                     getPackage(rs.getInt("packageId"), modelId).packageName,
                     type = rs.getInt("type"),
                     modificator = rs.getInt("modificator"),
+                    nestedIn = rs.getInt("nestedIn"),
                     methodCount = getMethodsCountForClass(classId)
                 )
             }
         }
     }
+    return classDB
+}
+
+
+fun DataBaseUtil.getClassFull(classId: Int, modelId: Int): ClassDB {
+    val classDB = getClass(classId, modelId)
     val sqlMethods = "SELECT * FROM ClassRelationship WHERE classId = ?"
     conn.prepareStatement(sqlMethods).use { pstmt ->
         pstmt.setInt(1, classId)
@@ -105,6 +111,22 @@ fun DataBaseUtil.getClass(classId: Int, modelId: Int): ClassDB {
             }
         }
     }
+
+    val sqlInnerClassIds = "SELECT * FROM Classes WHERE nestedIn = ?"
+    var nestedSize = 0L
+    conn.prepareStatement(sqlInnerClassIds).use { pstmt ->
+        pstmt.setInt(1, classId)
+        pstmt.executeQuery().use { rs ->
+            while (rs.next()) {
+                val innerClassId = rs.getInt("id")
+                nestedSize += rs.getLong("size")
+                if (rs.wasNull().not().and(innerClassId != 0)) {
+                    classDB.nestedClassList.add(innerClassId)
+                }
+            }
+        }
+    }
+    classDB.size -= nestedSize
     return classDB
 }
 

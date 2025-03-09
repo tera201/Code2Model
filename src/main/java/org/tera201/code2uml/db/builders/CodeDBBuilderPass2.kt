@@ -32,39 +32,30 @@ class CodeDBBuilderPass2(override val projectId: Int, override val model: Int, o
     }
 
     override fun startClass(builderClass: BuilderClass, filePath: String, checksum: String) {
-        if (!builderClass.isNested) {
-            currentClass = dataBaseUtil.getClassId(builderClass.name, filePath, checksum)
-            currentOwner = Type.CLASS
-            builderClass.interfaceList?.forEach {
-                currentClass?.let { it1 -> dataBaseUtil.insertClassRelationShip(it1, dataBaseUtil.getInterfaceIdByName(it.substringBefore("<")), null) }
-            }
-//            currentClass = UMLUtil.getClass(currentPackage, builderClass.name)
-//            currentClass?.setIsAbstract(builderClass.modifiers.isAbstract)
-//            currentClass?.visibility = UMLUtil.returnModifier(builderClass.modifiers.visibility)
-            if (builderClass.parentName != null) {
-                currentClass?.let { dataBaseUtil.insertClassRelationShip(it, null, dataBaseUtil.getClassIdByName(builderClass.parentName.substringBefore("<"))) }
-            }
-        } else {
-            currentOwner = null
-//            val nestedClass: Class = umlFactoryImpl.createClass()
-//            nestedClass.createOwnedComment().body = "0"
-//            nestedClass.createOwnedComment().body = "0"
-//            nestedClass.name = builderClass.name
-//            currentNestedClass = nestedClass
-//            currentClass?.nestedClassifiers?.add(nestedClass)
-//            currentOwner = currentPackage.getOwnedMember(builderClass.name)
+        currentClass = dataBaseUtil.getClassId(builderClass.name, filePath, checksum).takeIf { it != -1 }
+        if (currentClass == null) return
+        currentOwner = Type.CLASS
+        builderClass.interfaceList?.forEach {
+            val interfaceId = dataBaseUtil.getInterfaceIdByName(it.substringBefore("<"))
+            if (interfaceId == -1) dataBaseUtil.insertImportedClass(it.substringBefore("<"), currentClass!!, currentPackage!!)
+            else dataBaseUtil.insertClassRelationShip(currentClass!!, interfaceId, null)
+        }
+        if (builderClass.parentName != null) {
+            val parentClassId = dataBaseUtil.getClassIdByName(builderClass.parentName.substringBefore("<"))
+            if (parentClassId == -1) dataBaseUtil.insertImportedClass(builderClass.parentName.substringBefore("<"), currentClass!!, currentPackage!!)
+            else dataBaseUtil.insertClassRelationShip(currentClass!!, null, parentClassId)
         }
     }
 
     override fun endClass() {}
 
     override fun startInterface(interfaceBuilderInterface: BuilderInterface, filePath: String, checksum: String) {
-        currentInterface = dataBaseUtil.getInterfaceId(interfaceBuilderInterface.name, filePath, checksum)
+        currentInterface = currentPackage?.let {dataBaseUtil.getInterfaceId(interfaceBuilderInterface.name, filePath, it, checksum)}.takeIf { it != -1 }
         currentOwner = Type.INTERFACE
         interfaceBuilderInterface.parentsNameList?.forEach {
             val interfaceId = dataBaseUtil.getInterfaceIdByName(it)
             currentInterface?.let { it1 ->
-                if (interfaceId != null) {
+                if (interfaceId != -1) {
                     dataBaseUtil.insertInterfaceRelationShip(it1, interfaceId)
                 }
             }
@@ -79,16 +70,16 @@ class CodeDBBuilderPass2(override val projectId: Int, override val model: Int, o
 
     override fun startMethod(funType: String, funName: String, typeList: EList<String>, argList: EList<String>, isVirtual: Boolean) {
         if(currentOwner == Type.CLASS)
-            currentPackage?.let { dataBaseUtil.insertMethod(funName, funType, currentClass, null) }
+            currentPackage.takeIf { it != -1 }?.let { dataBaseUtil.insertMethod(funName, funType, currentClass, null) }
         else if (currentOwner == Type.INTERFACE)
-            currentPackage?.let { dataBaseUtil.insertMethod(funName, funType, null, currentInterface) }
+            currentPackage.takeIf { it != -1 }?.let { dataBaseUtil.insertMethod(funName, funType, null, currentInterface) }
     }
 
     override fun  addClassSize(byteSize: Int) {
         if(currentOwner == Type.CLASS)
-            currentClass?.let { dataBaseUtil.updateSizeForClass(it, byteSize) }
+            currentClass.takeIf { it != -1 }?.let { dataBaseUtil.updateSizeForClass(it, byteSize) }
         else if (currentOwner == Type.INTERFACE)
-            currentInterface?.let { dataBaseUtil.updateSizeForInterface(it, byteSize) }
+            currentInterface.takeIf { it != -1 }?.let { dataBaseUtil.updateSizeForInterface(it, byteSize) }
     }
     override fun addParameter(parName: String, typeName: String) {}
     override fun endMethod() {}
