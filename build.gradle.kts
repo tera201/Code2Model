@@ -16,5 +16,5 @@ repositories {
 dependencies {
     implementation("org.antlr:antlr4:4.13.0")
     implementation("org.xerial:sqlite-jdbc:3.45.3.0")
-    implementation("org.apache.logging.log4j:log4j-core:2.12.4")
+    implementation("org.slf4j:slf4j-simple:1.7.36")
 }

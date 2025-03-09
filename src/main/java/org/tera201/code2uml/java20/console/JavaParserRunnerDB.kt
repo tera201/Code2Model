@@ -3,8 +3,8 @@ package org.tera201.code2uml.java20.console
 import org.antlr.v4.runtime.CharStreams
 import org.antlr.v4.runtime.CommonTokenStream
 import org.antlr.v4.runtime.tree.ParseTreeWalker
-import org.apache.logging.log4j.LogManager
-import org.apache.logging.log4j.Logger
+import org.slf4j.Logger
+import org.slf4j.LoggerFactory
 import org.tera201.code2uml.db.builders.CodeDBBuilderPass1
 import org.tera201.code2uml.db.builders.CodeDBBuilderPass2
 import org.tera201.code2uml.java20.parser.Java20DBTreeListener
@@ -30,7 +30,7 @@ import javax.swing.JTextArea
  */
 class JavaParserRunnerDB {
 
-    private val log: Logger = LogManager.getLogger(JavaParserRunnerDB::class.java)
+    private val log: Logger = LoggerFactory.getLogger(JavaParserRunnerDB::class.java)
     private var modelPath: String? = null
     private var checksumMap = mutableMapOf<String, String>()
 

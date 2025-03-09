@@ -1,7 +1,7 @@
 package org.tera201.code2uml.util
 
-import org.apache.logging.log4j.LogManager
-import org.apache.logging.log4j.Logger
+import org.slf4j.Logger
+import org.slf4j.LoggerFactory
 import java.io.IOException
 import java.nio.file.FileVisitOption
 import java.nio.file.Files
@@ -9,7 +9,7 @@ import java.nio.file.Paths
 
 object FilesUtil {
 
-    private val log: Logger = LogManager.getLogger(FilesUtil::class.java)
+    private val log: Logger = LoggerFactory.getLogger(FilesUtil::class.java)
     fun walkRes(root: String, fileFilter: (String) -> Boolean, action: (String) -> Unit) {
         val start = Paths.get(root)
         try {

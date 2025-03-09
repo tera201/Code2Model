@@ -7,15 +7,15 @@ import org.tera201.code2uml.cpp.parser.generated.CPP14Parser
 import org.antlr.v4.runtime.CharStreams
 import org.antlr.v4.runtime.CommonTokenStream
 import org.antlr.v4.runtime.tree.ParseTreeWalker
-import org.apache.logging.log4j.LogManager
-import org.apache.logging.log4j.Logger
+import org.slf4j.Logger
+import org.slf4j.LoggerFactory
 import org.tera201.code2uml.util.FilesUtil
 import java.io.File
 import java.io.IOException
 
 class CppParserRunner {
 
-    private val log: Logger = LogManager.getLogger(CppParserRunner::class.java)
+    private val log: Logger = LoggerFactory.getLogger(CppParserRunner::class.java)
     private var modelPath: String? = null
 
     fun collectFiles(vararg paths: String): ArrayList<String> {
