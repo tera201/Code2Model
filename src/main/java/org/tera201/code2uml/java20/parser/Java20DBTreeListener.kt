@@ -46,13 +46,6 @@ class Java20DBTreeListener(
     }
 
     /**
-     * Handles entering a compilation unit (top-level of Java source).
-     */
-    override fun enterCompilationUnit(ctx: Java20Parser.CompilationUnitContext?) {
-        super.enterCompilationUnit(ctx)
-    }
-
-    /**
      * Handles exiting a compilation unit and ensures all open packages are closed.
      */
     override fun exitCompilationUnit(ctx: Java20Parser.CompilationUnitContext?) {
