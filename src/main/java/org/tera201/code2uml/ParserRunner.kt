@@ -8,7 +8,7 @@ import org.slf4j.Logger
 import org.slf4j.LoggerFactory
 import org.tera201.code2uml.db.builders.CodeDBBuilderPass1
 import org.tera201.code2uml.db.builders.CodeDBBuilderPass2
-import org.tera201.code2uml.uml.DBBuilder
+import org.tera201.code2uml.db.DBBuilder
 import org.tera201.code2uml.util.FilesUtil
 import org.tera201.code2uml.util.messages.DataBaseUtil
 import java.io.File

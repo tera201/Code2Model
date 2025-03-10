@@ -4,7 +4,7 @@ import org.tera201.code2uml.java20.parser.generated.Java20Parser
 import org.tera201.code2uml.java20.parser.generated.Java20Parser.ClassModifierContext
 import org.tera201.code2uml.java20.parser.generated.Java20Parser.InterfaceModifierContext
 import org.tera201.code2uml.java20.parser.generated.Java20ParserBaseListener
-import org.tera201.code2uml.uml.DBBuilder
+import org.tera201.code2uml.db.DBBuilder
 import org.tera201.code2uml.uml.helpers.*
 
 /**

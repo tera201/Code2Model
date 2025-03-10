@@ -1,12 +1,13 @@
 package org.tera201.code2uml.db.builders
 
-import org.tera201.code2uml.uml.DBBuilder
+import org.tera201.code2uml.db.DBBuilder
 import org.tera201.code2uml.uml.helpers.BuilderClass
 import org.tera201.code2uml.uml.helpers.BuilderInterface
 import org.tera201.code2uml.util.messages.DataBaseUtil
 import java.util.*
 
-class CodeDBBuilderPass2(override val projectId: Int, override val model: Int, override val dataBaseUtil: DataBaseUtil) : DBBuilder {
+class CodeDBBuilderPass2(override val projectId: Int, override val model: Int, override val dataBaseUtil: DataBaseUtil) :
+    DBBuilder {
     private var currentPackage: Int? = null
     private var currentClass: Int? = null
     private var currentNestedClass: Int? = null

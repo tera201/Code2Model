@@ -2,7 +2,7 @@ package org.tera201.code2uml.kotlin.parser
 
 import org.tera201.code2uml.kotlin.parser.generated.KotlinParser
 import org.tera201.code2uml.kotlin.parser.generated.KotlinParserBaseListener
-import org.tera201.code2uml.uml.DBBuilder
+import org.tera201.code2uml.db.DBBuilder
 import org.tera201.code2uml.uml.helpers.*
 
 class KotlinTreeListener(

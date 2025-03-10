@@ -3,7 +3,7 @@ package org.tera201.code2uml.cpp.parser
 import org.tera201.code2uml.cpp.parser.generated.CPP14Parser
 import org.tera201.code2uml.cpp.parser.generated.CPP14Parser.OriginalNamespaceNameContext
 import org.tera201.code2uml.cpp.parser.generated.CPP14ParserBaseListener
-import org.tera201.code2uml.uml.DBBuilder
+import org.tera201.code2uml.db.DBBuilder
 import org.tera201.code2uml.uml.helpers.BuilderClass
 
 class CPP14TreeListener(
