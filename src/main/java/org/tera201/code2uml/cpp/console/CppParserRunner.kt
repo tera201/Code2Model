@@ -1,61 +1,20 @@
 package org.tera201.code2uml.cpp.console
 
-import org.tera201.code2uml.cpp.parser.CPP14ErrorListener
 import org.tera201.code2uml.cpp.parser.CPP14TreeListener
 import org.tera201.code2uml.cpp.parser.generated.CPP14Lexer
 import org.tera201.code2uml.cpp.parser.generated.CPP14Parser
-import org.antlr.v4.runtime.CharStreams
-import org.antlr.v4.runtime.CommonTokenStream
-import org.antlr.v4.runtime.tree.ParseTreeWalker
-import org.slf4j.Logger
-import org.slf4j.LoggerFactory
-import org.tera201.code2uml.util.FilesUtil
+import org.antlr.v4.runtime.Parser
+import org.antlr.v4.runtime.tree.ParseTree
+import org.tera201.code2uml.ParserRunner
 import java.io.File
 import java.io.IOException
 
-class CppParserRunner {
+class CppParserRunner : ParserRunner(::CPP14Lexer, ::CPP14Parser, ::CPP14TreeListener) {
 
-    private val log: Logger = LoggerFactory.getLogger(CppParserRunner::class.java)
-    private var modelPath: String? = null
+    override fun getParseTree(parser: Parser): ParseTree = (parser as CPP14Parser).translationUnit()
 
-    fun collectFiles(vararg paths: String): ArrayList<String> {
-        modelPath = paths[0]
-        log.info("Collecting files from ${paths.toList()}")
-        val cppFiles = ArrayList<String>()
-
-        paths.forEach { FilesUtil.walkRes(it, ::test, cppFiles::add) }
-
-        return cppFiles
-    }
-
-    private fun parseFile(fileName: String) {
-        log.info("Parsing file: $fileName")
-        try {
-            // The input file with text in the form of code is read as a stream of characters
-            val input = CharStreams.fromFileName(fileName)
-
-            // The CPP14Lexer class allows you to group characters and determine the type of lexemes (identifier, number, string, etc.)
-            val lexer = CPP14Lexer(input)
-
-            // The code is then broken down into tokens
-            val tokens = CommonTokenStream(lexer)
-
-            // The code is prepared for use in building the parse tree
-            val parser = CPP14Parser(tokens)
-
-            // The code is checked for syntax errors
-            val errorListener = CPP14ErrorListener()
-            parser.addErrorListener(errorListener)
-
-            // Allows you to determine the nesting of the parent-child type (class - class member/method)
-            val tree = parser.translationUnit()
-            val walker = ParseTreeWalker()
-            val listener = CPP14TreeListener(parser, fileName)
-            walker.walk(listener, tree)
-        } catch (e: Exception) {
-            e.printStackTrace()
-        }
-    }
+    override fun test(fileName: String) =
+        fileName.endsWith(".h") || fileName.endsWith(".c") || fileName.endsWith(".hpp") || fileName.endsWith(".cpp")
 }
 
 fun main() {
@@ -84,6 +43,3 @@ fun main() {
 
     // Generate C++ code.
 }
-
-private fun test(fileName: String) =
-    fileName.endsWith(".h") || fileName.endsWith(".c") || fileName.endsWith(".hpp") || fileName.endsWith(".cpp")

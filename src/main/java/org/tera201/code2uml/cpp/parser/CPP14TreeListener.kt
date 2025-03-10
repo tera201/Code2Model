@@ -3,11 +3,13 @@ package org.tera201.code2uml.cpp.parser
 import org.tera201.code2uml.cpp.parser.generated.CPP14Parser
 import org.tera201.code2uml.cpp.parser.generated.CPP14Parser.OriginalNamespaceNameContext
 import org.tera201.code2uml.cpp.parser.generated.CPP14ParserBaseListener
+import org.tera201.code2uml.uml.DBBuilder
 import org.tera201.code2uml.uml.helpers.BuilderClass
 
 class CPP14TreeListener(
-    private val parser: CPP14Parser,
-    private val filePath: String
+    private val dbBuilder: DBBuilder,
+    private val filePath: String,
+    private val checksum: String
 ) : CPP14ParserBaseListener() {
 
     // Enum to define the types of classes (e.g., abstract, interface, etc.)

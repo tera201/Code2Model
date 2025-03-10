@@ -11,7 +11,6 @@ import org.tera201.code2uml.uml.helpers.*
  * Listener class for parsing Java 20 source code and building UML representations.
  */
 class Java20TreeListener(
-    private val parser: Java20Parser,
     private val dbBuilder: DBBuilder,
     private val filePath: String,
     private val checksum: String
