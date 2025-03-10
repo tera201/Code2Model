@@ -7,8 +7,7 @@ import org.slf4j.Logger
 import org.slf4j.LoggerFactory
 import org.tera201.code2uml.db.builders.CodeDBBuilderPass1
 import org.tera201.code2uml.db.builders.CodeDBBuilderPass2
-import org.tera201.code2uml.java20.parser.Java20DBTreeListener
-import org.tera201.code2uml.java20.parser.Java20ErrorListener
+import org.tera201.code2uml.java20.parser.Java20TreeListener
 import org.tera201.code2uml.java20.parser.generated.Java20Lexer
 import org.tera201.code2uml.java20.parser.generated.Java20Parser
 import org.tera201.code2uml.uml.DBBuilder
@@ -28,9 +27,9 @@ import javax.swing.JTextArea
 /**
  * Class responsible for running the Java parser, collecting files, and building UML models.
  */
-class JavaParserRunnerDB {
+class JavaParserRunner {
 
-    private val log: Logger = LoggerFactory.getLogger(JavaParserRunnerDB::class.java)
+    private val log: Logger = LoggerFactory.getLogger(JavaParserRunner::class.java)
     private var modelPath: String? = null
     private var checksumMap = mutableMapOf<String, String>()
 
@@ -195,7 +194,7 @@ class JavaParserRunnerDB {
             val walker = ParseTreeWalker()
 
             // Walk the parse tree and build the model
-            val listener = Java20DBTreeListener(parser, dbBuilder, filePath, checksum)
+            val listener = Java20TreeListener(parser, dbBuilder, filePath, checksum)
             walker.walk(listener, tree)
         } catch (e: Exception) {
             e.printStackTrace()
@@ -257,7 +256,7 @@ fun main() {
         e.printStackTrace()
     }
 
-    val runner = JavaParserRunnerDB()
+    val runner = JavaParserRunner()
 
     // Collect java files
     val javaFiles = runner.collectFiles(sourcePath)

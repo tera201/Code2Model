@@ -1,6 +1,6 @@
 package org.tera201.code2uml
 
-import org.tera201.code2uml.java20.console.JavaParserRunnerDB
+import org.tera201.code2uml.java20.console.JavaParserRunner
 import org.tera201.code2uml.util.messages.DataBaseUtil
 import javax.swing.JProgressBar
 import javax.swing.JTextArea
@@ -26,7 +26,7 @@ class AnalyzerBuilder(
 
     fun buildDB(dataBaseUtil: DataBaseUtil): Int = when (language) {
         Language.Java -> {
-            val javaParserRunner = JavaParserRunnerDB()
+            val javaParserRunner = JavaParserRunner()
             val javaFiles = javaParserRunner.collectFiles(path)
             javaParserRunner.buildModel(dataBaseUtil, projectName, modelName, javaFiles, textArea, progressBar, numThread)
         }
