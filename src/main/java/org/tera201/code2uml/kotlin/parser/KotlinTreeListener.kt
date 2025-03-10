@@ -12,6 +12,7 @@ class KotlinTreeListener(
 ) : KotlinParserBaseListener() {
 
     private var packageNum = 0
+    private var fileSize = 0
 
     // Lists to store different types of imports
     private val singleTypeImports = mutableListOf<String>()
@@ -38,15 +39,20 @@ class KotlinTreeListener(
         typeImportsOnDemand.clear()
     }
 
+    override fun enterKotlinFile(ctx: KotlinParser.KotlinFileContext?) {
+        ctx?.let { fileSize = it.text.toByteArray().size }
+    }
+
     override fun enterPackageHeader(ctx: KotlinParser.PackageHeaderContext?) {
         ctx?.identifier()?.let {
-            it.text.split(".").forEach { dbBuilder.startPackage(it, ctx.text.toByteArray().size, filePath, checksum) }
-            packageNum = 1
+            val packages = it.text.split(".")
+            packages.forEach { dbBuilder.startPackage(it, fileSize, filePath, checksum) }
+            packageNum = packages.size
         }
     }
 
-    override fun exitPackageHeader(ctx: KotlinParser.PackageHeaderContext?) {
-        dbBuilder.endPackage()
+    override fun exitKotlinFile(ctx: KotlinParser.KotlinFileContext?) {
+        repeat(packageNum) { dbBuilder.endPackage() }
     }
 
     /**
@@ -82,7 +88,6 @@ class KotlinTreeListener(
 
             }
             it.text.toByteArray().size.let(dbBuilder::addClassSize)
-            val isData = it.COLON()
         }
     }
 
