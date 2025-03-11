@@ -9,8 +9,8 @@ fun main() {
     val dbUrl = "$projectDir/Samples/db/model.db"
     val dataBaseUtil = DataBaseUtil(dbUrl)
     val analyzer = AnalyzerBuilder("Main", "v1")
-        .setLanguage(Language.Kotlin, )
-        .setPath("$projectDir/Samples/kotlin")
+        .setLanguage(Language.JavaKotlin)
+        .setPath("$projectDir")
         .setDataBaseUtil(dataBaseUtil)
         .threads(4)
     analyzer.buildDB()
