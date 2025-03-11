@@ -165,8 +165,9 @@ class Java20TreeListener(
     override fun enterMethodHeader(ctx: Java20Parser.MethodHeaderContext?) {
         ctx?.let {
             val declarator = it.methodDeclarator()
-            val funName = declarator.Identifier().text
+            val funName = declarator.Identifier()?.text
             val funType = it.result().text
+            if (funName == null) return
 
             val typeList = mutableListOf<String>()
             val argNameList = mutableListOf<String>()

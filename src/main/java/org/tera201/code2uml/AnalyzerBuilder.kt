@@ -11,7 +11,7 @@ class AnalyzerBuilder(
     private val projectName: String,
     private val modelName: String,
 ) {
-    private var language:Language = Language.Java
+    private var language:Language = Language.JAVA
     private var dataBaseUtil: DataBaseUtil? = null
     private var path: String = File(".").canonicalFile.toString()
     private var pathToDB: String = "$path/model.db"
@@ -34,19 +34,19 @@ class AnalyzerBuilder(
     fun setDataBaseUtil(dataBaseUtil: DataBaseUtil) = apply { this.dataBaseUtil = dataBaseUtil }
 
     fun buildDB(): Int = when (language) {
-        Language.Java -> {
+        Language.JAVA -> {
             dataBaseUtil = if (dataBaseUtil == null) DataBaseUtil(pathToDB) else dataBaseUtil
             val javaParserRunner = JavaParserRunner()
             val javaFiles = javaParserRunner.collectFiles(path)
             javaParserRunner.buildModel(dataBaseUtil!!, projectName, modelName, javaFiles, textArea, progressBar, numThread)
         }
-        Language.Kotlin -> {
+        Language.KOTLIN -> {
             dataBaseUtil = if (dataBaseUtil == null) DataBaseUtil(pathToDB) else dataBaseUtil
             val kotlinParserRunner = KotlinParserRunner()
             val kotlinFiles = kotlinParserRunner.collectFiles(path)
             kotlinParserRunner.buildModel(dataBaseUtil!!, projectName, modelName, kotlinFiles, textArea, progressBar, numThread)
         }
-        Language.JavaKotlin -> {
+        Language.JAVA_KOTLIN -> {
             dataBaseUtil = if (dataBaseUtil == null) DataBaseUtil(pathToDB) else dataBaseUtil
             val javaParserRunner = JavaParserRunner()
             val kotlinParserRunner = KotlinParserRunner()
@@ -55,6 +55,5 @@ class AnalyzerBuilder(
             kotlinParserRunner.buildModel(dataBaseUtil!!, projectName, modelName, kotlinFiles, textArea, progressBar, numThread)
             javaParserRunner.buildModel(dataBaseUtil!!, projectName, modelName, javaFiles, textArea, progressBar, numThread)
         }
-        Language.Cpp -> TODO()
     }
 }
