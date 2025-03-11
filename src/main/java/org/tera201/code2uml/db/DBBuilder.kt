@@ -1,12 +1,9 @@
-package org.tera201.code2uml.uml
+package org.tera201.code2uml.db
 
 import org.tera201.code2uml.uml.helpers.BuilderClass
 import org.tera201.code2uml.uml.helpers.BuilderInterface
 import org.tera201.code2uml.util.messages.DataBaseUtil
 
-/**
- * Интерфейс построителя UML-модели.
- */
 interface DBBuilder {
     val dataBaseUtil: DataBaseUtil
     val projectId: Int

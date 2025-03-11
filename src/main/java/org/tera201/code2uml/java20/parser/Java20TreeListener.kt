@@ -4,14 +4,13 @@ import org.tera201.code2uml.java20.parser.generated.Java20Parser
 import org.tera201.code2uml.java20.parser.generated.Java20Parser.ClassModifierContext
 import org.tera201.code2uml.java20.parser.generated.Java20Parser.InterfaceModifierContext
 import org.tera201.code2uml.java20.parser.generated.Java20ParserBaseListener
-import org.tera201.code2uml.uml.DBBuilder
+import org.tera201.code2uml.db.DBBuilder
 import org.tera201.code2uml.uml.helpers.*
 
 /**
  * Listener class for parsing Java 20 source code and building UML representations.
  */
-class Java20DBTreeListener(
-    private val parser: Java20Parser,
+class Java20TreeListener(
     private val dbBuilder: DBBuilder,
     private val filePath: String,
     private val checksum: String
@@ -43,13 +42,6 @@ class Java20DBTreeListener(
         staticImportsOnDemand.clear()
         singleStaticImports.clear()
         typeImportsOnDemand.clear()
-    }
-
-    /**
-     * Handles entering a compilation unit (top-level of Java source).
-     */
-    override fun enterCompilationUnit(ctx: Java20Parser.CompilationUnitContext?) {
-        super.enterCompilationUnit(ctx)
     }
 
     /**
@@ -173,8 +165,9 @@ class Java20DBTreeListener(
     override fun enterMethodHeader(ctx: Java20Parser.MethodHeaderContext?) {
         ctx?.let {
             val declarator = it.methodDeclarator()
-            val funName = declarator.Identifier().text
+            val funName = declarator.Identifier()?.text
             val funType = it.result().text
+            if (funName == null) return
 
             val typeList = mutableListOf<String>()
             val argNameList = mutableListOf<String>()

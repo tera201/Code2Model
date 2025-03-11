@@ -1,23 +1,18 @@
-package org.tera201.code2uml.java20.console
+package org.tera201.code2uml
 
-import org.antlr.v4.runtime.CharStreams
-import org.antlr.v4.runtime.CommonTokenStream
+import org.antlr.v4.runtime.*
+import org.antlr.v4.runtime.tree.ParseTree
+import org.antlr.v4.runtime.tree.ParseTreeListener
 import org.antlr.v4.runtime.tree.ParseTreeWalker
-import org.apache.logging.log4j.LogManager
-import org.apache.logging.log4j.Logger
+import org.slf4j.Logger
+import org.slf4j.LoggerFactory
 import org.tera201.code2uml.db.builders.CodeDBBuilderPass1
 import org.tera201.code2uml.db.builders.CodeDBBuilderPass2
-import org.tera201.code2uml.java20.parser.Java20DBTreeListener
-import org.tera201.code2uml.java20.parser.Java20ErrorListener
-import org.tera201.code2uml.java20.parser.generated.Java20Lexer
-import org.tera201.code2uml.java20.parser.generated.Java20Parser
-import org.tera201.code2uml.uml.DBBuilder
-import org.tera201.code2uml.uml.util.clearPackageDir
+import org.tera201.code2uml.db.DBBuilder
 import org.tera201.code2uml.util.FilesUtil
-import org.tera201.code2uml.util.messages.*
+import org.tera201.code2uml.util.messages.DataBaseUtil
 import java.io.File
 import java.io.FileInputStream
-import java.io.IOException
 import java.security.MessageDigest
 import java.util.concurrent.CompletableFuture
 import java.util.concurrent.ExecutorService
@@ -25,43 +20,14 @@ import java.util.concurrent.Executors
 import javax.swing.JProgressBar
 import javax.swing.JTextArea
 
-/**
- * Class responsible for running the Java parser, collecting files, and building UML models.
- */
-class JavaParserRunnerDB {
+abstract class ParserRunner(val Lexer: (CharStream) -> Lexer, val Parser: (CommonTokenStream) -> Parser, val Listener: (DBBuilder, String, String) -> ParseTreeListener) {
 
-    private val log: Logger = LogManager.getLogger(JavaParserRunnerDB::class.java)
-    private var modelPath: String? = null
-    private var checksumMap = mutableMapOf<String, String>()
+    val log: Logger = LoggerFactory.getLogger(ParserRunner::class.java)
+    var modelPath: String? = null
+    var checksumMap = mutableMapOf<String, String>()
 
     /**
-     * Collects Java files from given paths and stores them in a list.
-     */
-    fun collectFiles(vararg paths: String): ArrayList<String> {
-        modelPath = paths[0]
-        log.info("Collecting files from ${paths.toList()}")
-        val javaFiles = ArrayList<String>()
-        checksumMap.clear()
-
-        // Walk through directories and collect Java files
-        paths.forEach { FilesUtil.walkRes(it, ::test, javaFiles::add) }
-
-        // Compute checksum for each file
-        javaFiles.forEach { checksumMap[it] = calculateChecksum(it) }
-
-        return javaFiles
-    }
-
-    /**
-     * Creates or retrieves a project from the database by name and file path.
-     */
-    private fun createOrGetProject(dataBaseUtil: DataBaseUtil, name: String, filePath: String): Int {
-        val projectId = dataBaseUtil.getProjectId(name, filePath)
-        return if (projectId == -1) dataBaseUtil.insertProject(name, filePath) else projectId
-    }
-
-    /**
-     * Builds a UML model for the given Java files.
+     * Builds a model for the given files.
      */
     fun buildModel(dataBaseUtil: DataBaseUtil, projectName: String, modelName: String, javaFiles: ArrayList<String>, logJTextArea: JTextArea? = null, progressBar: JProgressBar? = null, numThreads: Int? = null): Int {
         val projectPath = "."
@@ -79,7 +45,7 @@ class JavaParserRunnerDB {
         javaFiles.map { checksumMap.getOrDefault(it, calculateChecksum(it)) }
             .filter { checksum -> dataBaseUtil.isFileExist(checksum) }
             .forEach { checksum -> dataBaseUtil.insertNewRelationsForModel(modelId, checksum)
-        }
+            }
 
         // Files that need analysis
         val javaFilesUnanalyzed = javaFiles.filter { file ->
@@ -104,6 +70,15 @@ class JavaParserRunnerDB {
         executorService?.shutdown()
 
         return modelId
+    }
+
+
+    /**
+     * Creates or retrieves a project from the database by name and file path.
+     */
+    private fun createOrGetProject(dataBaseUtil: DataBaseUtil, name: String, filePath: String): Int {
+        val projectId = dataBaseUtil.getProjectId(name, filePath)
+        return if (projectId == -1) dataBaseUtil.insertProject(name, filePath) else projectId
     }
 
     /**
@@ -179,27 +154,40 @@ class JavaParserRunnerDB {
 
         try {
             val input = CharStreams.fromFileName(filePath)
-            val lexer = Java20Lexer(input)
+            val lexer = Lexer(input)
             val tokens = CommonTokenStream(lexer)
-            val parser = Java20Parser(tokens)
+            val parser = Parser(tokens)
 
             parser.removeErrorListeners()
             lexer.removeErrorListeners()
 
-//            val errorListener = Java20ErrorListener()
-//            parser.addErrorListener(errorListener)
-//            lexer.addErrorListener(errorListener)
-
             // Build the parse tree
-            val tree = parser.compilationUnit()
+            val tree = getParseTree(parser)
             val walker = ParseTreeWalker()
 
-            // Walk the parse tree and build the model
-            val listener = Java20DBTreeListener(parser, dbBuilder, filePath, checksum)
+            val listener = Listener(dbBuilder, filePath, checksum)
             walker.walk(listener, tree)
         } catch (e: Exception) {
             e.printStackTrace()
         }
+    }
+
+    /**
+     * Collects source files from given paths and stores them in a list.
+     */
+    fun collectFiles(vararg paths: String): ArrayList<String> {
+        modelPath = paths[0]
+        log.info("Collecting files from ${paths.toList()}")
+        val sourceFiles = ArrayList<String>()
+        checksumMap.clear()
+
+        // Walk through directories and collect Java files
+        paths.forEach { FilesUtil.walkRes(it, this::filter, sourceFiles::add) }
+
+        // Compute checksum for each file
+        sourceFiles.forEach { checksumMap[it] = calculateChecksum(it) }
+
+        return sourceFiles
     }
 
     /**
@@ -233,42 +221,10 @@ class JavaParserRunnerDB {
         return String(hexChars)
     }
 
+    abstract fun getParseTree(parser: Parser):ParseTree
+
     /**
      * Test function to determine if a file should be processed (i.e., is a Java file and not in test or jvm directories).
      */
-    private fun test(fileName: String): Boolean =
-        fileName.endsWith(".java") && !fileName.contains("/test/") && !fileName.contains("/jvm/")
-}
-
-fun main() {
-    val startTime = System.currentTimeMillis()
-    val projectPath = "."
-    val projectDir = File(projectPath).canonicalFile
-    val sourcePath = "$projectDir/JavaToUMLSamples/src/a-foundation-master"
-    val targetPathForCode = "$projectDir/target/src"
-    val targetPathForUMLModels = "$projectDir/target/models"
-    val dbUrl = "$projectDir/JavaToUMLSamples/db/model.db"
-    val dataBaseUtil = DataBaseUtil(dbUrl)
-
-    try {
-        File(targetPathForCode).mkdirs()
-        File(targetPathForUMLModels).mkdirs()
-    } catch (e: IOException) {
-        e.printStackTrace()
-    }
-
-    val runner = JavaParserRunnerDB()
-
-    // Collect java files
-    val javaFiles = runner.collectFiles(sourcePath)
-
-    // Build UML model for these files
-    val model = runner.buildModel(dataBaseUtil, "JavaSampleModel", "master", javaFiles, null, null,4)
-
-    clearPackageDir(targetPathForCode)
-    println("Model saved")
-
-    val endTime = System.currentTimeMillis()
-    val executionTime = (endTime - startTime) / 1000.0
-    println("Execution time: $executionTime seconds")
+    abstract fun filter(fileName: String): Boolean
 }

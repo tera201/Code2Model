@@ -1,12 +1,12 @@
 package org.tera201.code2uml.util.messages
 
-import org.apache.logging.log4j.LogManager
-import org.apache.logging.log4j.Logger
+import org.slf4j.Logger
+import org.slf4j.LoggerFactory
 import java.sql.Connection
 import java.sql.PreparedStatement
 import java.sql.SQLException
 
-private val log: Logger = LogManager.getLogger(DataBaseUtil::class.java)
+private val log: Logger = LoggerFactory.getLogger(DataBaseUtil::class.java)
 
 // Map containing table creation SQL statements
 private val tableCreationQueries = mapOf(

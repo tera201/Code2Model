@@ -1,1 +1,1 @@
-rootProject.name = "code-to-uml"
+rootProject.name = "code-to-model"

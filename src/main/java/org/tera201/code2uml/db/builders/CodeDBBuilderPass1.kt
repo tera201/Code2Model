@@ -1,13 +1,14 @@
 package org.tera201.code2uml.db.builders
 
-import org.tera201.code2uml.uml.DBBuilder
+import org.tera201.code2uml.db.DBBuilder
 import org.tera201.code2uml.uml.helpers.BuilderClass
 import org.tera201.code2uml.uml.helpers.BuilderInterface
 import org.tera201.code2uml.util.messages.DataBaseUtil
 import java.util.*
 
 
-class CodeDBBuilderPass1(override val projectId: Int, override val model: Int, override val dataBaseUtil: DataBaseUtil) : DBBuilder {
+class CodeDBBuilderPass1(override val projectId: Int, override val model: Int, override val dataBaseUtil: DataBaseUtil) :
+    DBBuilder {
     private var currentPackage: Int? = null
     private var currentClass: Int? = null
     private var currentInterface: Int? = null
@@ -72,7 +73,7 @@ class CodeDBBuilderPass1(override val projectId: Int, override val model: Int, o
     override fun startEnumeration(enumerationName: String, filePath: String, checksum: String) {
         val enumerationId = dataBaseUtil.getEnumerationId(enumerationName, filePath, checksum)
         if (enumerationId == -1) {
-            currentPackage?.let { dataBaseUtil.insertEnumerationAndGetId(enumerationName, filePath, 0, it, checksum) }
+             currentPackage?.let { dataBaseUtil.insertEnumerationAndGetId(enumerationName, filePath, 0, it, checksum) }
         }
     }
 
