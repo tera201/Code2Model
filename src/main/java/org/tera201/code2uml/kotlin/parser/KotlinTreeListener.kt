@@ -11,6 +11,8 @@ class KotlinTreeListener(
     private val checksum: String
 ) : KotlinParserBaseListener() {
 
+    private var fileName = ""
+    private var isUtilFile = true
     private var packageNum = 0
     private var fileSize = 0
 
@@ -40,7 +42,10 @@ class KotlinTreeListener(
     }
 
     override fun enterKotlinFile(ctx: KotlinParser.KotlinFileContext?) {
-        ctx?.let { fileSize = it.text.toByteArray().size }
+        ctx?.let {
+            fileSize = it.text.toByteArray().size
+            fileName = filePath.substringAfterLast("/").substringBefore(".")
+        }
     }
 
     override fun enterPackageHeader(ctx: KotlinParser.PackageHeaderContext?) {
@@ -68,7 +73,9 @@ class KotlinTreeListener(
 
     override fun enterClassDeclaration(ctx: KotlinParser.ClassDeclarationContext?) {
         ctx?.let {
+            isUtilFile = false
             val builderImports = collectImports()
+            resetImports()
             val className = it.simpleIdentifier().text
             val extendName = it.delegationSpecifiers()?.text
             val modifiers = it.modifiers()?.modifier()?.map { it?.text }
@@ -94,6 +101,7 @@ class KotlinTreeListener(
     override fun enterFunctionDeclaration(ctx: KotlinParser.FunctionDeclarationContext?) {
         ctx?.text
         ctx?.let {
+            val receiverClass = it.receiverType()?.text
             val name = it.simpleIdentifier().text
             val modifiers = it.modifiers()?.modifier()
             val a = it.typeParameters()

@@ -11,6 +11,6 @@ class CppParserRunner : ParserRunner(::CPP14Lexer, ::CPP14Parser, ::CPP14TreeLis
 
     override fun getParseTree(parser: Parser): ParseTree = (parser as CPP14Parser).translationUnit()
 
-    override fun test(fileName: String) =
+    override fun filter(fileName: String) =
         fileName.endsWith(".h") || fileName.endsWith(".c") || fileName.endsWith(".hpp") || fileName.endsWith(".cpp")
 }

@@ -182,7 +182,7 @@ abstract class ParserRunner(val Lexer: (CharStream) -> Lexer, val Parser: (Commo
         checksumMap.clear()
 
         // Walk through directories and collect Java files
-        paths.forEach { FilesUtil.walkRes(it, ::test, sourceFiles::add) }
+        paths.forEach { FilesUtil.walkRes(it, this::filter, sourceFiles::add) }
 
         // Compute checksum for each file
         sourceFiles.forEach { checksumMap[it] = calculateChecksum(it) }
@@ -226,5 +226,5 @@ abstract class ParserRunner(val Lexer: (CharStream) -> Lexer, val Parser: (Commo
     /**
      * Test function to determine if a file should be processed (i.e., is a Java file and not in test or jvm directories).
      */
-    abstract fun test(fileName: String): Boolean
+    abstract fun filter(fileName: String): Boolean
 }

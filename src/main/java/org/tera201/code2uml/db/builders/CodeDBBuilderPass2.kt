@@ -83,9 +83,9 @@ class CodeDBBuilderPass2(override val projectId: Int, override val model: Int, o
     }
     override fun addParameter(parName: String, typeName: String) {}
     override fun endMethod() {}
-}
 
-enum class Type {
-    CLASS,
-    INTERFACE
+    enum class Type {
+        CLASS,
+        INTERFACE
+    }
 }
