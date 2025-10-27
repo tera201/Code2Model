@@ -1,5 +1,5 @@
 plugins {
-    kotlin("jvm") version "2.1.0"
+    alias(libs.plugins.kotlin)
 }
 
 java {
@@ -14,7 +14,7 @@ repositories {
 }
 
 dependencies {
-    implementation("org.antlr:antlr4:4.13.0")
-    implementation("org.xerial:sqlite-jdbc:3.45.3.0")
-    implementation("org.slf4j:slf4j-simple:1.7.36")
+    implementation(libs.antlr)
+    implementation(libs.sqlite)
+    implementation(libs.slf4j.simple)
 }
